@@ -1,10 +1,10 @@
-# RS Invest 🚀
+# RS Investment 🚀
 
 A comprehensive 6-month relative strength (RS) scanner for US stocks.
 
 ## Live Demo
 
-🔗 **Website**: <https://coreorders.github.io/RS_Invest/>
+🔗 **Website**: <https://coreorders.github.io/RS_Investment/>
 
 ## Features
 
@@ -14,10 +14,11 @@ A comprehensive 6-month relative strength (RS) scanner for US stocks.
 - 💹 **50DIV**: 50-day moving average divergence indicator
 - 📱 **Responsive UI**: Dark-themed, mobile-friendly interface
 - 🔄 **Auto-Update**: Daily data collection via GitHub Actions
+- ✨ **RS_Investment**: Renamed project for investment purposes
 
 ## Quick Start
 
-Visit **<https://coreorders.github.io/RS_Invest/>** to start using the scanner!
+Visit **<https://coreorders.github.io/RS_Investment/>** to start using the scanner!
 
 ## Local Development
 
@@ -30,8 +31,8 @@ Visit **<https://coreorders.github.io/RS_Invest/>** to start using the scanner!
 
 ```bash
 # Clone the repository
-git clone https://github.com/coreorders/RS_Invest.git
-cd RS_Invest
+git clone https://github.com/coreorders/RS_Investment.git
+cd RS_Investment
 
 # Install dependencies
 pip install -r requirements.txt
@@ -64,7 +65,7 @@ Data is updated daily after US market close (21:00 UTC / 6:00 AM KST) via GitHub
 ## Project Structure
 
 ```
-RS_Invest/
+RS_Investment/
 ├── .github/
 │   └── workflows/         # GitHub Actions automation
 ├── static/                # Data files
@@ -99,7 +100,7 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
-This project is for **personal educational purposes only** and is **not for commercial use**.  
+This project is for **personal educational purposes only** and is **not for commercial use**.
 Data provided by Yahoo Finance.
 
 ## Disclaimer
