@@ -1,0 +1,34 @@
+{
+  "last_updated": "2026-02-06 21:49:52 UTC",
+  "total_history": 7,
+  "dates": [
+    {
+      "date": "2026-02-06",
+      "filename": "history/result_2026-02-06.json"
+    },
+    {
+      "date": "2026-02-05",
+      "filename": "history/result_2026-02-05.json"
+    },
+    {
+      "date": "2026-02-04",
+      "filename": "history/result_2026-02-04.json"
+    },
+    {
+      "date": "2026-02-03",
+      "filename": "history/result_2026-02-03.json"
+    },
+    {
+      "date": "2026-02-01",
+      "filename": "history/result_2026-02-01.json"
+    },
+    {
+      "date": "2026-01-31",
+      "filename": "history/result_2026-01-31.json"
+    },
+    {
+      "date": "2026-01-29",
+      "filename": "history/result_2026-01-29.json"
+    }
+  ]
+}
