@@ -214,6 +214,10 @@ def main():
     # ===== 히스토리 인덱스 업데이트 =====
     print(f"[{time.strftime('%X')}] 히스토리 인덱스 업데이트 중...")
     update_history_index()
+    
+    # ===== GitHub 자동 업로드 =====
+    utils.git_push()
+    
     print(f"[{time.strftime('%X')}] 모든 작업 완료!")
 
 if __name__ == "__main__":

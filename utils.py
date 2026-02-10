@@ -5,7 +5,7 @@ import time
 import io
 import warnings
 from concurrent.futures import ThreadPoolExecutor
-
+import subprocess
 # 경고 메시지 숨김 (Pyarrow 등)
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -16,6 +16,34 @@ import os
 # 전역 캐시 변수
 SECTOR_CACHE_FILE = "static/sector_search.json"
 SECTOR_CACHE = {}
+
+ANALYSIS_CACHE_FILE = "static/analysis_cache.json"
+ANALYSIS_CACHE = {}
+
+def git_push():
+    """
+    변경된 데이터를 자동으로 GitHub에 업로드합니다.
+    """
+    try:
+        print("\n[Git] GitHub 업데이트 시작...")
+        
+        # 1. 모든 변경사항 추가
+        subprocess.run(["git", "add", "."], check=True)
+        
+        # 2. 커밋
+        # datetime은 이미 import 되어있지 않으므로 time.strftime 사용
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        subprocess.run(["git", "commit", "-m", f"Auto-update: {timestamp}"], check=False) 
+        
+        # 3. 푸시
+        subprocess.run(["git", "push"], check=True)
+        print("[Git] 업데이트 완료! (웹사이트에 곧 반영됩니다)")
+        
+    except Exception as e:
+        print(f"[Git] 업데이트 실패: {e}")
+        print("  -> 수동으로 '소스 제어' 탭에서 커밋 및 동기화를 해주세요.")
+
+
 
 def sanitize_ticker_for_yf(ticker):
     """
@@ -52,8 +80,30 @@ def save_sector_cache():
     except Exception as e:
         print(f"Cache Save Error: {e}")
 
+def load_analysis_cache():
+    global ANALYSIS_CACHE
+    if os.path.exists(ANALYSIS_CACHE_FILE):
+        try:
+            with open(ANALYSIS_CACHE_FILE, 'r', encoding='utf-8') as f:
+                ANALYSIS_CACHE = json.load(f)
+            print(f"Analysis Cache Loaded: {len(ANALYSIS_CACHE)} items")
+        except Exception as e:
+            print(f"Analysis Cache Load Error: {e}")
+            ANALYSIS_CACHE = {}
+
+def save_analysis_cache():
+    try:
+        if not os.path.exists('static'):
+            os.makedirs('static')
+        with open(ANALYSIS_CACHE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(ANALYSIS_CACHE, f, ensure_ascii=False, indent=2)
+        print(f"Analysis Cache Saved: {len(ANALYSIS_CACHE)} items")
+    except Exception as e:
+        print(f"Analysis Cache Save Error: {e}")
+
 # 초기 로드
 load_sector_cache()
+load_analysis_cache()
 
 def calculate_percentile_rank(value, all_values):
     """
@@ -139,7 +189,7 @@ def get_tickers_from_excel(file_path):
         print(f"엑셀 로드 에러: {e}")
         return []
 
-def get_market_cap_and_rs(ticker_info_list, batch_size=20):
+def get_market_cap_and_rs(ticker_info_list, batch_size=10):
     """
     티커 리스트를 받아 Market Cap과 RS를 계산합니다.
     20개씩 배치로 처리하여 yfinance 부하를 조절합니다.
@@ -176,19 +226,17 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
             # yfinance 최신 버전에서는 download로 시총을 못 가져오므로 Ticker.info 접근 필요
             # 속도를 위해 ThreadPool 사용
             
-            with ThreadPoolExecutor(max_workers=5) as executor:
-                future_to_ticker = {executor.submit(process_single_ticker, ticker, data, qqq_data): ticker for ticker in batch_tickers}
-                
-                for future in future_to_ticker:
-                    res = future.result()
-                    if res:
-                        results.append(res)
+            # 병렬 처리 대신 순차 처리로 변경 (Rate Limit 방지)
+            for ticker in batch_tickers:
+                res = process_single_ticker(ticker, data, qqq_data)
+                if res:
+                    results.append(res)
                         
         except Exception as e:
             print(f"Batch 처리 중 에러: {e}")
             
         # 딜레이 (옵션)
-        time.sleep(1)
+        time.sleep(10)
     
     # --- Retry Logic (재시도) ---
     # 1. 실패하거나 RS가 NaN인 티커 식별
@@ -213,7 +261,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
         print(f"\n[Retry] RS 수집 실패/NaN {len(failed_tickers)}개 발견. 배치 재시도 중...")
         
         # 재시도도 배치로 처리
-        retry_batch_size = 20
+        retry_batch_size = 10
         for i in range(0, len(failed_tickers), retry_batch_size):
             batch = failed_tickers[i:i+retry_batch_size]
             print(f" -> Retry batch {batch}")
@@ -223,29 +271,27 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
                 sanitized_retry_batch = [sanitize_ticker_for_yf(t) for t in batch]
                 data = yf.download(sanitized_retry_batch, period="1y", progress=False, group_by='ticker')
                 
-                # 병렬 처리 (메인 로직 재사용)
-                with ThreadPoolExecutor(max_workers=5) as executor:
-                    future_to_ticker = {executor.submit(process_single_ticker, t, data, qqq_data): t for t in batch}
-                    
-                    for future in future_to_ticker:
-                        res = future.result()
-                        if res:
-                            rs_res = res.get('RS_6mo')
-                            if rs_res is not None and str(rs_res).lower() != 'nan':
-                                # 성공 시 기존 결과 제거 후 추가
-                                results = [r for r in results if r['Ticker'] != res['Ticker']]
-                                results.append(res)
-                                print(f"    -> {res['Ticker']} 복구 성공 (RS_6mo: {res['RS_6mo']})")
-                            else:
-                                print(f"    -> {res['Ticker']} 복구 실패")
+                # 순차 처리 (Retry)
+                for t in batch:
+                    res = process_single_ticker(t, data, qqq_data)
+                    if res:
+                        rs_res = res.get('RS_6mo')
+                        if rs_res is not None and str(rs_res).lower() != 'nan':
+                            # 성공 시 기존 결과 제거 후 추가
+                            results = [r for r in results if r['Ticker'] != res['Ticker']]
+                            results.append(res)
+                            print(f"    -> {res['Ticker']} 복구 성공 (RS_6mo: {res['RS_6mo']})")
+                        else:
+                            print(f"    -> {res['Ticker']} 복구 실패")
                                 
             except Exception as e:
                 print(f"Retry Batch 에러: {e}")
             
-            time.sleep(1) # 배치 간 딜레이
+            time.sleep(10) # 배치 간 딜레이
 
     # 작업 완료 후 캐시 저장
     save_sector_cache()
+    save_analysis_cache()
     
     return results
 
@@ -391,6 +437,100 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                     div_50 = round(((latest_price - ma_50) / ma_50) * 100, 2)
         except Exception as e:
             print(f"50DIV 계산 에러 ({original_ticker}): {e}")
+
+        # 4. RS Estimate Calculation with Caching (3 Days)
+        cy_trend = None
+        ny_trend = None
+        up_count = None
+        down_count = None
+        up_down_ratio = None
+        
+        # Analysis Cache Start
+        from datetime import datetime, timedelta
+        
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        cache_item = ANALYSIS_CACHE.get(original_ticker)
+        
+        # Check if cache is valid (within 3 days)
+        use_cache = False
+        if cache_item and 'timestamp' in cache_item:
+            try:
+                cached_date = datetime.strptime(cache_item['timestamp'], "%Y-%m-%d")
+                if (datetime.now() - cached_date).days < 3:
+                    use_cache = True
+            except:
+                pass
+        
+        if use_cache:
+            # Use Cached Data
+            data = cache_item.get('data', {})
+            cy_trend = data.get('CY_Trend')
+            ny_trend = data.get('NY_Trend')
+            up_count = data.get('Up_Count')
+            down_count = data.get('Down_Count')
+            up_down_ratio = data.get('Up_Down_Ratio')
+            # print(f"Using Cache for {original_ticker}")
+            
+        else:
+            # Fetch New Data
+            try:
+                # t = yf.Ticker(yf_ticker) # Already defined above
+                
+                # (A) EPS Trend
+                eps_trend_df = t.eps_trend
+                
+                if eps_trend_df is not None and not eps_trend_df.empty:
+                    # CY Trend
+                    try:
+                        if '0y' in eps_trend_df.index:
+                            cy_est = eps_trend_df.loc['0y', 'current']
+                            cy_30 = eps_trend_df.loc['0y', '30daysAgo']
+                            if cy_30 and cy_30 != 0:
+                                cy_trend = round(((cy_est / cy_30) - 1) * 100, 2)
+                    except: pass
+
+                    # NY Trend
+                    try:
+                        if '+1y' in eps_trend_df.index:
+                            ny_est = eps_trend_df.loc['+1y', 'current']
+                            ny_30 = eps_trend_df.loc['+1y', '30daysAgo']
+                            if ny_30 and ny_30 != 0:
+                                ny_trend = round(((ny_est / ny_30) - 1) * 100, 2)
+                    except: pass
+
+                # (B) EPS Revisions
+                eps_rev_df = t.eps_revisions
+                
+                if eps_rev_df is not None and not eps_rev_df.empty:
+                    try:
+                        if 'upLast30days' in eps_rev_df.columns:
+                            up_count = int(eps_rev_df['upLast30days'].sum())
+                        if 'downLast30days' in eps_rev_df.columns:
+                            down_count = int(eps_rev_df['downLast30days'].sum())
+                            
+                        if up_count is not None and down_count is not None:
+                            total = up_count + down_count
+                            if total > 0:
+                                up_down_ratio = round((up_count / total) * 100, 2)
+                            else:
+                                up_down_ratio = 0.0
+                    except: pass
+                
+                # Save to Cache
+                ANALYSIS_CACHE[original_ticker] = {
+                    "timestamp": today_str,
+                    "data": {
+                        "CY_Trend": cy_trend,
+                        "NY_Trend": ny_trend,
+                        "Up_Count": up_count,
+                        "Down_Count": down_count,
+                        "Up_Down_Ratio": up_down_ratio
+                    }
+                }
+                
+            except Exception as e:
+                # print(f"Analysis Fetch Error {original_ticker}: {e}")
+                pass
             
         return {
             'Ticker': original_ticker, # Return original for UI
@@ -401,7 +541,13 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'RS_1mo': float(rs_1mo),
             '50DIV': div_50,  # 50일 이동평균 괴리율
             'Sector': sector,
-            'Industry': industry
+            'Industry': industry,
+            # [Added] RS Estimate Columns
+            'CY_Trend': cy_trend if 'cy_trend' in locals() else None,
+            'NY_Trend': ny_trend if 'ny_trend' in locals() else None,
+            'Up_Count': up_count if 'up_count' in locals() else None,
+            'Down_Count': down_count if 'down_count' in locals() else None,
+            'Up_Down_Ratio': up_down_ratio if 'up_down_ratio' in locals() else None
         }
 
     except Exception as e:

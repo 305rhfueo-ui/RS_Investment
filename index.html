@@ -652,6 +652,11 @@
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
+                    <th onclick="sortTable('CY_Trend')">CY Trend (%) ⬍</th>
+                    <th onclick="sortTable('NY_Trend')">NY Trend (%) ⬍</th>
+                    <th onclick="sortTable('Up_Count')">Up # ⬍</th>
+                    <th onclick="sortTable('Down_Count')">Down # ⬍</th>
+                    <th onclick="sortTable('Up_Down_Ratio')">Up/(Up+Down) ⬍</th>
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="sortTable('Industry')">Industry ⬍</th>
                 `;
@@ -710,6 +715,18 @@
                         : 'N/A';
                     const div50Class = item['50DIV'] > 0 ? 'rs-pos' : (item['50DIV'] < 0 ? 'rs-neg' : '');
 
+                    // RS Estimate Displays
+                    const cyTrendDisplay = item.CY_Trend !== null && item.CY_Trend !== undefined ? `${item.CY_Trend.toFixed(2)}%` : 'N/A';
+                    const cyTrendClass = item.CY_Trend > 0 ? 'rs-pos' : (item.CY_Trend < 0 ? 'rs-neg' : '');
+
+                    const nyTrendDisplay = item.NY_Trend !== null && item.NY_Trend !== undefined ? `${item.NY_Trend.toFixed(2)}%` : 'N/A';
+                    const nyTrendClass = item.NY_Trend > 0 ? 'rs-pos' : (item.NY_Trend < 0 ? 'rs-neg' : '');
+
+                    const upCountDisplay = item.Up_Count !== null ? item.Up_Count : '-';
+                    const downCountDisplay = item.Down_Count !== null ? item.Down_Count : '-';
+                    const upDownRatioDisplay = item.Up_Down_Ratio !== null && item.Up_Down_Ratio !== undefined ? `${item.Up_Down_Ratio.toFixed(2)}%` : '-';
+
+
                     tr.innerHTML = `
                         <td><strong>${tickerLink}</strong></td>
                         <td>$${Number(item.Price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
@@ -720,6 +737,11 @@
                         <td class="${item.RS_3mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_3mo).toFixed(4)}</td>
                         <td class="${item.RS_1mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_1mo).toFixed(4)}</td>
                         <td class="${div50Class}">${div50Display}</td>
+                        <td class="${cyTrendClass}">${cyTrendDisplay}</td>
+                        <td class="${nyTrendClass}">${nyTrendDisplay}</td>
+                        <td>${upCountDisplay}</td>
+                        <td>${downCountDisplay}</td>
+                        <td>${upDownRatioDisplay}</td>
                         <td>${item.Sector}</td>
                         <td>${item.Industry}</td>
                     `;
@@ -771,6 +793,12 @@
                     RS_6mo: item.RS_6mo,
                     RS_3mo: item.RS_3mo,
                     RS_1mo: item.RS_1mo,
+                    '50DIV': item['50DIV'],
+                    CY_Trend: item.CY_Trend,
+                    NY_Trend: item.NY_Trend,
+                    Up_Count: item.Up_Count,
+                    Down_Count: item.Down_Count,
+                    Up_Down_Ratio: item.Up_Down_Ratio,
                     Sector: item.Sector,
                     Industry: item.Industry
                 }));

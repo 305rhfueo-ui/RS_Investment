@@ -4,7 +4,7 @@ A comprehensive 6-month relative strength (RS) scanner for US stocks.
 
 ## Live Demo
 
-🔗 **Website**: <https://coreorders.github.io/RS_Investment/>
+🔗 **Website**: <https://305rhfueo-ui.github.io/RS_Investment/>
 
 ## Features
 
@@ -18,7 +18,7 @@ A comprehensive 6-month relative strength (RS) scanner for US stocks.
 
 ## Quick Start
 
-Visit **<https://coreorders.github.io/RS_Investment/>** to start using the scanner!
+Visit **<https://305rhfueo-ui.github.io/RS_Investment/>** to start using the scanner!
 
 ## Local Development
 
@@ -31,7 +31,7 @@ Visit **<https://coreorders.github.io/RS_Investment/>** to start using the scann
 
 ```bash
 # Clone the repository
-git clone https://github.com/coreorders/RS_Investment.git
+git clone https://github.com/305rhfueo-ui/RS_Investment.git
 cd RS_Investment
 
 # Install dependencies
