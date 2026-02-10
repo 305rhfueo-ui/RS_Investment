@@ -26,3 +26,6 @@ Thumbs.db
 # Local
 .env
 *.log
+
+# Secrets
+service_account.json

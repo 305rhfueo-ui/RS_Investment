@@ -9,7 +9,7 @@ import time
 JSON_FILE = 'service_account.json'
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/17JU4KoC-Out5NqGy3qtN7LSunMUsH5xS2qJSk1fBDGQ/edit?gid=870712162#gid=870712162'
 SCOPE = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-TARGET_TAB_NAME = 'Accumulated_Data' # 데이터 쌓을 탭 이름
+TARGET_TAB_NAME = 'RS_Estimate' # 사용자 요청에 따라 시트명 변경
 
 def get_client():
     try:
@@ -30,14 +30,23 @@ def update_sheet(data_list):
     try:
         doc = client.open_by_url(SHEET_URL)
         
-        # 탭 확인 또는 생성
-        try:
-            sheet = doc.worksheet(TARGET_TAB_NAME)
-        except:
+        # 탭 확인 및 생성 (Robust Check)
+        worksheets = doc.worksheets()
+        # Case-insensitive match
+        sheet = next((s for s in worksheets if s.title.lower() == TARGET_TAB_NAME.lower()), None)
+        
+        if sheet is None:
             print(f"[GSheet] '{TARGET_TAB_NAME}' 탭이 없어 생성합니다.")
-            sheet = doc.add_worksheet(title=TARGET_TAB_NAME, rows=1000, cols=10)
+            sheet = doc.add_worksheet(title=TARGET_TAB_NAME, rows=1000, cols=11) # cols adjusted
             # 헤더 추가
-            sheet.append_row(['Ticker', 'WorkDate', 'CY_Current', 'CY_30Ago', 'NY_Current', 'NY_30Ago'])
+            headers = [
+                'Ticker', 'WorkDate', 
+                'CY_Trend', 'NY_Trend', 'Up_Count', 'Down_Count', 'Up_Down_Ratio',
+                'CY_Current', 'CY_30Ago', 'NY_Current', 'NY_30Ago'
+            ]
+            sheet.append_row(headers)
+        else:
+            print(f"[GSheet] '{TARGET_TAB_NAME}' 탭을 찾았습니다.")
 
         # 기존 데이터 읽기 (중복/변동 확인용)
         existing_data = sheet.get_all_records()
@@ -74,30 +83,31 @@ def update_sheet(data_list):
             ny_est = item.get('NY_Est')
             ny_30 = item.get('NY_30')
             
-            # 값이 없는 경우(None)는 빈 문자열로 처리하거나 스킵?
-            # 사용자 요청: "해당 티커의 값이 변동이 없거나 즉 업데이트가 되지 않았으면 스킵"
-            # -> 이 말은 "이전 기록과 비교해서 값이 같으면 스킵"인 것 같음.
-            # 하지만 "누적적으로 쌓는다"는 건 시계열 데이터를 의미하므로,
-            # 값이 같더라도 "날짜가 다르면" (즉 3일 뒤면) 쌓는 게 일반적임.
-            # 그러나 사용자가 "변동이 없으면 스킵"이라고 명시했으므로, 값 변화가 있을 때만 쌓는다.
-            # 혹시 "값이 업데이트 되지 않았으면"이 "야후에서 값이 안 바뀐 경우"를 의미할 수도 있음.
+            # Trend & Revision Data
+            cy_trend = item.get('CY_Trend')
+            ny_trend = item.get('NY_Trend')
+            up_count = item.get('Up_Count')
+            down_count = item.get('Down_Count')
+            up_down_ratio = item.get('Up_Down_Ratio')
             
-            # 해석:
-            # 1. 3일 전 데이터와 오늘 데이터가 완전히 똑같음 -> 스킵 (굳이 행 추가 안함)
-            # 2. 3일 전 데이터와 오늘 데이터가 다름 -> 추가
-            
-            # 비교 대상 데이터 구성
+            # 구성
             new_entry = {
                 'Ticker': ticker,
                 'WorkDate': today_str,
+                'CY_Trend': cy_trend if cy_trend is not None else '',
+                'NY_Trend': ny_trend if ny_trend is not None else '',
+                'Up_Count': up_count if up_count is not None else '',
+                'Down_Count': down_count if down_count is not None else '',
+                'Up_Down_Ratio': up_down_ratio if up_down_ratio is not None else '',
                 'CY_Current': cy_est if cy_est is not None else '',
                 'CY_30Ago': cy_30 if cy_30 is not None else '',
                 'NY_Current': ny_est if ny_est is not None else '',
                 'NY_30Ago': ny_30 if ny_30 is not None else ''
             }
             
-            # Check Valid Data (적어도 Current 값은 있어야 함)
-            if new_entry['CY_Current'] == '' and new_entry['NY_Current'] == '':
+            # Check Valid Data (적어도 Current 값이나 Trend 값은 있어야 함)
+            if (new_entry['CY_Current'] == '' and new_entry['NY_Current'] == '' and 
+                new_entry['CY_Trend'] == '' and new_entry['NY_Trend'] == ''):
                 continue
 
             # Check Last Entry
@@ -107,30 +117,34 @@ def update_sheet(data_list):
             if not last:
                 should_append = True
             else:
-                # 값 비교 (문자열/숫자 형변환 유의)
-                # Google Sheet에서 읽어온 값은 숫자일수도, 문자일수도 있음.
                 def to_str(v): return str(v).strip() if v is not None else ''
                 
-                # Compare
-                # Date check: 만약 같은 날짜에 이미 돌렸으면 중복 추가 방지 (혹시 재실행 시)
-                last_date = str(last.get('WorkDate', '')).split(' ')[0] # pandas Timestamp일 수 있으므로
+                last_date = str(last.get('WorkDate', '')).split(' ')[0]
                 
                 if last_date == today_str:
-                    should_append = False # 오늘 이미 적재함
+                    should_append = False 
                 else:
-                    # 값이 다른지 확인
-                    v1 = to_str(new_entry['CY_Current'])
-                    v2 = to_str(last.get('CY_Current'))
-                    v3 = to_str(new_entry['NY_Current'])
-                    v4 = to_str(last.get('NY_Current'))
+                    # 값이 다른지 확인 (주로 Trend나 Current Estimate 변화 확인)
+                    # 여기서는 간단히 주요 값들이 하나라도 다르면 추가
+                    check_keys = ['CY_Current', 'NY_Current', 'CY_Trend', 'NY_Trend']
+                    is_diff = False
+                    for k in check_keys:
+                        if to_str(new_entry[k]) != to_str(last.get(k)):
+                            is_diff = True
+                            break
                     
-                    if v1 != v2 or v3 != v4:
+                    if is_diff:
                         should_append = True
             
             if should_append:
                 rows_to_append.append([
                     new_entry['Ticker'],
                     new_entry['WorkDate'],
+                    new_entry['CY_Trend'],
+                    new_entry['NY_Trend'],
+                    new_entry['Up_Count'],
+                    new_entry['Down_Count'],
+                    new_entry['Up_Down_Ratio'],
                     new_entry['CY_Current'],
                     new_entry['CY_30Ago'],
                     new_entry['NY_Current'],
