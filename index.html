@@ -194,7 +194,8 @@
                 <li><strong>RS (Relative Strength):</strong> 주가 수익률 - QQQ 수익률 (시장 대비 강도)</li>
                 <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
                 <li><strong>Order:</strong> 정배열 여부 (종가 > 50일선 > 150일선 > 200일선) → YES/NO</li>
-                <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 변화율 (CY:올해, NY:내년)</li>
+                <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
+                    장기 주도주가 될 가능성이 매우 높음)</li>
                 <li><strong>Up/Down #:</strong> 최근 30일간 EPS 추정치를 상향(Up)/하향(Down) 조정한 애널리스트 수</li>
                 <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
                 <li><strong>Today's List 기준:</strong>
@@ -203,6 +204,8 @@
                         <li><strong>종목:</strong> 위 섹터에 속하며 RS(6mo) 상위 30% 이내</li>
                     </ul>
                 </li>
+                <li><strong>Today's Top 기준:</strong> Today's List + <strong>Order(YES)</strong> + <strong>Trend(CY&NY ≥
+                        5%)</strong></li>
             </ul>
         </div>
 
@@ -227,6 +230,11 @@
                     <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
                         style="background-color:#ff9800; color:#000;">
                         Today's List
+                    </button>
+
+                    <button id="todays-top-btn" onclick="showTodaysTop()" class="download-btn"
+                        style="background-color:#00bcd4; color:#000;">
+                        Today's Top
                     </button>
 
                     <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
@@ -392,8 +400,8 @@
                 // Set Default Sort for WRS Mode (WRS_6mo Descending)
                 appState.sort = { key: 'WRS_6mo', asc: false };
 
-            } else if (appState.mode === 'TODAYS_LIST') {
-                // From Today's List, go back to Individual
+            } else if (appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_TOP') {
+                // From Today's List or Top, go back to Individual
                 appState.mode = 'INDIVIDUAL';
                 appState.drillDownKey = null;
 
@@ -453,6 +461,13 @@
 
                 btn.innerText = "Back to Individual RS";
                 btn.style.backgroundColor = "#2196f3"; // Blue
+            } else if (appState.mode === 'TODAYS_TOP') {
+                // Today's Top mode
+                subtitle.innerText = "Today's Top (Best of Best)";
+                subtitle.style.color = "#00bcd4"; // Cyan
+
+                btn.innerText = "Back to Individual RS";
+                btn.style.backgroundColor = "#2196f3"; // Blue
             }
 
             // 2. Render Data
@@ -478,6 +493,19 @@
             appState.sort = { key: 'RS_6mo', asc: false };
 
             // WRS 계산이 필요한 경우
+            if (groupedData.length === 0) {
+                calculateWRS();
+            }
+
+            updateUI();
+        }
+
+        function showTodaysTop() {
+            appState.mode = 'TODAYS_TOP';
+            appState.filterText = '';
+            document.getElementById('search-input').value = '';
+            appState.sort = { key: 'RS_6mo', asc: false };
+
             if (groupedData.length === 0) {
                 calculateWRS();
             }
@@ -598,6 +626,34 @@
                     return qualifiedKeys.has(key) &&
                         stock.RS_Rank_Pct !== null &&
                         stock.RS_Rank_Pct <= 30;  // RS rank ≤ 30% (상위 30%)
+                });
+            } else if (appState.mode === 'TODAYS_TOP') {
+                // Today's Top 필터링 (Today's List + Order=YES + Trend>=5%)
+                // 1. 적격 섹터 (Today's List와 동일)
+                const qualifiedSectors = groupedData.filter(wrs => {
+                    return wrs.Count >= 2 &&
+                        wrs.WRS_Rank_Pct <= 20 &&
+                        wrs.WRS_MD_Rank_Pct <= 40;
+                });
+
+                const qualifiedKeys = new Set(
+                    qualifiedSectors.map(s => `${s.Sector}|${s.Industry}`)
+                );
+
+                targetData = globalData.filter(stock => {
+                    const key = `${stock.Sector}|${stock.Industry}`;
+
+                    // 기본 Today's List 조건
+                    const basicCondition = qualifiedKeys.has(key) &&
+                        stock.RS_Rank_Pct !== null &&
+                        stock.RS_Rank_Pct <= 30;
+
+                    // 추가 조건: Order=YES, CY_Trend >= 0.05, NY_Trend >= 0.05
+                    const extraCondition = (stock.Order === 'YES') &&
+                        (stock.CY_Trend >= 0.05) &&
+                        (stock.NY_Trend >= 0.05);
+
+                    return basicCondition && extraCondition;
                 });
             }
 
