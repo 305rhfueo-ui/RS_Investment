@@ -10,6 +10,7 @@ import shutil
 from datetime import datetime
 # utils에 있는 강력한 병렬 처리 함수 가져오기
 import utils
+import gsheet_handler
 
 # 설정
 # 기존 엑셀 대신 구글 시트 사용
@@ -214,6 +215,14 @@ def main():
     # ===== 히스토리 인덱스 업데이트 =====
     print(f"[{time.strftime('%X')}] 히스토리 인덱스 업데이트 중...")
     update_history_index()
+
+    # [Added] Google Sheets Accumulation Update
+    print(f"[{time.strftime('%X')}] 구글 시트 누적 데이터 업데이트 중...")
+    try:
+        # results 리스트에는 utils.py에서 추가한 'CY_Est' 등의 Raw Data가 포함되어 있음
+        gsheet_handler.update_sheet(results)
+    except Exception as e:
+        print(f"⚠️ 구글 시트 업데이트 실패: {e}")
     
     # ===== GitHub 자동 업로드 =====
     utils.git_push()

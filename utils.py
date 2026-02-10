@@ -469,6 +469,12 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             except:
                 pass
         
+        # [Modified] Initialize raw EPS variables
+        cy_est = None
+        cy_30 = None
+        ny_est = None
+        ny_30 = None
+
         if use_cache:
             # Use Cached Data
             data = cache_item.get('data', {})
@@ -477,7 +483,13 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             up_count = data.get('Up_Count')
             down_count = data.get('Down_Count')
             up_down_ratio = data.get('Up_Down_Ratio')
-            # print(f"Using Cache for {original_ticker}")
+            order_val = data.get('Order', "NO") # Default to NO if missing
+            
+            # [Added] Retrieve raw EPS from cache
+            cy_est = data.get('CY_Est')
+            cy_30 = data.get('CY_30')
+            ny_est = data.get('NY_Est')
+            ny_30 = data.get('NY_30')
             
         else:
             # Fetch New Data
@@ -491,8 +503,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                     # CY Trend
                     try:
                         if '0y' in eps_trend_df.index:
-                            cy_est = eps_trend_df.loc['0y', 'current']
-                            cy_30 = eps_trend_df.loc['0y', '30daysAgo']
+                            cy_est = float(eps_trend_df.loc['0y', 'current'])
+                            cy_30 = float(eps_trend_df.loc['0y', '30daysAgo'])
                             if cy_30 and cy_30 != 0:
                                 cy_trend = round(((cy_est / cy_30) - 1) * 100, 2)
                     except: pass
@@ -500,8 +512,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                     # NY Trend
                     try:
                         if '+1y' in eps_trend_df.index:
-                            ny_est = eps_trend_df.loc['+1y', 'current']
-                            ny_30 = eps_trend_df.loc['+1y', '30daysAgo']
+                            ny_est = float(eps_trend_df.loc['+1y', 'current'])
+                            ny_30 = float(eps_trend_df.loc['+1y', '30daysAgo'])
                             if ny_30 and ny_30 != 0:
                                 ny_trend = round(((ny_est / ny_30) - 1) * 100, 2)
                     except: pass
@@ -533,7 +545,12 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                         "Up_Count": up_count,
                         "Down_Count": down_count,
                         'Up_Down_Ratio': up_down_ratio,
-                        'Order': order_val
+                        'Order': order_val,
+                        # [Added] Save raw EPS to cache
+                        'CY_Est': cy_est,
+                        'CY_30': cy_30,
+                        'NY_Est': ny_est,
+                        'NY_30': ny_30
                     }
                 }
                 
@@ -556,7 +573,13 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'NY_Trend': ny_trend if 'ny_trend' in locals() else None,
             'Up_Count': up_count if 'up_count' in locals() else None,
             'Down_Count': down_count if 'down_count' in locals() else None,
-            'Up_Down_Ratio': up_down_ratio if 'up_down_ratio' in locals() else None
+            'Up_Down_Ratio': up_down_ratio if 'up_down_ratio' in locals() else None,
+            'Order': order_val if 'order_val' in locals() else "NO",
+            # [Added] Raw EPS Data for Google Sheets
+            'CY_Est': cy_est,
+            'CY_30': cy_30,
+            'NY_Est': ny_est,
+            'NY_30': ny_30
         }
 
     except Exception as e:
