@@ -181,13 +181,29 @@
         </div>
 
         <div class="info-box">
-            <p>1. <strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)<br>
-                2. <strong>RS Logic</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)<br>
-                &nbsp;&nbsp;&nbsp;- <strong>RS(6mo)</strong>: 120영업일, <strong>RS(3mo)</strong>: 60영업일,
-                <strong>RS(1mo)</strong>: 20영업일<br>
-                &nbsp;&nbsp;&nbsp;- 양수(+)면 벤치마크(QQQ) 대비 초과 수익, 음수(-)면 저조한 성과를 의미합니다.<br>
-                3. <strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치)
-            </p>
+            <ul>
+                <li><strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)</li>
+                <li><strong>RS Logic</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)
+                    <ul>
+                        <li><strong>RS(6mo)</strong>: 120영업일, <strong>RS(3mo)</strong>: 60영업일, <strong>RS(1mo)</strong>:
+                            20영업일</li>
+                        <li>양수(+)면 벤치마크(QQQ) 대비 초과 수익, 음수(-)면 저조한 성과를 의미합니다.</li>
+                    </ul>
+                </li>
+                <li><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치)</li>
+                <li><strong>RS (Relative Strength):</strong> 주가 수익률 - QQQ 수익률 (시장 대비 강도)</li>
+                <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
+                <li><strong>Order:</strong> 정배열 여부 (종가 > 50일선 > 150일선 > 200일선) → YES/NO</li>
+                <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 변화율 (CY:올해, NY:내년)</li>
+                <li><strong>Up/Down #:</strong> 최근 30일간 EPS 추정치를 상향(Up)/하향(Down) 조정한 애널리스트 수</li>
+                <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
+                <li><strong>Today's List 기준:</strong>
+                    <ul>
+                        <li><strong>섹터/산업:</strong> 종목 수 2개 이상 & WRS(6mo) 상위 20% & Median 상위 40%</li>
+                        <li><strong>종목:</strong> 위 섹터에 속하며 RS(6mo) 상위 30% 이내</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
 
         <!-- 로딩 상태 표시 -->
@@ -221,14 +237,15 @@
                 <thead>
                     <tr>
                         <th onclick="sortTable('Ticker')">Ticker ⬍</th>
+                        <th onclick="sortTable('Sector')">Sector ⬍</th>
+                        <th onclick="sortTable('Industry')">Industry ⬍</th>
                         <th onclick="sortTable('Price')">Price ($) ⬍</th>
                         <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
                         <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
+                        <th onclick="sortTable('Order')">Order ⬍</th>
                         <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
                         <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                         <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
-                        <th onclick="sortTable('Sector')">Sector ⬍</th>
-                        <th onclick="sortTable('Industry')">Industry ⬍</th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -567,11 +584,11 @@
                 // (A) 적격 섹터/산업 찾기
                 const qualifiedSectors = groupedData.filter(wrs => {
                     return wrs.Count >= 2 &&                    // Count ≥ 2
-                        wrs.WRS_Rank_Pct <= 30 &&            // WRS rank ≤ 30%
+                        wrs.WRS_Rank_Pct <= 20 &&            // WRS rank ≤ 20% (상위 20%)
                         wrs.WRS_MD_Rank_Pct <= 40;           // WRS_MD rank ≤ 40%
                 });
 
-                // (B) 적격 섹터에 속하는 종목 중 RS rank ≤ 20% 인 종목들
+                // (B) 적격 섹터에 속하는 종목 중 RS rank ≤ 30% 인 종목들
                 const qualifiedKeys = new Set(
                     qualifiedSectors.map(s => `${s.Sector}|${s.Industry}`)
                 );
@@ -580,7 +597,7 @@
                     const key = `${stock.Sector}|${stock.Industry}`;
                     return qualifiedKeys.has(key) &&
                         stock.RS_Rank_Pct !== null &&
-                        stock.RS_Rank_Pct <= 20;  // RS rank ≤ 20%
+                        stock.RS_Rank_Pct <= 30;  // RS rank ≤ 30% (상위 30%)
                 });
             }
 
@@ -742,8 +759,6 @@
                         <td>${upCountDisplay}</td>
                         <td>${downCountDisplay}</td>
                         <td>${upDownRatioDisplay}</td>
-                        <td>${item.Sector}</td>
-                        <td>${item.Industry}</td>
                     `;
                 }
                 tbody.appendChild(tr);
@@ -776,10 +791,12 @@
 
             if (appState.mode === 'WRS') {
                 excelData = data.map(item => ({
+                    Ticker: item.Ticker,
                     Sector: item.Sector,
                     Industry: item.Industry,
-                    TotalCount: item.Count,
-                    WRS_6mo: item.WRS_6mo,
+                    Price: item.Price,
+                    Order: item.Order,
+                    RS_1mo: item.RS_1mo,
                     WRS_3mo: item.WRS_3mo,
                     WRS_1mo: item.WRS_1mo
                 }));

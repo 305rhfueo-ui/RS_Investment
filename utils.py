@@ -375,6 +375,14 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         
         latest_price = float(hist.iloc[-1]) if not hist.empty else 0
         
+        # --- Order Calculation (Current Price > 50MA > 150MA > 200MA) ---
+        ma50 = hist.rolling(window=50).mean().iloc[-1] if len(hist) >= 50 else 0
+        ma150 = hist.rolling(window=150).mean().iloc[-1] if len(hist) >= 150 else 0
+        ma200 = hist.rolling(window=200).mean().iloc[-1] if len(hist) >= 200 else 0
+        
+        is_order = (latest_price > ma50) and (ma50 > ma150) and (ma150 > ma200)
+        order_val = "YES" if is_order else "NO"
+        
         # 메타데이터 (Market Cap, Sector, Industry)
         # For Metadata, loop up using sanitied ticker
         t = yf.Ticker(yf_ticker)
@@ -524,7 +532,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                         "NY_Trend": ny_trend,
                         "Up_Count": up_count,
                         "Down_Count": down_count,
-                        "Up_Down_Ratio": up_down_ratio
+                        'Up_Down_Ratio': up_down_ratio,
+                        'Order': order_val
                     }
                 }
                 
