@@ -202,6 +202,13 @@
                         <li><strong>종목:</strong> 위 섹터에 속하며 RS(6mo) 상위 30% 이내 & <strong>50DIV > 0</strong></li>
                     </ul>
                 </li>
+                <li><strong>Today's Main 기준:</strong>
+                    <ul>
+                        <li><strong>Today's List</strong> 조건을 만족하는 종목 중</li>
+                        <li><strong>CY Trend & NY Trend</strong> 모두 5% 이상</li>
+                        <li><strong>50DIV</strong> 55% 이하</li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
@@ -232,6 +239,11 @@
                     <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
                         style="background-color:#ff9800; color:#000;">
                         Today's List
+                    </button>
+
+                    <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
+                        style="background-color:#e91e63; color:#ffffff;">
+                        Today's Main
                     </button>
 
 
@@ -455,6 +467,12 @@
 
                 wrsBtn.innerText = "Sector/Industry WRS"; // Reset
 
+            } else if (appState.mode === 'TODAYS_MAIN') {
+                subtitle.innerText = "Today's Main";
+                subtitle.style.color = "#e91e63"; // Pink
+
+                wrsBtn.innerText = "Sector/Industry WRS"; // Reset
+
             } else if (appState.mode === 'TODAYS_TOP') {
                 subtitle.innerText = "Today's Top (Best of Best)";
                 subtitle.style.color = "#00bcd4"; // Cyan
@@ -490,6 +508,23 @@
             appState.sort = { key: 'RS_6mo', asc: false };
 
             // WRS 계산이 필요한 경우
+            if (groupedData.length === 0) {
+                calculateWRS();
+            }
+
+            updateUI();
+        }
+
+        function showTodayMain() {
+            // Function needed but not part of original request, implementing `showTodaysMain` below
+        }
+
+        function showTodaysMain() {
+            appState.mode = 'TODAYS_MAIN';
+            appState.filterText = '';
+            document.getElementById('search-input').value = '';
+            appState.sort = { key: 'RS_6mo', asc: false };
+
             if (groupedData.length === 0) {
                 calculateWRS();
             }
@@ -624,6 +659,35 @@
                         stock.RS_Rank_Pct !== null &&
                         stock.RS_Rank_Pct <= 30 &&  // RS rank ≤ 30% (상위 30%)
                         stock['50DIV'] > 0;         // 50DIV > 0 (New Condition)
+                });
+            } else if (appState.mode === 'TODAYS_MAIN') {
+                // Today's Main 필터링 (Today's List + Trend>=5% + 50DIV<=55%)
+                // 1. 적격 섹터 (Today's List와 동일)
+                const qualifiedSectors = groupedData.filter(wrs => {
+                    return wrs.Count >= 2 &&
+                        wrs.WRS_Rank_Pct <= 20 &&
+                        wrs.WRS_MD_Rank_Pct <= 40;
+                });
+
+                const qualifiedKeys = new Set(
+                    qualifiedSectors.map(s => `${s.Sector}|${s.Industry}`)
+                );
+
+                targetData = globalData.filter(stock => {
+                    const key = `${stock.Sector}|${stock.Industry}`;
+
+                    // 기본 Today's List 조건
+                    const basicCondition = qualifiedKeys.has(key) &&
+                        stock.RS_Rank_Pct !== null &&
+                        stock.RS_Rank_Pct <= 30 &&
+                        stock['50DIV'] > 0;
+
+                    // 추가 조건: CY_Trend >= 0.05, NY_Trend >= 0.05, 50DIV <= 55
+                    const extraCondition = (stock.CY_Trend >= 0.05) &&
+                        (stock.NY_Trend >= 0.05) &&
+                        (stock['50DIV'] <= 55);
+
+                    return basicCondition && extraCondition;
                 });
             } else if (appState.mode === 'TODAYS_TOP') {
                 // Today's Top 필터링 (Today's List + Order=YES + Trend>=5%)
