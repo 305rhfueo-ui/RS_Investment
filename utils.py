@@ -374,7 +374,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         rs_6mo = (stock_ret_6mo - qqq_ret_6mo) if stock_ret_6mo is not None else 0
         
         # Use Close price series
-        closes = hist['Close']
+        closes = hist
         latest_price = float(closes.iloc[-1]) if not closes.empty else 0
         
         # --- Order Calculation (Current Price > 50MA > 150MA > 200MA) ---
@@ -477,6 +477,9 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         ny_est = None
         ny_30 = None
 
+        ny_30 = None
+        target_status = "NO"
+
         if use_cache:
             # Use Cached Data
             data = cache_item.get('data', {})
@@ -492,10 +495,11 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             cy_30 = data.get('CY_30')
             ny_est = data.get('NY_Est')
             ny_30 = data.get('NY_30')
+            target_status = data.get('Target_Status', "NO")
             
         else:
             # Fetch New Data
-            try:
+
                 # t = yf.Ticker(yf_ticker) # Already defined above
                 
             # [Modified] RS Estimate Calculation with strict user requirements
