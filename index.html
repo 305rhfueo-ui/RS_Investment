@@ -349,24 +349,24 @@
                 // Initialize Data
                 globalData = json.data;
 
-                // Market Condition Display
-                if (json.market_condition) {
-                    document.getElementById('market-condition-value').innerText = json.market_condition;
-                }
+
 
                 // Time Display
                 if (json.last_updated) {
-                    try {
-                        const dateObj = new Date(json.last_updated.replace(' UTC', 'Z').replace(' ', 'T'));
-                        const kstStr = new Intl.DateTimeFormat('ko-KR', {
-                            timeZone: 'Asia/Seoul',
-                            year: 'numeric', month: '2-digit', day: '2-digit',
-                            hour: '2-digit', minute: '2-digit', second: '2-digit',
-                            hour12: false
-                        }).format(dateObj);
-                        document.getElementById('last-updated').innerText = `Last update KST: ${kstStr}`;
-                    } catch (e) {
-                        document.getElementById('last-updated').innerText = `Last Updated: ${json.last_updated}`;
+                    const lastUpdatedEl = document.getElementById('last-updated');
+                    if (lastUpdatedEl) {
+                        try {
+                            const dateObj = new Date(json.last_updated.replace(' UTC', 'Z').replace(' ', 'T'));
+                            const kstStr = new Intl.DateTimeFormat('ko-KR', {
+                                timeZone: 'Asia/Seoul',
+                                year: 'numeric', month: '2-digit', day: '2-digit',
+                                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                                hour12: false
+                            }).format(dateObj);
+                            lastUpdatedEl.innerText = `Last update KST: ${kstStr}`;
+                        } catch (e) {
+                            lastUpdatedEl.innerText = `Last Updated: ${json.last_updated}`;
+                        }
                     }
                 }
 
@@ -420,6 +420,12 @@
             const subtitle = document.getElementById('mode-subtitle');
             const wrsBtn = document.getElementById('wrs-btn');
             const indivBtn = document.getElementById('indiv-btn');
+            const resultCount = document.getElementById('result-count');
+
+            if (!subtitle || !wrsBtn || !indivBtn) {
+                console.error("Missing UI elements");
+                return;
+            }
 
             // 1. Update Subtitle & Button States
             if (appState.mode === 'INDIVIDUAL') {
@@ -428,7 +434,7 @@
 
                 // Active/Inactive Styling (Optional)
                 indivBtn.style.opacity = '1';
-                wrsBtn.style.innerText = "Sector/Industry WRS"; // Reset text
+                wrsBtn.innerText = "Sector/Industry WRS"; // Reset text (Fixed: removed .style)
 
             } else if (appState.mode === 'WRS') {
                 subtitle.innerText = "Sector/Industry WRS";
@@ -459,16 +465,21 @@
             // 2. Render Data
             const data = getFilteredAndSortedData();
             renderTable(data);
-            document.getElementById('result-count').innerText = `Total: ${data.length} Items`;
+
+            if (resultCount) {
+                resultCount.innerText = `Total: ${data.length} Items`;
+            }
 
             // 3. Table Layout Adjustment (Compact center for WRS)
             const tableElement = document.querySelector('table');
-            if (appState.mode === 'WRS') {
-                tableElement.style.width = 'auto'; // Shrink to fit
-                tableElement.style.margin = '0 auto'; // Center
-            } else {
-                tableElement.style.width = '100%'; // Full width
-                tableElement.style.margin = '0';
+            if (tableElement) {
+                if (appState.mode === 'WRS') {
+                    tableElement.style.width = 'auto'; // Shrink to fit
+                    tableElement.style.margin = '0 auto'; // Center
+                } else {
+                    tableElement.style.width = '100%'; // Full width
+                    tableElement.style.margin = '0';
+                }
             }
         }
 
