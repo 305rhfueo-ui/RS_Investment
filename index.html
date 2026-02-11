@@ -156,9 +156,7 @@
     <div class="container">
         <h1 id="page-title" style="margin-bottom:5px;">US Market Multi-Timeframe RS Investment</h1>
         <h2 id="mode-subtitle" style="margin-top:0; margin-bottom:10px; font-size:24px; min-height:30px;"></h2>
-        <p id="market-condition" style="margin-top:0; margin-bottom:20px; font-size:16px; color:#aaa;">Market Condition:
-            <span id="market-condition-value">-</span>
-        </p>
+
         <p class="subtitle" id="last-updated" style="margin-bottom:15px;">업데이트 확인 중...</p>
 
         <!-- 날짜 선택 드롭다운 -->
@@ -201,7 +199,7 @@
                 <li><strong>Today's List 기준:</strong>
                     <ul>
                         <li><strong>섹터/산업:</strong> 종목 수 2개 이상 & WRS(6mo) 상위 20% & Median 상위 40%</li>
-                        <li><strong>종목:</strong> 위 섹터에 속하며 RS(6mo) 상위 30% 이내</li>
+                        <li><strong>종목:</strong> 위 섹터에 속하며 RS(6mo) 상위 30% 이내 & <strong>50DIV > 0</strong></li>
                     </ul>
                 </li>
 
@@ -393,7 +391,7 @@
             appState.mode = 'INDIVIDUAL';
             appState.drillDownKey = null;
             appState.sort = { key: 'RS_6mo', asc: false }; // Default sort
-            
+
             document.getElementById('search-input').value = '';
             appState.filterText = '';
             updateUI();
@@ -407,12 +405,12 @@
             } else {
                 appState.mode = 'WRS';
             }
-            
+
             // Generate data if needed
             if (groupedData.length === 0) calculateWRS();
 
             appState.sort = { key: 'WRS_6mo', asc: false }; // Default sort
-            
+
             document.getElementById('search-input').value = '';
             appState.filterText = '';
             updateUI();
@@ -427,11 +425,11 @@
             if (appState.mode === 'INDIVIDUAL') {
                 subtitle.innerText = "Individual RS";
                 subtitle.style.color = "#2196f3"; // Blue
-                
+
                 // Active/Inactive Styling (Optional)
                 indivBtn.style.opacity = '1';
                 wrsBtn.style.innerText = "Sector/Industry WRS"; // Reset text
-                
+
             } else if (appState.mode === 'WRS') {
                 subtitle.innerText = "Sector/Industry WRS";
                 subtitle.style.color = "#ff5252"; // Red
@@ -440,21 +438,21 @@
 
             } else if (appState.mode === 'DRILLDOWN') {
                 subtitle.innerText = "Sector Detail View";
-                subtitle.style.color = "#00e676"; 
+                subtitle.style.color = "#00e676";
 
                 // Change WRS button to Back button
                 wrsBtn.innerText = "Back to WRS List";
-                
+
             } else if (appState.mode === 'TODAYS_LIST') {
                 subtitle.innerText = "Today's List";
                 subtitle.style.color = "#ff9800"; // Orange
-                
+
                 wrsBtn.innerText = "Sector/Industry WRS"; // Reset
-                
+
             } else if (appState.mode === 'TODAYS_TOP') {
                 subtitle.innerText = "Today's Top (Best of Best)";
                 subtitle.style.color = "#00bcd4"; // Cyan
-                
+
                 wrsBtn.innerText = "Sector/Industry WRS"; // Reset
             }
 
@@ -613,7 +611,8 @@
                     const key = `${stock.Sector}|${stock.Industry}`;
                     return qualifiedKeys.has(key) &&
                         stock.RS_Rank_Pct !== null &&
-                        stock.RS_Rank_Pct <= 30;  // RS rank ≤ 30% (상위 30%)
+                        stock.RS_Rank_Pct <= 30 &&  // RS rank ≤ 30% (상위 30%)
+                        stock['50DIV'] > 0;         // 50DIV > 0 (New Condition)
                 });
             } else if (appState.mode === 'TODAYS_TOP') {
                 // Today's Top 필터링 (Today's List + Order=YES + Trend>=5%)
@@ -634,7 +633,8 @@
                     // 기본 Today's List 조건
                     const basicCondition = qualifiedKeys.has(key) &&
                         stock.RS_Rank_Pct !== null &&
-                        stock.RS_Rank_Pct <= 30;
+                        stock.RS_Rank_Pct <= 30 &&
+                        stock['50DIV'] > 0;
 
                     // 추가 조건: Order=YES, CY_Trend >= 0.05, NY_Trend >= 0.05
                     const extraCondition = (stock.Order === 'YES') &&
