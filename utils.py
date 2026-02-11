@@ -373,12 +373,14 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         rs_3mo = (stock_ret_3mo - qqq_ret_3mo) if stock_ret_3mo is not None else 0
         rs_6mo = (stock_ret_6mo - qqq_ret_6mo) if stock_ret_6mo is not None else 0
         
-        latest_price = float(hist.iloc[-1]) if not hist.empty else 0
+        # Use Close price series
+        closes = hist['Close']
+        latest_price = float(closes.iloc[-1]) if not closes.empty else 0
         
         # --- Order Calculation (Current Price > 50MA > 150MA > 200MA) ---
-        ma50 = hist.rolling(window=50).mean().iloc[-1] if len(hist) >= 50 else 0
-        ma150 = hist.rolling(window=150).mean().iloc[-1] if len(hist) >= 150 else 0
-        ma200 = hist.rolling(window=200).mean().iloc[-1] if len(hist) >= 200 else 0
+        ma50 = closes.rolling(window=50).mean().iloc[-1] if len(closes) >= 50 else 0
+        ma150 = closes.rolling(window=150).mean().iloc[-1] if len(closes) >= 150 else 0
+        ma200 = closes.rolling(window=200).mean().iloc[-1] if len(closes) >= 200 else 0
         
         is_order = (latest_price > ma50) and (ma50 > ma150) and (ma150 > ma200)
         order_val = "YES" if is_order else "NO"
@@ -483,7 +485,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             up_count = data.get('Up_Count')
             down_count = data.get('Down_Count')
             up_down_ratio = data.get('Up_Down_Ratio')
-            order_val = data.get('Order', "NO") # Default to NO if missing
+            # order_val = data.get('Order', "NO") # Order는 매일 새로 계산해야 함 (캐시 사용 X)
             
             # [Added] Retrieve raw EPS from cache
             cy_est = data.get('CY_Est')
@@ -496,67 +498,88 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             try:
                 # t = yf.Ticker(yf_ticker) # Already defined above
                 
-                # (A) EPS Trend
+            # [Modified] RS Estimate Calculation with strict user requirements
+            # (A) EPS Trend
+            # User Mapping:
+            # CY = '0y', NY = '+1y'
+            # Current = 'current', 30Ago = '30daysAgo'
+            
+            eps_trend_df = None
+            try:
                 eps_trend_df = t.eps_trend
-                
-                if eps_trend_df is not None and not eps_trend_df.empty:
-                    # CY Trend
-                    try:
-                        if '0y' in eps_trend_df.index:
-                            cy_est = float(eps_trend_df.loc['0y', 'current'])
-                            cy_30 = float(eps_trend_df.loc['0y', '30daysAgo'])
-                            if cy_30 and cy_30 != 0:
-                                cy_trend = round(((cy_est / cy_30) - 1) * 100, 2)
-                    except: pass
+            except: pass
 
-                    # NY Trend
-                    try:
-                        if '+1y' in eps_trend_df.index:
-                            ny_est = float(eps_trend_df.loc['+1y', 'current'])
-                            ny_30 = float(eps_trend_df.loc['+1y', '30daysAgo'])
-                            if ny_30 and ny_30 != 0:
-                                ny_trend = round(((ny_est / ny_30) - 1) * 100, 2)
-                    except: pass
+            if eps_trend_df is not None and not eps_trend_df.empty:
+                # CY Data
+                try:
+                    if '0y' in eps_trend_df.index:
+                        cy_est = float(eps_trend_df.loc['0y', 'current'])
+                        cy_30 = float(eps_trend_df.loc['0y', '30daysAgo'])
+                        if cy_30 and cy_30 != 0:
+                            cy_trend = round(((cy_est / cy_30) - 1) * 100, 2)
+                        else:
+                            cy_trend = 0.0
+                except: pass
 
-                # (B) EPS Revisions
+                # NY Data
+                try:
+                    if '+1y' in eps_trend_df.index:
+                        ny_est = float(eps_trend_df.loc['+1y', 'current'])
+                        ny_30 = float(eps_trend_df.loc['+1y', '30daysAgo'])
+                        if ny_30 and ny_30 != 0:
+                            ny_trend = round(((ny_est / ny_30) - 1) * 100, 2)
+                        else:
+                            ny_trend = 0.0
+                except: pass
+
+            # (B) EPS Revisions
+            # User Mapping: UP# = Sum of 'upLast30days' (All periods: 0q, +1q, 0y, +1y)
+            #               DOWN# = Sum of 'downLast30days' (All periods)
+            
+            eps_rev_df = None
+            try:
                 eps_rev_df = t.eps_revisions
-                
-                if eps_rev_df is not None and not eps_rev_df.empty:
-                    try:
-                        if 'upLast30days' in eps_rev_df.columns:
-                            up_count = int(eps_rev_df['upLast30days'].sum())
-                        if 'downLast30days' in eps_rev_df.columns:
-                            down_count = int(eps_rev_df['downLast30days'].sum())
-                            
-                        if up_count is not None and down_count is not None:
-                            total = up_count + down_count
-                            if total > 0:
-                                up_down_ratio = round((up_count / total) * 100, 2)
-                            else:
-                                up_down_ratio = 0.0
-                    except: pass
-                
-                # Save to Cache
-                ANALYSIS_CACHE[original_ticker] = {
-                    "timestamp": today_str,
-                    "data": {
-                        "CY_Trend": cy_trend,
-                        "NY_Trend": ny_trend,
-                        "Up_Count": up_count,
-                        "Down_Count": down_count,
-                        'Up_Down_Ratio': up_down_ratio,
-                        'Order': order_val,
-                        # [Added] Save raw EPS to cache
-                        'CY_Est': cy_est,
-                        'CY_30': cy_30,
-                        'NY_Est': ny_est,
-                        'NY_30': ny_30
-                    }
+            except: pass
+            
+            if eps_rev_df is not None and not eps_rev_df.empty:
+                try:
+                    if 'upLast30days' in eps_rev_df.columns:
+                        up_count = int(eps_rev_df['upLast30days'].sum())
+                    if 'downLast30days' in eps_rev_df.columns:
+                        down_count = int(eps_rev_df['downLast30days'].sum())
+                        
+                    if up_count is not None and down_count is not None:
+                        total = up_count + down_count
+                        if total > 0:
+                            up_down_ratio = round((up_count / total) * 100, 2)
+                        else:
+                            up_down_ratio = 0.0
+                except: pass
+            
+            # (C) Target Status
+            # Condition: CY_Trend >= 5% AND NY_Trend >= 5% -> YES, else NO
+            target_status = "NO"
+            if cy_trend is not None and ny_trend is not None:
+                if cy_trend >= 5 and ny_trend >= 5:
+                    target_status = "YES"
+
+            # Save to Cache
+            ANALYSIS_CACHE[original_ticker] = {
+                "timestamp": today_str,
+                "data": {
+                    "CY_Trend": cy_trend,
+                    "NY_Trend": ny_trend,
+                    "Up_Count": up_count,
+                    "Down_Count": down_count,
+                    'Up_Down_Ratio': up_down_ratio,
+                    'Order': order_val,
+                    'CY_Est': cy_est,
+                    'CY_30': cy_30,
+                    'NY_Est': ny_est,
+                    'NY_30': ny_30,
+                    'Target_Status': target_status
                 }
-                
-            except Exception as e:
-                # print(f"Analysis Fetch Error {original_ticker}: {e}")
-                pass
+            }
             
         return {
             'Ticker': original_ticker, # Return original for UI
@@ -568,18 +591,20 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             '50DIV': div_50,  # 50일 이동평균 괴리율
             'Sector': sector,
             'Industry': industry,
-            # [Added] RS Estimate Columns
-            'CY_Trend': cy_trend if 'cy_trend' in locals() else None,
-            'NY_Trend': ny_trend if 'ny_trend' in locals() else None,
-            'Up_Count': up_count if 'up_count' in locals() else None,
-            'Down_Count': down_count if 'down_count' in locals() else None,
-            'Up_Down_Ratio': up_down_ratio if 'up_down_ratio' in locals() else None,
-            'Order': order_val if 'order_val' in locals() else "NO",
+            # [Updated] RS Estimate Columns matching user request
+            'CY_Trend': cy_trend,
+            'NY_Trend': ny_trend,
+            'Up_Count': up_count,
+            'Down_Count': down_count,
+            'Up_Down_Ratio': up_down_ratio,
+            'Order': order_val, # Fresh calculated
             # [Added] Raw EPS Data for Google Sheets
-            'CY_Est': cy_est,
-            'CY_30': cy_30,
-            'NY_Est': ny_est,
-            'NY_30': ny_30
+            'CY_Current': cy_est,
+            'CY_30Ago': cy_30,
+            'NY_Current': ny_est,
+            'NY_30Ago': ny_30,
+            # [Added] Target Status
+            'Target_Status': target_status
         }
 
     except Exception as e:

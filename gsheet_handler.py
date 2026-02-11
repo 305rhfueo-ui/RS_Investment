@@ -41,8 +41,10 @@ def update_sheet(data_list):
             # 헤더 추가
             headers = [
                 'Ticker', 'WorkDate', 
-                'CY_Trend', 'NY_Trend', 'Up_Count', 'Down_Count', 'Up_Down_Ratio',
-                'CY_Current', 'CY_30Ago', 'NY_Current', 'NY_30Ago'
+                'CY_Current', 'CY_30Ago', 'CY_Trend', 
+                'NY_Current', 'NY_30Ago', 'NY_Trend',
+                'UP_Count', 'Down_Count', 'Up_Down_Ratio',
+                'Target_Status'
             ]
             sheet.append_row(headers)
         else:
@@ -78,10 +80,10 @@ def update_sheet(data_list):
             if not ticker: continue
             
             # Raw EPS Data
-            cy_est = item.get('CY_Est')
-            cy_30 = item.get('CY_30')
-            ny_est = item.get('NY_Est')
-            ny_30 = item.get('NY_30')
+            cy_est = item.get('CY_Current')
+            cy_30 = item.get('CY_30Ago')
+            ny_est = item.get('NY_Current')
+            ny_30 = item.get('NY_30Ago')
             
             # Trend & Revision Data
             cy_trend = item.get('CY_Trend')
@@ -89,27 +91,33 @@ def update_sheet(data_list):
             up_count = item.get('Up_Count')
             down_count = item.get('Down_Count')
             up_down_ratio = item.get('Up_Down_Ratio')
+            target_status = item.get('Target_Status', 'NO')
             
-            # 구성
+            # Helper to handle NaN
+            def sanitize(val):
+                if val is None: return ''
+                if isinstance(val, float) and (val != val or val == float('inf') or val == float('-inf')): # Check for NaN/Inf
+                    return ''
+                return val
+
+            # 구성 (User Request Order)
+            # 1.Ticker, 2.WorkDate, 3.CY_Current, 4.CY_30Ago, 5.CY_Trend, 
+            # 6.NY_Current, 7.NY_30Ago, 8.NY_Trend, 9.UP#, 10.DOWN#, 11.Ratio, 12.Target
             new_entry = {
                 'Ticker': ticker,
                 'WorkDate': today_str,
-                'CY_Trend': cy_trend if cy_trend is not None else '',
-                'NY_Trend': ny_trend if ny_trend is not None else '',
-                'Up_Count': up_count if up_count is not None else '',
-                'Down_Count': down_count if down_count is not None else '',
-                'Up_Down_Ratio': up_down_ratio if up_down_ratio is not None else '',
-                'CY_Current': cy_est if cy_est is not None else '',
-                'CY_30Ago': cy_30 if cy_30 is not None else '',
-                'NY_Current': ny_est if ny_est is not None else '',
-                'NY_30Ago': ny_30 if ny_30 is not None else ''
+                'CY_Current': sanitize(cy_est),
+                'CY_30Ago': sanitize(cy_30),
+                'CY_Trend': sanitize(cy_trend),
+                'NY_Current': sanitize(ny_est),
+                'NY_30Ago': sanitize(ny_30),
+                'NY_Trend': sanitize(ny_trend),
+                'UP_Count': sanitize(up_count),
+                'Down_Count': sanitize(down_count),
+                'Up_Down_Ratio': sanitize(up_down_ratio),
+                'Target_Status': target_status
             }
             
-            # Check Valid Data (적어도 Current 값이나 Trend 값은 있어야 함)
-            if (new_entry['CY_Current'] == '' and new_entry['NY_Current'] == '' and 
-                new_entry['CY_Trend'] == '' and new_entry['NY_Trend'] == ''):
-                continue
-
             # Check Last Entry
             last = last_entries.get(ticker)
             
@@ -124,9 +132,8 @@ def update_sheet(data_list):
                 if last_date == today_str:
                     should_append = False 
                 else:
-                    # 값이 다른지 확인 (주로 Trend나 Current Estimate 변화 확인)
-                    # 여기서는 간단히 주요 값들이 하나라도 다르면 추가
-                    check_keys = ['CY_Current', 'NY_Current', 'CY_Trend', 'NY_Trend']
+                    # 값이 다른지 확인
+                    check_keys = ['CY_Current', 'NY_Current', 'CY_Trend', 'NY_Trend', 'Target_Status']
                     is_diff = False
                     for k in check_keys:
                         if to_str(new_entry[k]) != to_str(last.get(k)):
@@ -140,15 +147,16 @@ def update_sheet(data_list):
                 rows_to_append.append([
                     new_entry['Ticker'],
                     new_entry['WorkDate'],
-                    new_entry['CY_Trend'],
-                    new_entry['NY_Trend'],
-                    new_entry['Up_Count'],
-                    new_entry['Down_Count'],
-                    new_entry['Up_Down_Ratio'],
                     new_entry['CY_Current'],
                     new_entry['CY_30Ago'],
+                    new_entry['CY_Trend'],
                     new_entry['NY_Current'],
-                    new_entry['NY_30Ago']
+                    new_entry['NY_30Ago'],
+                    new_entry['NY_Trend'],
+                    new_entry['UP_Count'],
+                    new_entry['Down_Count'],
+                    new_entry['Up_Down_Ratio'],
+                    new_entry['Target_Status']
                 ])
                 
         if rows_to_append:
