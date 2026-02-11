@@ -221,7 +221,12 @@
                     <input type="text" id="search-input" placeholder="Search..."
                         style="padding:10px; border-radius:4px; border:1px solid #333; background:#222; color:#fff;">
 
-                    <button id="toggle-mode-btn" onclick="toggleMode()" class="download-btn"
+                    <button id="indiv-btn" onclick="showIndividualRS()" class="download-btn"
+                        style="background-color:#2196f3; color:#ffffff;">
+                        Individual RS
+                    </button>
+
+                    <button id="wrs-btn" onclick="showWRS()" class="download-btn"
                         style="background-color:#00e676; color:#000;">
                         Sector/Industry WRS
                     </button>
@@ -384,86 +389,73 @@
 
         // --- Core Functions ---
 
-        function toggleMode() {
-            const btn = document.getElementById('toggle-mode-btn');
-
-            if (appState.mode === 'INDIVIDUAL' || appState.mode === 'DRILLDOWN') {
-                // Switch to WRS Mode
-                appState.mode = 'WRS';
-                appState.drillDownKey = null;
-                calculateWRS();
-
-                // Set Default Sort for WRS Mode (WRS_6mo Descending)
-                appState.sort = { key: 'WRS_6mo', asc: false };
-
-            } else if (appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_TOP') {
-                // From Today's List or Top, go back to Individual
-                appState.mode = 'INDIVIDUAL';
-                appState.drillDownKey = null;
-
-                // Set Default Sort for Individual Mode (RS Descending)
-                appState.sort = { key: 'RS_6mo', asc: false };
-
-            } else {
-                // Switch back to Individual Mode
-                appState.mode = 'INDIVIDUAL';
-                appState.drillDownKey = null;
-
-                // Set Default Sort for Individual Mode (RS Descending)
-                appState.sort = { key: 'RS_6mo', asc: false };
-            }
-
-            // Reset Search
+        function showIndividualRS() {
+            appState.mode = 'INDIVIDUAL';
+            appState.drillDownKey = null;
+            appState.sort = { key: 'RS_6mo', asc: false }; // Default sort
+            
             document.getElementById('search-input').value = '';
             appState.filterText = '';
+            updateUI();
+        }
 
+        function showWRS() {
+            // If in Drilldown, this acts as "Back"
+            if (appState.mode === 'DRILLDOWN') {
+                appState.mode = 'WRS';
+                appState.drillDownKey = null;
+            } else {
+                appState.mode = 'WRS';
+            }
+            
+            // Generate data if needed
+            if (groupedData.length === 0) calculateWRS();
+
+            appState.sort = { key: 'WRS_6mo', asc: false }; // Default sort
+            
+            document.getElementById('search-input').value = '';
+            appState.filterText = '';
             updateUI();
         }
 
         function updateUI() {
-            const btn = document.getElementById('toggle-mode-btn');
             const subtitle = document.getElementById('mode-subtitle');
+            const wrsBtn = document.getElementById('wrs-btn');
+            const indivBtn = document.getElementById('indiv-btn');
 
-            // 1. Update Subtitle & Button Colors
+            // 1. Update Subtitle & Button States
             if (appState.mode === 'INDIVIDUAL') {
-                // Currently INDIV: Show Blue Subtitle
                 subtitle.innerText = "Individual RS";
                 subtitle.style.color = "#2196f3"; // Blue
-
-                // Button: Action to go to WRS (Red)
-                btn.innerText = "Sector/Industry WRS";
-                btn.style.backgroundColor = "#ff5252";
-
+                
+                // Active/Inactive Styling (Optional)
+                indivBtn.style.opacity = '1';
+                wrsBtn.style.innerText = "Sector/Industry WRS"; // Reset text
+                
             } else if (appState.mode === 'WRS') {
-                // Currently WRS: Show Red Subtitle
                 subtitle.innerText = "Sector/Industry WRS";
                 subtitle.style.color = "#ff5252"; // Red
 
-                // Button: Action to go to INDIV (Blue)
-                btn.innerText = "Individual RS";
-                btn.style.backgroundColor = "#2196f3";
+                wrsBtn.innerText = "Sector/Industry WRS";
 
             } else if (appState.mode === 'DRILLDOWN') {
-                // Drilldown (basically Indiv view but restricted)
                 subtitle.innerText = "Sector Detail View";
-                subtitle.style.color = "#00e676"; // Green or stick to Blue
+                subtitle.style.color = "#00e676"; 
 
-                btn.innerText = "Back to WRS List";
-                btn.style.backgroundColor = "#ff5252"; // Go back to WRS logic
+                // Change WRS button to Back button
+                wrsBtn.innerText = "Back to WRS List";
+                
             } else if (appState.mode === 'TODAYS_LIST') {
-                // Today's List mode
                 subtitle.innerText = "Today's List";
                 subtitle.style.color = "#ff9800"; // Orange
-
-                btn.innerText = "Back to Individual RS";
-                btn.style.backgroundColor = "#2196f3"; // Blue
+                
+                wrsBtn.innerText = "Sector/Industry WRS"; // Reset
+                
             } else if (appState.mode === 'TODAYS_TOP') {
-                // Today's Top mode
                 subtitle.innerText = "Today's Top (Best of Best)";
                 subtitle.style.color = "#00bcd4"; // Cyan
-
-                btn.innerText = "Back to Individual RS";
-                btn.style.backgroundColor = "#2196f3"; // Blue
+                
+                wrsBtn.innerText = "Sector/Industry WRS"; // Reset
             }
 
             // 2. Render Data
