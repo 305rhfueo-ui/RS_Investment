@@ -194,6 +194,7 @@
                 <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)</li>
                 <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
                     Count))×20%</li>
+                <li><strong>5D Chg (%):</strong> Final WRS의 5거래일 전 대비 변화율</li>
                 <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
 
                 <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
@@ -392,6 +393,9 @@
                 document.getElementById('result-area').style.display = 'block';
                 loader.style.display = 'none';
 
+                // [Added] Load Historical Data for 5-day comparison (Async)
+                loadHistoricalComparison();
+
             } catch (e) {
                 if (e.message === "BOT_WORKING") {
                     loader.innerHTML = `<div style="padding: 20px; border: 2px dashed var(--primary-color);"><h3>🤖 봇이 작업중입니다!</h3><p>잠시 후 새로고침 해주세요.</p></div>`;
@@ -399,6 +403,125 @@
                     loader.innerText = "Error: " + e.message;
                 }
             }
+        }
+
+        // [Added] New Function for Historical Comparison
+        async function loadHistoricalComparison() {
+            try {
+                // 1. Get History Index
+                const res = await fetch('./static/history_index.json?t=' + new Date().getTime());
+                if (!res.ok) return;
+                const indexData = await res.json();
+
+                // 2. Find 5-day ago file (Index 5 in sorted list, assuming current is 0 or fresh)
+                // If viewing specific date, need to find relative 5 days.
+                // For simplicity, let's assume we compare "Current View" vs "5 Indices Back".
+
+                const dates = indexData.dates; // Sorted DESC
+                // Currently loaded file: if 'static/result.json' -> treat as latest (Index -1? No, logic needed).
+                // Let's just assume we want 5 days ago from LATEST for now, 
+                // BUT if user selected a date, we should respect that.
+
+                // Since this is a "LIVE" feature request ("지금 데이터가 계속 쌓이고 있잖아"),
+                // primarily focused on Latest view.
+
+                if (dates.length < 6) return; // Need at least 6 files (0 to 5)
+
+                const targetHistory = dates[5]; // 0 is today, 1 is yesterday... 5 is 5 days ago?
+                // Let's check: 
+                // Index 0: 2026-02-13 (Today)
+                // Index 1: 2026-02-12 (1 day ago)
+                // Index 5: 2026-02-06 (5 trading days ago approx)
+
+                if (!targetHistory) return;
+
+                console.log("Loading 5-day ago data from:", targetHistory.filename);
+
+                const histRes = await fetch('static/' + targetHistory.filename);
+                if (!histRes.ok) return;
+                const histJson = await histRes.json();
+                const histData = histJson.data; // Raw tickers
+
+                // 3. Calculate WRS for Historical Data
+                // We need to re-use calculateWRS logic but for this historical set.
+                const histWRS = calculateWRSForData(histData);
+
+                // 4. Merge comparison into current groupedData
+                groupedData.forEach(curr => {
+                    const key = `${curr.Sector}|${curr.Industry}`;
+                    const past = histWRS[key];
+                    if (past && past.Final_WRS !== 0) {
+                        const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
+                        curr.Final_WRS_5D_Chg = change;
+                    } else {
+                        curr.Final_WRS_5D_Chg = null;
+                    }
+                });
+
+                // 5. Re-render UI to show new column
+                updateUI();
+
+            } catch (e) {
+                console.error("Historical comparison failed:", e);
+            }
+        }
+
+        // Refactored WRS Calculation to be reusable
+        function calculateWRSForData(rawData) {
+            const groups = {};
+            rawData.forEach(item => {
+                if (!item['Market Cap'] || item['Market Cap'] === 'N/A' || item['Market Cap'] === 'null') return;
+                if (!item['Sector'] || item['Sector'] === 'N/A' || item['Sector'] === 'null' || item['Sector'] === 'nan') return;
+                // ... (rest of logic similar to calculateWRS)
+                // To avoid code duplication, I should refactor calculateWRS to use this.
+                // But for now, let's implement a simplified version here or duplicate logic safely.
+                // Logic must be IDENTICAL to `calculateWRS`.
+
+                const key = `${item.Sector}|${item.Industry}`;
+                if (!groups[key]) {
+                    groups[key] = {
+                        Sector: item.Sector,
+                        Industry: item.Industry,
+                        Count: 0,
+                        TotalMC: 0,
+                        WeightedSum6: 0,
+                        RS_Values: [],
+                        WinCount: 0
+                    };
+                }
+
+                const mc = parseMarketCap(item['Market Cap']);
+                const rs6 = item.RS_6mo || 0;
+
+                if (mc > 0) {
+                    groups[key].Count += 1;
+                    groups[key].TotalMC += mc;
+                    groups[key].WeightedSum6 += (mc * rs6);
+                    groups[key].RS_Values.push(rs6);
+                    if (rs6 > 0) groups[key].WinCount += 1;
+                }
+            });
+
+            const result = {};
+            Object.values(groups).forEach(g => {
+                // Median
+                const sortedRS = g.RS_Values.sort((a, b) => a - b);
+                const mid = Math.floor(sortedRS.length / 2);
+                const median = sortedRS.length % 2 === 0
+                    ? (sortedRS[mid - 1] + sortedRS[mid]) / 2
+                    : sortedRS[mid];
+
+                const wrs6mo = g.TotalMC > 0 ? (g.WeightedSum6 / g.TotalMC) : 0;
+                const winRate = g.Count > 0 ? (g.WinCount / g.Count) : 0;
+                const winFactor = g.Count > 1 ? (1 - (1 / g.Count)) : 0;
+
+                const finalWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
+
+                result[`${g.Sector}|${g.Industry}`] = {
+                    Final_WRS: finalWRS
+                };
+            });
+            return result;
         }
 
         // --- Core Functions ---
@@ -852,6 +975,7 @@
                     <th onclick="sortTable('Industry')" style="text-align: center;">Industry ⬍</th>
                     <th onclick="sortTable('Final_WRS')" style="text-align: center;">Final WRS ⬍</th>
                     <th onclick="sortTable('Final_WRS_Rank_Pct')" style="text-align: center;">Final Rank (%) ⬍</th>
+                    <th onclick="sortTable('Final_WRS_5D_Chg')" style="text-align: center;">5D Chg (%) ⬍</th>
                     <th onclick="sortTable('Count')" style="text-align: center;">Total Count ⬍</th>
                     <th onclick="sortTable('WRS_6mo')" style="text-align: center;">WRS (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_Rank_Pct')" style="text-align: center;">WRS Rank (%) ⬍</th>
@@ -912,6 +1036,9 @@
                         <td style="text-align: center; white-space: nowrap;">${item.Industry}</td>
                         <td style="text-align: center; font-weight: bold;">${item.Final_WRS ? item.Final_WRS.toFixed(4) : '0.0000'}</td>
                         <td style="text-align: center;">${item.Final_WRS_Rank_Pct ? item.Final_WRS_Rank_Pct.toFixed(2) + '%' : 'N/A'}</td>
+                        <td style="text-align: center; font-weight: bold; color: ${item.Final_WRS_5D_Chg > 0 ? '#00e676' : (item.Final_WRS_5D_Chg < 0 ? '#ff5252' : 'inherit')}">
+                            ${item.Final_WRS_5D_Chg !== undefined && item.Final_WRS_5D_Chg !== null ? (item.Final_WRS_5D_Chg > 0 ? '+' : '') + item.Final_WRS_5D_Chg.toFixed(2) + '%' : '-'}
+                        </td>
                         <td style="text-align: center;">${item.Count}</td>
                         <td class="${item.WRS_6mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_6mo.toFixed(4)}</td>
                         <td style="text-align: center;">${wrsRankDisplay}</td>
