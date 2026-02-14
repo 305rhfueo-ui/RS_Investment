@@ -420,32 +420,41 @@
                 const dates = indexData.dates; // Sorted DESC
                 // Currently loaded file: if 'static/result.json' -> treat as latest (Index -1? No, logic needed).
                 // Let's just assume we want 5 days ago from LATEST for now, 
+                // Let's just assume we want 5 days ago from LATEST for now,
                 // BUT if user selected a date, we should respect that.
 
                 // Since this is a "LIVE" feature request ("지금 데이터가 계속 쌓이고 있잖아"),
                 // primarily focused on Latest view.
 
-                if (dates.length < 11) return; // Need at least 11 files (0 to 10)
+                if (dates.length < 11) {
+                    console.log("Not enough history for 10D comparison (Total: " + dates.length + ")");
+                    // Optional: Fallback to oldest? Or just leave as '-'
+                    return;
+                }
 
-                const targetHistory = dates[10]; // 0 is today ... 10 is 10 days ago (data points)
-
-                if (!targetHistory) return;
+                const targetHistory = dates[10]; // 10 days ago
 
                 console.log("Loading 10-day ago data from:", targetHistory.filename);
 
                 const histRes = await fetch('static/' + targetHistory.filename);
-                if (!histRes.ok) return;
+                if (!histRes.ok) throw new Error("Failed to fetch history file");
                 const histJson = await histRes.json();
                 const histData = histJson.data; // Raw tickers
+
+                // Update Header with Date
+                const dateStr = targetHistory.date; // "YYYY-MM-DD"
+                const shortDate = dateStr.substring(5); // "MM-DD"
+                const header = document.querySelector('th[onclick="sortTable(\'Final_WRS_10D_Chg\')"]');
+                if (header) header.innerText = `10D Chg (${shortDate}) ⬍`;
 
                 // 3. Calculate WRS for Historical Data
                 const histWRS = calculateWRSForData(histData);
 
-                // 4. Merge comparison into current groupedData
+                // 4. Merge
                 groupedData.forEach(curr => {
                     const key = `${curr.Sector}|${curr.Industry}`;
                     const past = histWRS[key];
-                    if (past && past.Final_WRS !== 0) {
+                    if (past && past.Final_WRS !== 0 && !isNaN(past.Final_WRS)) {
                         const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
                         curr.Final_WRS_10D_Chg = change;
                     } else {
@@ -453,11 +462,12 @@
                     }
                 });
 
-                // 5. Re-render UI to show new column
+                // 5. Re-render UI
                 updateUI();
 
             } catch (e) {
                 console.error("Historical comparison failed:", e);
+                // Can verify error by checking if header changed
             }
         }
 
@@ -465,12 +475,9 @@
         function calculateWRSForData(rawData) {
             const groups = {};
             rawData.forEach(item => {
-                if (!item['Market Cap'] || item['Market Cap'] === 'N/A' || item['Market Cap'] === 'null') return;
-                if (!item['Sector'] || item['Sector'] === 'N/A' || item['Sector'] === 'null' || item['Sector'] === 'nan') return;
-                // ... (rest of logic similar to calculateWRS)
-                // To avoid code duplication, I should refactor calculateWRS to use this.
-                // But for now, let's implement a simplified version here or duplicate logic safely.
-                // Logic must be IDENTICAL to `calculateWRS`.
+                // Ensure field existence
+                if (!item['Market Cap'] || item['Market Cap'] === 'N/A') return;
+                if (!item['Sector'] || item['Sector'] === 'N/A' || item['Sector'] === 'nan') return;
 
                 const key = `${item.Sector}|${item.Industry}`;
                 if (!groups[key]) {
@@ -485,8 +492,10 @@
                     };
                 }
 
+                // Robust Parsing
                 const mc = parseMarketCap(item['Market Cap']);
-                const rs6 = item.RS_6mo || 0;
+                // Ensure RS is number
+                const rs6 = parseFloat(item.RS_6mo) || 0;
 
                 if (mc > 0) {
                     groups[key].Count += 1;
@@ -499,12 +508,16 @@
 
             const result = {};
             Object.values(groups).forEach(g => {
-                // Median
+                // Median Calculation
                 const sortedRS = g.RS_Values.sort((a, b) => a - b);
-                const mid = Math.floor(sortedRS.length / 2);
-                const median = sortedRS.length % 2 === 0
-                    ? (sortedRS[mid - 1] + sortedRS[mid]) / 2
-                    : sortedRS[mid];
+
+                let median = 0;
+                if (sortedRS.length > 0) {
+                    const mid = Math.floor(sortedRS.length / 2);
+                    median = sortedRS.length % 2 === 0
+                        ? (sortedRS[mid - 1] + sortedRS[mid]) / 2
+                        : sortedRS[mid];
+                }
 
                 const wrs6mo = g.TotalMC > 0 ? (g.WeightedSum6 / g.TotalMC) : 0;
                 const winRate = g.Count > 0 ? (g.WinCount / g.Count) : 0;
