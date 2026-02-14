@@ -190,6 +190,10 @@
                 </li>
                 <li><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치)</li>
                 <li><strong>WRS (Weighted Relative Strength):</strong> 섹터/산업 내 종목들의 시가총액 가중 평균 RS (섹터/산업의 주도력)</li>
+                <li><strong>WRS_MD:</strong> 섹터/산업 내 종목들의 RS(6mo) 중앙값 (Median)</li>
+                <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)</li>
+                <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
+                    Count))×20%</li>
                 <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
 
                 <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
@@ -421,7 +425,7 @@
             // Generate data if needed
             if (groupedData.length === 0) calculateWRS();
 
-            appState.sort = { key: 'WRS_6mo', asc: false }; // Default sort
+            appState.sort = { key: 'Final_WRS', asc: false }; // Default sort
 
             document.getElementById('search-input').value = '';
             appState.filterText = '';
@@ -570,7 +574,8 @@
                         WeightedSum6: 0,
                         WeightedSum3: 0,
                         WeightedSum1: 0,
-                        RS_Values: []  // For median calculation
+                        RS_Values: [],  // For median calculation
+                        WinCount: 0     // For Win-rate calculation
                     };
                 }
 
@@ -587,6 +592,10 @@
                     groups[key].WeightedSum3 += (mc * rs3);
                     groups[key].WeightedSum1 += (mc * rs1);
                     groups[key].RS_Values.push(rs6);  // Collect for median
+
+                    if (rs6 > 0) {
+                        groups[key].WinCount += 1;
+                    }
                 }
             });
 
@@ -598,14 +607,84 @@
                     ? (sortedRS[mid - 1] + sortedRS[mid]) / 2
                     : sortedRS[mid];
 
+                const wrs6mo = g.TotalMC > 0 ? (g.WeightedSum6 / g.TotalMC) : 0;
+                const winRate = g.Count > 0 ? (g.WinCount / g.Count) : 0; // 0.0 ~ 1.0
+
+                // Final WRS 공식: WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/total count))×20%
+                // Win-rate part needs to be scaled? Request says: Win-rate = (Count > 0) / Total Count
+                // "단위는 %이고 소수점 둘째자리까지 표시한다." -> Display only.
+                // Formula uses Win-rate as decimal? Or percentage?
+                // Example: Win-rate = 71.42% = 0.7142
+                // Example Calc: 2.7405*0.4 + 0.2661*0.4 + 0.7142*(1-1/7)*0.2
+                // So Win-rate is used as a decimal (0.7142) but logic probably implies the raw value before % formatting.
+                // Re-reading logic: "0.7142×(1-1/7)×20%" -> Yes, decimal.
+
+                const winFactor = g.Count > 1 ? (1 - (1 / g.Count)) : 0; // Avoid division by zero issues or single item? Logic says 1-1/count. If count=1, 1-1=0.
+
+                // WRS_MD(6MO) is `median`
+
+                // Final WRS
+                const finalWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
+                // Wait, example: 0.7142... 
+                // Let's re-read the example carefully.
+                // "Computer Hardware의 Final WRS는 = 1.0962 + 0.1064 + 0.6122×20% = 1.3250"
+                // 0.6122 comes from 0.7142 * (6/7) = 0.61217...
+                // 0.6122 * 0.2 = 0.12244...
+                // 1.0962 + 0.1064 + 0.1224 = 1.325
+                // The term "0.6122" is "Win-rate * (1 - 1/Count)".
+                // Wait, WRS values are usually around 0~10 or -10~10?
+                // Example WRS(6MO) = 2.7405. 
+                // Example WRS_MD(6MO) = 0.2661.
+                // Win-rate = 0.7142 (71.42%).
+                // If I just add them: 2.74*0.4 + 0.26*0.4 + 0.71*...*0.2?
+                // Let's check magnitude.
+                // 2.74 * 0.4 = 1.096. Correct.
+                // 0.26 * 0.4 = 0.106. Correct.
+                // 0.7142 * (6/7) * 0.2 = 0.6122 * 0.2 = 0.1224.
+                // Sum = 1.096 + 0.106 + 0.122 = 1.324.
+                // The user example says "= 2.7405×40% + 0.2661×40% + 0.7142×(1-1/7)×20%"
+                // AND THEN "= 1.0962 + 0.1064 + 0.6122×20%"
+                // The last term "0.6122 * 20%" suggests 0.12244.
+                // It seems Win-rate should be treated as 0.xx (decimal).
+                // However, RS values can be large (e.g. 20, 30). Win rate is 0-1.
+                // Is there a scaling factor?
+                // "Win-rate 단위는 %이고" -> 71.42. If used as 71.42:
+                // 71.42 * (6/7) * 0.2 = 61.21 * 0.2 = 12.24.
+                // This would dominate the score (1.0 vs 12.24).
+                // So likely it is used as decimal (0.7142).
+                // The User Example: 
+                // = 1.0962 + 0.1064 + 0.6122×20%
+                // 0.6122 is (5/7) * (6/7) ? No. Win-rate is 5/7 = 0.7142.
+                // 0.7142 * (1 - 1/7) = 0.7142 * 0.8571 = 0.61217... matches 0.6122.
+                // So the 3rd term is 0.6122 * 20% = 0.1224.
+                // Total = 1.3250.
+                // So yes, Win-rate is used as a decimal (0.0 to 1.0) in the calculation.
+
+                // BUT wait, is RS typically percentage? "RS(6mo): (개별종목 기간 수익률) - (QQQ 기간 수익률)".
+                // If a stock is up 50% and QQQ is up 10%, RS is 40? or 0.40?
+                // If RS is 2.74 (as in example), that sounds like 2.74%? Or factor?
+                // Usually RS is relative strength index 0-100 or a percentage difference.
+                // If RS_6mo is 2.74, and WRS_MD is 0.26.
+                // These are small numbers. Maybe they are percentages like 2.74%?
+                // If so, 0.71 (71%) is comparable?
+                // actually 2.74% is 0.0274. 
+                // If RS is raw percentage (e.g. 2.74 means 2.74%), then Win-rate (0.71) is huge (71%).
+                // If RS is just a number (e.g. 2.74), and Win Rate is 0.71.
+                // Let's assume the example is the ground truth.
+                // Win Rate part contributes ~0.12 to the score.
+                // WRS part contributes ~1.1 to the score.
+                // So Win Rate is a minor booster. This makes sense.
+
                 return {
                     Sector: g.Sector,
                     Industry: g.Industry,
                     Count: g.Count,
-                    WRS_6mo: g.TotalMC > 0 ? (g.WeightedSum6 / g.TotalMC) : 0,
+                    WRS_6mo: wrs6mo,
                     WRS_3mo: g.TotalMC > 0 ? (g.WeightedSum3 / g.TotalMC) : 0,
                     WRS_1mo: g.TotalMC > 0 ? (g.WeightedSum1 / g.TotalMC) : 0,
                     WRS_6mo_MD: median,  // Median
+                    Win_Rate: winRate,
+                    Final_WRS: finalWRS,
                     TotalMC: g.TotalMC
                 };
             });
@@ -769,11 +848,13 @@
                 thead.innerHTML = `
                     <th onclick="sortTable('Sector')" style="text-align: center;">Sector ⬍</th>
                     <th onclick="sortTable('Industry')" style="text-align: center;">Industry ⬍</th>
+                    <th onclick="sortTable('Final_WRS')" style="text-align: center;">Final WRS ⬍</th>
                     <th onclick="sortTable('Count')" style="text-align: center;">Total Count ⬍</th>
                     <th onclick="sortTable('WRS_6mo')" style="text-align: center;">WRS (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_Rank_Pct')" style="text-align: center;">WRS Rank (%) ⬍</th>
                     <th onclick="sortTable('WRS_6mo_MD')" style="text-align: center;">WRS_MD (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_MD_Rank_Pct')" style="text-align: center;">WRS_MD Rank (%) ⬍</th>
+                    <th onclick="sortTable('Win_Rate')" style="text-align: center;">Win-rate (%) ⬍</th>
                     <th onclick="sortTable('WRS_3mo')" style="text-align: center;">WRS (3mo) ⬍</th>
                     <th onclick="sortTable('WRS_1mo')" style="text-align: center;">WRS (1mo) ⬍</th>
                 `;
@@ -826,11 +907,13 @@
                     tr.innerHTML = `
                         <td style="text-align: center; white-space: nowrap;">${item.Sector}</td>
                         <td style="text-align: center; white-space: nowrap;">${item.Industry}</td>
+                        <td style="text-align: center; font-weight: bold;">${item.Final_WRS ? item.Final_WRS.toFixed(4) : '0.0000'}</td>
                         <td style="text-align: center;">${item.Count}</td>
                         <td class="${item.WRS_6mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_6mo.toFixed(4)}</td>
                         <td style="text-align: center;">${wrsRankDisplay}</td>
                         <td class="${item.WRS_6mo_MD > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_6mo_MD.toFixed(4)}</td>
                         <td style="text-align: center;">${wrsMDRankDisplay}</td>
+                        <td style="text-align: center;">${(item.Win_Rate * 100).toFixed(2)}%</td>
                         <td class="${item.WRS_3mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_3mo.toFixed(4)}</td>
                         <td class="${item.WRS_1mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_1mo.toFixed(4)}</td>
                     `;

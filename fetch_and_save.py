@@ -1,7 +1,3 @@
-
-import pandas as pd
-import json
-import os
 import pandas as pd
 import json
 import os
@@ -20,6 +16,20 @@ GOOGLE_SHEET_URL = f"https://docs.google.com/spreadsheets/d/{GOOGLE_SHEET_ID}/ex
 OUTPUT_FILE = "static/result.json"
 HISTORY_DIR = "static/history"
 HISTORY_INDEX = "static/history_index.json"
+
+def parse_market_cap(mc_str):
+    if not mc_str or mc_str == 'N/A':
+        return 0.0
+    try:
+        # Expected format: "2.50B"
+        val_str = mc_str.replace('B', '').replace('M', '').replace('T', '').replace(',', '')
+        val = float(val_str)
+        if 'B' in mc_str: val *= 1e9
+        elif 'M' in mc_str: val *= 1e6
+        elif 'T' in mc_str: val *= 1e12
+        return val
+    except:
+        return 0.0
 
 def backup_existing_data():
     """
@@ -160,19 +170,47 @@ def main():
             item.get('Industry') and item['Industry'] not in ['N/A', 'nan'] and
             item.get('RS_6mo') is not None):
             key = f"{item['Sector']}|{item['Industry']}"
-            sector_groups[key].append(item['RS_6mo'])
+            mc = parse_market_cap(item.get('Market Cap'))
+            sector_groups[key].append({
+                'RS': item['RS_6mo'],
+                'MC': mc
+            })
     
     # WRS 데이터 생성 (중앙값 포함)
     wrs_data = []
-    for key, rs_values in sector_groups.items():
-        if len(rs_values) >= 1:  # 최소 1개 이상
+    for key, values in sector_groups.items():
+        if len(values) >= 1:  # 최소 1개 이상
             sector, industry = key.split('|')
+            
+            # Lists for calculation
+            rs_values = [v['RS'] for v in values]
+            
+            # Median
             median_rs = statistics.median(rs_values)
+            
+            # Weighted RS (WRS_6mo)
+            total_mc = sum(v['MC'] for v in values)
+            weighted_sum = sum(v['MC'] * v['RS'] for v in values)
+            wrs_6mo = weighted_sum / total_mc if total_mc > 0 else 0
+            
+            # Win Rate
+            win_count = sum(1 for v in values if v['RS'] > 0)
+            count = len(values)
+            win_rate = win_count / count if count > 0 else 0
+            
+            # Final WRS
+            # Formula: WRS(6MO)*0.4 + WRS_MD(6MO)*0.4 + Win-rate*(1-(1/total count))*0.2
+            win_factor = (1 - (1/count)) if count > 1 else 0
+            final_wrs = (wrs_6mo * 0.4) + (median_rs * 0.4) + (win_rate * win_factor * 0.2)
+            
             wrs_data.append({
                 'Sector': sector,
                 'Industry': industry,
-                'Count': len(rs_values),
-                'WRS_6mo_MD': round(median_rs, 4)
+                'Count': count,
+                'WRS_6mo': round(wrs_6mo, 4),
+                'WRS_6mo_MD': round(median_rs, 4),
+                'Win_Rate': round(win_rate, 4),     # Saved as decimal (e.g. 0.7142)
+                'Final_WRS': round(final_wrs, 4)
             })
     
     # WRS 중앙값 퍼센타일 계산
