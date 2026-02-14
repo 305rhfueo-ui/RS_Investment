@@ -457,16 +457,18 @@
 
                 let matchCount = 0;
                 let foundCount = 0;
+                let firstHistKey = histKeys.length > 0 ? histKeys[0] : "None";
+                let firstCurrKey = "None";
 
                 // 4. Merge
-                groupedData.forEach(curr => {
+                groupedData.forEach((curr, idx) => {
                     const key = `${curr.Sector}|${curr.Industry}`;
+                    if (idx === 0) firstCurrKey = key;
+
                     const past = histWRS[key];
 
                     if (past) {
                         foundCount++;
-                        // Allow 0 comparison if we want, but usually valid WRS is non-zero.
-                        // If past is 0 (start of period), change is Infinity?
                         if (past.Final_WRS !== 0 && !isNaN(past.Final_WRS)) {
                             const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
                             curr.Final_WRS_10D_Chg = change;
@@ -479,7 +481,7 @@
                     }
                 });
 
-                const debugMsg = `Loaded: ${dateStr} | HistItems: ${histData.length} | WRSGroups: ${histKeys.length} | Found: ${foundCount} | Valid: ${matchCount}`;
+                const debugMsg = `Loaded: ${dateStr} | HistItems: ${histData.length} | WRSGroups: ${histKeys.length} | Found: ${foundCount} | Valid: ${matchCount}\nKeys: Hist[${firstHistKey}] vs Curr[${firstCurrKey}]`;
                 if (debugEl) debugEl.innerText = debugMsg;
                 console.log(debugMsg);
 
