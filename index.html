@@ -453,23 +453,35 @@
 
                 // 3. Calculate WRS for Historical Data
                 const histWRS = calculateWRSForData(histData);
+                const histKeys = Object.keys(histWRS);
 
                 let matchCount = 0;
+                let foundCount = 0;
 
                 // 4. Merge
                 groupedData.forEach(curr => {
                     const key = `${curr.Sector}|${curr.Industry}`;
                     const past = histWRS[key];
-                    if (past && past.Final_WRS !== 0 && !isNaN(past.Final_WRS)) {
-                        const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
-                        curr.Final_WRS_10D_Chg = change;
-                        matchCount++;
+
+                    if (past) {
+                        foundCount++;
+                        // Allow 0 comparison if we want, but usually valid WRS is non-zero.
+                        // If past is 0 (start of period), change is Infinity?
+                        if (past.Final_WRS !== 0 && !isNaN(past.Final_WRS)) {
+                            const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
+                            curr.Final_WRS_10D_Chg = change;
+                            matchCount++;
+                        } else {
+                            curr.Final_WRS_10D_Chg = null;
+                        }
                     } else {
                         curr.Final_WRS_10D_Chg = null;
                     }
                 });
 
-                if (debugEl) debugEl.innerText = `History Loaded: ${targetHistory.date} (Matches: ${matchCount})`;
+                const debugMsg = `Loaded: ${dateStr} | HistItems: ${histData.length} | WRSGroups: ${histKeys.length} | Found: ${foundCount} | Valid: ${matchCount}`;
+                if (debugEl) debugEl.innerText = debugMsg;
+                console.log(debugMsg);
 
                 // 5. Re-render UI
                 updateUI();
