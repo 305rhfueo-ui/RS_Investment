@@ -461,7 +461,7 @@
                 let firstHistKey = histKeys.length > 0 ? histKeys[0] : "None";
                 let firstCurrKey = "None";
 
-                // 4. Merge
+                // 4. Merge WRS
                 groupedData.forEach((curr, idx) => {
                     const key = `${curr.Sector}|${curr.Industry}`;
                     if (idx === 0) firstCurrKey = key;
@@ -482,11 +482,31 @@
                     }
                 });
 
-                const debugMsg = `Loaded: ${dateStr} | HistItems: ${histData.length} | WRSGroups: ${histKeys.length} | Found: ${foundCount} | Valid: ${matchCount}\nKeys: Hist[${firstHistKey}] vs Curr[${firstCurrKey}]`;
+                // [Added] 5. Merge Individual RS (Ticker Level)
+                const histTickerMap = {};
+                histData.forEach(item => {
+                    if (item.Ticker) histTickerMap[item.Ticker] = item.RS_6mo;
+                });
+
+                let tickerMatchCount = 0;
+                globalData.forEach(curr => {
+                    const pastRS = histTickerMap[curr.Ticker];
+                    // Check if pastRS is valid number (can be 0, but usually not null/undefined)
+                    if (pastRS !== undefined && pastRS !== null && !isNaN(pastRS) && pastRS !== 0) {
+                        // Change % = (Curr - Past) / |Past| * 100
+                        const change = ((curr.RS_6mo - pastRS) / Math.abs(pastRS)) * 100;
+                        curr.RS_6mo_10D_Chg = change;
+                        tickerMatchCount++;
+                    } else {
+                        curr.RS_6mo_10D_Chg = null;
+                    }
+                });
+
+                const debugMsg = `Loaded: ${dateStr} | HistItems: ${histData.length} | WRSGroups: ${histKeys.length} | Found: ${foundCount} | Valid: ${matchCount}\nTicker Matches: ${tickerMatchCount}`;
                 if (debugEl) debugEl.innerText = debugMsg;
                 console.log(debugMsg);
 
-                // 5. Re-render UI
+                // 6. Re-render UI
                 updateUI();
 
             } catch (e) {
@@ -1027,6 +1047,7 @@
                     <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
                     <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
                     <th onclick="sortTable('RS_Rank_Pct')">RS Rank (%) ⬍</th>
+                    <th onclick="sortTable('RS_6mo_10D_Chg')">10D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
@@ -1092,6 +1113,16 @@
                         ? `${Number(item.RS_Rank_Pct).toFixed(2)}%`
                         : 'N/A';
 
+                    // 10D Change Display
+                    const change10d = item.RS_6mo_10D_Chg;
+                    let change10dDisplay = '-';
+                    let change10dClass = '';
+                    if (change10d !== undefined && change10d !== null) {
+                        change10dDisplay = (change10d > 0 ? '+' : '') + change10d.toFixed(2) + '%';
+                        if (change10d > 0) change10dClass = 'rs-pos';
+                        else if (change10d < 0) change10dClass = 'rs-neg';
+                    }
+
                     // 50DIV Display
                     const div50Display = item['50DIV'] !== null && item['50DIV'] !== undefined
                         ? (item['50DIV'] > 0 ? `+${item['50DIV'].toFixed(2)}%` : `${item['50DIV'].toFixed(2)}%`)
@@ -1119,6 +1150,7 @@
                         <td>${item.MarketCapRank}</td>
                         <td class="${item.RS_6mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_6mo).toFixed(4)}</td>
                         <td>${rsRankDisplay}</td>
+                        <td class="${change10dClass}" style="text-align: center; font-weight: bold;">${change10dDisplay}</td>
                         <td class="${item.RS_3mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_3mo).toFixed(4)}</td>
                         <td class="${item.RS_1mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_1mo).toFixed(4)}</td>
                         <td class="${div50Class}">${div50Display}</td>
