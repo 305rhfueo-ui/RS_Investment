@@ -194,7 +194,7 @@
                 <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)</li>
                 <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
                     Count))×20%</li>
-                <li><strong>5D Chg (%):</strong> Final WRS의 5거래일 전 대비 변화율</li>
+                <li><strong>10D Chg (%):</strong> Final WRS의 10거래일 전 대비 변화율</li>
                 <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
 
                 <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
@@ -425,17 +425,13 @@
                 // Since this is a "LIVE" feature request ("지금 데이터가 계속 쌓이고 있잖아"),
                 // primarily focused on Latest view.
 
-                if (dates.length < 6) return; // Need at least 6 files (0 to 5)
+                if (dates.length < 11) return; // Need at least 11 files (0 to 10)
 
-                const targetHistory = dates[5]; // 0 is today, 1 is yesterday... 5 is 5 days ago?
-                // Let's check: 
-                // Index 0: 2026-02-13 (Today)
-                // Index 1: 2026-02-12 (1 day ago)
-                // Index 5: 2026-02-06 (5 trading days ago approx)
+                const targetHistory = dates[10]; // 0 is today ... 10 is 10 days ago (data points)
 
                 if (!targetHistory) return;
 
-                console.log("Loading 5-day ago data from:", targetHistory.filename);
+                console.log("Loading 10-day ago data from:", targetHistory.filename);
 
                 const histRes = await fetch('static/' + targetHistory.filename);
                 if (!histRes.ok) return;
@@ -443,7 +439,6 @@
                 const histData = histJson.data; // Raw tickers
 
                 // 3. Calculate WRS for Historical Data
-                // We need to re-use calculateWRS logic but for this historical set.
                 const histWRS = calculateWRSForData(histData);
 
                 // 4. Merge comparison into current groupedData
@@ -452,9 +447,9 @@
                     const past = histWRS[key];
                     if (past && past.Final_WRS !== 0) {
                         const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
-                        curr.Final_WRS_5D_Chg = change;
+                        curr.Final_WRS_10D_Chg = change;
                     } else {
-                        curr.Final_WRS_5D_Chg = null;
+                        curr.Final_WRS_10D_Chg = null;
                     }
                 });
 
@@ -975,7 +970,7 @@
                     <th onclick="sortTable('Industry')" style="text-align: center;">Industry ⬍</th>
                     <th onclick="sortTable('Final_WRS')" style="text-align: center;">Final WRS ⬍</th>
                     <th onclick="sortTable('Final_WRS_Rank_Pct')" style="text-align: center;">Final Rank (%) ⬍</th>
-                    <th onclick="sortTable('Final_WRS_5D_Chg')" style="text-align: center;">5D Chg (%) ⬍</th>
+                    <th onclick="sortTable('Final_WRS_10D_Chg')" style="text-align: center;">10D Chg (%) ⬍</th>
                     <th onclick="sortTable('Count')" style="text-align: center;">Total Count ⬍</th>
                     <th onclick="sortTable('WRS_6mo')" style="text-align: center;">WRS (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_Rank_Pct')" style="text-align: center;">WRS Rank (%) ⬍</th>
@@ -1036,8 +1031,8 @@
                         <td style="text-align: center; white-space: nowrap;">${item.Industry}</td>
                         <td style="text-align: center; font-weight: bold;">${item.Final_WRS ? item.Final_WRS.toFixed(4) : '0.0000'}</td>
                         <td style="text-align: center;">${item.Final_WRS_Rank_Pct ? item.Final_WRS_Rank_Pct.toFixed(2) + '%' : 'N/A'}</td>
-                        <td style="text-align: center; font-weight: bold; color: ${item.Final_WRS_5D_Chg > 0 ? '#00e676' : (item.Final_WRS_5D_Chg < 0 ? '#ff5252' : 'inherit')}">
-                            ${item.Final_WRS_5D_Chg !== undefined && item.Final_WRS_5D_Chg !== null ? (item.Final_WRS_5D_Chg > 0 ? '+' : '') + item.Final_WRS_5D_Chg.toFixed(2) + '%' : '-'}
+                        <td style="text-align: center; font-weight: bold; color: ${item.Final_WRS_10D_Chg > 0 ? '#00e676' : (item.Final_WRS_10D_Chg < 0 ? '#ff5252' : 'inherit')}">
+                            ${item.Final_WRS_10D_Chg !== undefined && item.Final_WRS_10D_Chg !== null ? (item.Final_WRS_10D_Chg > 0 ? '+' : '') + item.Final_WRS_10D_Chg.toFixed(2) + '%' : '-'}
                         </td>
                         <td style="text-align: center;">${item.Count}</td>
                         <td class="${item.WRS_6mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_6mo.toFixed(4)}</td>
