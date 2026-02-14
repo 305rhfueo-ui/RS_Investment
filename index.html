@@ -438,7 +438,11 @@
                     if (debugEl) debugEl.innerText = `Hist File Fetch Failed: ${targetHistory.filename}`;
                     throw new Error("Failed to fetch history file");
                 }
-                const histJson = await histRes.json();
+                // [Fix] Handle NaN in JSON
+                const rawText = await histRes.text();
+                // Replace constants like NaN with null (or 0) because JSON.parse fails on them
+                const sanitizedText = rawText.replace(/:\s*NaN/g, ': null');
+                const histJson = JSON.parse(sanitizedText);
                 const histData = histJson.data; // Raw tickers
 
                 // Update Header with Date
