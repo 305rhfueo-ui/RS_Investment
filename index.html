@@ -367,7 +367,8 @@
                 // Initialize Data
                 globalData = json.data;
 
-
+                // [Fix] Calculate WRS immediately so groupedData is ready for History Comparison
+                calculateWRS();
 
                 // Time Display
                 if (json.last_updated) {
