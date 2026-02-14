@@ -158,6 +158,7 @@
         <h2 id="mode-subtitle" style="margin-top:0; margin-bottom:10px; font-size:24px; min-height:30px;"></h2>
 
         <p class="subtitle" id="last-updated" style="margin-bottom:15px;">업데이트 확인 중...</p>
+        <p id="history-debug" style="font-size: 12px; color: #ff9800; display: none;"></p>
 
         <!-- 날짜 선택 드롭다운 -->
         <div style="margin-bottom:30px;">
@@ -407,37 +408,36 @@
 
         // [Added] New Function for Historical Comparison
         async function loadHistoricalComparison() {
+            const debugEl = document.getElementById('history-debug');
+            if (debugEl) debugEl.style.display = 'block';
+
             try {
                 // 1. Get History Index
                 const res = await fetch('./static/history_index.json?t=' + new Date().getTime());
-                if (!res.ok) return;
+                if (!res.ok) {
+                    if (debugEl) debugEl.innerText = "Hist Index Fetch Failed";
+                    return;
+                }
                 const indexData = await res.json();
 
-                // 2. Find 5-day ago file (Index 5 in sorted list, assuming current is 0 or fresh)
-                // If viewing specific date, need to find relative 5 days.
-                // For simplicity, let's assume we compare "Current View" vs "5 Indices Back".
-
                 const dates = indexData.dates; // Sorted DESC
-                // Currently loaded file: if 'static/result.json' -> treat as latest (Index -1? No, logic needed).
-                // Let's just assume we want 5 days ago from LATEST for now, 
-                // Let's just assume we want 5 days ago from LATEST for now,
-                // BUT if user selected a date, we should respect that.
-
-                // Since this is a "LIVE" feature request ("지금 데이터가 계속 쌓이고 있잖아"),
-                // primarily focused on Latest view.
 
                 if (dates.length < 11) {
+                    if (debugEl) debugEl.innerText = `History insufficient (Count: ${dates.length}, Need 11)`;
                     console.log("Not enough history for 10D comparison (Total: " + dates.length + ")");
-                    // Optional: Fallback to oldest? Or just leave as '-'
                     return;
                 }
 
-                const targetHistory = dates[10]; // 10 days ago
+                const targetHistory = dates[10]; // 10 days ago (11th file)
 
+                if (debugEl) debugEl.innerText = `Loading History: ${targetHistory.date} ...`;
                 console.log("Loading 10-day ago data from:", targetHistory.filename);
 
                 const histRes = await fetch('static/' + targetHistory.filename);
-                if (!histRes.ok) throw new Error("Failed to fetch history file");
+                if (!histRes.ok) {
+                    if (debugEl) debugEl.innerText = `Hist File Fetch Failed: ${targetHistory.filename}`;
+                    throw new Error("Failed to fetch history file");
+                }
                 const histJson = await histRes.json();
                 const histData = histJson.data; // Raw tickers
 
@@ -450,6 +450,8 @@
                 // 3. Calculate WRS for Historical Data
                 const histWRS = calculateWRSForData(histData);
 
+                let matchCount = 0;
+
                 // 4. Merge
                 groupedData.forEach(curr => {
                     const key = `${curr.Sector}|${curr.Industry}`;
@@ -457,17 +459,20 @@
                     if (past && past.Final_WRS !== 0 && !isNaN(past.Final_WRS)) {
                         const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
                         curr.Final_WRS_10D_Chg = change;
+                        matchCount++;
                     } else {
                         curr.Final_WRS_10D_Chg = null;
                     }
                 });
+
+                if (debugEl) debugEl.innerText = `History Loaded: ${targetHistory.date} (Matches: ${matchCount})`;
 
                 // 5. Re-render UI
                 updateUI();
 
             } catch (e) {
                 console.error("Historical comparison failed:", e);
-                // Can verify error by checking if header changed
+                if (debugEl) debugEl.innerText = `History Error: ${e.message}`;
             }
         }
 
