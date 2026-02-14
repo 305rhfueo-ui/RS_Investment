@@ -692,10 +692,12 @@
             // Calculate percentiles for WRS
             const wrs6moValues = groupedData.map(d => d.WRS_6mo);
             const wrsMDValues = groupedData.map(d => d.WRS_6mo_MD);
+            const finalWRSValues = groupedData.map(d => d.Final_WRS); // [Added]
 
             groupedData.forEach(item => {
                 item.WRS_Rank_Pct = calculatePercentileRank(item.WRS_6mo, wrs6moValues);
                 item.WRS_MD_Rank_Pct = calculatePercentileRank(item.WRS_6mo_MD, wrsMDValues);
+                item.Final_WRS_Rank_Pct = calculatePercentileRank(item.Final_WRS, finalWRSValues); // [Added]
             });
         }
 
@@ -849,6 +851,7 @@
                     <th onclick="sortTable('Sector')" style="text-align: center;">Sector ⬍</th>
                     <th onclick="sortTable('Industry')" style="text-align: center;">Industry ⬍</th>
                     <th onclick="sortTable('Final_WRS')" style="text-align: center;">Final WRS ⬍</th>
+                    <th onclick="sortTable('Final_WRS_Rank_Pct')" style="text-align: center;">Final Rank (%) ⬍</th>
                     <th onclick="sortTable('Count')" style="text-align: center;">Total Count ⬍</th>
                     <th onclick="sortTable('WRS_6mo')" style="text-align: center;">WRS (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_Rank_Pct')" style="text-align: center;">WRS Rank (%) ⬍</th>
@@ -908,6 +911,7 @@
                         <td style="text-align: center; white-space: nowrap;">${item.Sector}</td>
                         <td style="text-align: center; white-space: nowrap;">${item.Industry}</td>
                         <td style="text-align: center; font-weight: bold;">${item.Final_WRS ? item.Final_WRS.toFixed(4) : '0.0000'}</td>
+                        <td style="text-align: center;">${item.Final_WRS_Rank_Pct ? item.Final_WRS_Rank_Pct.toFixed(2) + '%' : 'N/A'}</td>
                         <td style="text-align: center;">${item.Count}</td>
                         <td class="${item.WRS_6mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_6mo.toFixed(4)}</td>
                         <td style="text-align: center;">${wrsRankDisplay}</td>

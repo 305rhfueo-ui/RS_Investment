@@ -214,9 +214,14 @@ def main():
             })
     
     # WRS 중앙값 퍼센타일 계산
+    wrs_6mo_values = [w['WRS_6mo'] for w in wrs_data]
     wrs_md_values = [w['WRS_6mo_MD'] for w in wrs_data]
+    final_wrs_values = [w['Final_WRS'] for w in wrs_data] # [Added]
+
     for wrs_item in wrs_data:
+        wrs_item['WRS_Rank_Pct'] = utils.calculate_percentile_rank(wrs_item['WRS_6mo'], wrs_6mo_values)
         wrs_item['WRS_MD_Rank_Pct'] = utils.calculate_percentile_rank(wrs_item['WRS_6mo_MD'], wrs_md_values)
+        wrs_item['Final_WRS_Rank_Pct'] = utils.calculate_percentile_rank(wrs_item['Final_WRS'], final_wrs_values) # [Added]
     
     # ===== Market Condition 가져오기 =====
     print(f"[{time.strftime('%X')}] Market Condition 가져오는 중...")
