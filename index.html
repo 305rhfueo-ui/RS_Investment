@@ -938,9 +938,10 @@
                         stock.RS_Rank_Pct <= 30 &&
                         stock['50DIV'] > 0;
 
-                    // 추가 조건: CY_Trend >= 0.05, NY_Trend >= 0.05, 50DIV <= 55
-                    const extraCondition = (stock.CY_Trend >= 0.05) &&
-                        (stock.NY_Trend >= 0.05) &&
+                    // 추가 조건: CY_Trend >= 5, NY_Trend >= 5, 50DIV <= 55
+                    // Note: Trend values are in percentage (e.g. 5.0 = 5%)
+                    const extraCondition = (stock.CY_Trend >= 5) &&
+                        (stock.NY_Trend >= 5) &&
                         (stock['50DIV'] <= 55);
 
                     return basicCondition && extraCondition;
