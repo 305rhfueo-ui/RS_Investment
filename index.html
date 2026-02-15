@@ -427,10 +427,27 @@
                 globalData = json.data;
 
                 // [Added] Calculate RS_DiF for Individual Data
+                // Also Calculate Market Cap Rank
+                // 1. Sort by Market Cap Desc for Ranking
+                const sortedByMC = [...globalData].sort((a, b) => {
+                    const mcA = parseMarketCap(a['Market Cap']);
+                    const mcB = parseMarketCap(b['Market Cap']);
+                    return mcB - mcA;
+                });
+                // 2. Map Ticker to Rank
+                const rankMap = {};
+                sortedByMC.forEach((item, index) => {
+                    rankMap[item.Ticker] = index + 1;
+                });
+
                 globalData.forEach(item => {
-                    const rs1 = item.RS_1mo || 0;
-                    const rs3 = item.RS_3mo || 0;
-                    const rs6 = item.RS_6mo || 0;
+                    // Assign Rank
+                    item.MarketCapRank = rankMap[item.Ticker];
+
+                    // RS_DiF Calculation
+                    const rs1 = parseFloat(item.RS_1mo) || 0;
+                    const rs3 = parseFloat(item.RS_3mo) || 0;
+                    const rs6 = parseFloat(item.RS_6mo) || 0;
                     // Formula: RS(1mo) - RS(3mo) - RS(6mo)
                     item.RS_DiF = rs1 - rs3 - rs6;
                 });
@@ -1321,16 +1338,24 @@
                 data.forEach(item => {
                     const tr = document.createElement('tr');
 
-                    const rs6Class = (isValidNumber(item.RS_6mo) && item.RS_6mo > 0) ? 'rs-pos' : 'rs-neg';
-                    const rs3Class = (isValidNumber(item.RS_3mo) && item.RS_3mo > 0) ? 'rs-pos' : 'rs-neg';
-                    const rs1Class = (isValidNumber(item.RS_1mo) && item.RS_1mo > 0) ? 'rs-pos' : 'rs-neg';
-                    const difClass = (isValidNumber(item.RS_DiF) && item.RS_DiF > 0) ? 'rs-pos' :
-                        ((isValidNumber(item.RS_DiF) && item.RS_DiF < 0) ? 'rs-neg' : '');
+                    // Convert to numbers for safety if strings
+                    const rs6 = parseFloat(item.RS_6mo);
+                    const rs3 = parseFloat(item.RS_3mo);
+                    const rs1 = parseFloat(item.RS_1mo);
+                    const rsDif = parseFloat(item.RS_DiF);
+
+                    const rs6Class = (isValidNumber(rs6) && rs6 > 0) ? 'rs-pos' : 'rs-neg';
+                    const rs3Class = (isValidNumber(rs3) && rs3 > 0) ? 'rs-pos' : 'rs-neg';
+                    const rs1Class = (isValidNumber(rs1) && rs1 > 0) ? 'rs-pos' : 'rs-neg';
+                    const difClass = (isValidNumber(rsDif) && rsDif > 0) ? 'rs-pos' :
+                        ((isValidNumber(rsDif) && rsDif < 0) ? 'rs-neg' : '');
 
                     const mcStr = item.Market_Cap_Readable || item['Market Cap'];
 
-                    const cyColor = (parseFloat(item.CY_Trend) >= 5) ? 'rs-pos' : '';
-                    const nyColor = (parseFloat(item.NY_Trend) >= 5) ? 'rs-pos' : '';
+                    const cy = parseFloat(item.CY_Trend);
+                    const ny = parseFloat(item.NY_Trend);
+                    const cyColor = (isValidNumber(cy) && cy >= 5) ? 'rs-pos' : '';
+                    const nyColor = (isValidNumber(ny) && ny >= 5) ? 'rs-pos' : '';
 
                     tr.innerHTML = `
                         <td style="font-weight:bold;">
@@ -1343,17 +1368,17 @@
                         <td>${item.Price}</td>
                         <td>${mcStr}</td>
                         <td>${item.MarketCapRank || '-'}</td>
-                        <td class="${rs6Class}">${isValidNumber(item.RS_6mo) ? item.RS_6mo : '-'}</td>
+                        <td class="${rs6Class}">${isValidNumber(rs6) ? rs6.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.RS_Rank_Pct) ? item.RS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td style="${getChgColor(item.RS_6mo_10D_Chg)}">
                             ${isValidNumber(item.RS_6mo_10D_Chg) ? item.RS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
-                        <td class="${rs3Class}">${isValidNumber(item.RS_3mo) ? item.RS_3mo : '-'}</td>
-                        <td class="${rs1Class}">${isValidNumber(item.RS_1mo) ? item.RS_1mo : '-'}</td>
-                        <td class="${difClass}">${isValidNumber(item.RS_DiF) ? item.RS_DiF.toFixed(2) : '-'}</td>
+                        <td class="${rs3Class}">${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
+                        <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
+                        <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
                         <td>${item['50DIV']}%</td>
-                        <td class="${cyColor}">${item.CY_Trend}%</td>
-                        <td class="${nyColor}">${item.NY_Trend}%</td>
+                        <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : '-'}</td>
+                        <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : '-'}</td>
                         <td>${item.Up_Count}</td>
                         <td>${item.Down_Count}</td>
                         <td>${item.Up_Down_Ratio}</td>
