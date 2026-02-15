@@ -1198,9 +1198,9 @@
                     stock.NY_Trend > 0
                 );
             } else if (appState.mode === 'RISING_SECTORS') {
-                // 급등/반등가능성↑섹터: WRS_DiF > 0
+                // 급등/반등가능성↑섹터: WRS_Dif > 0
                 // Sort is handled in sort section (Win_Rate)
-                targetData = groupedData.filter(g => g.WRS_DiF > 0);
+                targetData = groupedData.filter(g => g.WRS_Dif > 0);
             }
 
             // 3. Apply Text Search (Global)
