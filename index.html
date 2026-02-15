@@ -7,7 +7,178 @@
     <title>Multi-Timeframe RS Investment (v1.3)</title>
     <link rel="shortcut icon" href="static/favicon.png">
     <style>
-        /* ... existing styles ... */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #00e676;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --danger-color: #ff5252;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1600px;
+            /* Wider for more columns */
+            margin-top: 40px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Filter Popup */
+        .filter-popup {
+            position: absolute;
+            background-color: #333;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            min-width: 120px;
+            text-align: left;
+        }
+
+        .filter-popup label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+            color: #eee;
+            font-size: 13px;
+        }
+
+        .filter-popup button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #000;
+        }
+
+        #result-area {
+            display: none;
+            margin-top: 40px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .download-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--surface-color);
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            cursor: pointer;
+            user-select: none;
+            background-color: #252525;
+            color: var(--text-secondary);
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            background-color: #333;
+        }
+
+        .rs-pos {
+            color: #00e676;
+        }
+
+        .rs-neg {
+            color: #ff5252;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+            padding-bottom: 30px;
+        }
     </style>
 </head>
 
@@ -16,7 +187,29 @@
     <div class="container">
         <h1 id="page-title" style="margin-bottom:5px;">US Market Multi-Timeframe RS Investment</h1>
 
-        <!-- ... existing header elements ... -->
+        <h2 id="mode-subtitle" style="margin-top:0; margin-bottom:10px; font-size:24px; min-height:30px;"></h2>
+
+        <p class="subtitle" id="last-updated" style="margin-bottom:15px;">업데이트 확인 중...</p>
+        <p id="history-debug" style="font-size: 12px; color: #ff9800; display: none;"></p>
+
+        <!-- 날짜 선택 드롭다운 -->
+        <div style="margin-bottom:30px;">
+            <label for="date-selector" style="color: #aaa; margin-right: 10px; font-size: 14px;">
+                📅 데이터 날짜:
+            </label>
+            <select id="date-selector" style="
+                background-color: #2a2a2a;
+                color: #fff;
+                border: 1px solid #444;
+                padding: 8px 15px;
+                border-radius: 5px;
+                font-size: 14px;
+                cursor: pointer;
+                min-width: 150px;
+            ">
+                <option value="static/result.json">Latest</option>
+            </select>
+        </div>
 
         <div class="info-box">
             <ul>
