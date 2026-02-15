@@ -304,6 +304,12 @@
                 style="color: #ff5252; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 20px;">
                 📢 시장판단(필독)
             </a>
+
+            <!-- Investment Method Link -->
+            <a href="#" onclick="openInvestPopup(); return false;"
+                style="color: #ff9800; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                💰 투자방법(약식)
+            </a>
         </div>
 
         <div class="info-box">
@@ -527,8 +533,76 @@
         </div>
     </div>
 
+    <!-- Investment Method Modal -->
+    <div id="invest-popup" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeInvestPopup()">&times;</span>
+            <h2 style="margin-top:0; color:#ff9800;">💰 투자방법 (약식)</h2>
+
+            <div style="line-height: 1.8; font-size: 15px;">
+
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    1. RS_Dif가 양수인 종목들 [RS(6MO) > RS(3MO) > RS(1MO)]
+                </h3>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li><strong>Today’s list</strong> 또는 <strong>Today’s Main</strong> 내 종목들 중에서 <strong>눌림목(상승하다가 횡보)시
+                            매수</strong></li>
+                    <li>시장상황은 가급적 <strong>월봉 10 우상향</strong>할 때!</li>
+                </ul>
+
+                <h3 style="color:#f44336; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    2. RS_Dif가 음수인 종목들 [RS(6MO) < RS(3MO) < RS(1MO)] </h3>
+                        <ul style="list-style-type: disc; margin-left: 20px;">
+                            <li><strong>급등/반등가능성↑종목</strong> 에 포함된 종목들 중에서:
+                                <ul style="list-style-type: circle; margin-left: 20px; margin-top:5px;">
+                                    <li style="margin-bottom:5px;">
+                                        <strong>(1) 기관 매집</strong> (6개월간 횡보 + OBV 최소 3개월 상승)이 포착되고 이후 <strong>스퀴즈
+                                            돌파</strong>한 종목
+                                    </li>
+                                    <li>
+                                        <strong>(2) 회사는 매우 우량하나</strong> 회사가 포함된 섹터가 전반적으로 하락세를 보여 하락한 경우는 <strong>2파 4파
+                                            5파 이후 조정 돌파시 매수</strong><br>
+                                        <span style="font-size:13px; color:#aaa;">* 사례 : 2026년 팔란티어 (소프트웨어 섹터에 포함되 회사는
+                                            우량하나 포함된 섹터 때문에 하락)</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3 style="color:#00e676; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                            3. 급등/반등가능성↑섹터 (ETF)
+                        </h3>
+                        <ul style="list-style-type: disc; margin-left: 20px;">
+                            <li>해당 ETF를 찾아서 <strong>(1)~(3)에 해당될 경우 투자</strong></li>
+                            <li style="margin-top:5px;">
+                                <strong>(1) 상승 변화기1 (하락추세 끝):</strong><br>
+                                장기선(200일선) > 단기선(5일선(한달)) > 중기선(75일(1분기))
+                            </li>
+                            <li style="margin-top:5px;">
+                                <strong>(2) 상승 변화기2 (상승추세 시작):</strong><br>
+                                단기선(5일선(한달)) > 장기선(200일선) > 중기선(75일(1분기))
+                            </li>
+                            <li style="margin-top:5px;">
+                                <strong>(3) 상승 안정기:</strong><br>
+                                단기선 > 중기선 > 장기선
+                            </li>
+                        </ul>
+
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script>
+        // --- Invest Popup Functions ---
+        function openInvestPopup() {
+            document.getElementById('invest-popup').style.display = 'block';
+        }
+
+        function closeInvestPopup() {
+            document.getElementById('invest-popup').style.display = 'none';
+        }
+
         // --- Market Popup Functions ---
         function openMarketPopup() {
             document.getElementById('market-popup').style.display = 'block';
@@ -540,9 +614,14 @@
 
         // Close when clicking outside
         window.onclick = function (event) {
-            const modal = document.getElementById('market-popup');
-            if (event.target == modal) {
-                modal.style.display = "none";
+            const marketModal = document.getElementById('market-popup');
+            const investModal = document.getElementById('invest-popup');
+
+            if (event.target == marketModal) {
+                marketModal.style.display = "none";
+            }
+            if (event.target == investModal) {
+                investModal.style.display = "none";
             }
         }
 
