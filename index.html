@@ -1193,33 +1193,40 @@
 
             if (appState.mode === 'WRS') {
                 excelData = data.map(item => ({
-                    Ticker: item.Ticker,
-                    Sector: item.Sector,
-                    Industry: item.Industry,
-                    Price: item.Price,
-                    Order: item.Order,
-                    RS_1mo: item.RS_1mo,
-                    WRS_3mo: item.WRS_3mo,
-                    WRS_1mo: item.WRS_1mo
+                    'Sector': item.Sector,
+                    'Industry': item.Industry,
+                    'Final WRS': item.Final_WRS ? parseFloat(item.Final_WRS.toFixed(4)) : 0,
+                    'Final Rank (%)': item.Final_WRS_Rank_Pct ? parseFloat(item.Final_WRS_Rank_Pct.toFixed(2)) : null,
+                    '10D Chg (%)': item.Final_WRS_10D_Chg ? parseFloat(item.Final_WRS_10D_Chg.toFixed(2)) : null,
+                    'Total Count': item.Count,
+                    'WRS (6mo)': item.WRS_6mo ? parseFloat(item.WRS_6mo.toFixed(4)) : 0,
+                    'WRS Rank (%)': item.WRS_Rank_Pct ? parseFloat(item.WRS_Rank_Pct.toFixed(2)) : null,
+                    'WRS_MD (6mo)': item.WRS_6mo_MD ? parseFloat(item.WRS_6mo_MD.toFixed(4)) : 0,
+                    'WRS_MD Rank (%)': item.WRS_MD_Rank_Pct ? parseFloat(item.WRS_MD_Rank_Pct.toFixed(2)) : null,
+                    'Win-rate (%)': item.Win_Rate ? parseFloat((item.Win_Rate * 100).toFixed(2)) : 0,
+                    'WRS (3mo)': item.WRS_3mo ? parseFloat(item.WRS_3mo.toFixed(4)) : 0,
+                    'WRS (1mo)': item.WRS_1mo ? parseFloat(item.WRS_1mo.toFixed(4)) : 0
                 }));
                 fileName = `WRS_Score_${new Date().toISOString().slice(0, 10)}.xlsx`;
             } else {
                 excelData = data.map(item => ({
-                    Ticker: item.Ticker,
-                    Price: item.Price,
-                    MarketCap: parseMarketCap(item['Market Cap']),
-                    MarketCapRank: item.MarketCapRank,
-                    RS_6mo: item.RS_6mo,
-                    RS_3mo: item.RS_3mo,
-                    RS_1mo: item.RS_1mo,
-                    '50DIV': item['50DIV'],
-                    CY_Trend: item.CY_Trend,
-                    NY_Trend: item.NY_Trend,
-                    Up_Count: item.Up_Count,
-                    Down_Count: item.Down_Count,
-                    Up_Down_Ratio: item.Up_Down_Ratio,
-                    Sector: item.Sector,
-                    Industry: item.Industry
+                    'Ticker': item.Ticker,
+                    'Sector': item.Sector,
+                    'Industry': item.Industry,
+                    'Price ($)': typeof item.Price === 'number' ? item.Price : parseFloat(item.Price),
+                    'Market Cap ($)': parseMarketCap(item['Market Cap']),
+                    'MC Rank': item.MarketCapRank,
+                    'RS (6mo)': item.RS_6mo ? parseFloat(item.RS_6mo.toFixed(4)) : null,
+                    'RS Rank (%)': item.RS_Rank_Pct ? parseFloat(item.RS_Rank_Pct.toFixed(2)) : null,
+                    '10D Chg (%)': item.RS_6mo_10D_Chg !== undefined && item.RS_6mo_10D_Chg !== null ? parseFloat(item.RS_6mo_10D_Chg.toFixed(2)) : null,
+                    'RS (3mo)': item.RS_3mo ? parseFloat(item.RS_3mo.toFixed(4)) : null,
+                    'RS (1mo)': item.RS_1mo ? parseFloat(item.RS_1mo.toFixed(4)) : null,
+                    '50DIV (%)': item['50DIV'] !== undefined && item['50DIV'] !== null ? parseFloat(item['50DIV'].toFixed(2)) : null,
+                    'CY Trend (%)': item.CY_Trend !== undefined && item.CY_Trend !== null ? parseFloat(item.CY_Trend.toFixed(2)) : null,
+                    'NY Trend (%)': item.NY_Trend !== undefined && item.NY_Trend !== null ? parseFloat(item.NY_Trend.toFixed(2)) : null,
+                    'Up #': item.Up_Count,
+                    'Down #': item.Down_Count,
+                    'Up/(Up+Down)': item.Up_Down_Ratio !== undefined && item.Up_Down_Ratio !== null ? parseFloat(item.Up_Down_Ratio.toFixed(2)) : null
                 }));
                 const prefix = appState.mode === 'DRILLDOWN' ? 'Sector_Detail_' : 'RS_Investment_';
                 fileName = `${prefix}${new Date().toISOString().slice(0, 10)}.xlsx`;
