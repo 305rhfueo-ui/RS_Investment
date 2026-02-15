@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Timeframe RS Investment</title>
+    <title>Multi-Timeframe RS Investment (v1.1)</title>
     <link rel="shortcut icon" href="static/favicon.png">
     <style>
         :root {
@@ -1185,7 +1185,7 @@
 
         function downloadExcel() {
             const data = getFilteredAndSortedData();
-            if (data.length === 0) return alert('데이터가 없습니다.');
+            if (data.length === 0) return alert('데이터가 없습니다 (v1.1).');
 
             const wb = XLSX.utils.book_new();
             let excelData = [];
