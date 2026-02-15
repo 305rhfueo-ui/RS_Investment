@@ -452,6 +452,17 @@
                     item.RS_DiF = rs1 - rs3 - rs6;
                 });
 
+                // [Added] Calculate RS Rank (Percentile)
+                const sortedByRS = [...globalData].sort((a, b) => (parseFloat(b.RS_6mo) || 0) - (parseFloat(a.RS_6mo) || 0));
+                const totalDocs = sortedByRS.length;
+                const rsRankMap = {};
+                sortedByRS.forEach((item, index) => {
+                    rsRankMap[item.Ticker] = ((index + 1) / totalDocs) * 100;
+                });
+                globalData.forEach(item => {
+                    item.RS_Rank_Pct = rsRankMap[item.Ticker];
+                });
+
                 // [Fix] Calculate WRS immediately so groupedData is ready for History Comparison
                 calculateWRS();
 
@@ -896,6 +907,7 @@
 
             // Calculate Metrics per Group
             groupedData = Object.values(groups).map(g => {
+                // ... (Existing Logic)
                 // 1. Median RS(6mo)
                 const sortedRS = g.RS_Values.sort((a, b) => a - b);
                 let median = 0;
@@ -908,20 +920,16 @@
 
                 // 2. WRS (Weighted Average)
                 const wrs6mo = g.TotalMC > 0 ? (g.WeightedSum6 / g.TotalMC) : 0;
-                const wrs3mo = g.TotalMC > 0 ? (g.WeightedSum3 / g.TotalMC) : 0; // [Added]
-                const wrs1mo = g.TotalMC > 0 ? (g.WeightedSum1 / g.TotalMC) : 0; // [Added]
+                const wrs3mo = g.TotalMC > 0 ? (g.WeightedSum3 / g.TotalMC) : 0;
+                const wrs1mo = g.TotalMC > 0 ? (g.WeightedSum1 / g.TotalMC) : 0;
 
                 // 3. Win Rate & Factor
                 const winRate = g.Count > 0 ? (g.WinCount / g.Count) : 0;
-                // Count > 1 이면 (1 - 1/N), 1개면 0
                 const winFactor = g.Count > 1 ? (1 - (1 / g.Count)) : 0;
 
                 // 4. Final WRS
-                // Formula: WRS(6MO)*0.4 + WRS_MD(6MO)*0.4 + Win-rate*Win-factor*0.2
                 const finalWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
 
-                // [Added] WRS_Dif Calculation
-                // Formula: WRS(1mo) - WRS(3mo) - WRS(6mo)
                 const wrsDif = wrs1mo - wrs3mo - wrs6mo;
 
                 return {
@@ -931,14 +939,28 @@
                     WRS_6mo: wrs6mo,
                     WRS_3mo: wrs3mo,
                     WRS_1mo: wrs1mo,
-                    WRS_Dif: wrsDif, // [Added]
+                    WRS_Dif: wrsDif,
                     WRS_MD_6mo: median,
                     Win_Rate: winRate * 100, // %
                     Final_WRS: finalWRS,
-                    Final_WRS_10D_Chg: null, // Placeholder
+                    Final_WRS_10D_Chg: null,
                     RS_Values: g.RS_Values
                 };
             });
+
+            // [Added] Calculate WRS Ranks (Percentile)
+            const calculateRank = (arr, key, rankKey) => {
+                const sorted = [...arr].sort((a, b) => b[key] - a[key]);
+                const total = sorted.length;
+                sorted.forEach((item, index) => {
+                    // Percentile: Top 0.1% etc. (Rank / Total) * 100
+                    item[rankKey] = ((index + 1) / total) * 100;
+                });
+            };
+
+            calculateRank(groupedData, 'Final_WRS', 'Final_WRS_Rank_Pct');
+            calculateRank(groupedData, 'WRS_6mo', 'WRS_Rank_Pct');
+            calculateRank(groupedData, 'WRS_MD_6mo', 'WRS_MD_Rank_Pct');
         }
 
         // --- Helper: Parse Market Cap ---
@@ -1292,15 +1314,15 @@
                         <td style="font-weight:bold; cursor:pointer;" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Sector}</td>
                         <td style="font-weight:bold; cursor:pointer;" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Industry}</td>
                         <td style="font-weight:bold; color:var(--primary-color)">${isValidNumber(item.Final_WRS) ? item.Final_WRS.toFixed(2) : '-'}</td>
-                        <td> - </td>
+                        <td>${isValidNumber(item.Final_WRS_Rank_Pct) ? item.Final_WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td style="${getChgColor(item.Final_WRS_10D_Chg)}">
                             ${isValidNumber(item.Final_WRS_10D_Chg) ? item.Final_WRS_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
                         <td>${item.Count}</td>
                         <td>${isValidNumber(item.WRS_6mo) ? item.WRS_6mo.toFixed(2) : '-'}</td>
-                        <td> - </td>
+                        <td>${isValidNumber(item.WRS_Rank_Pct) ? item.WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.WRS_MD_6mo) ? item.WRS_MD_6mo.toFixed(2) : '-'}</td>
-                        <td> - </td>
+                        <td>${isValidNumber(item.WRS_MD_Rank_Pct) ? item.WRS_MD_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.Win_Rate) ? item.Win_Rate.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.WRS_3mo) ? item.WRS_3mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.WRS_1mo) ? item.WRS_1mo.toFixed(2) : '-'}</td>
@@ -1349,8 +1371,11 @@
                     const rs1Class = (isValidNumber(rs1) && rs1 > 0) ? 'rs-pos' : 'rs-neg';
                     const difClass = (isValidNumber(rsDif) && rsDif > 0) ? 'rs-pos' :
                         ((isValidNumber(rsDif) && rsDif < 0) ? 'rs-neg' : '');
-
+                    // Format Large Numbers
                     const mcStr = item.Market_Cap_Readable || item['Market Cap'];
+
+                    const price = parseFloat(item.Price);
+                    const priceStr = isValidNumber(price) ? price.toFixed(2) : item.Price;
 
                     const cy = parseFloat(item.CY_Trend);
                     const ny = parseFloat(item.NY_Trend);
@@ -1365,7 +1390,7 @@
                         </td>
                         <td>${item.Sector}</td>
                         <td>${item.Industry}</td>
-                        <td>${item.Price}</td>
+                        <td>${priceStr}</td>
                         <td>${mcStr}</td>
                         <td>${item.MarketCapRank || '-'}</td>
                         <td class="${rs6Class}">${isValidNumber(rs6) ? rs6.toFixed(2) : '-'}</td>
