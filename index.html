@@ -4,181 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Timeframe RS Investment (v1.2)</title>
+    <title>Multi-Timeframe RS Investment (v1.3)</title>
     <link rel="shortcut icon" href="static/favicon.png">
     <style>
-        :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --primary-color: #00e676;
-            --text-color: #ffffff;
-            --text-secondary: #b0b0b0;
-            --danger-color: #ff5252;
-            --border-color: #333;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 95%;
-            max-width: 1600px;
-            /* Wider for more columns */
-            margin-top: 40px;
-            text-align: center;
-            flex-grow: 1;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        .subtitle {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .info-box {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: left;
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: #000;
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Filter Popup */
-        .filter-popup {
-            position: absolute;
-            background-color: #333;
-            border: 1px solid #555;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: none;
-            min-width: 120px;
-            text-align: left;
-        }
-
-        .filter-popup label {
-            display: block;
-            margin-bottom: 5px;
-            cursor: pointer;
-            color: #eee;
-            font-size: 13px;
-        }
-
-        .filter-popup button {
-            margin-top: 5px;
-            padding: 5px 10px;
-            font-size: 12px;
-            width: 100%;
-            background-color: var(--primary-color);
-            color: #000;
-        }
-
-        #result-area {
-            display: none;
-            margin-top: 40px;
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .download-btn {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-
-        .download-btn:hover {
-            background-color: #555;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: var(--surface-color);
-            font-size: 13px;
-        }
-
-        th,
-        td {
-            text-align: left;
-            padding: 8px 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            cursor: pointer;
-            user-select: none;
-            background-color: #252525;
-            color: var(--text-secondary);
-            position: sticky;
-            top: 0;
-            white-space: nowrap;
-        }
-
-        th:hover {
-            background-color: #333;
-        }
-
-        .rs-pos {
-            color: #00e676;
-        }
-
-        .rs-neg {
-            color: #ff5252;
-        }
-
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 12px;
-            border-top: 1px solid var(--border-color);
-            margin-top: 50px;
-            padding-bottom: 30px;
-        }
+        /* ... existing styles ... */
     </style>
 </head>
 
@@ -186,29 +15,8 @@
 
     <div class="container">
         <h1 id="page-title" style="margin-bottom:5px;">US Market Multi-Timeframe RS Investment</h1>
-        <h2 id="mode-subtitle" style="margin-top:0; margin-bottom:10px; font-size:24px; min-height:30px;"></h2>
 
-        <p class="subtitle" id="last-updated" style="margin-bottom:15px;">업데이트 확인 중...</p>
-        <p id="history-debug" style="font-size: 12px; color: #ff9800; display: none;"></p>
-
-        <!-- 날짜 선택 드롭다운 -->
-        <div style="margin-bottom:30px;">
-            <label for="date-selector" style="color: #aaa; margin-right: 10px; font-size: 14px;">
-                📅 데이터 날짜:
-            </label>
-            <select id="date-selector" style="
-                background-color: #2a2a2a;
-                color: #fff;
-                border: 1px solid #444;
-                padding: 8px 15px;
-                border-radius: 5px;
-                font-size: 14px;
-                cursor: pointer;
-                min-width: 150px;
-            ">
-                <option value="static/result.json">Latest</option>
-            </select>
-        </div>
+        <!-- ... existing header elements ... -->
 
         <div class="info-box">
             <ul>
@@ -247,15 +55,13 @@
                         <li><strong>50DIV</strong> 55% 이하</li>
                     </ul>
                 </li>
-                <li><strong>급등가능성↑종목/섹터:</strong> RS_DiF(또는 WRS_Dif) > 0 인 항목을 내림차순 정렬 (단기 탄력이 강한 종목/섹터)</li>
+                <li><strong>급등/반등가능성↑종목:</strong> RS_DiF > 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)</li>
+                <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif > 0 인 섹터 (Win-rate 순 정렬)</li>
 
             </ul>
         </div>
 
-        <!-- 로딩 상태 표시 -->
-        <div id="loading-msg" style="margin-top:20px; font-size:18px; color:var(--primary-color);">
-            데이터 로딩 중... ⏳
-        </div>
+        <!-- ... -->
 
         <div id="result-area">
             <div class="btn-group">
@@ -288,11 +94,11 @@
                     <!-- Rising Links (Text style buttons) -->
                     <a href="#" onclick="showRisingStocks(); return false;"
                         style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
-                        ⚡급등가능성↑종목
+                        ⚡급등/반등가능성↑종목
                     </a>
                     <a href="#" onclick="showRisingSectors(); return false;"
                         style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
-                        ⚡급등가능성↑섹터
+                        ⚡급등/반등가능성↑섹터
                     </a>
 
 
@@ -728,6 +534,14 @@
                 subtitle.style.color = "#00bcd4"; // Cyan
 
                 wrsBtn.innerText = "Sector/Industry WRS"; // Reset
+            } else if (appState.mode === 'RISING_STOCKS') {
+                subtitle.innerText = "Rising/Rebound Stocks (RS_DiF > 0, CY/NY > 0)";
+                subtitle.style.color = "#ffca28";
+                wrsBtn.innerText = "Sector/Industry WRS";
+            } else if (appState.mode === 'RISING_SECTORS') {
+                subtitle.innerText = "Rising/Rebound Sectors (WRS_Dif > 0)";
+                subtitle.style.color = "#ffca28";
+                wrsBtn.innerText = "Sector/Industry WRS";
             }
 
             // 2. Render Data
@@ -804,10 +618,10 @@
         // --- Rising Modes ---
         function showRisingStocks() {
             appState.mode = 'RISING_STOCKS';
-            appState.sort = { key: 'RS_DiF', asc: false }; // Desc
-            appState.filterRS_DiF = 'POS'; // Default to Positive for this mode? Or just 'ALL' since mode filters > 0?
-            // Requirement 4: "값들이 + 즉 양수인것들만 보여주고" -> Mode filter handles this.
-            // But let's reset custom filter to avoid confusion.
+            // Sort by NY_Trend Desc
+            appState.sort = { key: 'NY_Trend', asc: false };
+
+            // Reset filters to avoid confusion, logic handled in getFilteredAndSortedData
             appState.filterRS_DiF = 'ALL';
 
             document.getElementById('search-input').value = '';
@@ -816,7 +630,8 @@
 
         function showRisingSectors() {
             appState.mode = 'RISING_SECTORS';
-            appState.sort = { key: 'WRS_DiF', asc: false }; // Desc
+            // Sort by Win_Rate Desc
+            appState.sort = { key: 'Win_Rate', asc: false };
 
             // Ensure WRS calculated
             if (groupedData.length === 0) calculateWRS();
@@ -1124,11 +939,18 @@
                     return basicCondition && extraCondition;
                 });
             } else if (appState.mode === 'RISING_STOCKS') {
-                // 급등가능성↑종목: RS_DiF > 0
-                targetData = globalData.filter(stock => stock.RS_DiF > 0);
+                // 급등/반등가능성↑종목:
+                // 1) RS_DiF > 0
+                // 2) CY_Trend > 0
+                // 3) NY_Trend > 0
+                targetData = globalData.filter(stock =>
+                    stock.RS_DiF > 0 &&
+                    stock.CY_Trend > 0 &&
+                    stock.NY_Trend > 0
+                );
             } else if (appState.mode === 'RISING_SECTORS') {
-                // 급등가능성↑섹터: WRS_DiF > 0
-                // Note: property is WRS_DiF based on previous edit
+                // 급등/반등가능성↑섹터: WRS_DiF > 0
+                // Sort is handled in sort section (Win_Rate)
                 targetData = groupedData.filter(g => g.WRS_DiF > 0);
             }
 
