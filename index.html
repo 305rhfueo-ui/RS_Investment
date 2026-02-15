@@ -256,6 +256,11 @@
 
         <!-- ... -->
 
+        <!-- Loading Message -->
+        <div id="loading-msg" style="text-align: center; padding: 50px; font-size: 18px; color: var(--primary-color);">
+            ⏳ 데이터 불러오는 중...
+        </div>
+
         <div id="result-area">
             <div class="btn-group">
                 <span id="result-count" style="font-size:14px; color:#aaa;"></span>
@@ -405,7 +410,7 @@
 
         async function loadData(url = './static/result.json') {
             const loader = document.getElementById('loading-msg');
-            loader.style.display = 'block'; // Show loader when switching
+            if (loader) loader.style.display = 'block'; // Show loader when switching
 
             try {
                 // Fetch Data
@@ -456,16 +461,20 @@
                 updateUI();
 
                 document.getElementById('result-area').style.display = 'block';
-                loader.style.display = 'none';
+                if (loader) loader.style.display = 'none';
 
                 // [Added] Load Historical Data for 5-day comparison (Async)
                 loadHistoricalComparison();
 
             } catch (e) {
-                if (e.message === "BOT_WORKING") {
-                    loader.innerHTML = `<div style="padding: 20px; border: 2px dashed var(--primary-color);"><h3>🤖 봇이 작업중입니다!</h3><p>잠시 후 새로고침 해주세요.</p></div>`;
+                if (loader) {
+                    if (e.message === "BOT_WORKING") {
+                        loader.innerHTML = `<div style="padding: 20px; border: 2px dashed var(--primary-color);"><h3>🤖 봇이 작업중입니다!</h3><p>잠시 후 새로고침 해주세요.</p></div>`;
+                    } else {
+                        loader.innerText = "Error: " + e.message;
+                    }
                 } else {
-                    loader.innerText = "Error: " + e.message;
+                    console.error("Load Error (and loader missing):", e);
                 }
             }
         }
@@ -1444,3 +1453,6 @@
         }
 
     </script>
+</body>
+
+</html>
