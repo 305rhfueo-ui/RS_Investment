@@ -179,6 +179,95 @@
             margin-top: 50px;
             padding-bottom: 30px;
         }
+
+        /* Market Popup Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 900px;
+            color: #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Matrix Table Styles */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .matrix-table th,
+        .matrix-table td {
+            border: 1px solid #444;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .matrix-table th {
+            background-color: #333;
+            color: #eee;
+        }
+
+        .matrix-table tr:nth-child(mm) {
+            background-color: #252525;
+        }
+
+        .trend-up {
+            color: #ff5252;
+            font-weight: bold;
+        }
+
+        /* Red for Up in KR stock context usually, but let's stick to user image context if colored. Image text is black. Let's use standard text color but bold for direction. */
+        .trend-down {
+            color: #00e676;
+            font-weight: bold;
+        }
+
+        /* Green for Down */
+        .trend-flat {
+            color: #ffca28;
+            font-weight: bold;
+        }
+
+        /* Yellow for Flat */
+
+        .action-highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -274,6 +363,12 @@
                         Individual RS
                     </button>
 
+                    <!-- Market Judgment Link -->
+                    <a href="#" onclick="openMarketPopup(); return false;"
+                        style="color: #ff5252; text-decoration: underline; font-size: 13px; font-weight: bold; margin-left: 5px; margin-right: 10px;">
+                        시장판단(필독)
+                    </a>
+
                     <button id="wrs-btn" onclick="showWRS()" class="download-btn"
                         style="background-color:#00e676; color:#000;">
                         Sector/Industry WRS
@@ -334,8 +429,121 @@
         </div>
     </footer>
 
+    <!-- Market Judgment Modal -->
+    <div id="market-popup" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMarketPopup()">&times;</span>
+            <h2 style="margin-top:0;">시장 추세 판단 가이드</h2>
+
+            <h3>1. 시장 장기 추세 판단(약식)</h3>
+            <ul style="line-height: 1.6;">
+                <li>(1) <strong>대세 상승</strong>: ARKK 월봉 10 우상향 (저점 2~3개 연결해서 판단)</li>
+                <li>(2) <strong>대세 하락</strong>: ARKK 월봉 10 우하향 (고점 2~3개 연결해서 판단)</li>
+                <li>(3) <strong>횡보(관망)</strong>: ARKK 월봉 10 횡보</li>
+            </ul>
+
+            <h3 style="margin-top:20px;">2. 시장 중기추세와 결합 판단(약식)</h3>
+            <p>📊 <strong>월봉 10선 & 주봉 30선 조합별 대응 매트릭스</strong></p>
+
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th>월봉 10선 (대세)</th>
+                        <th>주봉 30선 (중기)</th>
+                        <th>가격 위치</th>
+                        <th>시장 해석 (국면)</th>
+                        <th>대응 전략 (Action)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>상승 (↑)</td>
+                        <td>상승 (↑)</td>
+                        <td>가격 > 주봉</td>
+                        <td><strong>최강의 제2단계</strong></td>
+                        <td><span class="action-highlight">적극 매수 및 홀딩.</span> 비중을 최대화하여 수익 극대화.</td>
+                    </tr>
+                    <tr>
+                        <td>상승 (↑)</td>
+                        <td>상승 (↑)</td>
+                        <td>가격 < 주봉</td>
+                        <td>일시적 눌림목</td>
+                        <td><strong>추가 매수 기회.</strong> 주봉 지지 확인 후 반등 시 진입.</td>
+                    </tr>
+                    <tr>
+                        <td>상승 (↑)</td>
+                        <td>횡보 (→)</td>
+                        <td>주봉 부근</td>
+                        <td>에너지 응축</td>
+                        <td><strong>관심 종목 등록.</strong> 주봉 돌파 시점이 핵심 타점.</td>
+                    </tr>
+                    <tr>
+                        <td>상승 (↑)</td>
+                        <td>하락 (↓)</td>
+                        <td>가격 < 주봉</td>
+                        <td>깊은 조정 구간</td>
+                        <td><strong>보수적 접근.</strong> 주봉 위로 안착 전까지 신규 매수 금지.</td>
+                    </tr>
+                    <tr>
+                        <td>횡보 (→)</td>
+                        <td>상승 (↑)</td>
+                        <td>가격 > 주봉</td>
+                        <td>바닥 탈출 (1→2)</td>
+                        <td><strong>분할 매수 시작.</strong> 월봉 저항 돌파 시 비중 확대.</td>
+                    </tr>
+                    <tr>
+                        <td>횡보 (→)</td>
+                        <td>횡보 (→)</td>
+                        <td>박스권</td>
+                        <td>방향성 탐색</td>
+                        <td><strong>관망.</strong> 에너지가 위로 터지는지 아래로 터지는지 대기.</td>
+                    </tr>
+                    <tr>
+                        <td>횡보 (→)</td>
+                        <td>하락 (↓)</td>
+                        <td>가격 < 주봉</td>
+                        <td>하락 전환 전조</td>
+                        <td><strong>리스크 관리.</strong> 보유 비중을 줄이고 현금 확보.</td>
+                    </tr>
+                    <tr>
+                        <td>하락 (↓)</td>
+                        <td>상승 (↑)</td>
+                        <td>가격 > 주봉</td>
+                        <td>기술적 반등</td>
+                        <td><strong>단기 매매만 허용.</strong> 월봉 저항이 강하므로 짧게 익절.</td>
+                    </tr>
+                    <tr>
+                        <td>하락 (↓)</td>
+                        <td>하락 (↓)</td>
+                        <td>가격 < 주봉</td>
+                        <td>공포의 제4단계</td>
+                        <td><strong>전량 현금화.</strong> 어떤 반등도 매도 기회로 활용.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 12px; color: #888; margin-top: 10px;">* 가격 위치 : 가격은 주봉 종가, 주봉은 주봉 30선을 말함</p>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script>
+        // --- Market Popup Functions ---
+        function openMarketPopup() {
+            document.getElementById('market-popup').style.display = 'block';
+        }
+
+        function closeMarketPopup() {
+            document.getElementById('market-popup').style.display = 'none';
+        }
+
+        // Close when clicking outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('market-popup');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
         // Global State & Data
         let globalData = [];
         let groupedData = []; // for WRS mode
