@@ -1379,8 +1379,14 @@
 
                     const cy = parseFloat(item.CY_Trend);
                     const ny = parseFloat(item.NY_Trend);
-                    const cyColor = (isValidNumber(cy) && cy >= 5) ? 'rs-pos' : '';
-                    const nyColor = (isValidNumber(ny) && ny >= 5) ? 'rs-pos' : '';
+                    // [Fix] Standardize Trend Colors (Pos: Green, Neg: Red)
+                    const cyColor = (isValidNumber(cy) && cy > 0) ? 'rs-pos' : ((isValidNumber(cy) && cy < 0) ? 'rs-neg' : '');
+                    const nyColor = (isValidNumber(ny) && ny > 0) ? 'rs-pos' : ((isValidNumber(ny) && ny < 0) ? 'rs-neg' : '');
+
+                    // [Fix] Handle null counts gracefully
+                    const upCount = isValidNumber(item.Up_Count) ? item.Up_Count : '-';
+                    const downCount = isValidNumber(item.Down_Count) ? item.Down_Count : '-';
+                    const upDownRatio = isValidNumber(item.Up_Down_Ratio) ? item.Up_Down_Ratio : '-';
 
                     tr.innerHTML = `
                         <td style="font-weight:bold;">
@@ -1404,9 +1410,9 @@
                         <td>${item['50DIV']}%</td>
                         <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : '-'}</td>
                         <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : '-'}</td>
-                        <td>${item.Up_Count}</td>
-                        <td>${item.Down_Count}</td>
-                        <td>${item.Up_Down_Ratio}</td>
+                        <td>${upCount}</td>
+                        <td>${downCount}</td>
+                        <td>${upDownRatio}</td>
                     `;
                     tbody.appendChild(tr);
                 });
