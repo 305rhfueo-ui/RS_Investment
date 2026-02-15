@@ -530,6 +530,37 @@
                 </tbody>
             </table>
             <p style="font-size: 12px; color: #888; margin-top: 10px;">* 가격 위치 : 가격은 주봉 종가, 주봉은 주봉 30선을 말함</p>
+
+            <h3 style="margin-top:20px;">3. 주봉 30선 기반 시장 판단 로직</h3>
+            <p>📈 <strong>이 기준을 스캐너와 결합할 때 확인해야 할 3가지 체크포인트</strong></p>
+
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">상태</th>
+                        <th style="width: 25%;">시장 해석</th>
+                        <th>대응 전략</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>가격 > 주봉 30선 & 30선 우상향</strong></td>
+                        <td style="color:#ff5252; font-weight:bold;">강력한 강세장 (Stage 2)</td>
+                        <td>Today's List 종목 적극 매수 및 홀딩</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가격 < 주봉 30선 & 30선 우하향</strong>
+                        </td>
+                        <td style="color:#2196f3; font-weight:bold;">명확한 하락장 (Stage 4)</td>
+                        <td>보수적 접근, 현금 비중 확대</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가격이 30선 부근에서 횡보</strong></td>
+                        <td style="color:#ffca28; font-weight:bold;">전환기 (Stage 1 또는 3)</td>
+                        <td>추세가 결정될 때까지 관망 혹은 비중 조절</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
