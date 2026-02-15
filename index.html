@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Timeframe RS Investment (v1.1)</title>
+    <title>Multi-Timeframe RS Investment (v1.2)</title>
     <link rel="shortcut icon" href="static/favicon.png">
     <style>
         :root {
@@ -73,6 +73,37 @@
 
         button:hover {
             transform: translateY(-2px);
+        }
+
+        /* Filter Popup */
+        .filter-popup {
+            position: absolute;
+            background-color: #333;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            min-width: 120px;
+            text-align: left;
+        }
+
+        .filter-popup label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+            color: #eee;
+            font-size: 13px;
+        }
+
+        .filter-popup button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #000;
         }
 
         #result-area {
@@ -196,6 +227,7 @@
                 <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
                     Count))×20%</li>
                 <li><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo)의 10거래일 전 대비 변화율</li>
+                <li><strong>RS_DiF / WRS_Dif:</strong> (1개월 RS) - (3개월 RS) - (6개월 RS) (단기 모멘텀이 장기보다 강한지 확인)</li>
                 <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
 
                 <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
@@ -215,6 +247,7 @@
                         <li><strong>50DIV</strong> 55% 이하</li>
                     </ul>
                 </li>
+                <li><strong>급등가능성↑종목/섹터:</strong> RS_DiF(또는 WRS_Dif) > 0 인 항목을 내림차순 정렬 (단기 탄력이 강한 종목/섹터)</li>
 
             </ul>
         </div>
@@ -251,6 +284,16 @@
                         style="background-color:#e91e63; color:#ffffff;">
                         Today's Main
                     </button>
+
+                    <!-- Rising Links (Text style buttons) -->
+                    <a href="#" onclick="showRisingStocks(); return false;"
+                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        ⚡급등가능성↑종목
+                    </a>
+                    <a href="#" onclick="showRisingSectors(); return false;"
+                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
+                        ⚡급등가능성↑섹터
+                    </a>
 
 
 
@@ -295,10 +338,12 @@
 
         // App State
         let appState = {
-            mode: 'INDIVIDUAL', // 'INDIVIDUAL' | 'WRS' | 'DRILLDOWN' | 'TODAYS_LIST'
+            mode: 'INDIVIDUAL', // 'INDIVIDUAL' | 'WRS' | 'DRILLDOWN' | 'TODAYS_LIST' | 'RISING_STOCKS' | 'RISING_SECTORS'
             filterText: '',
             drillDownKey: null, // "Sector|Industry"
-            sort: { key: 'RS_6mo', asc: false } // Default Sort: RS(6mo) Descending
+            sort: { key: 'RS_6mo', asc: false }, // Default Sort: RS(6mo) Descending
+            filterRS_DiF: 'ALL', // 'ALL' | 'POS' | 'NEG'
+            filterWRS_Dif: 'ALL' // 'ALL' | 'POS' | 'NEG'
         };
 
         // 페이지 로드 시 자동 실행
@@ -315,6 +360,16 @@
                 if (event.key === "Enter") {
                     event.preventDefault();
                     handleSearch();
+                }
+            });
+
+            // Close filter popup when clicking outside
+            document.addEventListener('click', function (event) {
+                const popup = document.getElementById('filter-popup');
+                if (popup && popup.style.display === 'block' && !event.target.closest('th')) {
+                    if (!popup.contains(event.target)) {
+                        popup.style.display = 'none';
+                    }
                 }
             });
 
@@ -366,6 +421,15 @@
 
                 // Initialize Data
                 globalData = json.data;
+
+                // [Added] Calculate RS_DiF for Individual Data
+                globalData.forEach(item => {
+                    const rs1 = item.RS_1mo || 0;
+                    const rs3 = item.RS_3mo || 0;
+                    const rs6 = item.RS_6mo || 0;
+                    // Formula: RS(1mo) - RS(3mo) - RS(6mo)
+                    item.RS_DiF = rs1 - rs3 - rs6;
+                });
 
                 // [Fix] Calculate WRS immediately so groupedData is ready for History Comparison
                 calculateWRS();
@@ -569,8 +633,15 @@
 
                 const finalWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
 
+                // [Added] WRS_Dif Calculation
+                // Formula: WRS(1mo) - WRS(3mo) - WRS(6mo)
+                const wrs3mo = g.TotalMC > 0 ? (g.WeightedSum3 / g.TotalMC) : 0;
+                const wrs1mo = g.TotalMC > 0 ? (g.WeightedSum1 / g.TotalMC) : 0;
+                const wrsDif = wrs1mo - wrs3mo - wrs6mo;
+
                 result[`${g.Sector}|${g.Industry}`] = {
-                    Final_WRS: finalWRS
+                    Final_WRS: finalWRS,
+                    WRS_Dif: wrsDif
                 };
             });
             return result;
@@ -730,6 +801,82 @@
             updateUI();
         }
 
+        // --- Rising Modes ---
+        function showRisingStocks() {
+            appState.mode = 'RISING_STOCKS';
+            appState.sort = { key: 'RS_DiF', asc: false }; // Desc
+            appState.filterRS_DiF = 'POS'; // Default to Positive for this mode? Or just 'ALL' since mode filters > 0?
+            // Requirement 4: "값들이 + 즉 양수인것들만 보여주고" -> Mode filter handles this.
+            // But let's reset custom filter to avoid confusion.
+            appState.filterRS_DiF = 'ALL';
+
+            document.getElementById('search-input').value = '';
+            updateUI();
+        }
+
+        function showRisingSectors() {
+            appState.mode = 'RISING_SECTORS';
+            appState.sort = { key: 'WRS_DiF', asc: false }; // Desc
+
+            // Ensure WRS calculated
+            if (groupedData.length === 0) calculateWRS();
+
+            appState.filterWRS_Dif = 'ALL';
+            document.getElementById('search-input').value = '';
+            updateUI();
+        }
+
+        // --- Filter Popup Logic ---
+        function showFilterPopup(event, type) {
+            event.stopPropagation();
+            const th = event.target.closest('th');
+
+            // Remove existing popup if any
+            const existing = document.getElementById('filter-popup');
+            if (existing) existing.remove();
+
+            const popup = document.createElement('div');
+            popup.id = 'filter-popup';
+            popup.className = 'filter-popup';
+
+            // Determine current state
+            let current = type === 'RS_DiF' ? appState.filterRS_DiF : appState.filterWRS_Dif;
+            // ALL, POS, NEG
+            const isPos = current === 'POS' || current === 'ALL';
+            const isNeg = current === 'NEG' || current === 'ALL';
+
+            popup.innerHTML = `
+                <label><input type="checkbox" id="chk-pos" ${isPos ? 'checked' : ''}> (+) Positive</label>
+                <label><input type="checkbox" id="chk-neg" ${isNeg ? 'checked' : ''}> (-) Negative</label>
+                <button onclick="applyFilter('${type}')">확인</button>
+            `;
+
+            document.body.appendChild(popup);
+
+            // Position
+            const rect = th.getBoundingClientRect();
+            popup.style.left = rect.left + 'px';
+            popup.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+            popup.style.display = 'block';
+        }
+
+        function applyFilter(type) {
+            const pos = document.getElementById('chk-pos').checked;
+            const neg = document.getElementById('chk-neg').checked;
+
+            let val = 'ALL';
+            if (pos && neg) val = 'ALL';
+            else if (pos) val = 'POS';
+            else if (neg) val = 'NEG';
+            else val = 'NONE'; // Should we support NONE? Effectively hides all.
+
+            if (type === 'RS_DiF') appState.filterRS_DiF = val;
+            else appState.filterWRS_Dif = val;
+
+            document.getElementById('filter-popup').style.display = 'none';
+            updateUI();
+        }
+
         function calculateWRS() {
             const groups = {};
 
@@ -857,6 +1004,7 @@
                     WRS_6mo: wrs6mo,
                     WRS_3mo: g.TotalMC > 0 ? (g.WeightedSum3 / g.TotalMC) : 0,
                     WRS_1mo: g.TotalMC > 0 ? (g.WeightedSum1 / g.TotalMC) : 0,
+                    WRS_DiF: (g.TotalMC > 0 ? (g.WeightedSum1 / g.TotalMC) : 0) - (g.TotalMC > 0 ? (g.WeightedSum3 / g.TotalMC) : 0) - wrs6mo, // [Added]
                     WRS_6mo_MD: median,  // Median
                     Win_Rate: winRate,
                     Final_WRS: finalWRS,
@@ -975,9 +1123,32 @@
 
                     return basicCondition && extraCondition;
                 });
+            } else if (appState.mode === 'RISING_STOCKS') {
+                // 급등가능성↑종목: RS_DiF > 0
+                targetData = globalData.filter(stock => stock.RS_DiF > 0);
+            } else if (appState.mode === 'RISING_SECTORS') {
+                // 급등가능성↑섹터: WRS_DiF > 0
+                // Note: property is WRS_DiF based on previous edit
+                targetData = groupedData.filter(g => g.WRS_DiF > 0);
             }
 
-            // 1. Filter
+            // 1. Column Filters (RS_DiF / WRS_DiF)
+            if (appState.filterRS_DiF !== 'ALL' && appState.mode !== 'WRS' && appState.mode !== 'RISING_SECTORS') {
+                if (appState.filterRS_DiF === 'POS') {
+                    targetData = targetData.filter(d => d.RS_DiF > 0);
+                } else if (appState.filterRS_DiF === 'NEG') {
+                    targetData = targetData.filter(d => d.RS_DiF < 0);
+                }
+            }
+            if (appState.filterWRS_Dif !== 'ALL' && (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS')) {
+                if (appState.filterWRS_Dif === 'POS') {
+                    targetData = targetData.filter(d => d.WRS_DiF > 0);
+                } else if (appState.filterWRS_Dif === 'NEG') {
+                    targetData = targetData.filter(d => d.WRS_DiF < 0);
+                }
+            }
+
+            // 2. Search Text Filter
             if (appState.filterText) {
                 targetData = targetData.filter(item => {
                     return Object.values(item).some(val =>
@@ -986,7 +1157,7 @@
                 });
             }
 
-            // 2. Sort
+            // 3. Sort
             targetData.sort((a, b) => {
                 let valA = a[appState.sort.key];
                 let valB = b[appState.sort.key];
@@ -998,6 +1169,10 @@
 
                 if (typeof valA === 'string') valA = valA.toUpperCase();
                 if (typeof valB === 'string') valB = valB.toUpperCase();
+
+                // Handle nulls
+                if (valA === undefined || valA === null) valA = -999999;
+                if (valB === undefined || valB === null) valB = -999999;
 
                 if (valA < valB) return appState.sort.asc ? -1 : 1;
                 if (valA > valB) return appState.sort.asc ? 1 : -1;
@@ -1022,7 +1197,10 @@
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
 
-            if (appState.mode === 'WRS') {
+            // Determine Layout Type
+            const isWRSLayout = (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS');
+
+            if (isWRSLayout) {
                 thead.innerHTML = `
                     <th onclick="sortTable('Sector')" style="text-align: center;">Sector ⬍</th>
                     <th onclick="sortTable('Industry')" style="text-align: center;">Industry ⬍</th>
@@ -1037,6 +1215,7 @@
                     <th onclick="sortTable('Win_Rate')" style="text-align: center;">Win-rate (%) ⬍</th>
                     <th onclick="sortTable('WRS_3mo')" style="text-align: center;">WRS (3mo) ⬍</th>
                     <th onclick="sortTable('WRS_1mo')" style="text-align: center;">WRS (1mo) ⬍</th>
+                    <th onclick="showFilterPopup(event, 'WRS_Dif')" style="text-align: center; cursor: pointer; background-color: #444;">WRS_Dif 🔍</th>
                 `;
             } else {
                 thead.innerHTML = `
@@ -1051,18 +1230,18 @@
                     <th onclick="sortTable('RS_6mo_10D_Chg')">10D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
+                    <th onclick="showFilterPopup(event, 'RS_DiF')" style="cursor: pointer; background-color: #444;">RS_DiF 🔍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
                     <th onclick="sortTable('CY_Trend')">CY Trend (%) ⬍</th>
                     <th onclick="sortTable('NY_Trend')">NY Trend (%) ⬍</th>
                     <th onclick="sortTable('Up_Count')">Up # ⬍</th>
                     <th onclick="sortTable('Down_Count')">Down # ⬍</th>
                     <th onclick="sortTable('Up_Down_Ratio')">Up/(Up+Down) ⬍</th>
-
                 `;
             }
 
             // Rank Calc for Individual/Drilldown
-            if (appState.mode !== 'WRS') {
+            if (!isWRSLayout) {
                 const sortedRef = [...data].sort((a, b) => parseMarketCap(b['Market Cap']) - parseMarketCap(a['Market Cap']));
                 const rankMap = {};
                 sortedRef.forEach((item, idx) => rankMap[item.Ticker] = idx + 1);
@@ -1072,7 +1251,7 @@
             data.forEach(item => {
                 const tr = document.createElement('tr');
 
-                if (appState.mode === 'WRS') {
+                if (isWRSLayout) {
                     tr.style.cursor = 'pointer';
                     // [Change] Double click -> Single click
                     tr.onclick = () => enterDrillDown(item.Sector, item.Industry);
@@ -1101,6 +1280,7 @@
                         <td style="text-align: center;">${(item.Win_Rate * 100).toFixed(2)}%</td>
                         <td class="${item.WRS_3mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_3mo.toFixed(4)}</td>
                         <td class="${item.WRS_1mo > 0 ? 'rs-pos' : 'rs-neg'}" style="text-align: center;">${item.WRS_1mo.toFixed(4)}</td>
+                        <td class="${item.WRS_DiF > 0 ? 'rs-pos' : (item.WRS_DiF < 0 ? 'rs-neg' : '')}" style="text-align: center; font-weight: bold;">${item.WRS_DiF ? item.WRS_DiF.toFixed(4) : '0.0000'}</td>
                     `;
                 } else {
                     let mcDisplay = item['Market Cap'];
@@ -1141,6 +1321,8 @@
                     const downCountDisplay = item.Down_Count !== null ? item.Down_Count : '-';
                     const upDownRatioDisplay = item.Up_Down_Ratio !== null && item.Up_Down_Ratio !== undefined ? `${item.Up_Down_Ratio.toFixed(2)}%` : '-';
 
+                    const rsDifDisplay = item.RS_DiF ? item.RS_DiF.toFixed(4) : '0.0000';
+
 
                     tr.innerHTML = `
                         <td><strong>${tickerLink}</strong></td>
@@ -1154,6 +1336,7 @@
                         <td class="${change10dClass}" style="text-align: center; font-weight: bold;">${change10dDisplay}</td>
                         <td class="${item.RS_3mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_3mo).toFixed(4)}</td>
                         <td class="${item.RS_1mo > 0 ? 'rs-pos' : 'rs-neg'}">${Number(item.RS_1mo).toFixed(4)}</td>
+                        <td class="${item.RS_DiF > 0 ? 'rs-pos' : (item.RS_DiF < 0 ? 'rs-neg' : '')}" style="font-weight:bold;">${rsDifDisplay}</td>
                         <td class="${div50Class}">${div50Display}</td>
                         <td class="${cyTrendClass}">${cyTrendDisplay}</td>
                         <td class="${nyTrendClass}">${nyTrendDisplay}</td>
@@ -1185,13 +1368,16 @@
 
         function downloadExcel() {
             const data = getFilteredAndSortedData();
-            if (data.length === 0) return alert('데이터가 없습니다 (v1.1).');
+            if (data.length === 0) return alert('데이터가 없습니다 (v1.2).');
 
             const wb = XLSX.utils.book_new();
             let excelData = [];
             let fileName = "";
 
-            if (appState.mode === 'WRS') {
+            // Determine if WRS layout (including Rising Sectors)
+            const isWRSLayout = (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS');
+
+            if (isWRSLayout) {
                 excelData = data.map(item => ({
                     'Sector': item.Sector,
                     'Industry': item.Industry,
@@ -1205,7 +1391,8 @@
                     'WRS_MD Rank (%)': item.WRS_MD_Rank_Pct ? parseFloat(item.WRS_MD_Rank_Pct.toFixed(2)) : null,
                     'Win-rate (%)': item.Win_Rate ? parseFloat((item.Win_Rate * 100).toFixed(2)) : 0,
                     'WRS (3mo)': item.WRS_3mo ? parseFloat(item.WRS_3mo.toFixed(4)) : 0,
-                    'WRS (1mo)': item.WRS_1mo ? parseFloat(item.WRS_1mo.toFixed(4)) : 0
+                    'WRS (1mo)': item.WRS_1mo ? parseFloat(item.WRS_1mo.toFixed(4)) : 0,
+                    'WRS_Dif': item.WRS_DiF ? parseFloat(item.WRS_DiF.toFixed(4)) : 0
                 }));
                 fileName = `WRS_Score_${new Date().toISOString().slice(0, 10)}.xlsx`;
             } else {
@@ -1221,6 +1408,7 @@
                     '10D Chg (%)': item.RS_6mo_10D_Chg !== undefined && item.RS_6mo_10D_Chg !== null ? parseFloat(item.RS_6mo_10D_Chg.toFixed(2)) : null,
                     'RS (3mo)': item.RS_3mo ? parseFloat(item.RS_3mo.toFixed(4)) : null,
                     'RS (1mo)': item.RS_1mo ? parseFloat(item.RS_1mo.toFixed(4)) : null,
+                    'RS_DiF': item.RS_DiF ? parseFloat(item.RS_DiF.toFixed(4)) : null,
                     '50DIV (%)': item['50DIV'] !== undefined && item['50DIV'] !== null ? parseFloat(item['50DIV'].toFixed(2)) : null,
                     'CY Trend (%)': item.CY_Trend !== undefined && item.CY_Trend !== null ? parseFloat(item.CY_Trend.toFixed(2)) : null,
                     'NY Trend (%)': item.NY_Trend !== undefined && item.NY_Trend !== null ? parseFloat(item.NY_Trend.toFixed(2)) : null,
