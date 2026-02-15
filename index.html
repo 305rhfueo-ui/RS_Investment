@@ -1224,6 +1224,18 @@
             updateUI();
         }
 
+        // --- Helper: Safe Number Check ---
+        function isValidNumber(val) {
+            return val !== null && val !== undefined && !isNaN(val);
+        }
+
+        function getChgColor(val) {
+            if (!isValidNumber(val)) return "";
+            if (val > 0) return "color: #00e676;";
+            if (val < 0) return "color: #ff5252;";
+            return "";
+        }
+
         // --- Main Render Function ---
         function renderTable(data) {
             const tbody = document.getElementById('table-body');
@@ -1233,7 +1245,6 @@
 
             if (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') {
                 // WRS Table Header
-                // Added 10D Chg and WRS_Dif
                 thead.innerHTML = `
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="sortTable('Industry')">Industry ⬍</th>
@@ -1254,53 +1265,35 @@
                     </th>
                 `;
 
-                // Calculate Percentiles for Rank
-                // (Optional: Re-calculate per filter? Original requirements imply ranking based on global scope usually.
-                // But for display consistency, let's keep it simple. If we want dynamic ranking, we need full list.)
-                // Given "Rank (%)", let's assuming pre-calculated or calculate on the fly for *current list*?
-                // Usually Rank is relative to All Industries. 
-                // Let's compute ranks for the visible data for simplicity or use global?
-                // Using global groupedData to assign ranks first is better.
-                // Re-calculating ranks every render might be confusing if filtering.
-                // Let's computing ranks on global groupedData once in calculateWRS is ideal.
-                // For now, let's just display what we have. If we need "Rank" column, we need to compute it.
-                // Let's add partial Rank calculation here for visual completeness if missing.
-
-                const totalItems = groupedData.length;
-                // Sort by metrics to assist ranking (Visual only if not stored)
-                // Actually, let's just show values. 
-
-                // Render Rows
                 data.forEach(item => {
                     const tr = document.createElement('tr');
 
-                    // Style for WRS_Dif POS/NEG
-                    const difClass = item.WRS_Dif > 0 ? 'rs-pos' : (item.WRS_Dif < 0 ? 'rs-neg' : '');
+                    const difClass = (isValidNumber(item.WRS_Dif) && item.WRS_Dif > 0) ? 'rs-pos' :
+                        ((isValidNumber(item.WRS_Dif) && item.WRS_Dif < 0) ? 'rs-neg' : '');
 
                     tr.innerHTML = `
                         <td style="font-weight:bold; cursor:pointer;" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Sector}</td>
                         <td style="font-weight:bold; cursor:pointer;" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Industry}</td>
-                        <td style="font-weight:bold; color:var(--primary-color)">${item.Final_WRS.toFixed(2)}</td>
-                        <td> - </td> <!-- Rank Pct TODO if needed -->
+                        <td style="font-weight:bold; color:var(--primary-color)">${isValidNumber(item.Final_WRS) ? item.Final_WRS.toFixed(2) : '-'}</td>
+                        <td> - </td>
                         <td style="${getChgColor(item.Final_WRS_10D_Chg)}">
-                            ${item.Final_WRS_10D_Chg !== null ? item.Final_WRS_10D_Chg.toFixed(1) + '%' : '-'}
+                            ${isValidNumber(item.Final_WRS_10D_Chg) ? item.Final_WRS_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
                         <td>${item.Count}</td>
-                        <td>${item.WRS_6mo.toFixed(2)}</td>
+                        <td>${isValidNumber(item.WRS_6mo) ? item.WRS_6mo.toFixed(2) : '-'}</td>
                         <td> - </td>
-                        <td>${item.WRS_MD_6mo.toFixed(2)}</td>
+                        <td>${isValidNumber(item.WRS_MD_6mo) ? item.WRS_MD_6mo.toFixed(2) : '-'}</td>
                         <td> - </td>
-                        <td>${item.Win_Rate.toFixed(1)}%</td>
-                        <td>${item.WRS_3mo.toFixed(2)}</td>
-                        <td>${item.WRS_1mo.toFixed(2)}</td>
-                        <td class="${difClass}">${item.WRS_Dif.toFixed(2)}</td>
+                        <td>${isValidNumber(item.Win_Rate) ? item.Win_Rate.toFixed(1) + '%' : '-'}</td>
+                        <td>${isValidNumber(item.WRS_3mo) ? item.WRS_3mo.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.WRS_1mo) ? item.WRS_1mo.toFixed(2) : '-'}</td>
+                        <td class="${difClass}">${isValidNumber(item.WRS_Dif) ? item.WRS_Dif.toFixed(2) : '-'}</td>
                     `;
                     tbody.appendChild(tr);
                 });
 
             } else {
                 // Individual / Drilldown / Lists
-                // Added RS_DiF, 50DIV, Trends, Up/Down
                 thead.innerHTML = `
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
@@ -1328,14 +1321,13 @@
                 data.forEach(item => {
                     const tr = document.createElement('tr');
 
-                    // Colors
-                    const rs6Class = item.RS_6mo > 0 ? 'rs-pos' : 'rs-neg';
-                    const rs3Class = item.RS_3mo > 0 ? 'rs-pos' : 'rs-neg';
-                    const rs1Class = item.RS_1mo > 0 ? 'rs-pos' : 'rs-neg';
-                    const difClass = item.RS_DiF > 0 ? 'rs-pos' : (item.RS_DiF < 0 ? 'rs-neg' : '');
+                    const rs6Class = (isValidNumber(item.RS_6mo) && item.RS_6mo > 0) ? 'rs-pos' : 'rs-neg';
+                    const rs3Class = (isValidNumber(item.RS_3mo) && item.RS_3mo > 0) ? 'rs-pos' : 'rs-neg';
+                    const rs1Class = (isValidNumber(item.RS_1mo) && item.RS_1mo > 0) ? 'rs-pos' : 'rs-neg';
+                    const difClass = (isValidNumber(item.RS_DiF) && item.RS_DiF > 0) ? 'rs-pos' :
+                        ((isValidNumber(item.RS_DiF) && item.RS_DiF < 0) ? 'rs-neg' : '');
 
-                    // Format Large Numbers
-                    const mcStr = item.Market_Cap_Readable || item['Market Cap']; // Use readable if avail
+                    const mcStr = item.Market_Cap_Readable || item['Market Cap'];
 
                     const cyColor = (parseFloat(item.CY_Trend) >= 5) ? 'rs-pos' : '';
                     const nyColor = (parseFloat(item.NY_Trend) >= 5) ? 'rs-pos' : '';
@@ -1351,14 +1343,14 @@
                         <td>${item.Price}</td>
                         <td>${mcStr}</td>
                         <td>${item.MarketCapRank || '-'}</td>
-                        <td class="${rs6Class}">${item.RS_6mo}</td>
-                        <td>${item.RS_Rank_Pct ? item.RS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
+                        <td class="${rs6Class}">${isValidNumber(item.RS_6mo) ? item.RS_6mo : '-'}</td>
+                        <td>${isValidNumber(item.RS_Rank_Pct) ? item.RS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td style="${getChgColor(item.RS_6mo_10D_Chg)}">
-                            ${item.RS_6mo_10D_Chg !== null ? item.RS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
+                            ${isValidNumber(item.RS_6mo_10D_Chg) ? item.RS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
-                        <td class="${rs3Class}">${item.RS_3mo}</td>
-                        <td class="${rs1Class}">${item.RS_1mo}</td>
-                        <td class="${difClass}">${item.RS_DiF !== undefined ? item.RS_DiF.toFixed(2) : '-'}</td>
+                        <td class="${rs3Class}">${isValidNumber(item.RS_3mo) ? item.RS_3mo : '-'}</td>
+                        <td class="${rs1Class}">${isValidNumber(item.RS_1mo) ? item.RS_1mo : '-'}</td>
+                        <td class="${difClass}">${isValidNumber(item.RS_DiF) ? item.RS_DiF.toFixed(2) : '-'}</td>
                         <td>${item['50DIV']}%</td>
                         <td class="${cyColor}">${item.CY_Trend}%</td>
                         <td class="${nyColor}">${item.NY_Trend}%</td>
@@ -1369,13 +1361,6 @@
                     tbody.appendChild(tr);
                 });
             }
-        }
-
-        function getChgColor(val) {
-            if (val === null || val === undefined) return "";
-            if (val > 0) return "color: #00e676;";
-            if (val < 0) return "color: #ff5252;";
-            return "";
         }
 
         function drillDown(key) {
