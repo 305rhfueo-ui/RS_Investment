@@ -364,89 +364,86 @@
                             <li><strong>50DIV</strong> 55% 이하 (과열 방지)</li>
                         </ul>
                     </li>
+                    <li><strong>급등/반등가능성↑종목:</strong> RS_DiF &gt; 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)
+                    </li>
+                    <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif &gt; 0 인 섹터 (Win-rate 순 정렬)</li>
                 </ul>
             </div>
         </div>
-        <li><strong>50DIV</strong> 55% 이하</li>
-        </ul>
-        </li>
-        <li><strong>급등/반등가능성↑종목:</strong> RS_DiF > 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)</li>
-        <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif > 0 인 섹터 (Win-rate 순 정렬)</li>
-
-        </ul>
-    </div>
-
-    <!-- ... -->
-
-    <!-- Loading Message -->
-    <div id="loading-msg" style="text-align: center; padding: 50px; font-size: 18px; color: var(--primary-color);">
-        ⏳ 데이터 불러오는 중...
-    </div>
-
-    <div id="result-area">
-        <div class="btn-group">
-            <span id="result-count" style="font-size:14px; color:#aaa;"></span>
-
-            <div style="display:flex; gap:10px; align-items:center;">
-                <input type="text" id="search-input" placeholder="Search..."
-                    style="padding:10px; border-radius:4px; border:1px solid #333; background:#222; color:#fff;">
-
-                <button id="indiv-btn" onclick="showIndividualRS()" class="download-btn"
-                    style="background-color:#2196f3; color:#ffffff;">
-                    Individual RS
-                </button>
 
 
 
-                <button id="wrs-btn" onclick="showWRS()" class="download-btn"
-                    style="background-color:#00e676; color:#000;">
-                    Sector/Industry WRS
-                </button>
+        <!-- ... -->
 
-                <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
-                    style="background-color:#ff9800; color:#000;">
-                    Today's List
-                </button>
-
-                <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
-                    style="background-color:#e91e63; color:#ffffff;">
-                    Today's Main
-                </button>
-
-                <!-- Rising Links (Text style buttons) -->
-                <a href="#" onclick="showRisingStocks(); return false;"
-                    style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
-                    ⚡급등/반등가능성↑종목
-                </a>
-                <a href="#" onclick="showRisingSectors(); return false;"
-                    style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
-                    ⚡급등/반등가능성↑섹터
-                </a>
-
-
-
-                <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
-            </div>
+        <!-- Loading Message -->
+        <div id="loading-msg" style="text-align: center; padding: 50px; font-size: 18px; color: var(--primary-color);">
+            ⏳ 데이터 불러오는 중...
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th onclick="sortTable('Ticker')">Ticker ⬍</th>
-                    <th onclick="sortTable('Sector')">Sector ⬍</th>
-                    <th onclick="sortTable('Industry')">Industry ⬍</th>
-                    <th onclick="sortTable('Price')">Price ($) ⬍</th>
-                    <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
-                    <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
+        <div id="result-area">
+            <div class="btn-group">
+                <span id="result-count" style="font-size:14px; color:#aaa;"></span>
 
-                    <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
-                    <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
-                    <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
-                </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-        </table>
-    </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <input type="text" id="search-input" placeholder="Search..."
+                        style="padding:10px; border-radius:4px; border:1px solid #333; background:#222; color:#fff;">
+
+                    <button id="indiv-btn" onclick="showIndividualRS()" class="download-btn"
+                        style="background-color:#2196f3; color:#ffffff;">
+                        Individual RS
+                    </button>
+
+
+
+                    <button id="wrs-btn" onclick="showWRS()" class="download-btn"
+                        style="background-color:#00e676; color:#000;">
+                        Sector/Industry WRS
+                    </button>
+
+                    <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
+                        style="background-color:#ff9800; color:#000;">
+                        Today's List
+                    </button>
+
+                    <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
+                        style="background-color:#e91e63; color:#ffffff;">
+                        Today's Main
+                    </button>
+
+                    <!-- Rising Links (Text style buttons) -->
+                    <a href="#" onclick="showRisingStocks(); return false;"
+                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        ⚡급등/반등가능성↑종목
+                    </a>
+                    <a href="#" onclick="showRisingSectors(); return false;"
+                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
+                        ⚡급등/반등가능성↑섹터
+                    </a>
+
+
+
+                    <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th onclick="sortTable('Ticker')">Ticker ⬍</th>
+                        <th onclick="sortTable('Sector')">Sector ⬍</th>
+                        <th onclick="sortTable('Industry')">Industry ⬍</th>
+                        <th onclick="sortTable('Price')">Price ($) ⬍</th>
+                        <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
+                        <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
+
+                        <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
+                        <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
+                        <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
     </div>
 
     <footer>
