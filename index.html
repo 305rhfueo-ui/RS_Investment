@@ -313,121 +313,140 @@
         </div>
 
         <div class="info-box">
-            <ul>
-                <li><strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)</li>
-                <li><strong>RS Logic</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)
-                    <ul>
-                        <li><strong>RS(6mo)</strong>: 120영업일, <strong>RS(3mo)</strong>: 60영업일, <strong>RS(1mo)</strong>:
-                            20영업일</li>
-                        <li>양수(+)면 벤치마크(QQQ) 대비 초과 수익, 음수(-)면 저조한 성과를 의미합니다.</li>
-                    </ul>
-                </li>
-                <li><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치)</li>
-                <li><strong>WRS (Weighted Relative Strength):</strong> 섹터/산업 내 종목들의 시가총액 가중 평균 RS (섹터/산업의 주도력)</li>
-                <li><strong>WRS_MD:</strong> 섹터/산업 내 종목들의 RS(6mo) 중앙값 (Median)</li>
-                <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)</li>
-                <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
-                    Count))×20%</li>
-                <li><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo)의 10거래일 전 대비 변화율</li>
-                <li><strong>RS_DiF / WRS_Dif:</strong> (1개월 RS) - (3개월 RS) - (6개월 RS) (단기 모멘텀이 장기보다 강한지 확인)</li>
-                <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
-                <li><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선의 괴리율 (단기 이격도)</li>
-                <li><strong>정배열:</strong> 최근 10, 20, 60, 120 영업일 종가 이동평균선이 정배열(10>20>60>120) 상태인지 여부 (YES/NO)</li>
+            <h3 onclick="toggleDescription()"
+                style="cursor: pointer; margin: 0; padding: 10px; background-color: #333; border-radius: 5px; display: flex; justify-content: space-between; align-items: center;">
+                <span>📝 컬럼 등에 대한 설명 (Click to Open/Close)</span>
+                <span id="desc-arrow">▼</span>
+            </h3>
+            <div id="description-content"
+                style="display: none; margin-top: 10px; padding: 10px; background-color: #222; border-radius: 5px;">
+                <ul>
+                    <li><strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)
+                    </li>
+                    <li><strong>RS Logic</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)
+                        <ul>
+                            <li><strong>RS(6mo)</strong>: 120영업일, <strong>RS(3mo)</strong>: 60영업일,
+                                <strong>RS(1mo)</strong>:
+                                20영업일
+                            </li>
+                            <li>양수(+)면 벤치마크(QQQ) 대비 초과 수익, 음수(-)면 저조한 성과를 의미합니다.</li>
+                        </ul>
+                    </li>
+                    <li><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치)</li>
+                    <li><strong>WRS (Weighted Relative Strength):</strong> 섹터/산업 내 종목들의 시가총액 가중 평균 RS (섹터/산업의 주도력)</li>
+                    <li><strong>WRS_MD:</strong> 섹터/산업 내 종목들의 RS(6mo) 중앙값 (Median)</li>
+                    <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)
+                    </li>
+                    <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
+                        Count))×20%</li>
+                    <li><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo)의 10거래일 전 대비 변화율</li>
+                    <li><strong>RS_DiF / WRS_Dif:</strong> (1개월 RS) - (3개월 RS) - (6개월 RS) (단기 모멘텀이 장기보다 강한지 확인)</li>
+                    <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
+                    <li><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선의 괴리율 (단기 이격도)</li>
+                    <li><strong>정배열:</strong> 최근 10, 20, 60, 120 영업일 종가 이동평균선이 정배열(10&gt;20&gt;60&gt;120) 상태인지 여부
+                        (YES/NO)</li>
 
-                <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
-                    장기 주도주가 될 가능성이 매우 높음)</li>
-                <li><strong>Up/Down #:</strong> 최근 30일간 EPS 추정치를 상향(Up)/하향(Down) 조정한 애널리스트 수</li>
-                <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
-                <li><strong>Today's List 기준:</strong>
-                    <ul>
-                        <li><strong>섹터/산업:</strong> Total Count 2개 이상, Win-rate 60% 이상, Final WRS(종합 점수) 상위 30%</li>
-                        <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>50DIV > 0</strong></li>
-                    </ul>
-                </li>
-                <li><strong>Today's Main 기준:</strong>
-                    <ul>
-                        <li><strong>Today's List</strong> 조건을 만족하는 종목 중</li>
-                        <li><strong>CY Trend & NY Trend</strong> 모두 5% 이상</li>
-                        <li><strong>50DIV</strong> 55% 이하</li>
-                    </ul>
-                </li>
-                <li><strong>급등/반등가능성↑종목:</strong> RS_DiF > 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)</li>
-                <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif > 0 인 섹터 (Win-rate 순 정렬)</li>
-
-            </ul>
-        </div>
-
-        <!-- ... -->
-
-        <!-- Loading Message -->
-        <div id="loading-msg" style="text-align: center; padding: 50px; font-size: 18px; color: var(--primary-color);">
-            ⏳ 데이터 불러오는 중...
-        </div>
-
-        <div id="result-area">
-            <div class="btn-group">
-                <span id="result-count" style="font-size:14px; color:#aaa;"></span>
-
-                <div style="display:flex; gap:10px; align-items:center;">
-                    <input type="text" id="search-input" placeholder="Search..."
-                        style="padding:10px; border-radius:4px; border:1px solid #333; background:#222; color:#fff;">
-
-                    <button id="indiv-btn" onclick="showIndividualRS()" class="download-btn"
-                        style="background-color:#2196f3; color:#ffffff;">
-                        Individual RS
-                    </button>
-
-
-
-                    <button id="wrs-btn" onclick="showWRS()" class="download-btn"
-                        style="background-color:#00e676; color:#000;">
-                        Sector/Industry WRS
-                    </button>
-
-                    <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
-                        style="background-color:#ff9800; color:#000;">
-                        Today's List
-                    </button>
-
-                    <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
-                        style="background-color:#e91e63; color:#ffffff;">
-                        Today's Main
-                    </button>
-
-                    <!-- Rising Links (Text style buttons) -->
-                    <a href="#" onclick="showRisingStocks(); return false;"
-                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
-                        ⚡급등/반등가능성↑종목
-                    </a>
-                    <a href="#" onclick="showRisingSectors(); return false;"
-                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
-                        ⚡급등/반등가능성↑섹터
-                    </a>
-
-
-
-                    <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
-                </div>
+                    <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일
+                        경우
+                        장기 주도주가 될 가능성이 매우 높음)</li>
+                    <li><strong>Up/Down #:</strong> 최근 30일간 EPS 추정치를 상향(Up)/하향(Down) 조정한 애널리스트 수</li>
+                    <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
+                    <li><strong>Today's List 기준:</strong>
+                        <ul>
+                            <li><strong>섹터/산업:</strong> Total Count 2개 이상, Win-rate 60% 이상, Final WRS(종합 점수) 상위 30%</li>
+                            <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>50DIV &gt; 0</strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>Today's Main 기준:</strong>
+                        <ul>
+                            <li><strong>Today's List</strong> 조건을 만족하는 종목 중</li>
+                            <li><strong>CY Trend & NY Trend</strong> 모두 5% 이상</li>
+                            <li><strong>50DIV</strong> 55% 이하 (과열 방지)</li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th onclick="sortTable('Ticker')">Ticker ⬍</th>
-                        <th onclick="sortTable('Sector')">Sector ⬍</th>
-                        <th onclick="sortTable('Industry')">Industry ⬍</th>
-                        <th onclick="sortTable('Price')">Price ($) ⬍</th>
-                        <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
-                        <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
-
-                        <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
-                        <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
-                        <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body"></tbody>
-            </table>
         </div>
+        <li><strong>50DIV</strong> 55% 이하</li>
+        </ul>
+        </li>
+        <li><strong>급등/반등가능성↑종목:</strong> RS_DiF > 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)</li>
+        <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif > 0 인 섹터 (Win-rate 순 정렬)</li>
+
+        </ul>
+    </div>
+
+    <!-- ... -->
+
+    <!-- Loading Message -->
+    <div id="loading-msg" style="text-align: center; padding: 50px; font-size: 18px; color: var(--primary-color);">
+        ⏳ 데이터 불러오는 중...
+    </div>
+
+    <div id="result-area">
+        <div class="btn-group">
+            <span id="result-count" style="font-size:14px; color:#aaa;"></span>
+
+            <div style="display:flex; gap:10px; align-items:center;">
+                <input type="text" id="search-input" placeholder="Search..."
+                    style="padding:10px; border-radius:4px; border:1px solid #333; background:#222; color:#fff;">
+
+                <button id="indiv-btn" onclick="showIndividualRS()" class="download-btn"
+                    style="background-color:#2196f3; color:#ffffff;">
+                    Individual RS
+                </button>
+
+
+
+                <button id="wrs-btn" onclick="showWRS()" class="download-btn"
+                    style="background-color:#00e676; color:#000;">
+                    Sector/Industry WRS
+                </button>
+
+                <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
+                    style="background-color:#ff9800; color:#000;">
+                    Today's List
+                </button>
+
+                <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
+                    style="background-color:#e91e63; color:#ffffff;">
+                    Today's Main
+                </button>
+
+                <!-- Rising Links (Text style buttons) -->
+                <a href="#" onclick="showRisingStocks(); return false;"
+                    style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                    ⚡급등/반등가능성↑종목
+                </a>
+                <a href="#" onclick="showRisingSectors(); return false;"
+                    style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
+                    ⚡급등/반등가능성↑섹터
+                </a>
+
+
+
+                <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortTable('Ticker')">Ticker ⬍</th>
+                    <th onclick="sortTable('Sector')">Sector ⬍</th>
+                    <th onclick="sortTable('Industry')">Industry ⬍</th>
+                    <th onclick="sortTable('Price')">Price ($) ⬍</th>
+                    <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
+                    <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
+
+                    <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
+                    <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
+                    <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
     </div>
 
     <footer>
@@ -1829,6 +1848,19 @@
             // Filename with date
             const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
             XLSX.writeFile(wb, `RS_Investment_${sheetName}_${dateStr}.xlsx`);
+        }
+
+        // Description Toggle
+        function toggleDescription() {
+            const content = document.getElementById('description-content');
+            const arrow = document.getElementById('desc-arrow');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.textContent = '▲';
+            } else {
+                content.style.display = 'none';
+                arrow.textContent = '▼';
+            }
         }
 
     </script>
