@@ -331,6 +331,8 @@
                 <li><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo)의 10거래일 전 대비 변화율</li>
                 <li><strong>RS_DiF / WRS_Dif:</strong> (1개월 RS) - (3개월 RS) - (6개월 RS) (단기 모멘텀이 장기보다 강한지 확인)</li>
                 <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
+                <li><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선의 괴리율 (단기 이격도)</li>
+                <li><strong>정배열:</strong> 최근 10, 20, 60, 120 영업일 종가 이동평균선이 정배열(10>20>60>120) 상태인지 여부 (YES/NO)</li>
 
                 <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일 경우
                     장기 주도주가 될 가능성이 매우 높음)</li>
@@ -1675,6 +1677,8 @@
                     <th onclick="sortTable('Up_Count')">Up # ⬍</th>
                     <th onclick="sortTable('Down_Count')">Down # ⬍</th>
                     <th onclick="sortTable('Up_Down_Ratio')">Up/(Up+Down) ⬍</th>
+                    <th onclick="sortTable('Jeongbaeyeol')">정배열 ⬍</th>
+                    <th onclick="sortTable('10DIV')">10DIV (%) ⬍</th>
                 `;
 
                 data.forEach(item => {
@@ -1708,6 +1712,16 @@
                     const downCount = isValidNumber(item.Down_Count) ? item.Down_Count : '-';
                     const upDownRatio = isValidNumber(item.Up_Down_Ratio) ? item.Up_Down_Ratio : '-';
 
+                    // [Added] Jeongbaeyeol Color Logic
+                    const jb = item['Jeongbaeyeol'] || 'NO';
+                    const jbColor = (jb === 'YES') ? 'rs-pos' : '';
+
+                    // [Added] 10DIV Logic
+                    // User wanted it like 50DIV
+                    const div10 = item['10DIV'];
+                    const div10Str = isValidNumber(div10) ? div10 + '%' : '-';
+
+
                     tr.innerHTML = `
                         <td style="font-weight:bold;">
                             <a href="https://finance.yahoo.com/quote/${item.Ticker}" target="_blank" style="color:#fff; text-decoration:none">
@@ -1733,6 +1747,8 @@
                         <td>${upCount}</td>
                         <td>${downCount}</td>
                         <td>${upDownRatio}</td>
+                        <td class="${jbColor}">${jb}</td>
+                        <td>${div10Str}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -1797,7 +1813,9 @@
                     'NY Trend': item.NY_Trend,
                     'Up Count': item.Up_Count,
                     'Down Count': item.Down_Count,
-                    'Up/Down Ratio': item.Up_Down_Ratio
+                    'Up/Down Ratio': item.Up_Down_Ratio,
+                    'Jeongbaeyeol': item.Jeongbaeyeol,
+                    '10DIV': item['10DIV']
                 }));
             }
 

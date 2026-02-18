@@ -189,7 +189,7 @@ def get_tickers_from_excel(file_path):
         print(f"엑셀 로드 에러: {e}")
         return []
 
-def get_market_cap_and_rs(ticker_info_list, batch_size=10):
+def get_market_cap_and_rs(ticker_info_list, batch_size=20):
     """
     티커 리스트를 받아 Market Cap과 RS를 계산합니다.
     20개씩 배치로 처리하여 yfinance 부하를 조절합니다.
@@ -236,7 +236,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=10):
             print(f"Batch 처리 중 에러: {e}")
             
         # 딜레이 (옵션)
-        time.sleep(10)
+        time.sleep(5)
     
     # --- Retry Logic (재시도) ---
     # 1. 실패하거나 RS가 NaN인 티커 식별
@@ -384,6 +384,21 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         
         is_order = (latest_price > ma50) and (ma50 > ma150) and (ma150 > ma200)
         order_val = "YES" if is_order else "NO"
+
+        # [Added] New Order Logic (Jeongbaeyeol) & 10DIV
+        # MA10 > MA20 > MA60 > MA120
+        ma10 = closes.rolling(window=10).mean().iloc[-1] if len(closes) >= 10 else 0
+        ma20 = closes.rolling(window=20).mean().iloc[-1] if len(closes) >= 20 else 0
+        ma60 = closes.rolling(window=60).mean().iloc[-1] if len(closes) >= 60 else 0
+        ma120 = closes.rolling(window=120).mean().iloc[-1] if len(closes) >= 120 else 0
+        
+        is_jeongbaeyeol = (ma10 > ma20) and (ma20 > ma60) and (ma60 > ma120)
+        jeongbaeyeol_val = "YES" if is_jeongbaeyeol else "NO"
+
+        # 10DIV (%): ((Close - MA10) / MA10) * 100
+        div_10 = None
+        if ma10 != 0:
+            div_10 = round(((latest_price - ma10) / ma10) * 100, 2)
         
         # 메타데이터 (Market Cap, Sector, Industry)
         # For Metadata, loop up using sanitied ticker
@@ -608,7 +623,10 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'NY_Current': ny_est,
             'NY_30Ago': ny_30,
             # [Added] Target Status
-            'Target_Status': target_status
+            'Target_Status': target_status,
+            # [Added] New Columns
+            'Jeongbaeyeol': jeongbaeyeol_val,
+            '10DIV': div_10
         }
 
     except Exception as e:
