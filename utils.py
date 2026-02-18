@@ -399,6 +399,46 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         div_10 = None
         if ma10 != 0:
             div_10 = round(((latest_price - ma10) / ma10) * 100, 2)
+
+        # [Added] Bollinger Band Width (BBWTHD) & BBWTHD LOW (60-day Min)
+        # MB = 20SMA
+        # UB = MB + 2*sigma
+        # LB = MB - 2*sigma
+        # Bandwidth = (UB - LB) / MB
+        
+        bbwthd = None
+        bbwthd_low = None
+        
+        # Need enough data for 20-day MA/StdDev. 
+        # For 60-day low of BBW, we ideally need 20 + 59 more days prior. 
+        # We fetch 1y data so should be fine.
+        if len(closes) >= 20:
+            mb = closes.rolling(window=20).mean()
+            sigma = closes.rolling(window=20).std()
+            
+            # Calculate Bandwidth Series
+            # Avoid division by zero
+            bandwidth = (4 * sigma) / mb  # ( (MB+2s) - (MB-2s) ) / MB = 4s / MB
+            
+            # Current BBWTHD
+            current_bw = bandwidth.iloc[-1]
+            if pd.notna(current_bw):
+                bbwthd = round(current_bw, 2)
+            
+            # BBWTHD LOW (Last 60 days)
+            # Slice last 60 valid entries if possible
+            if len(bandwidth) >= 60:
+                recent_bw = bandwidth.iloc[-60:]
+                min_bw = recent_bw.min()
+                if pd.notna(min_bw):
+                    bbwthd_low = round(min_bw, 2)
+            else:
+                # If we have < 60 days of bandwidth data, take min of what we have
+                # (After initial 20 days NaN)
+                valid_bw = bandwidth.dropna()
+                if not valid_bw.empty:
+                    min_bw = valid_bw.min()
+                    bbwthd_low = round(min_bw, 2)
         
         # 메타데이터 (Market Cap, Sector, Industry)
         # For Metadata, loop up using sanitied ticker
@@ -626,7 +666,10 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'Target_Status': target_status,
             # [Added] New Columns
             'Jeongbaeyeol': jeongbaeyeol_val,
-            '10DIV': div_10
+            '10DIV': div_10,
+            # [Added] Bollinger Band Width
+            'BBWTHD': bbwthd,
+            'BBWTHD_LOW': bbwthd_low
         }
 
     except Exception as e:

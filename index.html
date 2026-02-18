@@ -367,6 +367,8 @@
                     <li><strong>급등/반등가능성↑종목:</strong> RS_DiF &gt; 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)
                     </li>
                     <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif &gt; 0 인 섹터 (Win-rate 순 정렬)</li>
+                    <li><strong>BBWTHD:</strong> 볼린저 밴드 너비(Bandwidth). (상단밴드 - 하단밴드) / 중심선(20일SMA)</li>
+                    <li><strong>BBWTHD LOW:</strong> 해당 종목의 최근 60영업일 간 BBWTHD 최저값</li>
                 </ul>
             </div>
         </div>
@@ -1695,6 +1697,8 @@
                     <th onclick="sortTable('Up_Down_Ratio')">Up/(Up+Down) ⬍</th>
                     <th onclick="sortTable('Jeongbaeyeol')">정배열 ⬍</th>
                     <th onclick="sortTable('10DIV')">10DIV (%) ⬍</th>
+                    <th onclick="sortTable('BBWTHD')">BBWTHD ⬍</th>
+                    <th onclick="sortTable('BBWTHD_LOW')">BBWTHD LOW ⬍</th>
                 `;
 
                 data.forEach(item => {
@@ -1765,6 +1769,8 @@
                         <td>${upDownRatio}</td>
                         <td class="${jbColor}">${jb}</td>
                         <td>${div10Str}</td>
+                        <td>${isValidNumber(item.BBWTHD) ? item.BBWTHD.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.BBWTHD_LOW) ? item.BBWTHD_LOW.toFixed(2) : '-'}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -1831,7 +1837,9 @@
                     'Down Count': item.Down_Count,
                     'Up/Down Ratio': item.Up_Down_Ratio,
                     'Jeongbaeyeol': item.Jeongbaeyeol,
-                    '10DIV': item['10DIV']
+                    '10DIV': item['10DIV'],
+                    'BBWTHD': item.BBWTHD,
+                    'BBWTHD_LOW': item.BBWTHD_LOW
                 }));
             }
 
