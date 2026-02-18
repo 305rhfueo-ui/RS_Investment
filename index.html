@@ -422,7 +422,11 @@
                         ⚡급등/반등가능성↑섹터
                     </a>
 
-
+                    <!-- [Added] Energy Filter Button -->
+                    <a href="#" id="energy-filter-btn" onclick="toggleEnergyFilter(); return false;"
+                        style="color: #FFD700; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        ⚡에너지응축하는놈
+                    </a>
 
                     <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
                 </div>
@@ -687,7 +691,8 @@
             drillDownKey: null, // "Sector|Industry"
             sort: { key: 'RS_6mo', asc: false }, // Default Sort: RS(6mo) Descending
             filterRS_DiF: 'ALL', // 'ALL' | 'POS' | 'NEG'
-            filterWRS_Dif: 'ALL' // 'ALL' | 'POS' | 'NEG'
+            filterWRS_Dif: 'ALL', // 'ALL' | 'POS' | 'NEG'
+            energyFilter: false // [Added] Energy Condensing Filter State
         };
 
         // 페이지 로드 시 자동 실행
@@ -1059,60 +1064,67 @@
             const wrsBtn = document.getElementById('wrs-btn');
             const indivBtn = document.getElementById('indiv-btn');
             const resultCount = document.getElementById('result-count');
+            const energyBtn = document.getElementById('energy-filter-btn'); // [Added]
 
-            if (!subtitle || !wrsBtn || !indivBtn) {
-                console.error("Missing UI elements");
-                return;
+            if (!subtitle || !wrsBtn) {
+                console.error("Missing UI elements: subtitle or wrsBtn");
+                // indivBtn might be null if not used, but let's be safe. 
+                // actually indivBtn is not used in this function below except for logic check
+                // return; 
             }
 
             // 1. Update Subtitle & Button States
+            let subtitleText = "";
             if (appState.mode === 'INDIVIDUAL') {
-                subtitle.innerText = "Individual RS";
+                subtitleText = "Individual RS";
                 subtitle.style.color = "#2196f3"; // Blue
-
-                // Active/Inactive Styling (Optional)
-                indivBtn.style.opacity = '1';
-                wrsBtn.innerText = "Sector/Industry WRS"; // Reset text (Fixed: removed .style)
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
             } else if (appState.mode === 'WRS') {
-                subtitle.innerText = "Sector/Industry WRS";
+                subtitleText = "Sector/Industry WRS";
                 subtitle.style.color = "#ff5252"; // Red
-
-                wrsBtn.innerText = "Sector/Industry WRS";
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
             } else if (appState.mode === 'DRILLDOWN') {
-                subtitle.innerText = "Sector Detail View";
+                subtitleText = "Sector Detail View";
                 subtitle.style.color = "#00e676";
-
-                // Change WRS button to Back button
-                wrsBtn.innerText = "Back to WRS List";
+                if (wrsBtn) wrsBtn.innerText = "Back to WRS List";
 
             } else if (appState.mode === 'TODAYS_LIST') {
-                subtitle.innerText = "Today's List";
+                subtitleText = "Today's List";
                 subtitle.style.color = "#ff9800"; // Orange
-
-                wrsBtn.innerText = "Sector/Industry WRS"; // Reset
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
             } else if (appState.mode === 'TODAYS_MAIN') {
-                subtitle.innerText = "Today's Main";
+                subtitleText = "Today's Main";
                 subtitle.style.color = "#e91e63"; // Pink
-
-                wrsBtn.innerText = "Sector/Industry WRS"; // Reset
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
             } else if (appState.mode === 'TODAYS_TOP') {
-                subtitle.innerText = "Today's Top (Best of Best)";
+                subtitleText = "Today's Top (Best of Best)";
                 subtitle.style.color = "#00bcd4"; // Cyan
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
-                wrsBtn.innerText = "Sector/Industry WRS"; // Reset
             } else if (appState.mode === 'RISING_STOCKS') {
-                subtitle.innerText = "Rising/Rebound Stocks (RS_DiF > 0, CY/NY > 0)";
+                subtitleText = "Rising/Rebound Stocks (RS_DiF > 0, CY/NY > 0)";
                 subtitle.style.color = "#ffca28";
-                wrsBtn.innerText = "Sector/Industry WRS";
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
+
             } else if (appState.mode === 'RISING_SECTORS') {
-                subtitle.innerText = "Rising/Rebound Sectors (WRS_Dif > 0)";
+                subtitleText = "Rising/Rebound Sectors (WRS_Dif > 0)";
                 subtitle.style.color = "#ffca28";
-                wrsBtn.innerText = "Sector/Industry WRS";
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
             }
+
+            // [Added] Energy Filter UI Update
+            if (appState.energyFilter) {
+                if (energyBtn) energyBtn.innerText = "🔄 다시모든놈보여줘";
+                subtitleText += " (⚡에너지응축)";
+            } else {
+                if (energyBtn) energyBtn.innerText = "⚡에너지응축하는놈";
+            }
+
+            subtitle.innerText = subtitleText;
 
             // 2. Render Data
             const data = getFilteredAndSortedData();
@@ -1193,12 +1205,17 @@
             appState.mode = 'RISING_SECTORS';
             // Sort by Win_Rate Desc
             appState.sort = { key: 'Win_Rate', asc: false };
-
             // Ensure WRS calculated
             if (groupedData.length === 0) calculateWRS();
 
             appState.filterWRS_Dif = 'ALL';
             document.getElementById('search-input').value = '';
+            updateUI();
+        }
+
+        // [Added] Toggle Energy Filter
+        function toggleEnergyFilter() {
+            appState.energyFilter = !appState.energyFilter;
             updateUI();
         }
 
@@ -1407,6 +1424,34 @@
                 targetData = [...globalData];
             } else if (appState.mode === 'TODAYS_TOP') { // Added TODAYS_TOP logic source
                 targetData = [...globalData];
+            }
+
+
+            // 2. [Added] Apply Energy Condensing Filter (Prioritize this over mode specific? No, combine with mode)
+            // It acts as an additional filter on the currently selected data source.
+            if (appState.energyFilter) {
+                targetData = targetData.filter(item => {
+                    // 1. Jeongbaeyeol: YES
+                    if (item.Jeongbaeyeol !== "YES") return false;
+
+                    // 2. 10DIV: within ±4%
+                    const div10 = parseFloat(item['10DIV']);
+                    if (isNaN(div10) || Math.abs(div10) > 4) return false;
+
+                    // 3. BBWTHD < 0.15 OR BBWTHD <= BBWTHD_LOW
+                    // Note: If BBWTHD_LOW includes today, BBWTHD <= BBWTHD_LOW means it matches the low.
+                    const bbw = parseFloat(item.BBWTHD);
+                    const bbwLow = parseFloat(item.BBWTHD_LOW);
+
+                    if (isNaN(bbw)) return false;
+
+                    let cond1 = bbw < 0.15;
+                    let cond2 = (!isNaN(bbwLow) && bbw <= bbwLow);
+
+                    if (!cond1 && !cond2) return false;
+
+                    return true;
+                });
             }
 
 
