@@ -385,14 +385,14 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         is_order = (latest_price > ma50) and (ma50 > ma150) and (ma150 > ma200)
         order_val = "YES" if is_order else "NO"
 
-        # [Added] New Order Logic (Jeongbaeyeol) & 10DIV
-        # MA10 > MA20 > MA60 > MA120
+        # [Added] New Order Logic (Jungjanggi Jeongbaeyeol) & 10DIV
+        # MA20 > MA60 > MA120 (Modified from MA10>MA20>MA60>MA120)
         ma10 = closes.rolling(window=10).mean().iloc[-1] if len(closes) >= 10 else 0
         ma20 = closes.rolling(window=20).mean().iloc[-1] if len(closes) >= 20 else 0
         ma60 = closes.rolling(window=60).mean().iloc[-1] if len(closes) >= 60 else 0
         ma120 = closes.rolling(window=120).mean().iloc[-1] if len(closes) >= 120 else 0
         
-        is_jeongbaeyeol = (ma10 > ma20) and (ma20 > ma60) and (ma60 > ma120)
+        is_jeongbaeyeol = (ma20 > ma60) and (ma60 > ma120)
         jeongbaeyeol_val = "YES" if is_jeongbaeyeol else "NO"
 
         # 10DIV (%): ((Close - MA10) / MA10) * 100
@@ -665,7 +665,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             # [Added] Target Status
             'Target_Status': target_status,
             # [Added] New Columns
-            'Jeongbaeyeol': jeongbaeyeol_val,
+            'Jungjanggi Jeongbaeyeol': jeongbaeyeol_val,
             '10DIV': div_10,
             # [Added] Bollinger Band Width
             'BBWTHD': bbwthd,

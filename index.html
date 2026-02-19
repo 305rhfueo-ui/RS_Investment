@@ -343,8 +343,7 @@
                     <li><strong>RS_DiF / WRS_Dif:</strong> (1개월 RS) - (3개월 RS) - (6개월 RS) (단기 모멘텀이 장기보다 강한지 확인)</li>
                     <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
                     <li><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선의 괴리율 (단기 이격도)</li>
-                    <li><strong>정배열:</strong> 최근 10, 20, 60, 120 영업일 종가 이동평균선이 정배열(10&gt;20&gt;60&gt;120) 상태인지 여부
-                        (YES/NO)</li>
+                    <li><strong>중장기정배열:</strong> 최근 20, 60, 120 영업일 종가 이동평균선이 정배열(20&gt;60&gt;120) 상태인지 여부 (YES/NO)</li>
 
                     <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일
                         경우
@@ -1305,6 +1304,9 @@
                 };
             });
 
+            // [Modified] Exclude groups with Count <= 1
+            groupedData = groupedData.filter(g => g.Count > 1);
+
             // [Added] Calculate WRS Ranks (Percentile)
             const calculateRank = (arr, key, rankKey) => {
                 const sorted = [...arr].sort((a, b) => b[key] - a[key]);
@@ -1431,8 +1433,8 @@
             // It acts as an additional filter on the currently selected data source.
             if (appState.energyFilter) {
                 targetData = targetData.filter(item => {
-                    // 1. Jeongbaeyeol: YES
-                    if (item.Jeongbaeyeol !== "YES") return false;
+                    // 1. Jungjanggi Jeongbaeyeol: YES
+                    if (item['Jungjanggi Jeongbaeyeol'] !== "YES") return false;
 
                     // 2. 10DIV: within ±4%
                     const div10 = parseFloat(item['10DIV']);
@@ -1740,7 +1742,7 @@
                     <th onclick="sortTable('Up_Count')">Up # ⬍</th>
                     <th onclick="sortTable('Down_Count')">Down # ⬍</th>
                     <th onclick="sortTable('Up_Down_Ratio')">Up/(Up+Down) ⬍</th>
-                    <th onclick="sortTable('Jeongbaeyeol')">정배열 ⬍</th>
+                    <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">중장기정배열 ⬍</th>
                     <th onclick="sortTable('10DIV')">10DIV (%) ⬍</th>
                     <th onclick="sortTable('BBWTHD')">BBWTHD ⬍</th>
                     <th onclick="sortTable('BBWTHD_LOW')">BBWTHD LOW ⬍</th>
@@ -1778,41 +1780,7 @@
                     const upDownRatio = isValidNumber(item.Up_Down_Ratio) ? item.Up_Down_Ratio : '-';
 
                     // [Added] Jeongbaeyeol Color Logic
-                    const jb = item['Jeongbaeyeol'] || 'NO';
-                    const jbColor = (jb === 'YES') ? 'rs-pos' : '';
-
-                    // [Added] 10DIV Logic
-                    // User wanted it like 50DIV
-                    const div10 = item['10DIV'];
-                    const div10Str = isValidNumber(div10) ? div10 + '%' : '-';
-
-
-                    tr.innerHTML = `
-                        <td style="font-weight:bold;">
-                            <a href="https://finance.yahoo.com/quote/${item.Ticker}" target="_blank" style="color:#fff; text-decoration:none">
-                                ${item.Ticker}
-                            </a>
-                        </td>
-                        <td>${item.Sector}</td>
-                        <td>${item.Industry}</td>
-                        <td>${priceStr}</td>
-                        <td>${mcStr}</td>
-                        <td>${item.MarketCapRank || '-'}</td>
-                        <td class="${rs6Class}">${isValidNumber(rs6) ? rs6.toFixed(2) : '-'}</td>
-                        <td>${isValidNumber(item.RS_Rank_Pct) ? item.RS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
-                        <td style="${getChgColor(item.RS_6mo_10D_Chg)}">
-                            ${isValidNumber(item.RS_6mo_10D_Chg) ? item.RS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
-                        </td>
-                        <td class="${rs3Class}">${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
-                        <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
-                        <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
-                        <td>${item['50DIV']}%</td>
-                        <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : '-'}</td>
-                        <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : '-'}</td>
-                        <td>${upCount}</td>
-                        <td>${downCount}</td>
-                        <td>${upDownRatio}</td>
-                        <td class="${jbColor}">${jb}</td>
+                        <td class="${jbColor}">${item['Jungjanggi Jeongbaeyeol'] || 'NO'}</td>
                         <td>${div10Str}</td>
                         <td>${isValidNumber(item.BBWTHD) ? item.BBWTHD.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.BBWTHD_LOW) ? item.BBWTHD_LOW.toFixed(2) : '-'}</td>
@@ -1881,7 +1849,7 @@
                     'Up Count': item.Up_Count,
                     'Down Count': item.Down_Count,
                     'Up/Down Ratio': item.Up_Down_Ratio,
-                    'Jeongbaeyeol': item.Jeongbaeyeol,
+                    'Jungjanggi Jeongbaeyeol': item['Jungjanggi Jeongbaeyeol'],
                     '10DIV': item['10DIV'],
                     'BBWTHD': item.BBWTHD,
                     'BBWTHD_LOW': item.BBWTHD_LOW
@@ -1897,7 +1865,7 @@
 
             // Filename with date
             const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-            XLSX.writeFile(wb, `RS_Investment_${sheetName}_${dateStr}.xlsx`);
+            XLSX.writeFile(wb, `RS_Investment_${ sheetName }_${ dateStr }.xlsx`);
         }
 
         // Description Toggle
