@@ -1780,7 +1780,39 @@
                     const upDownRatio = isValidNumber(item.Up_Down_Ratio) ? item.Up_Down_Ratio : '-';
 
                     // [Added] Jeongbaeyeol Color Logic
-                        <td class="${jbColor}">${item['Jungjanggi Jeongbaeyeol'] || 'NO'}</td>
+                    const jb = item['Jungjanggi Jeongbaeyeol'] || 'NO';
+                    const jbColor = (jb === 'YES') ? 'rs-pos' : '';
+
+                    // [Added] 10DIV Logic
+                    const div10 = item['10DIV'];
+                    const div10Str = isValidNumber(div10) ? div10 + '%' : '-';
+
+                    tr.innerHTML = `
+                        <td style="font-weight:bold;">
+                            <a href="https://finance.yahoo.com/quote/${item.Ticker}" target="_blank" style="color:#fff; text-decoration:none">
+                                ${item.Ticker}
+                            </a>
+                        </td>
+                        <td>${item.Sector}</td>
+                        <td>${item.Industry}</td>
+                        <td>${priceStr}</td>
+                        <td>${mcStr}</td>
+                        <td>${item.MarketCapRank || '-'}</td>
+                        <td class="${rs6Class}">${isValidNumber(rs6) ? rs6.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.RS_Rank_Pct) ? item.RS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
+                        <td style="${getChgColor(item.RS_6mo_10D_Chg)}">
+                            ${isValidNumber(item.RS_6mo_10D_Chg) ? item.RS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
+                        </td>
+                        <td class="${rs3Class}">${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
+                        <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
+                        <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
+                        <td>${item['50DIV']}%</td>
+                        <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : '-'}</td>
+                        <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : '-'}</td>
+                        <td>${upCount}</td>
+                        <td>${downCount}</td>
+                        <td>${upDownRatio}</td>
+                        <td class="${jbColor}">${jb}</td>
                         <td>${div10Str}</td>
                         <td>${isValidNumber(item.BBWTHD) ? item.BBWTHD.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.BBWTHD_LOW) ? item.BBWTHD_LOW.toFixed(2) : '-'}</td>
@@ -1865,7 +1897,7 @@
 
             // Filename with date
             const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-            XLSX.writeFile(wb, `RS_Investment_${ sheetName }_${ dateStr }.xlsx`);
+            XLSX.writeFile(wb, `RS_Investment_${sheetName}_${dateStr}.xlsx`);
         }
 
         // Description Toggle
