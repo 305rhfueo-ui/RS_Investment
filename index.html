@@ -1284,12 +1284,8 @@
                 const winFactor = g.Count > 1 ? (1 - (1 / g.Count)) : 0;
 
                 // 4. Final WRS
-                const fwrsA = parseFloat(a.Final_WRS);
-                const fwrsB = parseFloat(b.Final_WRS);
-                if (!isNaN(fwrsA) && !isNaN(fwrsB) && fwrsA !== fwrsB) {
-                    return Math.sign(fwrsB - fwrsA); // Descending for ranking
-                }
-                const finalWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
+                const baseWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
+                const finalWRS = baseWRS * (g.Count / (g.Count + 5));
 
                 const wrsDif = wrs1mo - wrs3mo - wrs6mo;
 
