@@ -337,8 +337,8 @@
                     <li><strong>WRS_MD:</strong> 섹터/산업 내 종목들의 RS(6mo) 중앙값 (Median)</li>
                     <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)
                     </li>
-                    <li><strong>Final WRS:</strong> 종합 점수 = WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
-                        Count))×20%</li>
+                    <li><strong>Final WRS:</strong> 종합 점수 = (WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
+                        Count))×20%) × (Total count / (Total count + 5))</li>
                     <li><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo)의 10거래일 전 대비 변화율</li>
                     <li><strong>RS_DiF / WRS_Dif:</strong> (1개월 RS) - (3개월 RS) - (6개월 RS) (단기 모멘텀이 장기보다 강한지 확인)</li>
                     <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
@@ -352,7 +352,7 @@
                     <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
                     <li><strong>Today's List 기준:</strong>
                         <ul>
-                            <li><strong>섹터/산업:</strong> Total Count 2개 이상, Win-rate 60% 이상, Final WRS(종합 점수) 상위 30%</li>
+                            <li><strong>섹터/산업:</strong> Total Count 2개 이상, Win-rate 60% 이상, Final WRS(종합 점수) 상위 20%</li>
                             <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>50DIV &gt; 0</strong></li>
                         </ul>
                     </li>
@@ -1284,6 +1284,11 @@
                 const winFactor = g.Count > 1 ? (1 - (1 / g.Count)) : 0;
 
                 // 4. Final WRS
+                const fwrsA = parseFloat(a.Final_WRS);
+                const fwrsB = parseFloat(b.Final_WRS);
+                if (!isNaN(fwrsA) && !isNaN(fwrsB) && fwrsA !== fwrsB) {
+                    return Math.sign(fwrsB - fwrsA); // Descending for ranking
+                }
                 const finalWRS = (wrs6mo * 0.4) + (median * 0.4) + (winRate * winFactor * 0.2);
 
                 const wrsDif = wrs1mo - wrs3mo - wrs6mo;
@@ -1460,7 +1465,10 @@
             // 2. Apply Mode-Specific Filters
             if (appState.mode === 'TODAYS_LIST') {
                 // [Requirement]
-                // 1. Sector/Industry: Count >= 2, Win-Rate >= 60%, Final WRS Top 30%
+                // 1. Sector/Industry: Count >= 2, Win-Rate >= 60%, Final WRS Top 20%
+                if (g.Count >= 2 && g.Win_Rate >= 0.6 && g.Final_WRS_Rank_Pct <= 0.20) {
+                    groupThresholds[key] = g.Threshold_30_Pct; // We still need Top 30% RS threshold for the stocks in this sector
+                }
                 // 2. Individual: RS(6mo) Top 30% within Sector, 50DIV > 0
 
                 // A. Identify Top Sectors
@@ -1559,7 +1567,7 @@
                     const threshold = groupThresholds[key];
                     const rs6 = parseFloat(stock.RS_6mo) || 0;
 
-                    // 1. Today's List condition
+                    // 1. Today's List condition (Top 30% within Sector, handled by threshold)
                     if (rs6 < threshold) return false;
 
                     // 2. CY & NY Trend

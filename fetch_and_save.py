@@ -199,9 +199,10 @@ def main():
             win_rate = win_count / count if count > 0 else 0
             
             # Final WRS
-            # Formula: WRS(6MO)*0.4 + WRS_MD(6MO)*0.4 + Win-rate*(1-(1/total count))*0.2
+            # Formula: (WRS(6MO)*0.4 + WRS_MD(6MO)*0.4 + Win-rate*(1-(1/total count))*0.2) * (count / (count + 5))
             win_factor = (1 - (1/count)) if count > 1 else 0
-            final_wrs = (wrs_6mo * 0.4) + (median_rs * 0.4) + (win_rate * win_factor * 0.2)
+            base_wrs = (wrs_6mo * 0.4) + (median_rs * 0.4) + (win_rate * win_factor * 0.2)
+            final_wrs = base_wrs * (count / (count + 5))
             
             wrs_data.append({
                 'Sector': sector,
