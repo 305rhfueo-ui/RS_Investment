@@ -892,13 +892,6 @@
 
                 const histData10 = await getHistData(targetHistory10.filename);
                 const histData25 = has25D ? await getHistData(targetHistory25.filename) : null;
-                // [Fix] Handle NaN in JSON
-                const rawText = await histRes.text();
-                // Replace constants like NaN with null (or 0) because JSON.parse fails on them
-                const sanitizedText = rawText.replace(/:\s*NaN/g, ': null');
-                const histJson = JSON.parse(sanitizedText);
-                const histData = histJson.data; // Raw tickers
-
                 // Update Header with Date
                 const shortDate10 = targetHistory10.date.substring(5); // "MM-DD"
                 const header10 = document.querySelector('th[onclick="sortTable(\'Final_WRS_10D_Chg\')"]');
