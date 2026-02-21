@@ -1702,6 +1702,7 @@
                     <th onclick="sortTable('Count')">Total Count ⬍</th>
                     <th onclick="sortTable('WRS_6mo')">WRS (6mo) ⬍</th>
                     <th onclick="sortTable('Final_WRS_10D_Chg')">10D Chg (%) ⬍</th>
+                    <th onclick="sortTable('Final_WRS_25D_Chg')">25D Chg (%) ⬍</th>
                     <th onclick="sortTable('WRS_Rank_Pct')">WRS Rank (%) ⬍</th>
                     <th onclick="sortTable('WRS_6mo_MD')">WRS_MD (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_MD_Rank_Pct')">WRS_MD Rank (%) ⬍</th>
@@ -1729,6 +1730,9 @@
                         <td>${isValidNumber(item.WRS_6mo) ? item.WRS_6mo.toFixed(2) : '-'}</td>
                         <td style="${getChgColor(item.Final_WRS_10D_Chg)}">
                             ${isValidNumber(item.Final_WRS_10D_Chg) ? item.Final_WRS_10D_Chg.toFixed(1) + '%' : '-'}
+                        </td>
+                        <td style="${getChgColor(item.Final_WRS_25D_Chg)}">
+                            ${isValidNumber(item.Final_WRS_25D_Chg) ? item.Final_WRS_25D_Chg.toFixed(1) + '%' : '-'}
                         </td>
                         <td>${isValidNumber(item.WRS_Rank_Pct) ? item.WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.WRS_MD_6mo) ? item.WRS_MD_6mo.toFixed(2) : '-'}</td>
