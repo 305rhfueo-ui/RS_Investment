@@ -873,16 +873,25 @@
                     return;
                 }
 
-                const targetHistory = dates[10]; // 10 days ago (11th file)
+                const targetHistory10 = dates[10]; // 10 days ago
+                const has25D = dates.length >= 26;
+                const targetHistory25 = has25D ? dates[25] : null;
 
-                if (debugEl) debugEl.innerText = `Loading History: ${targetHistory.date} ...`;
-                console.log("Loading 10-day ago data from:", targetHistory.filename);
+                if (debugEl) debugEl.innerText = `Loading History 10D: ${targetHistory10.date}` + (has25D ? ` | 25D: ${targetHistory25.date}` : '');
+                console.log("Loading 10-day ago data from:", targetHistory10.filename);
+                if (has25D) console.log("Loading 25-day ago data from:", targetHistory25.filename);
 
-                const histRes = await fetch('static/' + targetHistory.filename);
-                if (!histRes.ok) {
-                    if (debugEl) debugEl.innerText = `Hist File Fetch Failed: ${targetHistory.filename}`;
-                    throw new Error("Failed to fetch history file");
-                }
+                const getHistData = async (filename) => {
+                    const res = await fetch('static/' + filename);
+                    if (!res.ok) throw new Error(`Failed to fetch ${filename}`);
+                    const rawText = await res.text();
+                    const sanitizedText = rawText.replace(/:\s*NaN/g, ': null');
+                    const json = JSON.parse(sanitizedText);
+                    return json.data;
+                };
+
+                const histData10 = await getHistData(targetHistory10.filename);
+                const histData25 = has25D ? await getHistData(targetHistory25.filename) : null;
                 // [Fix] Handle NaN in JSON
                 const rawText = await histRes.text();
                 // Replace constants like NaN with null (or 0) because JSON.parse fails on them
@@ -891,14 +900,20 @@
                 const histData = histJson.data; // Raw tickers
 
                 // Update Header with Date
-                const dateStr = targetHistory.date; // "YYYY-MM-DD"
-                const shortDate = dateStr.substring(5); // "MM-DD"
-                const header = document.querySelector('th[onclick="sortTable(\'Final_WRS_10D_Chg\')"]');
-                if (header) header.innerText = `10D Chg (${shortDate}) ⬍`;
+                const shortDate10 = targetHistory10.date.substring(5); // "MM-DD"
+                const header10 = document.querySelector('th[onclick="sortTable(\'Final_WRS_10D_Chg\')"]');
+                if (header10) header10.innerText = `10D Chg (${shortDate10}) ⬍`;
+
+                if (has25D) {
+                    const shortDate25 = targetHistory25.date.substring(5);
+                    const header25 = document.querySelector('th[onclick="sortTable(\'Final_WRS_25D_Chg\')"]');
+                    if (header25) header25.innerText = `25D Chg (${shortDate25}) ⬍`;
+                }
 
                 // 3. Calculate WRS for Historical Data
-                const histWRS = calculateWRSForData(histData);
-                const histKeys = Object.keys(histWRS);
+                const histWRS10 = calculateWRSForData(histData10);
+                const histWRS25 = has25D ? calculateWRSForData(histData25) : {};
+                const histKeys10 = Object.keys(histWRS10);
 
                 let matchCount = 0;
                 let foundCount = 0;
@@ -908,45 +923,56 @@
                 // 4. Merge WRS
                 groupedData.forEach((curr, idx) => {
                     const key = `${curr.Sector}|${curr.Industry}`;
-                    if (idx === 0) firstCurrKey = key;
 
-                    const past = histWRS[key];
-
-                    if (past) {
-                        foundCount++;
-                        if (past.Final_WRS !== 0 && !isNaN(past.Final_WRS)) {
-                            const change = ((curr.Final_WRS - past.Final_WRS) / Math.abs(past.Final_WRS)) * 100;
-                            curr.Final_WRS_10D_Chg = change;
-                            matchCount++;
+                    const past10 = histWRS10[key];
+                    if (past10) {
+                        if (past10.Final_WRS !== 0 && !isNaN(past10.Final_WRS)) {
+                            curr.Final_WRS_10D_Chg = ((curr.Final_WRS - past10.Final_WRS) / Math.abs(past10.Final_WRS)) * 100;
                         } else {
                             curr.Final_WRS_10D_Chg = null;
                         }
                     } else {
                         curr.Final_WRS_10D_Chg = null;
                     }
-                });
 
-                // [Added] 5. Merge Individual RS (Ticker Level)
-                const histTickerMap = {};
-                histData.forEach(item => {
-                    if (item.Ticker) histTickerMap[item.Ticker] = item.RS_6mo;
-                });
-
-                let tickerMatchCount = 0;
-                globalData.forEach(curr => {
-                    const pastRS = histTickerMap[curr.Ticker];
-                    // Check if pastRS is valid number (can be 0, but usually not null/undefined)
-                    if (pastRS !== undefined && pastRS !== null && !isNaN(pastRS) && pastRS !== 0) {
-                        // Change % = (Curr - Past) / |Past| * 100
-                        const change = ((curr.RS_6mo - pastRS) / Math.abs(pastRS)) * 100;
-                        curr.RS_6mo_10D_Chg = change;
-                        tickerMatchCount++;
+                    const past25 = histWRS25[key];
+                    if (past25) {
+                        if (past25.Final_WRS !== 0 && !isNaN(past25.Final_WRS)) {
+                            curr.Final_WRS_25D_Chg = ((curr.Final_WRS - past25.Final_WRS) / Math.abs(past25.Final_WRS)) * 100;
+                        } else {
+                            curr.Final_WRS_25D_Chg = null;
+                        }
                     } else {
-                        curr.RS_6mo_10D_Chg = null;
+                        curr.Final_WRS_25D_Chg = null;
                     }
                 });
 
-                const debugMsg = `Loaded: ${dateStr} | HistItems: ${histData.length} | WRSGroups: ${histKeys.length} | Found: ${foundCount} | Valid: ${matchCount}\nTicker Matches: ${tickerMatchCount}`;
+                // [Added] 5. Merge Individual RS (Ticker Level)
+                const histTickerMap10 = {};
+                histData10.forEach(item => { if (item.Ticker) histTickerMap10[item.Ticker] = item.RS_6mo; });
+
+                const histTickerMap25 = {};
+                if (has25D) {
+                    histData25.forEach(item => { if (item.Ticker) histTickerMap25[item.Ticker] = item.RS_6mo; });
+                }
+
+                globalData.forEach(curr => {
+                    const pastRS10 = histTickerMap10[curr.Ticker];
+                    if (pastRS10 !== undefined && pastRS10 !== null && !isNaN(pastRS10) && pastRS10 !== 0) {
+                        curr.RS_6mo_10D_Chg = ((curr.RS_6mo - pastRS10) / Math.abs(pastRS10)) * 100;
+                    } else {
+                        curr.RS_6mo_10D_Chg = null;
+                    }
+
+                    const pastRS25 = histTickerMap25[curr.Ticker];
+                    if (pastRS25 !== undefined && pastRS25 !== null && !isNaN(pastRS25) && pastRS25 !== 0) {
+                        curr.RS_6mo_25D_Chg = ((curr.RS_6mo - pastRS25) / Math.abs(pastRS25)) * 100;
+                    } else {
+                        curr.RS_6mo_25D_Chg = null;
+                    }
+                });
+
+                const debugMsg = `Hist 10D/25D Loaded`;
                 if (debugEl) debugEl.innerText = debugMsg;
                 console.log(debugMsg);
 
@@ -1733,6 +1759,7 @@
                     <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
                     <th onclick="sortTable('RS_Rank_Pct')">RS Rank (%) ⬍</th>
                     <th onclick="sortTable('RS_6mo_10D_Chg')">10D Chg (%) ⬍</th>
+                    <th onclick="sortTable('RS_6mo_25D_Chg')">25D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('RS_DiF')">
@@ -1806,6 +1833,9 @@
                         <td style="${getChgColor(item.RS_6mo_10D_Chg)}">
                             ${isValidNumber(item.RS_6mo_10D_Chg) ? item.RS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
+                        <td style="${getChgColor(item.RS_6mo_25D_Chg)}">
+                            ${isValidNumber(item.RS_6mo_25D_Chg) ? item.RS_6mo_25D_Chg.toFixed(1) + '%' : '-'}
+                        </td>
                         <td class="${rs3Class}">${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
                         <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
@@ -1858,6 +1888,7 @@
                     'Final WRS': item.Final_WRS.toFixed(4),
                     'WRS(6mo)': item.WRS_6mo.toFixed(4),
                     'WRS(6mo)_10D_Chg%': item.Final_WRS_10D_Chg !== null ? parseFloat(item.Final_WRS_10D_Chg.toFixed(2)) : null,
+                    'WRS(6mo)_25D_Chg%': item.Final_WRS_25D_Chg !== null ? parseFloat(item.Final_WRS_25D_Chg.toFixed(2)) : null,
                     'WRS_MD(6mo)': item.WRS_MD_6mo.toFixed(4),
                     'Win-Rate(%)': item.Win_Rate.toFixed(2),
                     'Total Count': item.Count,
@@ -1874,6 +1905,7 @@
                     'Market Cap': item['Market Cap'],
                     'RS(6mo)': item.RS_6mo,
                     'RS(6mo)_10D_Chg%': item.RS_6mo_10D_Chg !== null ? parseFloat(item.RS_6mo_10D_Chg.toFixed(2)) : null,
+                    'RS(6mo)_25D_Chg%': item.RS_6mo_25D_Chg !== null ? parseFloat(item.RS_6mo_25D_Chg.toFixed(2)) : null,
                     'RS Rank%': item.RS_Rank_Pct,
                     'RS(3mo)': item.RS_3mo,
                     'RS(1mo)': item.RS_1mo,
