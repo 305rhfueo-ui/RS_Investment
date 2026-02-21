@@ -352,7 +352,7 @@
                     <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
                     <li><strong>Today's List 기준:</strong>
                         <ul>
-                            <li><strong>섹터/산업:</strong> Total Count 2개 이상, Win-rate 60% 이상, Final WRS(종합 점수) 상위 20%</li>
+                            <li><strong>섹터/산업:</strong> Final WRS(종합 점수) 상위 20% 이내</li>
                             <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>50DIV &gt; 0</strong></li>
                         </ul>
                     </li>
@@ -1462,16 +1462,14 @@
             if (appState.mode === 'TODAYS_LIST') {
                 // [Requirement]
                 // 1. Sector/Industry: Count >= 2, Win-Rate >= 60%, Final WRS Top 20%
-                if (g.Count >= 2 && g.Win_Rate >= 0.6 && g.Final_WRS_Rank_Pct <= 0.20) {
-                    groupThresholds[key] = g.Threshold_30_Pct; // We still need Top 30% RS threshold for the stocks in this sector
-                }
                 // 2. Individual: RS(6mo) Top 30% within Sector, 50DIV > 0
 
                 // A. Identify Top Sectors
-                const validGroups = groupedData.filter(g => g.Count >= 2 && g.Win_Rate >= 60);
-                // Sort by Final_WRS desc to find top 30%
+                // Sector/Industry Criteria: Final WRS Top 20%
+                const validGroups = [...groupedData];
+                // Sort by Final_WRS desc to find top 20%
                 validGroups.sort((a, b) => b.Final_WRS - a.Final_WRS);
-                const topGroupCutoff = Math.ceil(validGroups.length * 0.3);
+                const topGroupCutoff = Math.ceil(validGroups.length * 0.2);
                 const topGroups = validGroups.slice(0, topGroupCutoff);
                 const topGroupKeys = new Set(topGroups.map(g => `${g.Sector}|${g.Industry}`));
 
@@ -1528,9 +1526,10 @@
                 // Copy-paste logic or abstraction? Abstraction is better but stick to flow.
 
                 // A. Identify Top Sectors (Same as List)
-                const validGroups = groupedData.filter(g => g.Count >= 2 && g.Win_Rate >= 60);
+                // Sector/Industry Criteria: Final WRS Top 20%
+                const validGroups = [...groupedData];
                 validGroups.sort((a, b) => b.Final_WRS - a.Final_WRS);
-                const topGroupCutoff = Math.ceil(validGroups.length * 0.3);
+                const topGroupCutoff = Math.ceil(validGroups.length * 0.2);
                 const topGroups = validGroups.slice(0, topGroupCutoff);
                 const topGroupKeys = new Set(topGroups.map(g => `${g.Sector}|${g.Industry}`));
 
