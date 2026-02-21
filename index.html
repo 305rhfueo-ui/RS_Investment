@@ -874,10 +874,11 @@
                 }
 
                 const targetHistory10 = dates[10]; // 10 days ago
-                const has25D = dates.length >= 26;
-                const targetHistory25 = has25D ? dates[25] : null;
+                const has25D = dates.length > 11; // We can show "Max History" if 25 isn't available
+                // If 26 files exist, use 26th (index 25). Otherwise use the oldest (last item).
+                const targetHistory25 = dates.length >= 26 ? dates[25] : (has25D ? dates[dates.length - 1] : null);
 
-                if (debugEl) debugEl.innerText = `Loading History 10D: ${targetHistory10.date}` + (has25D ? ` | 25D: ${targetHistory25.date}` : '');
+                if (debugEl) debugEl.innerText = `Loading History 10D: ${targetHistory10.date}` + (has25D ? ` | 25D (or Max): ${targetHistory25.date}` : '');
                 console.log("Loading 10-day ago data from:", targetHistory10.filename);
                 if (has25D) console.log("Loading 25-day ago data from:", targetHistory25.filename);
 
