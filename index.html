@@ -691,7 +691,9 @@
             sort: { key: 'RS_6mo', asc: false }, // Default Sort: RS(6mo) Descending
             filterRS_DiF: 'ALL', // 'ALL' | 'POS' | 'NEG'
             filterWRS_Dif: 'ALL', // 'ALL' | 'POS' | 'NEG'
-            energyFilter: false // [Added] Energy Condensing Filter State
+            energyFilter: false, // [Added] Energy Condensing Filter State
+            date10D: '',
+            date25D: ''
         };
 
         // 페이지 로드 시 자동 실행
@@ -893,20 +895,22 @@
 
                 const histData10 = await getHistData(targetHistory10.filename);
                 const histData25 = has25D ? await getHistData(targetHistory25.filename) : null;
-                // Update Header with Date
-                const shortDate10 = targetHistory10.date.substring(5); // "MM-DD"
-                const header10 = document.querySelector('th[onclick="sortTable(\'Final_WRS_10D_Chg\')"]');
-                if (header10) header10.innerText = `10D Chg (${shortDate10}) ⬍`;
-
-                if (has25D) {
-                    const shortDate25 = targetHistory25.date.substring(5);
-                    const header25 = document.querySelector('th[onclick="sortTable(\'Final_WRS_25D_Chg\')"]');
-                    if (header25) header25.innerText = `25D Chg (${shortDate25}) ⬍`;
-                }
+                // Update State with Date for headers
+                appState.date10D = `(${targetHistory10.date.substring(5)})`;
+                appState.date25D = has25D ? `(${targetHistory25.date.substring(5)})` : '';
 
                 // 3. Calculate WRS for Historical Data
                 const histWRS10 = calculateWRSForData(histData10);
                 const histWRS25 = has25D ? calculateWRSForData(histData25) : {};
+
+                // Add FRANK to histWRS25
+                if (has25D) {
+                    const hist25Array = Object.values(histWRS25);
+                    hist25Array.sort((a, b) => b.Final_WRS - a.Final_WRS);
+                    hist25Array.forEach((item, index) => {
+                        item.FRANK = index + 1;
+                    });
+                }
                 const histKeys10 = Object.keys(histWRS10);
 
                 let matchCount = 0;
@@ -920,24 +924,22 @@
 
                     const past10 = histWRS10[key];
                     if (past10) {
-                        if (past10.Final_WRS !== 0 && !isNaN(past10.Final_WRS)) {
-                            curr.Final_WRS_10D_Chg = ((curr.Final_WRS - past10.Final_WRS) / Math.abs(past10.Final_WRS)) * 100;
-                        } else {
-                            curr.Final_WRS_10D_Chg = null;
-                        }
+                        curr.WRS_6mo_10D_Chg = (past10.WRS_6mo !== 0 && !isNaN(past10.WRS_6mo)) ? ((curr.WRS_6mo - past10.WRS_6mo) / Math.abs(past10.WRS_6mo)) * 100 : null;
+                        curr.Final_WRS_10D_Chg = (past10.Final_WRS !== 0 && !isNaN(past10.Final_WRS)) ? ((curr.Final_WRS - past10.Final_WRS) / Math.abs(past10.Final_WRS)) * 100 : null;
                     } else {
+                        curr.WRS_6mo_10D_Chg = null;
                         curr.Final_WRS_10D_Chg = null;
                     }
 
                     const past25 = histWRS25[key];
                     if (past25) {
-                        if (past25.Final_WRS !== 0 && !isNaN(past25.Final_WRS)) {
-                            curr.Final_WRS_25D_Chg = ((curr.Final_WRS - past25.Final_WRS) / Math.abs(past25.Final_WRS)) * 100;
-                        } else {
-                            curr.Final_WRS_25D_Chg = null;
-                        }
+                        curr.WRS_6mo_25D_Chg = (past25.WRS_6mo !== 0 && !isNaN(past25.WRS_6mo)) ? ((curr.WRS_6mo - past25.WRS_6mo) / Math.abs(past25.WRS_6mo)) * 100 : null;
+                        curr.Final_WRS_25D_Chg = (past25.Final_WRS !== 0 && !isNaN(past25.Final_WRS)) ? ((curr.Final_WRS - past25.Final_WRS) / Math.abs(past25.Final_WRS)) * 100 : null;
+                        curr.FRANK_25D_Chg = (past25.FRANK !== undefined && curr.FRANK !== undefined) ? (past25.FRANK - curr.FRANK) : null;
                     } else {
+                        curr.WRS_6mo_25D_Chg = null;
                         curr.Final_WRS_25D_Chg = null;
+                        curr.FRANK_25D_Chg = null;
                     }
                 });
 
@@ -1041,7 +1043,8 @@
 
                 result[`${g.Sector}|${g.Industry}`] = {
                     Final_WRS: finalWRS,
-                    WRS_Dif: wrsDif
+                    WRS_Dif: wrsDif,
+                    WRS_6mo: wrs6mo
                 };
             });
             return result;
@@ -1341,6 +1344,14 @@
             calculateRank(groupedData, 'Final_WRS', 'Final_WRS_Rank_Pct');
             calculateRank(groupedData, 'WRS_6mo', 'WRS_Rank_Pct');
             calculateRank(groupedData, 'WRS_MD_6mo', 'WRS_MD_Rank_Pct');
+
+            const calculateFRANK = (arr, key, rankKey) => {
+                const sorted = [...arr].sort((a, b) => b[key] - a[key]);
+                sorted.forEach((item, index) => {
+                    item[rankKey] = index + 1;
+                });
+            };
+            calculateFRANK(groupedData, 'Final_WRS', 'FRANK');
         }
 
         // --- Helper: Parse Market Cap ---
@@ -1697,12 +1708,16 @@
                 thead.innerHTML = `
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="sortTable('Industry')">Industry ⬍</th>
+                    <th onclick="sortTable('FRANK')">FRANK ⬍</th>
+                    <th onclick="sortTable('FRANK_25D_Chg')">FRANK 25d CHG ${appState.date25D}⬍</th>
                     <th onclick="sortTable('Final_WRS')">Final WRS ⬍</th>
                     <th onclick="sortTable('Final_WRS_Rank_Pct')">Final Rank (%) ⬍</th>
                     <th onclick="sortTable('Count')">Total Count ⬍</th>
+                    <th onclick="sortTable('Final_WRS_10D_Chg')">F10d chg(%) ${appState.date10D}⬍</th>
+                    <th onclick="sortTable('Final_WRS_25D_Chg')">F25d chg(%) ${appState.date25D}⬍</th>
                     <th onclick="sortTable('WRS_6mo')">WRS (6mo) ⬍</th>
-                    <th onclick="sortTable('Final_WRS_10D_Chg')">10D Chg (%) ⬍</th>
-                    <th onclick="sortTable('Final_WRS_25D_Chg')">25D Chg (%) ⬍</th>
+                    <th onclick="sortTable('WRS_6mo_10D_Chg')">10D Chg (%) ${appState.date10D}⬍</th>
+                    <th onclick="sortTable('WRS_6mo_25D_Chg')">25D Chg (%) ${appState.date25D}⬍</th>
                     <th onclick="sortTable('WRS_Rank_Pct')">WRS Rank (%) ⬍</th>
                     <th onclick="sortTable('WRS_6mo_MD')">WRS_MD (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_MD_Rank_Pct')">WRS_MD Rank (%) ⬍</th>
@@ -1721,18 +1736,31 @@
                     const difClass = (isValidNumber(item.WRS_Dif) && item.WRS_Dif > 0) ? 'rs-pos' :
                         ((isValidNumber(item.WRS_Dif) && item.WRS_Dif < 0) ? 'rs-neg' : '');
 
+                    const formatChg = (val) => {
+                        if (!isValidNumber(val)) return '-';
+                        return (val > 0 ? '+' : '') + Math.round(val);
+                    };
+
                     tr.innerHTML = `
                         <td style="font-weight:bold; cursor:pointer;" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Sector}</td>
                         <td style="font-weight:bold; cursor:pointer;" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Industry}</td>
+                        <td style="font-weight:bold; color:#ff9800">${isValidNumber(item.FRANK) ? item.FRANK : '-'}</td>
+                        <td style="${getChgColor(item.FRANK_25D_Chg)}">${formatChg(item.FRANK_25D_Chg)}</td>
                         <td style="font-weight:bold; color:var(--primary-color)">${isValidNumber(item.Final_WRS) ? item.Final_WRS.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.Final_WRS_Rank_Pct) ? item.Final_WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${item.Count}</td>
-                        <td>${isValidNumber(item.WRS_6mo) ? item.WRS_6mo.toFixed(2) : '-'}</td>
                         <td style="${getChgColor(item.Final_WRS_10D_Chg)}">
                             ${isValidNumber(item.Final_WRS_10D_Chg) ? item.Final_WRS_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
                         <td style="${getChgColor(item.Final_WRS_25D_Chg)}">
                             ${isValidNumber(item.Final_WRS_25D_Chg) ? item.Final_WRS_25D_Chg.toFixed(1) + '%' : '-'}
+                        </td>
+                        <td>${isValidNumber(item.WRS_6mo) ? item.WRS_6mo.toFixed(2) : '-'}</td>
+                        <td style="${getChgColor(item.WRS_6mo_10D_Chg)}">
+                            ${isValidNumber(item.WRS_6mo_10D_Chg) ? item.WRS_6mo_10D_Chg.toFixed(1) + '%' : '-'}
+                        </td>
+                        <td style="${getChgColor(item.WRS_6mo_25D_Chg)}">
+                            ${isValidNumber(item.WRS_6mo_25D_Chg) ? item.WRS_6mo_25D_Chg.toFixed(1) + '%' : '-'}
                         </td>
                         <td>${isValidNumber(item.WRS_Rank_Pct) ? item.WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.WRS_MD_6mo) ? item.WRS_MD_6mo.toFixed(2) : '-'}</td>
@@ -1883,16 +1911,21 @@
                 excelData = data.map(item => ({
                     'Sector': item.Sector,
                     'Industry': item.Industry,
-                    'Final WRS': item.Final_WRS.toFixed(4),
-                    'WRS(6mo)': item.WRS_6mo.toFixed(4),
-                    'WRS(6mo)_10D_Chg%': item.Final_WRS_10D_Chg !== null ? parseFloat(item.Final_WRS_10D_Chg.toFixed(2)) : null,
-                    'WRS(6mo)_25D_Chg%': item.Final_WRS_25D_Chg !== null ? parseFloat(item.Final_WRS_25D_Chg.toFixed(2)) : null,
-                    'WRS_MD(6mo)': item.WRS_MD_6mo.toFixed(4),
-                    'Win-Rate(%)': item.Win_Rate.toFixed(2),
+                    'FRANK': item.FRANK,
+                    'FRANK 25d CHG': item.FRANK_25D_Chg,
+                    'Final WRS': isValidNumber(item.Final_WRS) ? parseFloat(item.Final_WRS.toFixed(4)) : null,
+                    'Final Rank (%)': isValidNumber(item.Final_WRS_Rank_Pct) ? parseFloat(item.Final_WRS_Rank_Pct.toFixed(2)) : null,
                     'Total Count': item.Count,
-                    'WRS(3mo)': item.WRS_3mo.toFixed(4),
-                    'WRS(1mo)': item.WRS_1mo.toFixed(4),
-                    'WRS_Dif': item.WRS_Dif ? parseFloat(item.WRS_Dif.toFixed(4)) : null // Add new column
+                    'F10d chg(%)': item.Final_WRS_10D_Chg !== null ? parseFloat(item.Final_WRS_10D_Chg.toFixed(2)) : null,
+                    'F25d chg(%)': item.Final_WRS_25D_Chg !== null ? parseFloat(item.Final_WRS_25D_Chg.toFixed(2)) : null,
+                    'WRS(6mo)': isValidNumber(item.WRS_6mo) ? parseFloat(item.WRS_6mo.toFixed(4)) : null,
+                    '10D Chg (%)': item.WRS_6mo_10D_Chg !== null ? parseFloat(item.WRS_6mo_10D_Chg.toFixed(2)) : null,
+                    '25D Chg (%)': item.WRS_6mo_25D_Chg !== null ? parseFloat(item.WRS_6mo_25D_Chg.toFixed(2)) : null,
+                    'WRS_MD(6mo)': isValidNumber(item.WRS_MD_6mo) ? parseFloat(item.WRS_MD_6mo.toFixed(4)) : null,
+                    'Win-Rate(%)': isValidNumber(item.Win_Rate) ? parseFloat(item.Win_Rate.toFixed(2)) : null,
+                    'WRS(3mo)': isValidNumber(item.WRS_3mo) ? parseFloat(item.WRS_3mo.toFixed(4)) : null,
+                    'WRS(1mo)': isValidNumber(item.WRS_1mo) ? parseFloat(item.WRS_1mo.toFixed(4)) : null,
+                    'WRS_Dif': item.WRS_Dif ? parseFloat(item.WRS_Dif.toFixed(4)) : null
                 }));
             } else {
                 excelData = data.map(item => ({
