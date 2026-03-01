@@ -231,6 +231,10 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
                 res = process_single_ticker(ticker, data, qqq_data)
                 if res:
                     results.append(res)
+                
+                # 티커 1개 처리할 때마다 약간의 딜레이 (Yahoo Finance IP Ban 방지)
+                import time
+                time.sleep(1.5)
                         
         except Exception as e:
             print(f"Batch 처리 중 에러: {e}")

@@ -2,8 +2,8 @@ name: Update RS Data
 
 on:
   schedule:
-    # 3일마다 00:00 UTC에 실행 (한국 시간 오전 9시)
-    - cron: '0 0 */3 * *'
+    # 매일 22:00 UTC에 실행 (한국 시간 오전 7시)
+    - cron: '0 22 * * *'
   workflow_dispatch: # 수동 실행 가능
 
 jobs:
