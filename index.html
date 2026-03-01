@@ -106,6 +106,62 @@
             color: #000;
         }
 
+        /* Industry Filter Popup */
+        .industry-filter-popup {
+            position: absolute;
+            background-color: #333;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            min-width: 250px;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .industry-filter-popup .popup-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+        }
+
+        .industry-filter-popup .popup-header button {
+            padding: 4px 8px;
+            font-size: 11px;
+            background-color: #555;
+            border-radius: 3px;
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .industry-filter-popup label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            cursor: pointer;
+            color: #eee;
+            font-size: 13px;
+        }
+
+        .industry-filter-popup label input {
+            margin-right: 8px;
+        }
+
+        .industry-filter-popup .apply-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 13px;
+            width: 100%;
+            border-radius: 3px;
+            background-color: var(--primary-color);
+            color: #000;
+        }
+
         #result-area {
             display: none;
             margin-top: 40px;
@@ -444,7 +500,7 @@
                     <tr>
                         <th onclick="sortTable('Ticker')">Ticker ⬍</th>
                         <th onclick="sortTable('Sector')">Sector ⬍</th>
-                        <th onclick="sortTable('Industry')">Industry ⬍</th>
+                        <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
                         <th onclick="sortTable('Price')">Price ($) ⬍</th>
                         <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
                         <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
@@ -791,6 +847,7 @@
             filterRS_DiF: 'ALL', // 'ALL' | 'POS' | 'NEG'
             filterWRS_Dif: 'ALL', // 'ALL' | 'POS' | 'NEG'
             energyFilter: false, // [Added] Energy Condensing Filter State
+            industryFilter: null, // [Added] Industry Filter State (Array of selected industries, or null)
             date10D: '',
             date25D: ''
         };
@@ -818,6 +875,12 @@
                 if (popup && popup.style.display === 'block' && !event.target.closest('th')) {
                     if (!popup.contains(event.target)) {
                         popup.style.display = 'none';
+                    }
+                }
+                const indPopup = document.getElementById('industry-filter-popup');
+                if (indPopup && indPopup.style.display === 'block' && !event.target.closest('th')) {
+                    if (!indPopup.contains(event.target)) {
+                        indPopup.style.display = 'none';
                     }
                 }
             });
@@ -1158,6 +1221,7 @@
 
             document.getElementById('search-input').value = '';
             appState.filterText = '';
+            appState.industryFilter = null;
             updateUI();
         }
 
@@ -1177,6 +1241,7 @@
 
             document.getElementById('search-input').value = '';
             appState.filterText = '';
+            appState.industryFilter = null;
             updateUI();
         }
 
@@ -1272,6 +1337,7 @@
             appState.mode = 'TODAYS_LIST';
             appState.filterText = '';
             document.getElementById('search-input').value = '';
+            appState.industryFilter = null;
             appState.sort = { key: 'RS_6mo', asc: false };
 
             // WRS 계산이 필요한 경우
@@ -1290,6 +1356,7 @@
             appState.mode = 'TODAYS_MAIN';
             appState.filterText = '';
             document.getElementById('search-input').value = '';
+            appState.industryFilter = null;
             appState.sort = { key: 'RS_6mo', asc: false };
 
             if (groupedData.length === 0) {
@@ -1303,6 +1370,7 @@
             appState.mode = 'TODAYS_TOP';
             appState.filterText = '';
             document.getElementById('search-input').value = '';
+            appState.industryFilter = null;
             appState.sort = { key: 'RS_6mo', asc: false };
 
 
@@ -1317,6 +1385,7 @@
 
             // Reset filters to avoid confusion, logic handled in getFilteredAndSortedData
             appState.filterRS_DiF = 'ALL';
+            appState.industryFilter = null;
 
             document.getElementById('search-input').value = '';
             updateUI();
@@ -1330,6 +1399,7 @@
             if (groupedData.length === 0) calculateWRS();
 
             appState.filterWRS_Dif = 'ALL';
+            appState.industryFilter = null;
             document.getElementById('search-input').value = '';
             updateUI();
         }
@@ -1537,6 +1607,108 @@
             p.style.top = (window.scrollY + rect.bottom + 5) + 'px';
             p.style.left = (window.scrollX + rect.left) + 'px';
             p.style.display = 'block';
+        }
+
+        // --- Industry Filter Popup Functions ---
+        function handleIndustryHeaderClick(event) {
+            sortTable('Industry');
+            showIndustryFilterPopup(event);
+        }
+
+        function showIndustryFilterPopup(event) {
+            event.stopPropagation();
+
+            let popup = document.getElementById('industry-filter-popup');
+            if (!popup) {
+                popup = document.createElement('div');
+                popup.id = 'industry-filter-popup';
+                popup.className = 'industry-filter-popup';
+                document.body.appendChild(popup);
+            }
+
+            // Get unique industries from globalData
+            const currentData = getFilteredAndSortedDataForIndustryPopup();
+            const uniqueIndustries = [...new Set(currentData.map(item => item.Industry).filter(Boolean))].sort();
+
+            let checkedMap = {};
+            if (appState.industryFilter !== null) {
+                appState.industryFilter.forEach(ind => checkedMap[ind] = true);
+            } else {
+                uniqueIndustries.forEach(ind => checkedMap[ind] = true);
+            }
+
+            let html = `
+                <div class="popup-header">
+                    <div>
+                        <button onclick="selectAllIndustries()">모두 선택</button>
+                        <button onclick="deselectAllIndustries()">모두 제외</button>
+                    </div>
+                </div>
+                <div id="industry-checkbox-list" style="margin-bottom: 10px;">
+            `;
+
+            uniqueIndustries.forEach(ind => {
+                const isChecked = checkedMap[ind] ? 'checked' : '';
+                html += `
+                    <label>
+                        <input type="checkbox" value="${ind}" ${isChecked}>
+                        ${ind}
+                    </label>
+                `;
+            });
+
+            html += `
+                </div>
+                <button class="apply-btn" onclick="applyIndustryFilter()">적용</button>
+            `;
+
+            popup.innerHTML = html;
+
+            const rect = event.target.getBoundingClientRect();
+            popup.style.top = (window.scrollY + rect.bottom + 5) + 'px';
+            popup.style.left = (window.scrollX + rect.left) + 'px';
+            popup.style.display = 'block';
+        }
+
+        function selectAllIndustries() {
+            const list = document.getElementById('industry-checkbox-list');
+            if (list) {
+                const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => cb.checked = true);
+            }
+        }
+
+        function deselectAllIndustries() {
+            const list = document.getElementById('industry-checkbox-list');
+            if (list) {
+                const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => cb.checked = false);
+            }
+        }
+
+        function applyIndustryFilter() {
+            const list = document.getElementById('industry-checkbox-list');
+            if (list) {
+                const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+                const selected = [];
+                checkboxes.forEach(cb => {
+                    if (cb.checked) selected.push(cb.value);
+                });
+                appState.industryFilter = selected;
+            }
+
+            const popup = document.getElementById('industry-filter-popup');
+            if (popup) popup.style.display = 'none';
+
+            updateUI();
+        }
+
+        function getFilteredAndSortedDataForIndustryPopup() {
+            const temp = appState.industryFilter;
+            appState.industryFilter = null;
+            const data = getFilteredAndSortedData();
+            appState.industryFilter = temp;
+            return data;
         }
 
         // --- Data Processing for Render ---
@@ -1750,6 +1922,12 @@
                 } else if (appState.filterWRS_Dif === 'NEG') {
                     targetData = targetData.filter(item => item.WRS_Dif < 0);
                 }
+            }
+
+            // [Added] Apply Industry Filter
+            if (appState.industryFilter !== null) {
+                const industrySet = new Set(appState.industryFilter);
+                targetData = targetData.filter(item => industrySet.has(item.Industry));
             }
 
             // 5. Apply Sorting
