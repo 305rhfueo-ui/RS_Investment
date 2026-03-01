@@ -1984,7 +1984,7 @@
                 // WRS Table Header
                 thead.innerHTML = `
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
-                    <th onclick="sortTable('Industry')">Industry ⬍</th>
+                    <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
                     <th onclick="sortTable('FRANK')">FRANK ⬍</th>
                     <th onclick="sortTable('FRANK_25D_Chg')">FRANK 25d CHG ${appState.date25D}⬍</th>
                     <th onclick="sortTable('Final_WRS')">Final WRS ⬍</th>
@@ -2055,7 +2055,7 @@
                 thead.innerHTML = `
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
-                    <th onclick="sortTable('Industry')">Industry ⬍</th>
+                    <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
                     <th onclick="sortTable('Price')">Price ($) ⬍</th>
                     <th onclick="sortTable('Market Cap')">Market Cap ($) ⬍</th>
                     <th onclick="sortTable('MarketCapRank')">MC Rank ⬍</th>
