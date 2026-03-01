@@ -522,7 +522,10 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             try:
                 cached_date = datetime.strptime(cache_item['timestamp'], "%Y-%m-%d")
                 if (datetime.now() - cached_date).days < 3:
-                    use_cache = True
+                    # [Fix] Ensure cache has the new columns before validating it
+                    data = cache_item.get('data', {})
+                    if 'SALE_CY' in data:
+                        use_cache = True
             except:
                 pass
         
