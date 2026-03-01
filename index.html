@@ -310,6 +310,12 @@
                 style="color: #ff9800; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
                 💰 투자방법(약식)
             </a>
+
+            <!-- Prevent Top Popup Link -->
+            <a href="#" onclick="openPreventTopPopup(); return false;"
+                style="color: #00bcd4; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                🛡️ 고점물림방지
+            </a>
         </div>
 
         <div class="info-box">
@@ -356,14 +362,15 @@
                     <li><strong>Today's List 기준:</strong>
                         <ul>
                             <li><strong>섹터/산업:</strong> Final WRS(종합 점수) 상위 20% 이내</li>
-                            <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>50DIV &gt; 0</strong></li>
+                            <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>0 &lt; 50DIV &le;
+                                    35%</strong></li>
                         </ul>
                     </li>
                     <li><strong>Today's Main 기준:</strong>
                         <ul>
                             <li><strong>Today's List</strong> 조건을 만족하는 종목 중</li>
                             <li><strong>CY Trend & NY Trend</strong> 모두 5% 이상</li>
-                            <li><strong>50DIV</strong> 55% 이하 (과열 방지)</li>
+                            <li><strong>50DIV</strong> 30% 이하 (고점에 물리는 걸 방지하기 위해서)</li>
                         </ul>
                     </li>
                     <li><strong>급등/반등가능성↑종목:</strong> RS_DiF &gt; 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)
@@ -649,6 +656,76 @@
         </div>
     </div>
 
+    <!-- Prevent Top Popup Modal -->
+    <div id="prevent-top-popup" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePreventTopPopup()">&times;</span>
+            <h2 style="margin-top:0; color:#00bcd4;">🛡️ 고점물림방지 투자전략</h2>
+
+            <div style="line-height: 1.8; font-size: 14px;">
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:15px;">
+                    1단계: 시장 환경 확인 (Market Direction)
+                </h3>
+                <p>전체 시장이 하락세일 때는 상대강도 전략도 작동하기 어렵다. 나스닥(QQQ)이나 S&P500이 주요 이동평균선(50일, 200일) 위에 있는지 먼저 확인한다.</p>
+
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    2단계: 주도 섹터 및 산업군 식별
+                </h3>
+                <p>Sector/Industry WRS 탭에서 Final Rank가 상위 20% 이내이면서 25D CHG가 양수인 산업군을 찾는다.</p>
+                <div style="background:#2a2a2a; border-left:3px solid #00bcd4; padding:10px; margin:10px 0;">
+                    <strong>예시 분석:</strong> 현재 데이터상 'Semiconductor Equipment & Materials'가 1위를 차지하고 있으며, FRANK 25d CHG가
+                    +3으로 개선되고 있다. 이는 반도체 장비주가 현재 시장의 명확한 주도주임을 시사한다.
+                </div>
+
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    3단계: 산업 내 대장주 선정
+                </h3>
+                <p>선정된 산업군을 클릭하여 개별 종목 리스트를 연다. 여기서 RS Rank (%)가 가장 낮고(숫자가 작을수록 강함), 10D Chg가 양수인 종목을 선정한다.</p>
+                <div style="background:#2a2a2a; border-left:3px solid #ff9800; padding:10px; margin:10px 0;">
+                    <strong>차별화:</strong> 단순히 RS가 높은 것뿐만 아니라 Up/Down Ratio가 높은 종목을 우선한다. 이는 최근 애널리스트들의 실적 전망 상향이 이어지고
+                    있음을 의미하여, 기술적 강세에 펀더멘털 정당성을 부여한다.
+                </div>
+
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    4단계: 기술적 진입 시점 포착 (Timing)
+                </h3>
+                <p>선택된 종목의 50DIV와 10DIV를 확인한다.</p>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li><strong style="color:#f44336">진입 금지:</strong> 50DIV > 30% (너무 비쌈)</li>
+                    <li><strong style="color:#00e676">최적 진입:</strong> 10DIV가 -3% ~ +3% 사이이면서 주가가 지지선에 위치할 때.</li>
+                    <li><strong style="color:#ffca28">가속 진입:</strong> RS_Dif가 음수에서 양수로 전환되는 날.</li>
+                </ul>
+
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    5단계: 손절 및 익절 규칙 적용
+                </h3>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li><strong style="color:#f44336">손절:</strong> 매수가 대비 7~8% 하락하거나, 종가가 20일 이동평균선을 강하게 이탈할 때.</li>
+                    <li><strong style="color:#00e676">익절:</strong> 주가가 10일 이동평균선으로부터 이격도가 20% 이상 벌어지는 '클라이맥스 런' 구간에서 분할
+                        매도.</li>
+                </ul>
+
+                <h3 style="color:#ff5252; border-bottom:1px solid #444; padding-bottom:5px; margin-top:25px;">
+                    ✨ 전문가의 제언: 어떤 전략이 가장 '돈을 많이 벌어줄까'?
+                </h3>
+                <div style="background:#222; padding:15px; border-radius:5px; margin-top:10px;">
+                    <p style="margin-top:0;"><strong>1. "Final WRS가 25일 전 대비 빠르게 성장하면서 상위 10%에 오르는 기업"에
+                            투자하라.</strong><br>
+                        이것이 가장 큰 수익을 가져다줄 확률이 높다. 주식 투자에서 가장 큰 수익은 '소외주'가 '주도주'로 탈바꿈하는 구간에서 발생한다. 25d Chg는 이 거대한 변화의 초기
+                        신호를 포착하는 지표다. 다만, 이때 반드시 EPS Trend가 우상향인지 확인하여 가짜 모멘텀을 걸러내야 한다.</p>
+
+                    <p><strong>2. "물리지 않으려면" 이격도와 BBWTHD를 반드시 결합하라.</strong><br>
+                        RS가 높은 종목이 물리는 이유는 '좋아서' 사는 것이 아니라 '너무 비쌀 때' 사기 때문이다. 50DIV가 낮은 상태에서 BBWTHD가 수축되어 있는 종목은 하락 변동성이
+                        제한적이다. 즉, 상위 10%의 종목을 사되, 차트가 '예쁘게 정돈된(Tightening)' 종목만 골라내면 물릴 확률은 극도로 낮아진다.</p>
+
+                    <p style="margin-bottom:0;"><strong>3. "WRS(6MO) 상위 + 눌림목" 전략은 자산 규모가 클 때 유리하다.</strong><br>
+                        안정적인 수익을 원하는 전문가들은 이 방법을 선호한다. 이미 검증된 주도주가 일시적 시장 조정으로 인해 50일 이동평균선 근처까지 내려왔을 때(즉, 50DIV가 5% 이내일
+                        때) 매수하는 단가는 '기관 투자자와 같은 평단가'를 갖게 해주는 효과가 있다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script>
         // --- Invest Popup Functions ---
@@ -669,16 +746,29 @@
             document.getElementById('market-popup').style.display = 'none';
         }
 
+        // --- Prevent Top Popup Functions ---
+        function openPreventTopPopup() {
+            document.getElementById('prevent-top-popup').style.display = 'block';
+        }
+
+        function closePreventTopPopup() {
+            document.getElementById('prevent-top-popup').style.display = 'none';
+        }
+
         // Close when clicking outside
         window.onclick = function (event) {
             const marketModal = document.getElementById('market-popup');
             const investModal = document.getElementById('invest-popup');
+            const preventTopModal = document.getElementById('prevent-top-popup');
 
             if (event.target == marketModal) {
                 marketModal.style.display = "none";
             }
             if (event.target == investModal) {
                 investModal.style.display = "none";
+            }
+            if (event.target == preventTopModal) {
+                preventTopModal.style.display = "none";
             }
         }
 
@@ -1513,9 +1603,9 @@
                     const key = `${stock.Sector}|${stock.Industry}`;
                     if (!topGroupKeys.has(key)) return false;
 
-                    // Must have 50DIV > 0
+                    // Must have 0 < 50DIV <= 35
                     const div50 = parseFloat(stock['50DIV']);
-                    if (isNaN(div50) || div50 <= 0) return false;
+                    if (isNaN(div50) || div50 <= 0 || div50 > 35) return false;
 
                     return true;
                 });
@@ -1605,9 +1695,9 @@
                     if (isNaN(cy) || cy < 5) return false;
                     if (isNaN(ny) || ny < 5) return false;
 
-                    // 3. 50DIV <= 55
+                    // 3. 50DIV <= 30
                     const div50 = parseFloat(stock['50DIV']); // Already checked > 0 above
-                    if (div50 > 55) return false;
+                    if (div50 > 30) return false;
 
                     return true;
                 });
