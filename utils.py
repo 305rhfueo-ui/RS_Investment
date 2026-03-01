@@ -531,8 +531,13 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         cy_30 = None
         ny_est = None
         ny_30 = None
+        
+        # New Initializations for 4 columns
+        sale_cy = None
+        sale_ny = None
+        eps_cy = None
+        eps_ny = None
 
-        ny_30 = None
         target_status = "NO"
 
         if use_cache:
@@ -551,6 +556,11 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             ny_est = data.get('NY_Est')
             ny_30 = data.get('NY_30')
             target_status = data.get('Target_Status', "NO")
+
+            sale_cy = data.get('SALE_CY')
+            sale_ny = data.get('SALE_NY')
+            eps_cy = data.get('EPS_CY')
+            eps_ny = data.get('EPS_NY')
             
         else:
             # Fetch New Data
@@ -591,10 +601,6 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                             ny_trend = 0.0
                 except: pass
 
-            # (B) EPS Revisions
-            # User Mapping: UP# = Sum of 'upLast30days' (All periods: 0q, +1q, 0y, +1y)
-            #               DOWN# = Sum of 'downLast30days' (All periods)
-            
             eps_rev_df = None
             try:
                 eps_rev_df = t.eps_revisions
@@ -614,6 +620,51 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                         else:
                             up_down_ratio = 0.0
                 except: pass
+
+            # Add Data Extraction for 4 New Columns
+            # 1. SALE CY(%), SALE NY(%)
+            rev_est_df = None
+            try:
+                rev_est_df = t.revenue_estimate
+            except: pass
+            
+            if rev_est_df is not None and not rev_est_df.empty:
+                try:
+                    if '0y' in rev_est_df.index:
+                        # value is already in growth unit ratio from yfinance, so multiply 100
+                        val = float(rev_est_df.loc['0y', 'growth'])
+                        sale_cy = round(val * 100, 2)
+                except: pass
+                
+                try:
+                    if '+1y' in rev_est_df.index:
+                        val = float(rev_est_df.loc['+1y', 'growth'])
+                        sale_ny = round(val * 100, 2)
+                except: pass
+
+            # 2. EPS CY(%), EPS NY(%)
+            earn_est_df = None
+            try:
+                earn_est_df = t.earnings_estimate
+            except: pass
+            
+            if earn_est_df is not None and not earn_est_df.empty:
+                try:
+                    if '0y' in earn_est_df.index:
+                        c_avg = float(earn_est_df.loc['0y', 'avg'])
+                        c_ago = float(earn_est_df.loc['0y', 'yearAgoEps'])
+                        if c_ago and c_ago != 0:
+                            eps_cy = round(((c_avg / c_ago) - 1) * 100, 2)
+                except: pass
+                
+                try:
+                    if '+1y' in earn_est_df.index and '0y' in earn_est_df.index:
+                        n_avg = float(earn_est_df.loc['+1y', 'avg'])
+                        c_avg2 = float(earn_est_df.loc['0y', 'avg'])
+                        if c_avg2 and c_avg2 != 0:
+                            eps_ny = round(((n_avg / c_avg2) - 1) * 100, 2)
+                except: pass
+
             
             # (C) Target Status
             # Condition: CY_Trend >= 5% AND NY_Trend >= 5% -> YES, else NO
@@ -636,7 +687,11 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                     'CY_30': cy_30,
                     'NY_Est': ny_est,
                     'NY_30': ny_30,
-                    'Target_Status': target_status
+                    'Target_Status': target_status,
+                    'SALE_CY': sale_cy,
+                    'SALE_NY': sale_ny,
+                    'EPS_CY': eps_cy,
+                    'EPS_NY': eps_ny
                 }
             }
             
@@ -669,7 +724,12 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             '10DIV': div_10,
             # [Added] Bollinger Band Width
             'BBWTHD': bbwthd,
-            'BBWTHD_LOW': bbwthd_low
+            'BBWTHD_LOW': bbwthd_low,
+            # [Added] 4 New Metric Columns
+            'SALE_CY': sale_cy,
+            'SALE_NY': sale_ny,
+            'EPS_CY': eps_cy,
+            'EPS_NY': eps_ny
         }
 
     except Exception as e:
