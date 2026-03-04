@@ -444,6 +444,7 @@
                     <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif &gt; 0 인 섹터 (Win-rate 순 정렬)</li>
                     <li><strong>BBWTHD:</strong> 볼린저 밴드 너비(Bandwidth). (상단밴드 - 하단밴드) / 중심선(20일SMA)</li>
                     <li><strong>BBWTHD LOW:</strong> 해당 종목의 최근 60영업일 간 BBWTHD 최저값</li>
+                    <li><strong>BBC:</strong> 최근 5영업일 기간 중에 주가가 볼린저밴드 중심선(20일 이동평균선)을 상향 돌파한 적이 있는지 여부 (YES/NO)</li>
                 </ul>
             </div>
         </div>
@@ -2321,6 +2322,7 @@
                     <th onclick="sortTable('10DIV')">10DIV (%) ⬍</th>
                     <th onclick="sortTable('BBWTHD')">BBWTHD ⬍</th>
                     <th onclick="sortTable('BBWTHD_LOW')">BBWTHD LOW ⬍</th>
+                    <th onclick="sortTable('BB_Center_Breakout_5D')">BBC ⬍</th>
                 `;
 
                 data.forEach(item => {
@@ -2407,6 +2409,7 @@
                         <td>${div10Str}</td>
                         <td>${isValidNumber(item.BBWTHD) ? item.BBWTHD.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.BBWTHD_LOW) ? item.BBWTHD_LOW.toFixed(2) : '-'}</td>
+                        <td class="${item.BB_Center_Breakout_5D === 'YES' ? 'rs-pos' : ''}">${item.BB_Center_Breakout_5D || 'NO'}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -2486,7 +2489,8 @@
                     'Jungjanggi Jeongbaeyeol': item['Jungjanggi Jeongbaeyeol'],
                     '10DIV': item['10DIV'],
                     'BBWTHD': item.BBWTHD,
-                    'BBWTHD_LOW': item.BBWTHD_LOW
+                    'BBWTHD_LOW': item.BBWTHD_LOW,
+                    'BBC': item.BB_Center_Breakout_5D || 'NO'
                 }));
             }
 
