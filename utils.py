@@ -412,6 +412,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         
         bbwthd = None
         bbwthd_low = None
+        bb_center_breakout_5d = "NO"
         
         # Need enough data for 20-day MA/StdDev. 
         # For 60-day low of BBW, we ideally need 20 + 59 more days prior. 
@@ -443,6 +444,19 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                 if not valid_bw.empty:
                     min_bw = valid_bw.min()
                     bbwthd_low = round(min_bw, 2)
+                    
+            # Check for BB Center (20 SMA) breakout in the last 5 days
+            # -5 to -1 means last 5 trading days
+            if len(closes) >= 25:
+                for i in range(-5, 0):
+                    prev_close = closes.iloc[i-1]
+                    curr_close = closes.iloc[i]
+                    prev_mb = mb.iloc[i-1]
+                    curr_mb = mb.iloc[i]
+                    if pd.notna(prev_close) and pd.notna(curr_close) and pd.notna(prev_mb) and pd.notna(curr_mb):
+                        if prev_close < prev_mb and curr_close > curr_mb:
+                            bb_center_breakout_5d = "YES"
+                            break
         
         # 메타데이터 (Market Cap, Sector, Industry)
         # For Metadata, loop up using sanitied ticker
@@ -698,7 +712,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                     'SALE_CY': sale_cy,
                     'SALE_NY': sale_ny,
                     'EPS_CY': eps_cy,
-                    'EPS_NY': eps_ny
+                    'EPS_NY': eps_ny,
+                    'BB_Center_Breakout_5D': bb_center_breakout_5d
                 }
             }
             
@@ -736,7 +751,9 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'SALE_CY': sale_cy,
             'SALE_NY': sale_ny,
             'EPS_CY': eps_cy,
-            'EPS_NY': eps_ny
+            'EPS_NY': eps_ny,
+            # [Added] BB Center Breakout 5D
+            'BB_Center_Breakout_5D': bb_center_breakout_5d
         }
 
     except Exception as e:
