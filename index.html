@@ -2229,6 +2229,7 @@
                     <th onclick="sortTable('Final_WRS')">Final WRS ⬍</th>
                     <th onclick="sortTable('Final_WRS_Rank_Pct')">Final Rank (%) ⬍</th>
                     <th onclick="sortTable('Count')">Total Count ⬍</th>
+                    <th onclick="sortTable('Win_Rate')">Win-rate (%) ⬍</th>
                     <th onclick="sortTable('Final_WRS_10D_Chg')">F10d chg(%) ${appState.date10D}⬍</th>
                     <th onclick="sortTable('Final_WRS_25D_Chg')">F25d chg(%) ${appState.date25D}⬍</th>
                     <th onclick="sortTable('WRS_6mo')">WRS (6mo) ⬍</th>
@@ -2237,7 +2238,6 @@
                     <th onclick="sortTable('WRS_Rank_Pct')">WRS Rank (%) ⬍</th>
                     <th onclick="sortTable('WRS_6mo_MD')">WRS_MD (6mo) ⬍</th>
                     <th onclick="sortTable('WRS_MD_Rank_Pct')">WRS_MD Rank (%) ⬍</th>
-                    <th onclick="sortTable('Win_Rate')">Win-rate (%) ⬍</th>
                     <th onclick="sortTable('WRS_3mo')">WRS (3mo) ⬍</th>
                     <th onclick="sortTable('WRS_1mo')">WRS (1mo) ⬍</th>
                     <th onclick="sortTable('WRS_Dif')">
@@ -2265,6 +2265,7 @@
                         <td style="font-weight:bold; color:var(--primary-color)">${isValidNumber(item.Final_WRS) ? item.Final_WRS.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.Final_WRS_Rank_Pct) ? item.Final_WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${item.Count}</td>
+                        <td>${isValidNumber(item.Win_Rate) ? item.Win_Rate.toFixed(1) + '%' : '-'}</td>
                         <td style="${getChgColor(item.Final_WRS_10D_Chg)}">
                             ${isValidNumber(item.Final_WRS_10D_Chg) ? item.Final_WRS_10D_Chg.toFixed(1) + '%' : '-'}
                         </td>
@@ -2281,7 +2282,6 @@
                         <td>${isValidNumber(item.WRS_Rank_Pct) ? item.WRS_Rank_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.WRS_MD_6mo) ? item.WRS_MD_6mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.WRS_MD_Rank_Pct) ? item.WRS_MD_Rank_Pct.toFixed(1) + '%' : '-'}</td>
-                        <td>${isValidNumber(item.Win_Rate) ? item.Win_Rate.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.WRS_3mo) ? item.WRS_3mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.WRS_1mo) ? item.WRS_1mo.toFixed(2) : '-'}</td>
                         <td class="${difClass}">${isValidNumber(item.WRS_Dif) ? item.WRS_Dif.toFixed(2) : '-'}</td>
@@ -2451,13 +2451,13 @@
                     'Final WRS': isValidNumber(item.Final_WRS) ? parseFloat(item.Final_WRS.toFixed(4)) : null,
                     'Final Rank (%)': isValidNumber(item.Final_WRS_Rank_Pct) ? parseFloat(item.Final_WRS_Rank_Pct.toFixed(2)) : null,
                     'Total Count': item.Count,
+                    'Win-Rate(%)': isValidNumber(item.Win_Rate) ? parseFloat(item.Win_Rate.toFixed(2)) : null,
                     'F10d chg(%)': item.Final_WRS_10D_Chg !== null ? parseFloat(item.Final_WRS_10D_Chg.toFixed(2)) : null,
                     'F25d chg(%)': item.Final_WRS_25D_Chg !== null ? parseFloat(item.Final_WRS_25D_Chg.toFixed(2)) : null,
                     'WRS(6mo)': isValidNumber(item.WRS_6mo) ? parseFloat(item.WRS_6mo.toFixed(4)) : null,
                     '10D Chg (%)': item.WRS_6mo_10D_Chg !== null ? parseFloat(item.WRS_6mo_10D_Chg.toFixed(2)) : null,
                     '25D Chg (%)': item.WRS_6mo_25D_Chg !== null ? parseFloat(item.WRS_6mo_25D_Chg.toFixed(2)) : null,
                     'WRS_MD(6mo)': isValidNumber(item.WRS_MD_6mo) ? parseFloat(item.WRS_MD_6mo.toFixed(4)) : null,
-                    'Win-Rate(%)': isValidNumber(item.Win_Rate) ? parseFloat(item.Win_Rate.toFixed(2)) : null,
                     'WRS(3mo)': isValidNumber(item.WRS_3mo) ? parseFloat(item.WRS_3mo.toFixed(4)) : null,
                     'WRS(1mo)': isValidNumber(item.WRS_1mo) ? parseFloat(item.WRS_1mo.toFixed(4)) : null,
                     'WRS_Dif': item.WRS_Dif ? parseFloat(item.WRS_Dif.toFixed(4)) : null
