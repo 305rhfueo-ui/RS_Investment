@@ -428,8 +428,8 @@
                     <li><strong>⚡에너지응축하는놈:</strong> 중장기정배열 상태(YES)이면서 10일 이동평균선 괴리율(10DIV)이 ±4% 이내이고, 볼린저밴드폭(BBWTHD)이
                         0.15 미만이거나 신저가 부근인 종목</li>
                     <li><strong>🚀고성장하는놈:</strong> 올해/내년 매출액(SALE) 및 주당순이익(EPS) 전망치 증가율이 모두 20% 이상인 실적 고성장 종목</li>
-                    <li><strong>🔥탄력붙은놈:</strong> 특정 개별 종목의 단기/중기 모멘텀(RS_Dif &ge; 0)과 해당 종목이 속한 섹터의 모멘텀(WRS_Dif &ge; 0)이
-                        모두 긍정적인, 상승세에 가속도가 붙은 종목들</li>
+                    <li><strong>🔥(개별)탄력붙은놈:</strong> 특정 개별 종목의 단기/중기 모멘텀(RS_Dif &ge; 0)이 긍정적인, 상승세에 가속도가 붙은 종목들</li>
+                    <li><strong>🎯(섹터)탄력붙은놈:</strong> 해당 종목이 속한 섹터/산업의 모멘텀(WRS_Dif &ge; 0)이 긍정적인 테마군</li>
                     <li><strong>Today's List 기준:</strong>
                         <ul>
                             <li><strong>섹터/산업:</strong> Final WRS(종합 점수) 상위 20% 이내</li>
@@ -518,7 +518,13 @@
                     <!-- [Added] Momentum Filter Button -->
                     <a href="#" id="momentum-filter-btn" onclick="toggleMomentumFilter(); return false;"
                         style="color: #ff5722; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
-                        🔥탄력붙은놈
+                        🔥(개별)탄력붙은놈
+                    </a>
+
+                    <!-- [Added] Sector Momentum Filter Button -->
+                    <a href="#" id="sector-momentum-filter-btn" onclick="toggleSectorMomentumFilter(); return false;"
+                        style="color: #e91e63; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        🎯(섹터)탄력붙은놈
                     </a>
 
                     <a href="#" id="wpattern-filter-btn" onclick="toggleWPatternFilter(); return false;"
@@ -1029,7 +1035,8 @@
             filterWRS_Dif: 'ALL', // 'ALL' | 'POS' | 'NEG'
             energyFilter: false, // [Added] Energy Condensing Filter State
             highGrowthFilter: false, // [Added] High Growth Filter State
-            momentumFilter: false, // [Added] Momentum Filter State (탄력붙은놈)
+            momentumFilter: false, // [Added] Momentum Filter State (개별 탄력붙은놈)
+            sectorMomentumFilter: false, // [Added] Sector Momentum Filter State (섹터 탄력붙은놈)
             wPatternFilter: false, // [Added] W-Pattern Filter State
             industryFilter: null, // [Added] Industry Filter State (Array of selected industries, or null)
             date10D: '',
@@ -1507,9 +1514,18 @@
             // [Added] Momentum Filter UI Update
             if (appState.momentumFilter) {
                 if (momentumBtn) momentumBtn.innerText = "🔄 다시돌아가기";
-                subtitleText += " (🔥탄력붙은놈)";
+                subtitleText += " (🔥(개별)탄력붙은놈)";
             } else {
-                if (momentumBtn) momentumBtn.innerText = "🔥탄력붙은놈";
+                if (momentumBtn) momentumBtn.innerText = "🔥(개별)탄력붙은놈";
+            }
+
+            const sectorMomentumBtn = document.getElementById('sector-momentum-filter-btn');
+            // [Added] Sector Momentum Filter UI Update
+            if (appState.sectorMomentumFilter) {
+                if (sectorMomentumBtn) sectorMomentumBtn.innerText = "🔄 다시돌아가기";
+                subtitleText += " (🎯(섹터)탄력붙은놈)";
+            } else {
+                if (sectorMomentumBtn) sectorMomentumBtn.innerText = "🎯(섹터)탄력붙은놈";
             }
 
             const wPatternBtn = document.getElementById('wpattern-filter-btn');
@@ -1637,12 +1653,24 @@
             updateUI();
         }
 
-        // [Added] Toggle Momentum Filter (탄력붙은놈)
+        // [Added] Toggle Momentum Filter (개별 탄력붙은놈)
         function toggleMomentumFilter() {
             appState.momentumFilter = !appState.momentumFilter;
             // Disable mutually exclusive filters
             if (appState.momentumFilter) {
                 appState.highGrowthFilter = false;
+                appState.sectorMomentumFilter = false;
+            }
+            updateUI();
+        }
+
+        // [Added] Toggle Sector Momentum Filter (섹터 탄력붙은놈)
+        function toggleSectorMomentumFilter() {
+            appState.sectorMomentumFilter = !appState.sectorMomentumFilter;
+            // Disable mutually exclusive filters
+            if (appState.sectorMomentumFilter) {
+                appState.highGrowthFilter = false;
+                appState.momentumFilter = false;
             }
             updateUI();
         }
@@ -2186,20 +2214,24 @@
                 });
             }
 
-            // 3.5 [Added] Apply Momentum Filter (탄력붙은놈)
+            // 3.5 [Added] Apply Momentum Filter (개별 탄력붙은놈)
             if (appState.momentumFilter) {
                 if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_MAIN' || appState.mode === 'TODAYS_TOP') {
-                    // Must ensure we have Group WRS data for the stock's Sector/Industry
+                    // Only check individual RS_DiF
                     targetData = targetData.filter(item => {
-                        if (item.RS_DiF === undefined || item.RS_DiF < 0) return false;
+                        return item.RS_DiF !== undefined && item.RS_DiF >= 0;
+                    });
+                }
+            }
 
+            // 3.6 [Added] Apply Sector Momentum Filter (섹터 탄력붙은놈)
+            if (appState.sectorMomentumFilter) {
+                if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_MAIN' || appState.mode === 'TODAYS_TOP') {
+                    // Filter stocks whose Sector/Industry WRS_Dif >= 0
+                    targetData = targetData.filter(item => {
                         const groupKey = `${item.Sector}|${item.Industry}`;
                         const groupInfo = groupedData.find(g => `${g.Sector}|${g.Industry}` === groupKey);
-
-                        if (groupInfo && groupInfo.WRS_Dif >= 0) {
-                            return true;
-                        }
-                        return false;
+                        return groupInfo && groupInfo.WRS_Dif >= 0;
                     });
                 } else if (appState.mode === 'WRS') {
                     // In WRS mode, targetData is groupedData
