@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -377,6 +377,12 @@
             <a href="#" onclick="openNoticePopup(); return false;"
                 style="color: #00e676; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
                 👀 주목해야할 티커
+            </a>
+
+            <!-- Core of Pullback Investment Link -->
+            <a href="#" onclick="openPullbackCorePopup(); return false;"
+                style="color: #ff9800; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                🎯 눌림목투자핵심
             </a>
         </div>
 
@@ -925,8 +931,29 @@
         </div>
     </div>
 
+    <!-- Pullback Core Modal -->
+    <div id="pullback-core-popup" class="modal">
+        <div class="modal-content" style="max-width: 900px; padding: 20px;">
+            <span class="close-btn" onclick="closePullbackCorePopup()">&times;</span>
+            <h2 style="margin-top:0; color:#ff9800; margin-bottom: 20px;">🎯 눌림목투자핵심</h2>
+            <div style="text-align: center; overflow-y: auto; max-height: 75vh; padding-right: 10px;">
+                <img src="static/pullback_core_1.png" alt="대시세 분출의 5단계 시그널" style="max-width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <img src="static/pullback_core_2.png" alt="공매도 거래 비중 판단 기준 및 실전 대응 결론" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script>
+        // --- Pullback Core Popup Functions ---
+        function openPullbackCorePopup() {
+            document.getElementById('pullback-core-popup').style.display = 'block';
+        }
+
+        function closePullbackCorePopup() {
+            document.getElementById('pullback-core-popup').style.display = 'none';
+        }
+
         // --- Invest Popup Functions ---
         function openInvestPopup() {
             document.getElementById('invest-popup').style.display = 'block';
