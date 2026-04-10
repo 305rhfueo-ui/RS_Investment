@@ -494,6 +494,12 @@
                         Today's List
                     </button>
 
+                    <!-- [Added] Today's list FS -->
+                    <button id="todays-list-fs-btn" onclick="showTodaysListFS()" class="download-btn"
+                        style="background-color:#ff9800; color:#000;">
+                        Today's list FS
+                    </button>
+
                     <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
                         style="background-color:#e91e63; color:#ffffff;">
                         Today's Main
@@ -1163,8 +1169,9 @@
         let groupedData = []; // for WRS mode
 
         // App State
+        let fsData = {}; // For Today's list FS
         let appState = {
-            mode: 'INDIVIDUAL', // 'INDIVIDUAL' | 'WRS' | 'DRILLDOWN' | 'TODAYS_LIST' | 'RISING_STOCKS' | 'RISING_SECTORS'
+            mode: 'INDIVIDUAL', // 'INDIVIDUAL' | 'WRS' | 'DRILLDOWN' | 'TODAYS_LIST' | 'TODAYS_LIST_FS' | 'RISING_STOCKS' | 'RISING_SECTORS'
             filterText: '',
             drillDownKey: null, // "Sector|Industry"
             sort: { key: 'RS_6mo', asc: false }, // Default Sort: RS(6mo) Descending
@@ -1255,12 +1262,23 @@
                 if (!res.ok) throw new Error("데이터 로드 실패 code: " + res.status);
 
                 const rawText = await res.text();
-                // Fix NaN issue
                 const sanitizedText = rawText.replace(/:\s*NaN/g, ': null');
                 const json = JSON.parse(sanitizedText);
 
                 // Initialize Data
                 globalData = json.data;
+
+                // Fetch FS Data
+                try {
+                    const fsRes = await fetch('./static/fs_data.json?t=' + new Date().getTime());
+                    if (fsRes.ok) {
+                        fsData = await fsRes.json();
+                    } else {
+                        fsData = {};
+                    }
+                } catch(e) {
+                    fsData = {};
+                }
 
                 // [Added] Calculate RS_DiF for Individual Data
                 // Also Calculate Market Cap Rank
@@ -1614,6 +1632,11 @@
                 subtitle.style.color = "#e91e63"; // Pink
                 if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
+            } else if (appState.mode === 'TODAYS_LIST_FS') {
+                subtitleText = "Today's List FS (Financial Statement)";
+                subtitle.style.color = "#ff9800"; // Orange
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
+
             } else if (appState.mode === 'TODAYS_TOP') {
                 subtitleText = "Today's Top (Best of Best)";
                 subtitle.style.color = "#00bcd4"; // Cyan
@@ -1711,6 +1734,21 @@
             appState.sort = { key: 'RS_6mo', asc: false };
 
             // WRS 계산이 필요한 경우
+            if (groupedData.length === 0) {
+                calculateWRS();
+            }
+
+            updateUI();
+        }
+
+        // [Added] Function for Today's List FS
+        function showTodaysListFS() {
+            appState.mode = 'TODAYS_LIST_FS';
+            appState.filterText = '';
+            document.getElementById('search-input').value = '';
+            appState.industryFilter = null;
+            appState.sort = { key: 'Ticker', asc: true };
+
             if (groupedData.length === 0) {
                 calculateWRS();
             }
@@ -2133,7 +2171,7 @@
             let targetData = [];
 
             // 1. Select Data Source based on Mode
-            if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_MAIN') {
+            if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_LIST_FS' || appState.mode === 'TODAYS_MAIN') {
                 targetData = [...globalData]; // Copy
             } else if (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') {
                 targetData = [...groupedData];
@@ -2205,7 +2243,7 @@
 
 
             // 3. Apply Mode-Specific Filters
-            if (appState.mode === 'TODAYS_LIST') {
+            if (appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_LIST_FS') {
                 // [Requirement]
                 // 1. Sector/Industry: Count >= 2, Win-Rate >= 60%, Final WRS Top 20%
                 // 2. Individual: RS(6mo) Top 30% within Sector, 50DIV > 0
@@ -2515,6 +2553,78 @@
                         <td>${isValidNumber(item.WRS_3mo) ? item.WRS_3mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.WRS_1mo) ? item.WRS_1mo.toFixed(2) : '-'}</td>
                         <td class="${difClass}">${isValidNumber(item.WRS_Dif) ? item.WRS_Dif.toFixed(2) : '-'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } else if (appState.mode === 'TODAYS_LIST_FS') {
+                // Today's List FS Table Header
+                thead.innerHTML = `
+                    <th onclick="sortTable('Ticker')">Ticker ⬍</th>
+                    <th>0SALE%</th>
+                    <th>1SALE%</th>
+                    <th>2SALE%</th>
+                    <th>0NI%</th>
+                    <th>1NI%</th>
+                    <th>2NI%</th>
+                    <th onclick="sortTable('CY_Trend')">CY Trend (%) ⬍</th>
+                    <th onclick="sortTable('NY_Trend')">NY Trend (%) ⬍</th>
+                    <th onclick="sortTable('SALE_CY')">SALE CY(%) ⬍</th>
+                    <th onclick="sortTable('SALE_NY')">SALE NY(%) ⬍</th>
+                    <th onclick="sortTable('EPS_CY')">EPS CY(%) ⬍</th>
+                    <th onclick="sortTable('EPS_NY')">EPS NY(%) ⬍</th>
+                `;
+
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    const ticker = item.Ticker;
+                    
+                    const cy = parseFloat(item.CY_Trend);
+                    const ny = parseFloat(item.NY_Trend);
+                    const sCy = parseFloat(item.SALE_CY);
+                    const sNy = parseFloat(item.SALE_NY);
+                    const eCy = parseFloat(item.EPS_CY);
+                    const eNy = parseFloat(item.EPS_NY);
+
+                    const cyColor = (isValidNumber(cy) && cy > 0) ? 'rs-pos' : ((isValidNumber(cy) && cy < 0) ? 'rs-neg' : '');
+                    const nyColor = (isValidNumber(ny) && ny > 0) ? 'rs-pos' : ((isValidNumber(ny) && ny < 0) ? 'rs-neg' : '');
+                    const sCyColor = (isValidNumber(sCy) && sCy > 0) ? 'rs-pos' : ((isValidNumber(sCy) && sCy < 0) ? 'rs-neg' : '');
+                    const sNyColor = (isValidNumber(sNy) && sNy > 0) ? 'rs-pos' : ((isValidNumber(sNy) && sNy < 0) ? 'rs-neg' : '');
+                    const eCyColor = (isValidNumber(eCy) && eCy > 0) ? 'rs-pos' : ((isValidNumber(eCy) && eCy < 0) ? 'rs-neg' : '');
+                    const eNyColor = (isValidNumber(eNy) && eNy > 0) ? 'rs-pos' : ((isValidNumber(eNy) && eNy < 0) ? 'rs-neg' : '');
+
+                    // Fetch FS Data for this ticker
+                    const fs = fsData[ticker] || {};
+                    const sale0 = fs['0SALE'] !== undefined && fs['0SALE'] !== null ? fs['0SALE'] + '%' : '-';
+                    const sale1 = fs['1SALE'] !== undefined && fs['1SALE'] !== null ? fs['1SALE'] + '%' : '-';
+                    const sale2 = fs['2SALE'] !== undefined && fs['2SALE'] !== null ? fs['2SALE'] + '%' : '-';
+                    
+                    let ni0 = fs['0NI'] !== undefined && fs['0NI'] !== null ? fs['0NI'] : '-';
+                    let ni1 = fs['1NI'] !== undefined && fs['1NI'] !== null ? fs['1NI'] : '-';
+                    let ni2 = fs['2NI'] !== undefined && fs['2NI'] !== null ? fs['2NI'] : '-';
+                    
+                    if (ni0 !== '-' && ni0 !== '흑자전환') ni0 += '%';
+                    if (ni1 !== '-' && ni1 !== '흑자전환') ni1 += '%';
+                    if (ni2 !== '-' && ni2 !== '흑자전환') ni2 += '%';
+
+                    tr.innerHTML = `
+                        <td style="font-weight:bold;">
+                            <a href="https://finance.yahoo.com/quote/${item.Ticker}" target="_blank" style="color:#fff; text-decoration:none">
+                                ${item.Ticker}
+                            </a>
+                        </td>
+                        <td class="${fs['0SALE'] !== undefined && fs['0SALE'] > 0 ? 'rs-pos' : (fs['0SALE'] < 0 ? 'rs-neg' : '')}">${sale0}</td>
+                        <td class="${fs['1SALE'] !== undefined && fs['1SALE'] > 0 ? 'rs-pos' : (fs['1SALE'] < 0 ? 'rs-neg' : '')}">${sale1}</td>
+                        <td class="${fs['2SALE'] !== undefined && fs['2SALE'] > 0 ? 'rs-pos' : (fs['2SALE'] < 0 ? 'rs-neg' : '')}">${sale2}</td>
+                        <td class="${ni0 === '흑자전환' || (fs['0NI'] !== undefined && fs['0NI'] > 0) ? 'rs-pos' : (fs['0NI'] < 0 ? 'rs-neg' : '')}">${ni0}</td>
+                        <td class="${ni1 === '흑자전환' || (fs['1NI'] !== undefined && fs['1NI'] > 0) ? 'rs-pos' : (fs['1NI'] < 0 ? 'rs-neg' : '')}">${ni1}</td>
+                        <td class="${ni2 === '흑자전환' || (fs['2NI'] !== undefined && fs['2NI'] > 0) ? 'rs-pos' : (fs['2NI'] < 0 ? 'rs-neg' : '')}">${ni2}</td>
+                        <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : item.CY_Trend}</td>
+                        <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : item.NY_Trend}</td>
+                        <td class="${sCyColor}">${isValidNumber(sCy) ? sCy.toFixed(2) + '%' : item.SALE_CY}</td>
+                        <td class="${sNyColor}">${isValidNumber(sNy) ? sNy.toFixed(2) + '%' : item.SALE_NY}</td>
+                        <td class="${eCyColor}">${isValidNumber(eCy) ? eCy.toFixed(2) + '%' : item.EPS_CY}</td>
+                        <td class="${eNyColor}">${isValidNumber(eNy) ? eNy.toFixed(2) + '%' : item.EPS_NY}</td>
                     `;
                     tbody.appendChild(tr);
                 });
