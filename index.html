@@ -1273,6 +1273,16 @@
                     const fsRes = await fetch('./static/fs_data.json?t=' + new Date().getTime());
                     if (fsRes.ok) {
                         fsData = await fsRes.json();
+                        // Inject into globalData to allow easier sorting
+                        globalData.forEach(item => {
+                            const fs = fsData[item.Ticker] || {};
+                            item['0SALE'] = fs['0SALE'];
+                            item['1SALE'] = fs['1SALE'];
+                            item['2SALE'] = fs['2SALE'];
+                            item['0NI'] = fs['0NI'] === '흑자전환' ? 999999 : fs['0NI'];
+                            item['1NI'] = fs['1NI'] === '흑자전환' ? 999999 : fs['1NI'];
+                            item['2NI'] = fs['2NI'] === '흑자전환' ? 999999 : fs['2NI'];
+                        });
                     } else {
                         fsData = {};
                     }
@@ -2561,12 +2571,12 @@
                 // Today's List FS Table Header
                 thead.innerHTML = `
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
-                    <th>0SALE%</th>
-                    <th>1SALE%</th>
-                    <th>2SALE%</th>
-                    <th>0NI%</th>
-                    <th>1NI%</th>
-                    <th>2NI%</th>
+                    <th onclick="sortTable('0SALE')">0SALE% ⬍</th>
+                    <th onclick="sortTable('1SALE')">1SALE% ⬍</th>
+                    <th onclick="sortTable('2SALE')">2SALE% ⬍</th>
+                    <th onclick="sortTable('0NI')">0NI% ⬍</th>
+                    <th onclick="sortTable('1NI')">1NI% ⬍</th>
+                    <th onclick="sortTable('2NI')">2NI% ⬍</th>
                     <th onclick="sortTable('CY_Trend')">CY Trend (%) ⬍</th>
                     <th onclick="sortTable('NY_Trend')">NY Trend (%) ⬍</th>
                     <th onclick="sortTable('SALE_CY')">SALE CY(%) ⬍</th>

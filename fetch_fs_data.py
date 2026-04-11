@@ -143,9 +143,26 @@ def get_todays_list_tickers(result_json_path):
     for x in stocks:
         key = f"{x.get('Sector')}|{x.get('Industry')}"
         if key in top_keys:
+            # Need to match JS parsing
+            mc = x.get('Market Cap')
+            try:
+                if type(mc) == str:
+                    mv = float(mc.replace('B','').replace('M','').replace('T','').replace(',',''))
+                    if mv > 0:
+                        pass
+                    else: continue
+                elif type(mc) in [int, float] and mc > 0:
+                    pass
+                else: continue
+            except: continue
+
             val = x.get('RS_6mo')
-            if val is not None and not math.isnan(float(val)):
-                rs_vals[key].append(float(val))
+            try:
+                rs6 = float(val) if val is not None else 0.0
+                if math.isnan(rs6): rs6 = 0.0
+            except:
+                rs6 = 0.0
+            rs_vals[key].append(rs6)
     
     thresholds = {}
     for k in rs_vals:
@@ -169,12 +186,14 @@ def get_todays_list_tickers(result_json_path):
             if div50 <= 0 or div50 > 35: continue
         except: continue
             
-        rs6 = stock.get('RS_6mo')
-        if rs6 is None: continue
+        val = stock.get('RS_6mo')
         try:
-            rs6 = float(rs6)
-            if rs6 < thresholds.get(key, 9999): continue
-        except: continue
+            rs6 = float(val) if val is not None else 0.0
+            if math.isnan(rs6): rs6 = 0.0
+        except:
+            rs6 = 0.0
+            
+        if rs6 < thresholds.get(key, -9999): continue
             
         todays_list.append(stock['Ticker'])
         
