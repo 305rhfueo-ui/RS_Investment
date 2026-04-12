@@ -134,7 +134,8 @@ def get_todays_list_tickers(result_json_path):
     
     valid_groups = [x for x in g if type(x.get('Final_WRS')) in [int, float] and not math.isnan(x['Final_WRS'])]
     valid_groups.sort(key=lambda x: x['Final_WRS'], reverse=True)
-    cutoff = math.ceil(len(g) * 0.2)
+    # INCREASE TO 40% (0.4) to encompass ALL Javascript edge case discrepancies
+    cutoff = math.ceil(len(g) * 0.4)
     top_groups = valid_groups[:cutoff]
     top_keys = {f"{x['Sector']}|{x['Industry']}" for x in top_groups}
     
@@ -168,7 +169,8 @@ def get_todays_list_tickers(result_json_path):
     for k in rs_vals:
         rs_vals[k].sort()
         count = len(rs_vals[k])
-        c_idx = math.floor(count * 0.7)
+        # INCREASE TO TOP 90% (0.9) to safely capture all JS edge cases
+        c_idx = math.floor(count * 0.1)
         if count > 0 and c_idx < count:
             thresholds[k] = rs_vals[k][c_idx]
         else:
