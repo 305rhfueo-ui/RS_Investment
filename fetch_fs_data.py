@@ -128,78 +128,33 @@ def calculate_growth_rate(series):
 def get_todays_list_tickers(result_json_path):
     with open(result_json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
-    
-    g = data.get('wrs_data', [])
-    stocks = data.get('data', [])
-    
-    valid_groups = [x for x in g if type(x.get('Final_WRS')) in [int, float] and not math.isnan(x['Final_WRS'])]
-    valid_groups.sort(key=lambda x: x['Final_WRS'], reverse=True)
-    # INCREASE TO 40% (0.4) to encompass ALL Javascript edge case discrepancies
-    cutoff = math.ceil(len(g) * 0.4)
-    top_groups = valid_groups[:cutoff]
-    top_keys = {f"{x['Sector']}|{x['Industry']}" for x in top_groups}
-    
-    from collections import defaultdict
-    rs_vals = defaultdict(list)
-    for x in stocks:
-        key = f"{x.get('Sector')}|{x.get('Industry')}"
-        if key in top_keys:
-            # Need to match JS parsing
-            mc = x.get('Market Cap')
-            try:
-                if type(mc) == str:
-                    mv = float(mc.replace('B','').replace('M','').replace('T','').replace(',',''))
-                    if mv > 0:
-                        pass
-                    else: continue
-                elif type(mc) in [int, float] and mc > 0:
-                    pass
-                else: continue
-            except: continue
-
-            val = x.get('RS_6mo')
-            try:
-                rs6 = float(val) if val is not None else 0.0
-                if math.isnan(rs6): rs6 = 0.0
-            except:
-                rs6 = 0.0
-            rs_vals[key].append(rs6)
-    
-    thresholds = {}
-    for k in rs_vals:
-        rs_vals[k].sort()
-        count = len(rs_vals[k])
-        # INCREASE TO TOP 90% (0.9) to safely capture all JS edge cases
-        c_idx = math.floor(count * 0.1)
-        if count > 0 and c_idx < count:
-            thresholds[k] = rs_vals[k][c_idx]
-        else:
-            thresholds[k] = -9999
-            
-    todays_list = []
-    for stock in stocks:
-        key = f"{stock.get('Sector')}|{stock.get('Industry')}"
-        if key not in top_keys: continue
         
-        div50 = stock.get('50DIV')
-        if div50 is None: continue
+    stocks = data.get('data', [])
+    todays_list = []
+    
+    for stock in stocks:
+        val = stock.get('50DIV')
         try:
-            div50 = float(div50)
-            if div50 <= 0 or div50 > 35: continue
-        except: continue
-            
-        val = stock.get('RS_6mo')
-        try:
-            rs6 = float(val) if val is not None else 0.0
-            if math.isnan(rs6): rs6 = 0.0
+            div50 = float(val) if val is not None else -9999
         except:
-            rs6 = 0.0
+            div50 = -9999
             
-        if rs6 < thresholds.get(key, -9999): continue
+        if div50 <= 0 or div50 > 35: continue
+            
+        val_rs = stock.get('RS_6mo')
+        try:
+            rs6 = float(val_rs) if val_rs is not None else -9999
+            
+            import math
+            if math.isnan(rs6): rs6 = -9999
+        except:
+            rs6 = -9999
+            
+        if rs6 <= 0: continue
             
         todays_list.append(stock['Ticker'])
         
-    return todays_list
+    return list(set(todays_list))
 
 def main():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
