@@ -209,9 +209,12 @@ def main():
         fs_data[ticker] = res
         print(f" -> Success: SALE={[res['0SALE'], res['1SALE'], res['2SALE']]} NI={[res['0NI'], res['1NI'], res['2NI']]}")
         
-        
-    with open(SAVE_PATH, 'w', encoding='utf-8') as f:
-        json.dump(fs_data, f, indent=2, ensure_ascii=False)
+        # Save explicitly
+        with open(SAVE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(fs_data, f, indent=2, ensure_ascii=False)
+            
+        # Add random sleep between requests to avoid Macrotrends 403 blocks
+        time.sleep(random.uniform(5, 8))
         
     print("FS Data fetch complete and saved to fs_data.json.")
     
