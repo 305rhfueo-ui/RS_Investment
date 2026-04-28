@@ -5,6 +5,10 @@ on:
     # 매일 01:00 UTC에 실행 (한국 시간 오전 10시)
     - cron: '0 1 * * *'
   workflow_dispatch: # 수동 실행 가능
+  push:
+    paths:
+      - 'trigger.txt'
+
 
 jobs:
   build:
