@@ -130,30 +130,7 @@ def get_todays_list_tickers(result_json_path):
         data = json.load(f)
         
     stocks = data.get('data', [])
-    todays_list = []
-    
-    for stock in stocks:
-        val = stock.get('50DIV')
-        try:
-            div50 = float(val) if val is not None else -9999
-        except:
-            div50 = -9999
-            
-        if div50 <= 0 or div50 > 35: continue
-            
-        val_rs = stock.get('RS_6mo')
-        try:
-            rs6 = float(val_rs) if val_rs is not None else -9999
-            
-            import math
-            if math.isnan(rs6): rs6 = -9999
-        except:
-            rs6 = -9999
-            
-        if rs6 <= 0: continue
-            
-        todays_list.append(stock['Ticker'])
-        
+    todays_list = [stock['Ticker'] for stock in stocks]
     return list(set(todays_list))
 
 def main():

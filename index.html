@@ -2253,7 +2253,7 @@
 
 
             // 3. Apply Mode-Specific Filters
-            if (appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_LIST_FS') {
+            if (appState.mode === 'TODAYS_LIST') {
                 // [Requirement]
                 // 1. Sector/Industry: Count >= 2, Win-Rate >= 60%, Final WRS Top 20%
                 // 2. Individual: RS(6mo) Top 30% within Sector, 50DIV > 0
@@ -2571,6 +2571,8 @@
                 // Today's List FS Table Header
                 thead.innerHTML = `
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
+                    <th onclick="sortTable('Sector')">Sector ⬍</th>
+                    <th onclick="sortTable('Industry')">Industry ⬍</th>
                     <th onclick="sortTable('0SALE')">0SALE% ⬍</th>
                     <th onclick="sortTable('1SALE')">1SALE% ⬍</th>
                     <th onclick="sortTable('2SALE')">2SALE% ⬍</th>
@@ -2623,6 +2625,8 @@
                                 ${item.Ticker}
                             </a>
                         </td>
+                        <td>${item.Sector || ''}</td>
+                        <td>${item.Industry || ''}</td>
                         <td class="${fs['0SALE'] !== undefined && fs['0SALE'] > 0 ? 'rs-pos' : (fs['0SALE'] < 0 ? 'rs-neg' : '')}">${sale0}</td>
                         <td class="${fs['1SALE'] !== undefined && fs['1SALE'] > 0 ? 'rs-pos' : (fs['1SALE'] < 0 ? 'rs-neg' : '')}">${sale1}</td>
                         <td class="${fs['2SALE'] !== undefined && fs['2SALE'] > 0 ? 'rs-pos' : (fs['2SALE'] < 0 ? 'rs-neg' : '')}">${sale2}</td>
