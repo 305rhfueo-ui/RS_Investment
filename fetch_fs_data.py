@@ -157,8 +157,23 @@ def main():
 
     session = requests.Session()
     
+    fetch_count = 0
     for i, ticker in enumerate(tickers):
-        print(f"[{i+1}/{len(tickers)}] Fetching FS for {ticker}...")
+        print(f"[{i+1}/{len(tickers)}] Processing FS for {ticker}...")
+        
+        # SKIP LOGIC: if updated within the last 14 days and has data
+        if ticker in fs_data:
+            last_up = fs_data[ticker].get("last_updated")
+            if last_up:
+                try:
+                    last_dt = datetime.strptime(last_up, "%Y-%m-%d %H:%M:%S")
+                    if (datetime.now() - last_dt).days < 14 and fs_data[ticker].get("0SALE") is not None:
+                        print(f" -> Skipped {ticker}: Recently updated ({last_up})")
+                        continue
+                except:
+                    pass
+
+        print(f" -> Fetching data for {ticker}...")
         df, err = get_financial_data(ticker, freq='Q', session=session)
         
         if err or df is None:
@@ -189,6 +204,20 @@ def main():
         # Save explicitly
         with open(SAVE_PATH, 'w', encoding='utf-8') as f:
             json.dump(fs_data, f, indent=2, ensure_ascii=False)
+            
+        fetch_count += 1
+        # Incremental push every 50 fetches to avoid losing data on 6-hour GitHub Actions timeout
+        if fetch_count % 50 == 0:
+            print(f"Pushing intermediate progress ({fetch_count} fetched)...")
+            try:
+                os.system('git config --global user.name "github-actions[bot]"')
+                os.system('git config --global user.email "github-actions[bot]@users.noreply.github.com"')
+                os.system('git add static/fs_data.json fetch_fs_data.py')
+                os.system('git commit -m "Auto-update: FS Data (Intermediate)"')
+                os.system('git push')
+                print(" -> Intermediate push successful.")
+            except Exception as e:
+                print(f" -> Intermediate push failed: {e}")
             
         # Add random sleep between requests to avoid Macrotrends 403 blocks
         time.sleep(random.uniform(5, 8))
