@@ -2607,17 +2607,24 @@
 
                     // Fetch FS Data for this ticker
                     const fs = fsData[ticker] || {};
-                    const sale0 = fs['0SALE'] !== undefined && fs['0SALE'] !== null ? fs['0SALE'] + '%' : '-';
-                    const sale1 = fs['1SALE'] !== undefined && fs['1SALE'] !== null ? fs['1SALE'] + '%' : '-';
-                    const sale2 = fs['2SALE'] !== undefined && fs['2SALE'] !== null ? fs['2SALE'] + '%' : '-';
-                    
-                    let ni0 = fs['0NI'] !== undefined && fs['0NI'] !== null ? fs['0NI'] : '-';
-                    let ni1 = fs['1NI'] !== undefined && fs['1NI'] !== null ? fs['1NI'] : '-';
-                    let ni2 = fs['2NI'] !== undefined && fs['2NI'] !== null ? fs['2NI'] : '-';
-                    
-                    if (ni0 !== '-' && ni0 !== '흑자전환') ni0 += '%';
-                    if (ni1 !== '-' && ni1 !== '흑자전환') ni1 += '%';
-                    if (ni2 !== '-' && ni2 !== '흑자전환') ni2 += '%';
+                    const formatFsVal = (val) => {
+                        if (val === undefined || val === null) return '-';
+                        if (typeof val === 'number') return val + '%';
+                        return val;
+                    };
+                    const getFsColor = (val) => {
+                        if (val === '흑자전환' || val === '적자축소') return 'rs-pos';
+                        if (val === '적자확대' || val === '적자지속') return 'rs-neg';
+                        if (typeof val === 'number') return val > 0 ? 'rs-pos' : (val < 0 ? 'rs-neg' : '');
+                        return '';
+                    };
+
+                    const sale0 = formatFsVal(fs['0SALE']);
+                    const sale1 = formatFsVal(fs['1SALE']);
+                    const sale2 = formatFsVal(fs['2SALE']);
+                    const ni0 = formatFsVal(fs['0NI']);
+                    const ni1 = formatFsVal(fs['1NI']);
+                    const ni2 = formatFsVal(fs['2NI']);
 
                     tr.innerHTML = `
                         <td style="font-weight:bold;">
@@ -2627,12 +2634,12 @@
                         </td>
                         <td>${item.Sector || ''}</td>
                         <td>${item.Industry || ''}</td>
-                        <td class="${fs['0SALE'] !== undefined && fs['0SALE'] > 0 ? 'rs-pos' : (fs['0SALE'] < 0 ? 'rs-neg' : '')}">${sale0}</td>
-                        <td class="${fs['1SALE'] !== undefined && fs['1SALE'] > 0 ? 'rs-pos' : (fs['1SALE'] < 0 ? 'rs-neg' : '')}">${sale1}</td>
-                        <td class="${fs['2SALE'] !== undefined && fs['2SALE'] > 0 ? 'rs-pos' : (fs['2SALE'] < 0 ? 'rs-neg' : '')}">${sale2}</td>
-                        <td class="${ni0 === '흑자전환' || (fs['0NI'] !== undefined && fs['0NI'] > 0) ? 'rs-pos' : (fs['0NI'] < 0 ? 'rs-neg' : '')}">${ni0}</td>
-                        <td class="${ni1 === '흑자전환' || (fs['1NI'] !== undefined && fs['1NI'] > 0) ? 'rs-pos' : (fs['1NI'] < 0 ? 'rs-neg' : '')}">${ni1}</td>
-                        <td class="${ni2 === '흑자전환' || (fs['2NI'] !== undefined && fs['2NI'] > 0) ? 'rs-pos' : (fs['2NI'] < 0 ? 'rs-neg' : '')}">${ni2}</td>
+                        <td class="${getFsColor(fs['0SALE'])}">${sale0}</td>
+                        <td class="${getFsColor(fs['1SALE'])}">${sale1}</td>
+                        <td class="${getFsColor(fs['2SALE'])}">${sale2}</td>
+                        <td class="${getFsColor(fs['0NI'])}">${ni0}</td>
+                        <td class="${getFsColor(fs['1NI'])}">${ni1}</td>
+                        <td class="${getFsColor(fs['2NI'])}">${ni2}</td>
                         <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : item.CY_Trend}</td>
                         <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : item.NY_Trend}</td>
                         <td class="${sCyColor}">${isValidNumber(sCy) ? sCy.toFixed(2) + '%' : item.SALE_CY}</td>

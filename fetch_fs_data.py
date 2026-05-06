@@ -101,6 +101,13 @@ def calculate_ni_growth(series):
             if pd.notna(curr) and pd.notna(prev) and prev != 0:
                 if prev < 0 and curr > 0:
                     rates.append("흑자전환")
+                elif prev < 0 and curr < 0:
+                    if curr > prev:
+                        rates.append("적자축소")
+                    elif curr < prev:
+                        rates.append("적자확대")
+                    else:
+                        rates.append("적자지속")
                 else:
                     g = (curr / prev) - 1
                     rates.append(round(g * 100, 2))
@@ -117,8 +124,18 @@ def calculate_growth_rate(series):
             curr = series.iloc[i]
             prev = series.iloc[i+4]
             if pd.notna(curr) and pd.notna(prev) and prev != 0:
-                g = (curr / abs(prev)) - 1
-                rates.append(round(g * 100, 2))
+                if prev < 0 and curr > 0:
+                    rates.append("흑자전환")
+                elif prev < 0 and curr < 0:
+                    if curr > prev:
+                        rates.append("적자축소")
+                    elif curr < prev:
+                        rates.append("적자확대")
+                    else:
+                        rates.append("적자지속")
+                else:
+                    g = (curr / abs(prev)) - 1
+                    rates.append(round(g * 100, 2))
             else:
                 rates.append(None)
         else:
