@@ -484,21 +484,33 @@
 
 
 
-                    <button id="wrs-btn" onclick="showWRS()" class="download-btn"
-                        style="background-color:#00e676; color:#000;">
-                        Sector/Industry WRS
-                    </button>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap: 5px;">
+                        <button id="wrs-btn" onclick="showWRS()" class="download-btn"
+                            style="background-color:#00e676; color:#000;">
+                            Sector/Industry WRS
+                        </button>
+                        <a href="#" id="real-rise-btn" onclick="toggleRealRise(); return false;"
+                            style="color: #00e676; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                            찐상승
+                        </a>
+                    </div>
 
                     <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
                         style="background-color:#ff9800; color:#000;">
                         Today's List
                     </button>
 
-                    <!-- [Added] Today's list FS -->
-                    <button id="todays-list-fs-btn" onclick="showTodaysListFS()" class="download-btn"
-                        style="background-color:#ff9800; color:#000;">
-                        Today's list FS
-                    </button>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap: 5px;">
+                        <!-- [Added] Today's list FS -->
+                        <button id="todays-list-fs-btn" onclick="showTodaysListFS()" class="download-btn"
+                            style="background-color:#ff9800; color:#000;">
+                            Today's list FS
+                        </button>
+                        <a href="#" id="sector-fs-click-btn" onclick="showDrilldownFS(); return false;"
+                            style="color: #ff9800; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                            Click
+                        </a>
+                    </div>
 
                     <button id="todays-main-btn" onclick="showTodaysMain()" class="download-btn"
                         style="background-color:#e91e63; color:#ffffff;">
@@ -1627,9 +1639,14 @@
                 subtitle.style.color = "#ff5252"; // Red
                 if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
-            } else if (appState.mode === 'DRILLDOWN') {
-                subtitleText = "Sector Detail View";
-                subtitle.style.color = "#00e676";
+            } else if (appState.mode === 'DRILLDOWN' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
+                if (appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
+                    subtitleText = "Sector Detail View (FS)";
+                    subtitle.style.color = "#ff9800";
+                } else {
+                    subtitleText = "Sector Detail View";
+                    subtitle.style.color = "#00e676";
+                }
                 if (wrsBtn) wrsBtn.innerText = "Back to WRS List";
 
             } else if (appState.mode === 'TODAYS_LIST') {
@@ -1713,6 +1730,43 @@
                 }
             }
 
+            // [Added] Real Rise Filter UI Update
+            const realRiseBtn = document.getElementById('real-rise-btn');
+            if (appState.mode === 'WRS') {
+                if (realRiseBtn) {
+                    realRiseBtn.style.display = 'inline-block';
+                    if (appState.realRiseFilter) {
+                        realRiseBtn.innerText = "돌아가기";
+                        subtitleText += " (찐상승)";
+                    } else {
+                        realRiseBtn.innerText = "찐상승";
+                    }
+                }
+            } else {
+                if (realRiseBtn) realRiseBtn.style.display = 'none';
+            }
+
+            // [Added] Sector FS Click UI Update
+            const sectorFsBtn = document.getElementById('sector-fs-click-btn');
+            if (appState.mode === 'DRILLDOWN' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
+                if (sectorFsBtn) {
+                    sectorFsBtn.style.display = 'inline-block';
+                    if (appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
+                        sectorFsBtn.innerText = "Click"; // Text doesn't change based on state since clicking back goes to DrillDown 
+                        // Wait, user says: "Click이라는 링크가 보일거야 ... 누르면 ... 보여줄거야". Let's change text to "돌아가기" if clicked?
+                        // User didn't ask to change text of "Click" button to go back. But let's add a way to go back.
+                        // For now we just keep the text "Click" but action shows FS. Or maybe change to "Back to Sector View" ?
+                        // Let's use "돌아가기" for consistency.
+                        sectorFsBtn.innerText = "돌아가기";
+                        // The onclick is handled below or we just define toggle. We will change action in showDrilldownFS.
+                    } else {
+                        sectorFsBtn.innerText = "Click";
+                    }
+                }
+            } else {
+                if (sectorFsBtn) sectorFsBtn.style.display = 'none';
+            }
+
             subtitle.innerText = subtitleText;
 
             // 2. Render Data
@@ -1763,6 +1817,30 @@
                 calculateWRS();
             }
 
+            updateUI();
+        }
+
+        // [Added] Function for Drilldown FS
+        function showDrilldownFS() {
+            if (appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
+                appState.mode = 'DRILLDOWN';
+            } else {
+                appState.mode = 'TODAYS_LIST_FS_DRILLDOWN';
+                appState.sort = { key: 'Ticker', asc: true };
+            }
+            appState.filterText = '';
+            document.getElementById('search-input').value = '';
+            
+            if (groupedData.length === 0) {
+                calculateWRS();
+            }
+
+            updateUI();
+        }
+
+        // [Added] Toggle Real Rise Filter
+        function toggleRealRise() {
+            appState.realRiseFilter = !appState.realRiseFilter;
             updateUI();
         }
 
@@ -2185,7 +2263,7 @@
                 targetData = [...globalData]; // Copy
             } else if (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') {
                 targetData = [...groupedData];
-            } else if (appState.mode === 'DRILLDOWN') {
+            } else if (appState.mode === 'DRILLDOWN' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
                 // Filter globalData by DrillDownKey
                 targetData = globalData.filter(item => {
                     return `${item.Sector}|${item.Industry}` === appState.drillDownKey;
@@ -2441,6 +2519,17 @@
                 }
             }
 
+            }
+
+            // [Added] Apply Real Rise Filter
+            if (appState.realRiseFilter && appState.mode === 'WRS') {
+                targetData = targetData.filter(g => {
+                    const frankChg = g.FRANK_25D_Chg;
+                    const f25dChg = g.Final_WRS_25D_Chg;
+                    return isValidNumber(frankChg) && frankChg > 0 && isValidNumber(f25dChg) && f25dChg > 0;
+                });
+            }
+
             // [Added] Apply Industry Filter
             if (appState.industryFilter !== null) {
                 const industrySet = new Set(appState.industryFilter);
@@ -2567,7 +2656,7 @@
                     tbody.appendChild(tr);
                 });
 
-            } else if (appState.mode === 'TODAYS_LIST_FS') {
+            } else if (appState.mode === 'TODAYS_LIST_FS' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
                 // Today's List FS Table Header
                 thead.innerHTML = `
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
