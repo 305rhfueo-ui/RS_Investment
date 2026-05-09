@@ -1826,7 +1826,7 @@
                 appState.mode = 'DRILLDOWN';
             } else {
                 appState.mode = 'TODAYS_LIST_FS_DRILLDOWN';
-                appState.sort = { key: 'Ticker', asc: true };
+                // Preserve current sort order
             }
             appState.filterText = '';
             document.getElementById('search-input').value = '';
