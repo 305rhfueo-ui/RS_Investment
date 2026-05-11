@@ -2660,6 +2660,8 @@
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="sortTable('Industry')">Industry ⬍</th>
+                    <th onclick="sortTable('50DIV')">50 div(%) ⬍</th>
+                    <th onclick="sortTable('10DIV')">10 div(%) ⬍</th>
                     <th onclick="sortTable('0SALE')">0SALE% ⬍</th>
                     <th onclick="sortTable('1SALE')">1SALE% ⬍</th>
                     <th onclick="sortTable('2SALE')">2SALE% ⬍</th>
@@ -2721,6 +2723,8 @@
                         </td>
                         <td>${item.Sector || ''}</td>
                         <td>${item.Industry || ''}</td>
+                        <td style="${getChgColor(item['50DIV'])}">${isValidNumber(item['50DIV']) ? parseFloat(item['50DIV']).toFixed(1) + '%' : '-'}</td>
+                        <td style="${getChgColor(item['10DIV'])}">${isValidNumber(item['10DIV']) ? parseFloat(item['10DIV']).toFixed(1) + '%' : '-'}</td>
                         <td class="${getFsColor(fs['0SALE'])}">${sale0}</td>
                         <td class="${getFsColor(fs['1SALE'])}">${sale1}</td>
                         <td class="${getFsColor(fs['2SALE'])}">${sale2}</td>
