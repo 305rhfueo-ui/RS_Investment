@@ -489,10 +489,16 @@
                             style="background-color:#00e676; color:#000;">
                             Sector/Industry WRS
                         </button>
-                        <a href="#" id="real-rise-btn" onclick="toggleRealRise(); return false;"
-                            style="color: #00e676; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
-                            찐상승
-                        </a>
+                        <div style="display:flex; gap: 10px;">
+                            <a href="#" id="real-rise-btn" onclick="toggleRealRise(); return false;"
+                                style="color: #00e676; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                                찐상승
+                            </a>
+                            <a href="#" id="real-real-rise-btn" onclick="toggleRealRealRise(); return false;"
+                                style="color: #00e676; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                                찐찐상승
+                            </a>
+                        </div>
                     </div>
 
                     <button id="todays-list-btn" onclick="showTodaysList()" class="download-btn"
@@ -1194,6 +1200,8 @@
             momentumFilter: false, // [Added] Momentum Filter State (개별 탄력붙은놈)
             sectorMomentumFilter: false, // [Added] Sector Momentum Filter State (섹터 탄력붙은놈)
             wPatternFilter: false, // [Added] W-Pattern Filter State
+            realRiseFilter: false,
+            realRealRiseFilter: false,
             industryFilter: null, // [Added] Industry Filter State (Array of selected industries, or null)
             date10D: '',
             date25D: ''
@@ -1732,18 +1740,27 @@
 
             // [Added] Real Rise Filter UI Update
             const realRiseBtn = document.getElementById('real-rise-btn');
+            const realRealRiseBtn = document.getElementById('real-real-rise-btn');
             if (appState.mode === 'WRS') {
-                if (realRiseBtn) {
-                    realRiseBtn.style.display = 'inline-block';
-                    if (appState.realRiseFilter) {
-                        realRiseBtn.innerText = "돌아가기";
-                        subtitleText += " (찐상승)";
-                    } else {
-                        realRiseBtn.innerText = "찐상승";
-                    }
+                if (realRiseBtn) realRiseBtn.style.display = 'inline-block';
+                if (realRealRiseBtn) realRealRiseBtn.style.display = 'inline-block';
+                
+                if (appState.realRiseFilter) {
+                    if (realRiseBtn) realRiseBtn.innerText = "돌아가기";
+                    subtitleText += " (찐상승)";
+                } else {
+                    if (realRiseBtn) realRiseBtn.innerText = "찐상승";
+                }
+
+                if (appState.realRealRiseFilter) {
+                    if (realRealRiseBtn) realRealRiseBtn.innerText = "돌아가기";
+                    subtitleText += " (찐찐상승)";
+                } else {
+                    if (realRealRiseBtn) realRealRiseBtn.innerText = "찐찐상승";
                 }
             } else {
                 if (realRiseBtn) realRiseBtn.style.display = 'none';
+                if (realRealRiseBtn) realRealRiseBtn.style.display = 'none';
             }
 
             // [Added] Sector FS Click UI Update
@@ -1841,6 +1858,13 @@
         // [Added] Toggle Real Rise Filter
         function toggleRealRise() {
             appState.realRiseFilter = !appState.realRiseFilter;
+            if (appState.realRiseFilter) appState.realRealRiseFilter = false;
+            updateUI();
+        }
+
+        function toggleRealRealRise() {
+            appState.realRealRiseFilter = !appState.realRealRiseFilter;
+            if (appState.realRealRiseFilter) appState.realRiseFilter = false;
             updateUI();
         }
 
@@ -2525,6 +2549,15 @@
                     const frankChg = g.FRANK_25D_Chg;
                     const f25dChg = g.Final_WRS_25D_Chg;
                     return isValidNumber(frankChg) && frankChg > 0 && isValidNumber(f25dChg) && f25dChg > 0;
+                });
+            } else if (appState.realRealRiseFilter && appState.mode === 'WRS') {
+                targetData = targetData.filter(g => {
+                    const frankChg = g.FRANK_25D_Chg;
+                    const f25dChg = g.Final_WRS_25D_Chg;
+                    const f10dChg = g.Final_WRS_10D_Chg;
+                    return isValidNumber(frankChg) && frankChg > 0 && 
+                           isValidNumber(f25dChg) && f25dChg > 0 && 
+                           isValidNumber(f10dChg) && f10dChg > 0;
                 });
             }
 
