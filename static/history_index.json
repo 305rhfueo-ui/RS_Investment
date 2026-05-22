@@ -1,7 +1,11 @@
 {
-  "last_updated": "2026-05-21 23:39:56 UTC",
-  "total_history": 105,
+  "last_updated": "2026-05-22 23:06:20 UTC",
+  "total_history": 106,
   "dates": [
+    {
+      "date": "2026-05-22",
+      "filename": "history/result_2026-05-22.json"
+    },
     {
       "date": "2026-05-21",
       "filename": "history/result_2026-05-21.json"
