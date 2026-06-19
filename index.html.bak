@@ -361,16 +361,28 @@
                 📢 시장판단(필독)
             </a>
 
-            <!-- Old Strategy Popup Link -->
-            <a href="#" onclick="openOldStrategyPopup(); return false;"
-                style="color: #ffca28; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
-                🔑 Old Strategy
+            <!-- Prevent Top Popup Link -->
+            <a href="#" onclick="openPreventTopPopup(); return false;"
+                style="color: #00bcd4; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                🛡️ 투자방법(강세장)
             </a>
 
-            <!-- [Added] Perfect Storm Strategy Link -->
-            <a href="#" onclick="openPerfectStormPopup(); return false;"
+            <!-- [Added] Down Market Invest Method Link -->
+            <a href="#" onclick="openDownMarketInvestPopup(); return false;"
+                style="color: #9c27b0; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                📉 투자방법(하락장)
+            </a>
+
+            <!-- Notice Ticker Link -->
+            <a href="#" onclick="openNoticePopup(); return false;"
                 style="color: #00e676; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
-                ⚡ Perfect Storm 전략
+                👀 주목해야할 티커
+            </a>
+
+            <!-- Core of Pullback Investment Link -->
+            <a href="#" onclick="openPullbackCorePopup(); return false;"
+                style="color: #ff9800; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                🎯 눌림목투자핵심
             </a>
 
             <!-- [Added] Eungbong Ajussi Link -->
@@ -504,7 +516,7 @@
                         <!-- [Added] Today's list FS -->
                         <button id="todays-list-fs-btn" onclick="showTodaysListFS()" class="download-btn"
                             style="background-color:#ff9800; color:#000;">
-                            FS
+                            Today's list FS
                         </button>
                         <a href="#" id="sector-fs-click-btn" onclick="showDrilldownFS(); return false;"
                             style="color: #ff9800; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
@@ -517,11 +529,44 @@
                         Today's Main
                     </button>
 
-                    <!-- [Added] Perfect Storm Breakout View Link -->
-                    <button id="breakout-btn" onclick="showBreakout()" class="download-btn"
-                        style="background-color:#00bcd4; color:#000;">
-                        돌파항목
-                    </button>
+                    <!-- Rising Links (Text style buttons) -->
+                    <a href="#" onclick="showRisingStocks(); return false;"
+                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        ⚡급등/반등가능성↑종목
+                    </a>
+                    <a href="#" onclick="showRisingSectors(); return false;"
+                        style="color: #ffca28; text-decoration: none; font-size: 14px; font-weight: bold;">
+                        ⚡급등/반등가능성↑섹터
+                    </a>
+
+                    <!-- [Added] Energy Filter Button -->
+                    <a href="#" id="energy-filter-btn" onclick="toggleEnergyFilter(); return false;"
+                        style="color: #FFD700; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        ⚡에너지응축하는놈
+                    </a>
+
+                    <!-- [Added] High Growth Filter Button -->
+                    <a href="#" id="high-growth-filter-btn" onclick="toggleHighGrowthFilter(); return false;"
+                        style="color: #ff9800; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        🚀고성장하는놈
+                    </a>
+
+                    <!-- [Added] Momentum Filter Button -->
+                    <a href="#" id="momentum-filter-btn" onclick="toggleMomentumFilter(); return false;"
+                        style="color: #ff5722; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        🔥(개별)탄력붙은놈
+                    </a>
+
+                    <!-- [Added] Sector Momentum Filter Button -->
+                    <a href="#" id="sector-momentum-filter-btn" onclick="toggleSectorMomentumFilter(); return false;"
+                        style="color: #e91e63; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px;">
+                        🎯(섹터)탄력붙은놈
+                    </a>
+
+                    <a href="#" id="wpattern-filter-btn" onclick="toggleWPatternFilter(); return false;"
+                        style="color: #9c27b0; text-decoration: none; font-size: 14px; font-weight: bold; margin-left: 10px; display: none;">
+                        📉W형 패턴
+                    </a>
 
                     <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
                 </div>
@@ -619,7 +664,7 @@
             <div style="background:#222; padding:10px; border-radius:5px; margin-bottom:10px;">
                 <strong style="color:#00e676;">② 그 중에서 실적이 급상승하는 애들 누구야?</strong>
                 <ul style="line-height: 1.6; margin-top:5px;">
-                    <li><strong>FS</strong> 밑에 click 해서</li>
+                    <li>today’s list FS 밑에 click 해서</li>
                     <li><strong>(무조건)</strong> 실적 상승률 자체가 상승하는 애들 0NI% > 1NI% > 2NI%, 0SALE%>1SALE%>2SALE% 중에서 골라
                         <br><span style="color:#888;">※ semiconductor의 MU가 가장 이상적인 실적 상승세 흐름 탄 애들</span>
                     </li>
@@ -1032,64 +1077,35 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
 
-    <!-- Old Strategy Modal -->
-    <div id="old-strategy-popup" class="modal">
-        <div class="modal-content" style="max-width: 500px; text-align: center; padding: 25px; background-color: #1a1a1a; border-radius: 8px;">
-            <span class="close-btn" onclick="closeOldStrategyPopup()">&times;</span>
-            <h2 style="margin-top:0; color:#ffca28; margin-bottom: 25px;">🔑 Old Strategy</h2>
-            <div style="display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; padding: 10px 0;">
-                <a href="#" onclick="openPreventTopPopup(); closeOldStrategyPopup(); return false;"
-                    style="color: #00bcd4; text-decoration: underline; font-size: 18px; font-weight: bold;">
-                    🛡️ 투자방법(강세장)
-                </a>
-                <a href="#" onclick="openDownMarketInvestPopup(); closeOldStrategyPopup(); return false;"
-                    style="color: #9c27b0; text-decoration: underline; font-size: 18px; font-weight: bold;">
-                    📉 투자방법(하락장)
-                </a>
-                <a href="#" onclick="openPullbackCorePopup(); closeOldStrategyPopup(); return false;"
-                    style="color: #ff9800; text-decoration: underline; font-size: 18px; font-weight: bold;">
-                    🎯 눌림목투자핵심
-                </a>
+    <!-- Notice Ticker Modal -->
+    <div id="notice-popup" class="modal">
+        <div class="modal-content"
+            style="max-width: 1000px; width: 90%; height: 80vh; display: flex; flex-direction: column;">
+            <div>
+                <span class="close-btn" onclick="closeNoticePopup()">&times;</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 style="margin: 0; color: #00e676;">👀 주목해야할 티커</h2>
+                    <input type="password" id="notice-password" placeholder="비밀번호"
+                        style="padding: 8px; width: 100px; background: #222; color: #fff; border: 1px solid #444; border-radius: 4px;"
+                        oninput="checkNoticePassword()">
+                </div>
+            </div>
+            <div style="flex-grow: 1; display: flex; flex-direction: column;">
+                <textarea id="notice-textarea"
+                    style="width: 100%; flex-grow: 1; min-height: 200px; background: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 15px; font-family: inherit; font-size: 16px; box-sizing: border-box; resize: none; overflow-y: auto; opacity: 1; -webkit-text-fill-color: #fff;"
+                    readonly placeholder="비밀번호를 입력해야 작성할 수 있습니다."></textarea>
+            </div>
+            <div style="margin-top: 15px; text-align: right;">
+                <button onclick="saveNoticePopup()" id="notice-save-btn"
+                    style="padding: 10px 20px; font-size: 16px; background-color: #00e676; color: #000; border: none; border-radius: 4px; cursor: pointer; display: none; margin-right: 10px; font-weight: bold;">저장</button>
+                <button onclick="closeNoticePopup()"
+                    style="padding: 10px 20px; font-size: 16px; background-color: #555; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">취소</button>
             </div>
         </div>
     </div>
-
-    <!-- Perfect Storm Strategy Modal -->
-    <div id="perfect-storm-popup" class="modal">
-        <div class="modal-content" style="max-width: 700px; text-align: left; padding: 30px; background-color: #1a1a1a; border-radius: 8px; border: 1px solid #333; line-height: 1.6; max-height: 85vh; overflow-y: auto;">
-            <span class="close-btn" onclick="closePerfectStormPopup()">&times;</span>
-            <h2 style="margin-top:0; color:#00e676; border-bottom: 2px solid #00e676; padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                <span>⚡</span> Perfect Storm 전략 (3단계 사전조건 & 4단계 진입시그널)
-            </h2>
-            
-            <h3 style="color: #00bcd4; margin-top: 20px; margin-bottom: 8px;">🔥 3단계: 종목 사전 조건 — 검증된 추세 + 시세 능력 (5가지 모두 만족)</h3>
-            <ul style="list-style-type: decimal; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
-                <li style="margin-bottom: 8px;"><strong>주가 &ge; 52주 최고가의 80% :</strong> 1년 고점에서 20% 이내 (미너비니 Trend Template). 역배열 바닥 잡기 차단. 신고가 영역은 본전 매물이 없어 가장 가볍게 상승함.</li>
-                <li style="margin-bottom: 8px;"><strong>중장기 정배열 (20일 > 60일 > 120일선) :</strong> 보유자 전원이 수익 중인 본격 상승 국면(Stage 2). 구조적 매도 압력이 매우 낮음.</li>
-                <li style="margin-bottom: 8px;"><strong>50DIV &le; 30% :</strong> 50일선 대비 30% 이상 위면 진입 금지. 평균 매수자들의 차익실현 압력을 피하고 "강하지만 아직 안 비싼" 구간만 진입.</li>
-                <li style="margin-bottom: 8px;"><strong>ADR% &ge; 3.5%~4.0% :</strong> 최근 20일간 매일의 고가/저가 평균 변동폭. 둔한 종목을 제거하고, 추세 타면 급등 가능한 "잘 뛰는 말"만 남김 (쿨라매기).</li>
-                <li style="margin-bottom: 8px;"><strong>최근 1~3개월 내 +30% 이상 급등 이력 :</strong> "대박을 칠 수 있는 넘치는 끼(시세 능력)"가 이미 증명된 종목만 선택.</li>
-            </ul>
-
-            <h3 style="color: #9c27b0; margin-top: 25px; margin-bottom: 8px;">🚀 4단계: 진입 시그널 — 3개 동시 충족 (전 영업일 종가 기준)</h3>
-            <ul style="list-style-type: decimal; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
-                <li style="margin-bottom: 8px;"><strong>60D_BRK = YES :</strong> 종가 &gt; 직전 60영업일(전일 제외) 최고가. 3개월 박스 천장 돌파 = 매물 소화 완료.</li>
-                <li style="margin-bottom: 8px;"><strong>VOL_X &ge; 2.0 :</strong> 전일 거래대금 &divide; 20일 평균 거래대금. 기관 매수의 직접 증거 (가장 중요한 단일 필터).</li>
-                <li style="margin-bottom: 8px;"><strong>CLS_POS &ge; 50 :</strong> (종가 - 저가) &divide; (고가 - 저가) * 100. 100에 가까울수록 강함. 윗꼬리가 긴 실패 돌파를 걸러내기 위한 검문소.</li>
-            </ul>
-
-            <h3 style="color: #ff9800; margin-top: 25px; margin-bottom: 8px;">🎯 진입 실행 & 가이드</h3>
-            <ul style="list-style-type: disc; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
-                <li style="margin-bottom: 8px;"><strong>익일 진입:</strong> 아침에 본 대시보드 시그널을 확인한 후, 당일 밤 미국 주식 시장에서 매수합니다.</li>
-                <li style="margin-bottom: 8px;"><strong>오닐 피벗 룰(중요):</strong> 돌파 가격 대비 <strong>+5% 이상 추격 매수 절대 금지</strong>. 만약 장초반 갭이 크게 떠서 5%를 초과하면 그 거래는 포기합니다. 다음 기회는 반드시 옵니다.</li>
-            </ul>
-        </div>
-    </div>
-    </div>
-    </div>
-
-
 
     <!-- Pullback Core Modal -->
     <div id="pullback-core-popup" class="modal">
@@ -1269,22 +1285,37 @@
             document.getElementById('down-market-invest-popup').style.display = 'none';
         }
 
-        // --- Old Strategy Popup Functions ---
-        function openOldStrategyPopup() {
-            document.getElementById('old-strategy-popup').style.display = 'block';
+        // --- Notice Popup Functions ---
+        function openNoticePopup() {
+            document.getElementById('notice-popup').style.display = 'block';
+            document.getElementById('notice-password').value = '';
+            document.getElementById('notice-textarea').readOnly = true;
+            document.getElementById('notice-save-btn').style.display = 'none';
+            const savedText = localStorage.getItem('noticeTickers') || '';
+            document.getElementById('notice-textarea').value = savedText;
         }
 
-        function closeOldStrategyPopup() {
-            document.getElementById('old-strategy-popup').style.display = 'none';
+        function closeNoticePopup() {
+            document.getElementById('notice-popup').style.display = 'none';
         }
 
-        // --- Perfect Storm Strategy Popup Functions ---
-        function openPerfectStormPopup() {
-            document.getElementById('perfect-storm-popup').style.display = 'block';
+        function checkNoticePassword() {
+            const pwd = document.getElementById('notice-password').value;
+            const textarea = document.getElementById('notice-textarea');
+            const saveBtn = document.getElementById('notice-save-btn');
+            if (pwd === '5305') {
+                textarea.readOnly = false;
+                saveBtn.style.display = 'inline-block';
+            } else {
+                textarea.readOnly = true;
+                saveBtn.style.display = 'none';
+            }
         }
 
-        function closePerfectStormPopup() {
-            document.getElementById('perfect-storm-popup').style.display = 'none';
+        function saveNoticePopup() {
+            const text = document.getElementById('notice-textarea').value;
+            localStorage.setItem('noticeTickers', text);
+            closeNoticePopup();
         }
 
         // Close when clicking outside
@@ -1293,8 +1324,7 @@
             const investModal = document.getElementById('invest-popup');
             const preventTopModal = document.getElementById('prevent-top-popup');
             const downMarketModal = document.getElementById('down-market-invest-popup');
-            const oldStrategyModal = document.getElementById('old-strategy-popup');
-            const perfectStormModal = document.getElementById('perfect-storm-popup');
+            const noticeModal = document.getElementById('notice-popup');
 
             if (event.target == marketModal) {
                 marketModal.style.display = "none";
@@ -1308,11 +1338,8 @@
             if (event.target == downMarketModal) {
                 downMarketModal.style.display = "none";
             }
-            if (event.target == oldStrategyModal) {
-                oldStrategyModal.style.display = "none";
-            }
-            if (event.target == perfectStormModal) {
-                perfectStormModal.style.display = "none";
+            if (event.target == noticeModal) {
+                noticeModal.style.display = "none";
             }
         }
 
@@ -1329,6 +1356,10 @@
             sort: { key: 'RS_6mo', asc: false }, // Default Sort: RS(6mo) Descending
             filterRS_DiF: 'ALL', // 'ALL' | 'POS' | 'NEG'
             filterWRS_Dif: 'ALL', // 'ALL' | 'POS' | 'NEG'
+            energyFilter: false, // [Added] Energy Condensing Filter State
+            highGrowthFilter: false, // [Added] High Growth Filter State
+            momentumFilter: false, // [Added] Momentum Filter State (개별 탄력붙은놈)
+            sectorMomentumFilter: false, // [Added] Sector Momentum Filter State (섹터 탄력붙은놈)
             wPatternFilter: false, // [Added] W-Pattern Filter State
             realRiseFilter: false,
             realRealRiseFilter: false,
@@ -1756,6 +1787,7 @@
             const wrsBtn = document.getElementById('wrs-btn');
             const indivBtn = document.getElementById('indiv-btn');
             const resultCount = document.getElementById('result-count');
+            const energyBtn = document.getElementById('energy-filter-btn'); // [Added]
 
             if (!subtitle || !wrsBtn) {
                 console.error("Missing UI elements: subtitle or wrsBtn");
@@ -1797,7 +1829,7 @@
                 if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
             } else if (appState.mode === 'TODAYS_LIST_FS') {
-                subtitleText = "FS (Financial Statement)";
+                subtitleText = "Today's List FS (Financial Statement)";
                 subtitle.style.color = "#ff9800"; // Orange
                 if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
 
@@ -1817,7 +1849,40 @@
                 if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
             }
 
+            // [Added] Energy Filter UI Update
+            if (appState.energyFilter) {
+                if (energyBtn) energyBtn.innerText = "🔄 다시모든놈보여줘";
+                subtitleText += " (⚡에너지응축)";
+            } else {
+                if (energyBtn) energyBtn.innerText = "⚡에너지응축하는놈";
+            }
 
+            const highGrowthBtn = document.getElementById('high-growth-filter-btn');
+            // [Added] High Growth Filter UI Update
+            if (appState.highGrowthFilter) {
+                if (highGrowthBtn) highGrowthBtn.innerText = "🔄 다시돌아가기";
+                subtitleText += " (🚀고성장)";
+            } else {
+                if (highGrowthBtn) highGrowthBtn.innerText = "🚀고성장하는놈";
+            }
+
+            const momentumBtn = document.getElementById('momentum-filter-btn');
+            // [Added] Momentum Filter UI Update
+            if (appState.momentumFilter) {
+                if (momentumBtn) momentumBtn.innerText = "🔄 다시돌아가기";
+                subtitleText += " (🔥(개별)탄력붙은놈)";
+            } else {
+                if (momentumBtn) momentumBtn.innerText = "🔥(개별)탄력붙은놈";
+            }
+
+            const sectorMomentumBtn = document.getElementById('sector-momentum-filter-btn');
+            // [Added] Sector Momentum Filter UI Update
+            if (appState.sectorMomentumFilter) {
+                if (sectorMomentumBtn) sectorMomentumBtn.innerText = "🔄 다시돌아가기";
+                subtitleText += " (🎯(섹터)탄력붙은놈)";
+            } else {
+                if (sectorMomentumBtn) sectorMomentumBtn.innerText = "🎯(섹터)탄력붙은놈";
+            }
 
             const wPatternBtn = document.getElementById('wpattern-filter-btn');
             // [Added] W-Pattern Filter UI Update
@@ -1993,32 +2058,78 @@
             updateUI();
         }
 
-        function showBreakout() {
-            // WRS 드릴다운 상태(DRILLDOWN) 또는 이미 BREAKOUT인 상태에서 drillDownKey가 설정되어 있는 상황
-            if (appState.mode === 'DRILLDOWN' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
-                appState.mode = 'BREAKOUT';
-            } else if (appState.mode === 'BREAKOUT') {
-                // 이미 돌파항목 모드면 상태 유지
-            } else {
-                // 드릴다운 상태가 아닌 일반 모드에서 누르면 드릴다운 키 리셋
-                appState.mode = 'BREAKOUT';
-                appState.drillDownKey = null;
-            }
-            
-            appState.filterText = '';
-            document.getElementById('search-input').value = '';
+        // --- Rising Modes ---
+        function showRisingStocks() {
+            appState.mode = 'RISING_STOCKS';
+            // Sort by NY_Trend Desc
+            appState.sort = { key: 'NY_Trend', asc: false };
+
+            // Reset filters to avoid confusion, logic handled in getFilteredAndSortedData
+            appState.filterRS_DiF = 'ALL';
             appState.industryFilter = null;
-            appState.sort = { key: 'Ticker', asc: true }; // Ticker 가나다순 정렬이 기본으로 적합
+
+            document.getElementById('search-input').value = '';
             updateUI();
         }
 
+        function showRisingSectors() {
+            appState.mode = 'RISING_SECTORS';
+            // Sort by Win_Rate Desc
+            appState.sort = { key: 'Win_Rate', asc: false };
+            // Ensure WRS calculated
+            if (groupedData.length === 0) calculateWRS();
 
+            appState.filterWRS_Dif = 'ALL';
+            appState.industryFilter = null;
+            document.getElementById('search-input').value = '';
+            updateUI();
+        }
+
+        // [Added] Toggle Energy Filter
+        function toggleEnergyFilter() {
+            appState.energyFilter = !appState.energyFilter;
+            updateUI();
+        }
+
+        // [Added] Toggle High Growth Filter
+        function toggleHighGrowthFilter() {
+            appState.highGrowthFilter = !appState.highGrowthFilter;
+            // Disable mutually exclusive filters
+            if (appState.highGrowthFilter) {
+                appState.momentumFilter = false;
+            }
+            updateUI();
+        }
+
+        // [Added] Toggle Momentum Filter (개별 탄력붙은놈)
+        function toggleMomentumFilter() {
+            appState.momentumFilter = !appState.momentumFilter;
+            // Disable mutually exclusive filters
+            if (appState.momentumFilter) {
+                appState.highGrowthFilter = false;
+                appState.sectorMomentumFilter = false;
+            }
+            updateUI();
+        }
+
+        // [Added] Toggle Sector Momentum Filter (섹터 탄력붙은놈)
+        function toggleSectorMomentumFilter() {
+            appState.sectorMomentumFilter = !appState.sectorMomentumFilter;
+            // Disable mutually exclusive filters
+            if (appState.sectorMomentumFilter) {
+                appState.highGrowthFilter = false;
+                appState.momentumFilter = false;
+            }
+            updateUI();
+        }
 
         // [Added] Toggle W-Pattern Filter
         function toggleWPatternFilter() {
             appState.wPatternFilter = !appState.wPatternFilter;
             if (appState.wPatternFilter) {
                 appState.mode = 'INDIVIDUAL';
+                appState.energyFilter = false;
+                appState.highGrowthFilter = false;
                 appState.filterText = '';
                 document.getElementById('search-input').value = '';
                 appState.industryFilter = null;
@@ -2335,27 +2446,62 @@
             // 1. Select Data Source based on Mode
             if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_LIST_FS' || appState.mode === 'TODAYS_MAIN') {
                 targetData = [...globalData]; // Copy
-            } else if (appState.mode === 'BREAKOUT') {
-                if (appState.drillDownKey) {
-                    targetData = globalData.filter(item => {
-                        return `${item.Sector}|${item.Industry}` === appState.drillDownKey;
-                    });
-                } else {
-                    targetData = [...globalData];
-                }
-            } else if (appState.mode === 'WRS') {
+            } else if (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') {
                 targetData = [...groupedData];
             } else if (appState.mode === 'DRILLDOWN' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
                 // Filter globalData by DrillDownKey
                 targetData = globalData.filter(item => {
                     return `${item.Sector}|${item.Industry}` === appState.drillDownKey;
                 });
+            } else if (appState.mode === 'RISING_STOCKS') {
+                targetData = [...globalData];
             } else if (appState.mode === 'TODAYS_TOP') { // Added TODAYS_TOP logic source
                 targetData = [...globalData];
             }
 
 
+            // [Added] Apply High Growth Filter
+            if (appState.highGrowthFilter) {
+                targetData = targetData.filter(item => {
+                    const sCy = parseFloat(item.SALE_CY);
+                    const sNy = parseFloat(item.SALE_NY);
+                    const eCy = parseFloat(item.EPS_CY);
+                    const eNy = parseFloat(item.EPS_NY);
 
+                    if (isNaN(sCy) || sCy < 20) return false;
+                    if (isNaN(sNy) || sNy < 20) return false;
+                    if (isNaN(eCy) || eCy < 20) return false;
+                    if (isNaN(eNy) || eNy < 20) return false;
+
+                    return true;
+                });
+            }
+
+            // 2. [Added] Apply Energy Condensing Filter AND W-Pattern Filter
+            if (appState.energyFilter) {
+                targetData = targetData.filter(item => {
+                    // 1. Jungjanggi Jeongbaeyeol: YES
+                    if (item['Jungjanggi Jeongbaeyeol'] !== "YES") return false;
+
+                    // 2. 10DIV: within ±4%
+                    const div10 = parseFloat(item['10DIV']);
+                    if (isNaN(div10) || Math.abs(div10) > 4) return false;
+
+                    // 3. BBWTHD < 0.15 OR BBWTHD <= BBWTHD_LOW
+                    // Note: If BBWTHD_LOW includes today, BBWTHD <= BBWTHD_LOW means it matches the low.
+                    const bbw = parseFloat(item.BBWTHD);
+                    const bbwLow = parseFloat(item.BBWTHD_LOW);
+
+                    if (isNaN(bbw)) return false;
+
+                    let cond1 = bbw < 0.15;
+                    let cond2 = (!isNaN(bbwLow) && bbw <= bbwLow);
+
+                    if (!cond1 && !cond2) return false;
+
+                    return true;
+                });
+            }
 
             if (appState.wPatternFilter) {
                 targetData = targetData.filter(item => {
@@ -2488,8 +2634,21 @@
 
                     return true;
                 });
+            } else if (appState.mode === 'RISING_STOCKS') {
+                // 급등/반등가능성↑종목: 
+                // 1) RS_DiF > 0 
+                // 2) CY_Trend > 0
+                // 3) NY_Trend > 0
+                targetData = globalData.filter(stock =>
+                    stock.RS_DiF > 0 &&
+                    stock.CY_Trend > 0 &&
+                    stock.NY_Trend > 0
+                );
+            } else if (appState.mode === 'RISING_SECTORS') {
+                // 급등/반등가능성↑섹터: WRS_Dif > 0
+                // Sort is handled in sort section (Win_Rate)
+                targetData = groupedData.filter(g => g.WRS_Dif > 0);
             }
-
 
             // 3. Apply Text Search (Global)
             if (appState.filterText) {
@@ -2503,7 +2662,30 @@
                 });
             }
 
+            // 3.5 [Added] Apply Momentum Filter (개별 탄력붙은놈)
+            if (appState.momentumFilter) {
+                if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_MAIN' || appState.mode === 'TODAYS_TOP') {
+                    // Only check individual RS_DiF
+                    targetData = targetData.filter(item => {
+                        return item.RS_DiF !== undefined && item.RS_DiF >= 0;
+                    });
+                }
+            }
 
+            // 3.6 [Added] Apply Sector Momentum Filter (섹터 탄력붙은놈)
+            if (appState.sectorMomentumFilter) {
+                if (appState.mode === 'INDIVIDUAL' || appState.mode === 'TODAYS_LIST' || appState.mode === 'TODAYS_MAIN' || appState.mode === 'TODAYS_TOP') {
+                    // Filter stocks whose Sector/Industry WRS_Dif >= 0
+                    targetData = targetData.filter(item => {
+                        const groupKey = `${item.Sector}|${item.Industry}`;
+                        const groupInfo = groupedData.find(g => `${g.Sector}|${g.Industry}` === groupKey);
+                        return groupInfo && groupInfo.WRS_Dif >= 0;
+                    });
+                } else if (appState.mode === 'WRS') {
+                    // In WRS mode, targetData is groupedData
+                    targetData = targetData.filter(g => g.WRS_Dif >= 0);
+                }
+            }
 
             // 4. Apply Custom Filters (RS_DiF / WRS_Dif)
             // Note: RISING modes override these, but if user manually filters in INDIV/WRS mode:
@@ -2596,7 +2778,7 @@
 
             const thead = document.querySelector('table thead tr');
 
-            if (appState.mode === 'WRS') {
+            if (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') {
                 // WRS Table Header
                 thead.innerHTML = `
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
@@ -2753,54 +2935,6 @@
                     tbody.appendChild(tr);
                 });
 
-            } else if (appState.mode === 'BREAKOUT') {
-                // 돌파항목 전용 테이블 헤더
-                thead.innerHTML = `
-                    <th onclick="sortTable('Ticker')">Ticker ⬍</th>
-                    <th onclick="sortTable('Sector')">Sector ⬍</th>
-                    <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
-                    <th onclick="sortTable('Price')">Price ($) ⬍</th>
-                    <th onclick="sortTable('High_52W_Pct')">52주 대비 (%) ⬍</th>
-                    <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">중장기정배열 ⬍</th>
-                    <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
-                    <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
-                    <th onclick="sortTable('Max_Rise_3M_Pct')">3M 상승 (%) ⬍</th>
-                    <th onclick="sortTable('BRK_60D')">60D BRK ⬍</th>
-                    <th onclick="sortTable('VOL_X')">VOL_X ⬍</th>
-                    <th onclick="sortTable('CLS_POS')">CLS_POS ⬍</th>
-                `;
-
-                data.forEach(item => {
-                    const tr = document.createElement('tr');
-                    
-                    const price = parseFloat(item.Price);
-                    const priceStr = isValidNumber(price) ? price.toFixed(2) : item.Price;
-                    
-                    // 정배열 색상
-                    const jb = item['Jungjanggi Jeongbaeyeol'] || 'NO';
-                    const jbColor = (jb === 'YES') ? 'rs-pos' : '';
-                    
-                    tr.innerHTML = `
-                        <td style="font-weight:bold;">
-                            <a href="https://finance.yahoo.com/quote/${item.Ticker}" target="_blank" style="color:#fff; text-decoration:none">
-                                ${item.Ticker}
-                            </a>
-                        </td>
-                        <td>${item.Sector}</td>
-                        <td>${item.Industry}</td>
-                        <td>${priceStr}</td>
-                        <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
-                        <td class="${jbColor}">${jb}</td>
-                        <td>${item['50DIV']}%</td>
-                        <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) + '%' : '-'}</td>
-                        <td>${isValidNumber(item.Max_Rise_3M_Pct) ? item.Max_Rise_3M_Pct.toFixed(1) + '%' : '-'}</td>
-                        <td class="${item.BRK_60D === 'YES' ? 'rs-pos' : ''}">${item.BRK_60D || 'NO'}</td>
-                        <td class="${isValidNumber(item.VOL_X) && item.VOL_X >= 2.0 ? 'rs-pos' : ''}">${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
-                        <td class="${isValidNumber(item.CLS_POS) && item.CLS_POS >= 50 ? 'rs-pos' : ''}">${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) + '%' : '-'}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-
             } else {
                 // Individual / Drilldown / Lists
                 thead.innerHTML = `
@@ -2835,12 +2969,6 @@
                     <th onclick="sortTable('BBWTHD')">BBWTHD ⬍</th>
                     <th onclick="sortTable('BBWTHD_LOW')">BBWTHD LOW ⬍</th>
                     <th onclick="sortTable('BB_Center_Breakout_5D')">BBC ⬍</th>
-                    <th onclick="sortTable('High_52W_Pct')">52주 대비 (%) ⬍</th>
-                    <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
-                    <th onclick="sortTable('Max_Rise_3M_Pct')">3M 상승 (%) ⬍</th>
-                    <th onclick="sortTable('BRK_60D')">60D BRK ⬍</th>
-                    <th onclick="sortTable('VOL_X')">VOL_X ⬍</th>
-                    <th onclick="sortTable('CLS_POS')">CLS_POS ⬍</th>
                 `;
 
                 data.forEach(item => {
@@ -2928,12 +3056,6 @@
                         <td>${isValidNumber(item.BBWTHD) ? item.BBWTHD.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.BBWTHD_LOW) ? item.BBWTHD_LOW.toFixed(2) : '-'}</td>
                         <td class="${item.BB_Center_Breakout_5D === 'YES' ? 'rs-pos' : ''}">${item.BB_Center_Breakout_5D || 'NO'}</td>
-                        <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
-                        <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) + '%' : '-'}</td>
-                        <td>${isValidNumber(item.Max_Rise_3M_Pct) ? item.Max_Rise_3M_Pct.toFixed(1) + '%' : '-'}</td>
-                        <td class="${item.BRK_60D === 'YES' ? 'rs-pos' : ''}">${item.BRK_60D || 'NO'}</td>
-                        <td class="${isValidNumber(item.VOL_X) && item.VOL_X >= 2.0 ? 'rs-pos' : ''}">${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
-                        <td class="${isValidNumber(item.CLS_POS) && item.CLS_POS >= 50 ? 'rs-pos' : ''}">${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) + '%' : '-'}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -2966,7 +3088,7 @@
 
             let excelData = [];
 
-            if (appState.mode === 'WRS') {
+            if (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') {
                 excelData = data.map(item => ({
                     'Sector': item.Sector,
                     'Industry': item.Industry,
@@ -3014,20 +3136,14 @@
                     '10DIV': item['10DIV'],
                     'BBWTHD': item.BBWTHD,
                     'BBWTHD_LOW': item.BBWTHD_LOW,
-                    'BBC': item.BB_Center_Breakout_5D || 'NO',
-                    'High_52W_Pct': item.High_52W_Pct,
-                    'ADR_20D': item.ADR_20D,
-                    'Max_Rise_3M_Pct': item.Max_Rise_3M_Pct,
-                    'BRK_60D': item.BRK_60D,
-                    'VOL_X': item.VOL_X,
-                    'CLS_POS': item.CLS_POS
+                    'BBC': item.BB_Center_Breakout_5D || 'NO'
                 }));
             }
 
             const ws = XLSX.utils.json_to_sheet(excelData);
             const wb = XLSX.utils.book_new();
 
-            const sheetName = (appState.mode === 'WRS') ? 'Sector_WRS' : 'Individual_RS';
+            const sheetName = (appState.mode === 'WRS' || appState.mode === 'RISING_SECTORS') ? 'Sector_WRS' : 'Individual_RS';
 
             XLSX.utils.book_append_sheet(wb, ws, sheetName);
 
