@@ -213,6 +213,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
         batch_tickers = [item['Ticker'] for item in batch]
         print(f"Processing batch {i} to {min(i+batch_size, total_tickers)}: {batch_tickers}")
         
+        batch_api_called = False
         try:
             # 1. 주가 데이터 일괄 다운로드 (Price & RS용)
             # Yahoo Finance용 포맷으로 변환
@@ -231,16 +232,18 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
                 res = process_single_ticker(ticker, data, qqq_data)
                 if res:
                     results.append(res)
-                
-                # 티커 1개 처리할 때마다 약간의 딜레이 (Yahoo Finance IP Ban 방지)
-                import time
-                time.sleep(1.5)
+                    # 실제 API 호출이 있었을 때만 2.5초 딜레이
+                    if res.get('api_called', False):
+                        batch_api_called = True
+                        import time
+                        time.sleep(2.5)
                         
         except Exception as e:
             print(f"Batch 처리 중 에러: {e}")
             
-        # 딜레이 (옵션)
-        time.sleep(5)
+        # 실제 API 호출이 있었을 때만 10초 대기
+        if batch_api_called:
+            time.sleep(10)
     
     # --- Retry Logic (재시도) ---
     # 1. 실패하거나 RS가 NaN인 티커 식별
@@ -291,7 +294,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
             except Exception as e:
                 print(f"Retry Batch 에러: {e}")
             
-            time.sleep(10) # 배치 간 딜레이
+            time.sleep(20) # 재시도 배치 간 딜레이 (20초로 보수적 설정)
 
     # 작업 완료 후 캐시 저장
     save_sector_cache()
@@ -508,7 +511,14 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         
         # 메타데이터 (Market Cap, Sector, Industry)
         # For Metadata, loop up using sanitied ticker
-        t = yf.Ticker(yf_ticker)
+        api_called = False
+        t_obj = None
+        def get_ticker_obj():
+            nonlocal t_obj, api_called
+            if t_obj is None:
+                t_obj = yf.Ticker(yf_ticker)
+                api_called = True
+            return t_obj
         
         # 1. Sector/Industry (Cache Check) uses ORIGINAL ticker key usually, 
         # but for API fetch we must use yf_ticker.
@@ -521,62 +531,39 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         sector = "N/A"
         industry = "N/A"
         
-        # Check Cache
-        if cached and cached.get('Sector') not in ['N/A', 'nan', 'NONE'] and cached.get('Industry') not in ['N/A', 'nan', 'NONE']:
-            sector = cached['Sector']
-            industry = cached['Industry']
+        # Check Cache: If original_ticker is in SECTOR_CACHE, use it even if it is 'N/A' to prevent redundant API queries.
+        if cached:
+            sector = cached.get('Sector', 'N/A')
+            industry = cached.get('Industry', 'N/A')
         else:
             # Fetch Metadata
-            if sector == "N/A" and industry == "N/A":
-                try:
-                    info = t.info 
+            try:
+                info = get_ticker_obj().info 
+                
+                quote_type = info.get('quoteType', '').upper()
+                
+                if 'ETF' in quote_type:
+                    sector = 'ETF'
+                    industry = 'ETF' # User requested both to be ETF
+                elif 'ETN' in quote_type: 
+                    sector = 'ETN'
+                    industry = 'ETN' # User requested both to be ETN
+                else:
+                    sector = info.get('sector', 'N/A')
+                    industry = info.get('industry', 'N/A')
+
+                if not sector: sector = 'N/A'
+                if not industry: industry = 'N/A'
                     
-                    quote_type = info.get('quoteType', '').upper()
-                    
-                    if 'ETF' in quote_type:
-                        sector = 'ETF'
-                        industry = 'ETF' # User requested both to be ETF
-                    elif 'ETN' in quote_type: 
-                        sector = 'ETN'
-                        industry = 'ETN' # User requested both to be ETN
-                    else:
-                        sector = info.get('sector', 'N/A')
-                        industry = info.get('industry', 'N/A')
+                # Save to Cache using ORIGINAL key for consistency
+                SECTOR_CACHE[original_ticker] = {'Sector': sector, 'Industry': industry}
+            except:
+                sector = 'N/A'
+                industry = 'N/A'
+                # Also save to cache so we don't query it again next time
+                SECTOR_CACHE[original_ticker] = {'Sector': sector, 'Industry': industry}
 
-                    if not sector: sector = 'N/A'
-                    if not industry: industry = 'N/A'
-                        
-                    # Save to Cache using ORIGINAL key for consistency
-                    SECTOR_CACHE[original_ticker] = {'Sector': sector, 'Industry': industry}
-                except:
-                    sector = 'N/A'
-                    industry = 'N/A'
-
-        # 2. Market Cap (Fast Info)
-        market_cap = 0
-        try:
-            market_cap = t.fast_info['market_cap']
-        except:
-            pass
-        
-        # 3. 50-day Moving Average Divergence (50DIV)
-        div_50 = None
-        try:
-            if len(hist) >= 50:
-                ma_50 = hist.iloc[-50:].mean()
-                if ma_50 != 0:
-                    div_50 = round(((latest_price - ma_50) / ma_50) * 100, 2)
-        except Exception as e:
-            print(f"50DIV 계산 에러 ({original_ticker}): {e}")
-
-        # 4. RS Estimate Calculation with Caching (3 Days)
-        cy_trend = None
-        ny_trend = None
-        up_count = None
-        down_count = None
-        up_down_ratio = None
-        
-        # Analysis Cache Start
+        # Analysis Cache Start - Moved up to optimize Market Cap & API limits
         from datetime import datetime, timedelta
         
         today_str = datetime.now().strftime("%Y-%m-%d")
@@ -594,6 +581,37 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                         use_cache = True
             except:
                 pass
+
+        # 2. Market Cap (Fast Info) - Optimized with Cache Check
+        market_cap = 0
+        if use_cache:
+            market_cap = cache_item.get('data', {}).get('Market_Cap', 0)
+            
+        if not market_cap: # If not in cache or cache invalid or zero, fetch from API
+            try:
+                market_cap = get_ticker_obj().fast_info['market_cap']
+            except:
+                try:
+                    market_cap = get_ticker_obj().info.get('marketCap', 0)
+                except:
+                    market_cap = 0
+        
+        # 3. 50-day Moving Average Divergence (50DIV)
+        div_50 = None
+        try:
+            if len(hist) >= 50:
+                ma_50 = hist.iloc[-50:].mean()
+                if ma_50 != 0:
+                    div_50 = round(((latest_price - ma_50) / ma_50) * 100, 2)
+        except Exception as e:
+            print(f"50DIV 계산 에러 ({original_ticker}): {e}")
+
+        # 4. RS Estimate Calculation with Caching (3 Days)
+        cy_trend = None
+        ny_trend = None
+        up_count = None
+        down_count = None
+        up_down_ratio = None
         
         # [Modified] Initialize raw EPS variables
         cy_est = None
@@ -633,10 +651,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             
         else:
             # Fetch New Data
-
-                # t = yf.Ticker(yf_ticker) # Already defined above
-                
-            # [Modified] RS Estimate Calculation with strict user requirements
+            
             # (A) EPS Trend
             # User Mapping:
             # CY = '0y', NY = '+1y'
@@ -644,7 +659,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             
             eps_trend_df = None
             try:
-                eps_trend_df = t.eps_trend
+                eps_trend_df = get_ticker_obj().eps_trend
             except: pass
 
             if eps_trend_df is not None and not eps_trend_df.empty:
@@ -672,7 +687,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
 
             eps_rev_df = None
             try:
-                eps_rev_df = t.eps_revisions
+                eps_rev_df = get_ticker_obj().eps_revisions
             except: pass
             
             if eps_rev_df is not None and not eps_rev_df.empty:
@@ -694,7 +709,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             # 1. SALE CY(%), SALE NY(%)
             rev_est_df = None
             try:
-                rev_est_df = t.revenue_estimate
+                rev_est_df = get_ticker_obj().revenue_estimate
             except: pass
             
             if rev_est_df is not None and not rev_est_df.empty:
@@ -714,7 +729,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             # 2. EPS CY(%), EPS NY(%)
             earn_est_df = None
             try:
-                earn_est_df = t.earnings_estimate
+                earn_est_df = get_ticker_obj().earnings_estimate
             except: pass
             
             if earn_est_df is not None and not earn_est_df.empty:
@@ -761,7 +776,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                     'SALE_NY': sale_ny,
                     'EPS_CY': eps_cy,
                     'EPS_NY': eps_ny,
-                    'BB_Center_Breakout_5D': bb_center_breakout_5d
+                    'BB_Center_Breakout_5D': bb_center_breakout_5d,
+                    'Market_Cap': market_cap
                 }
             }
             
@@ -808,7 +824,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'Max_Rise_3M_Pct': max_rise_3m_pct,
             'BRK_60D': brk_60d,
             'VOL_X': vol_x,
-            'CLS_POS': cls_pos
+            'CLS_POS': cls_pos,
+            'api_called': api_called
         }
 
     except Exception as e:

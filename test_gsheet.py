@@ -30,11 +30,11 @@ def test_connection():
         print("\n[데이터 미리보기]")
         print(df.head())
         
-        print("\n✅ 연결 성공!")
+        print("\nSUCCESS!")
         return True
         
     except Exception as e:
-        print(f"\n❌ 연결 실패: {e}")
+        print(f"\nFAIL: {e}")
         return False
 
 if __name__ == "__main__":
