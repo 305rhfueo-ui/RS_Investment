@@ -387,69 +387,75 @@
                 <span id="desc-arrow">▼</span>
             </h3>
             <div id="description-content"
-                style="display: none; margin-top: 10px; padding: 10px; background-color: #222; border-radius: 5px;">
-                <ul>
-                    <li><strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)
-                    </li>
-                    <li><strong>RS Logic</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)
+                style="display: none; margin-top: 10px; padding: 15px; background-color: #222; border-radius: 5px; line-height: 1.7;">
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li style="margin-bottom: 8px;"><strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)</li>
+                    <li style="margin-bottom: 8px;"><strong>RS Logic (상대 강도 지표)</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)
                         <ul>
-                            <li><strong>RS(6mo)</strong>: 120영업일, <strong>RS(3mo)</strong>: 60영업일,
-                                <strong>RS(1mo)</strong>:
-                                20영업일
-                            </li>
-                            <li>양수(+)면 벤치마크(QQQ) 대비 초과 수익, 음수(-)면 저조한 성과를 의미합니다.</li>
+                            <li><strong>RS(6mo)</strong>: 120영업일(최근 6개월) 간의 상대강도이며 장기 주도 섹터와 종목을 필터링하는 중심 잣대입니다.</li>
+                            <li><strong>RS(3mo)</strong>: 60영업일(최근 3개월) 간의 상대강도로 중기 탄력을 가늠합니다.</li>
+                            <li><strong>RS(1mo)</strong>: 20영업일(최근 1개월) 간의 상대강도로 가장 최근 수급 쏠림 여부를 판단합니다.</li>
+                            <li>양수(+)면 시장 평균(QQQ) 대비 아웃퍼폼(초과 수익)을 의미하며, 음수(-)면 마켓 언더퍼폼(열위 성과)을 뜻합니다.</li>
                         </ul>
                     </li>
-                    <li><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치)</li>
-                    <li><strong>WRS (Weighted Relative Strength):</strong> 섹터/산업 내 종목들의 시가총액 가중 평균 RS (섹터/산업의 주도력)</li>
-                    <li><strong>WRS_MD:</strong> 섹터/산업 내 종목들의 RS(6mo) 중앙값 (Median)</li>
-                    <li><strong>Win-rate:</strong> (해당 Sector/Industry 내 RS(6mo) > 0 인 Ticker 수) / Total Count (단위: %)
+                    <li style="margin-bottom: 8px;"><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치이며 주도 대장주와 소형 테마주를 구별하는 척도입니다.)</li>
+                    <li style="margin-bottom: 8px;"><strong>WRS (Weighted Relative Strength):</strong> 섹터/산업 내 개별 구성 종목들의 시가총액을 가중치로 적용한 평균 RS 값입니다. 섹터 내 주요 대장주들이 이끄는 실제 시장 수급 주도력을 파악하는 데 효과적입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>WRS_MD:</strong> 섹터/산업 내 구성 종목들의 RS(6mo) 단순 중앙값(Median)입니다. 시총이 큰 특정 주도주 한두 개에 의한 섹터 전체의 수치 왜곡 현상을 필터링하고, 산업군 전반의 자금 분포가 고른지 보여줍니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>Win-rate:</strong> 해당 산업군 내에서 6개월 상대강도가 양수인(RS(6mo) > 0) 상승 종목들의 비율(%)입니다. 이 비율이 80% 이상으로 높을수록 특정 테마나 업종 전체에 광범위한 기관계 자금이 유입되었음을 뜻합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>Final WRS:</strong> 종합 점수 = <code>(WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×Win_Factor×20%) × (Total count / (Total count + 5))</code><br>
+                        <span style="font-size:12.5px; color:#aaa;">* Win_Factor: 구성 종목이 2개 이상일 때 <code>(1 - (1/Total Count))</code>로 보정하며, 종목 수가 너무 적어 순위가 급변하는 초소형 섹터의 튀기 현상을 <code>(Total count / (Total count + 5))</code> 보정계수로 억제합니다.</span>
                     </li>
-                    <li><strong>Final WRS:</strong> 종합 점수 = (WRS(6MO)×40% + WRS_MD(6MO)×40% + Win-rate×(1-(1/Total
-                        Count))×20%) × (Total count / (Total count + 5))</li>
-                    <li><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo)의 10거래일 전 대비 변화율</li>
-                    <li><strong>F10d chg(%) / F25d chg(%):</strong> Final WRS의 10영업일 및 25영업일 전 대비 증감률</li>
-                    <li><strong>FRANK:</strong> 전체 섹터/산업 중 Final WRS 순위 (1이 가장 높음)</li>
-                    <li><strong>FRANK 25d CHG:</strong> 25영업일 전 대비 FRANK 순위 변동폭 (예: 과거 100등 -> 현재 1등 = +99)</li>
-                    <li><strong>RS_DiF / WRS_Dif:</strong> (3개월 RS) - (6개월 RS) (중기 모멘텀이 장기보다 강한지 확인)</li>
-                    <li><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선의 괴리율 (높을수록 과열)</li>
-                    <li><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선의 괴리율 (단기 이격도)</li>
-                    <li><strong>중장기정배열:</strong> 최근 20, 60, 120 영업일 종가 이동평균선이 정배열(20&gt;60&gt;120) 상태인지 여부 (YES/NO)</li>
+                    <li style="margin-bottom: 8px;"><strong>10D Chg (%):</strong> WRS 및 개별 종목 RS(6mo) 지표 자체의 10거래일 전 대비 모멘텀 상승 변화율입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>F10d chg(%) / F25d chg(%):</strong> 섹터/산업 Final WRS 점수의 10영업일 및 25영업일 전 대비 증감율로, 업종의 상승 탄력 가속을 파악합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>FRANK:</strong> 전체 섹터/산업군 중 Final WRS 점수 기준 종합 순위 (1위가 최상위 주도 섹터)입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>FRANK 25d CHG:</strong> 25영업일(5주) 전 대비 FRANK 순위의 변동폭입니다. 값이 큰 양수(+)일수록 소외 업종에서 최근 주도 섹터로 급격히 턴어라운드하여 치고 올라왔다는 강력한 신호입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>RS_DiF / WRS_Dif:</strong> <code>(3개월 RS) - (6개월 RS)</code>로 계산되는 상대강도 스프레드입니다. 이 스프레드가 양수(+)로 돌아서면 중단기 모멘텀이 장기 모멘텀을 넘어서 상승 흐름에 가속도가 붙었음을 입증합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선 간의 괴리율(%)입니다. 수치가 30%를 넘는 등 지나치게 높으면 단기 과열 국면이므로 눌림목 조정을 기다렸다가 진입하는 것이 유리합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선 간의 괴리율(%)입니다. 10일선 근처인 -3% ~ +3% 구간에 딱 붙을 때가 주도주 추종 시 최적의 분할 매수 타점을 제공합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>중장기정배열:</strong> 최근 20일선 > 60일선 > 120일선 순으로 이동평균선이 안정적인 우상향 정배열 구조(Stage 2)를 보이고 있는지 여부(YES/NO)입니다. 정배열 상태(YES)에서만 매수를 고려하는 것이 자산 보호에 절대적으로 유리합니다.</li>
 
-                    <li><strong>SALE CY(%):</strong> 올해 실적 전망치의 전년대비 증가율</li>
-                    <li><strong>SALE NY(%):</strong> 차년도 실적 전망치의 전년대비 증가율</li>
-                    <li><strong>EPS CY(%):</strong> 올해 EPS 전망치의 전년대비 증가율</li>
-                    <li><strong>EPS NY(%):</strong> 차년도 EPS 전망치의 전년대비 증가율</li>
-                    <li><strong>EPS Trend:</strong> 시장 전문가들의 EPS(주당순이익) 예상치 30일전 대비 변화율 (CY:올해, NY:내년, CY와 NY 모두 5% 이상일
-                        경우
-                        장기 주도주가 될 가능성이 매우 높음)</li>
-                    <li><strong>Up/Down #:</strong> 최근 30일간 EPS 추정치를 상향(Up)/하향(Down) 조정한 애널리스트 수</li>
-                    <li><strong>Up/Down Ratio:</strong> 상향 조정 비율 (높을수록 실적 전망 긍정적)</li>
-                    <li><strong>⚡에너지응축하는놈:</strong> 중장기정배열 상태(YES)이면서 10일 이동평균선 괴리율(10DIV)이 ±4% 이내이고, 볼린저밴드폭(BBWTHD)이
-                        0.15 미만이거나 신저가 부근인 종목</li>
-                    <li><strong>🚀고성장하는놈:</strong> 올해/내년 매출액(SALE) 및 주당순이익(EPS) 전망치 증가율이 모두 20% 이상인 실적 고성장 종목</li>
-                    <li><strong>🔥(개별)탄력붙은놈:</strong> 특정 개별 종목의 단기/중기 모멘텀(RS_Dif &ge; 0)이 긍정적인, 상승세에 가속도가 붙은 종목들</li>
-                    <li><strong>🎯(섹터)탄력붙은놈:</strong> 해당 종목이 속한 섹터/산업의 모멘텀(WRS_Dif &ge; 0)이 긍정적인 테마군</li>
-                    <li><strong>Today's List 기준:</strong>
+                    <li style="margin-bottom: 8px;"><strong>SALE CY(%):</strong> 올해(Current Year) 예상 매출액의 전년대비 증가율 전망치입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>SALE NY(%):</strong> 내년(Next Year) 예상 매출액의 전년대비 증가율 전망치입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>EPS CY(%):</strong> 올해 예상 주당순이익(EPS)의 전년대비 증가율 전망치입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>EPS NY(%):</strong> 내년 예상 주당순이익(EPS)의 전년대비 증가율 전망치입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>EPS Trend:</strong> 시장 애널리스트들의 올해(CY)와 내년(NY) EPS 전망치가 한 달(30일) 전 추정치 대비 얼마나 상향 조정되었는지의 추세 증감율입니다. 두 항목이 모두 5% 이상인 종목은 향후 실적 대시세를 분출할 잠재력이 가장 높습니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>Up/Down #:</strong> 최근 30일간 해당 종목의 실적 추정치를 상향(Up)/하향(Down) 조정한 애널리스트의 수입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>Up/Down Ratio:</strong> 상향 조정 비율 <code>(Up / (Up + Down)) * 100</code>입니다. 수치가 80% 이상이면 애널리스트 대다수가 긍정적인 실적 상향을 내다보고 있음을 뜻합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>⚡에너지응축하는놈:</strong> 중장기정배열(YES)을 갖추고, 10일선 괴리율(10DIV)이 ±4% 이내로 수렴하며, 볼린저 밴드 폭(BBWTHD)이 0.15 이하로 극도로 좁아져 강력한 위아래 시세 변동을 폭발시키기 직전인 폭발 대기 종목입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>🚀고성장하는놈:</strong> 올해와 내년의 매출액(SALE) 및 주당순이익(EPS) 증가 전망률이 모두 연 20% 이상인, 검증된 펀더멘털 고성장 주도주입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>🔥(개별)탄력붙은놈:</strong> 개별 종목 차원에서 단기 상승 강도가 장기 흐름을 돌파하여 탄력이 올라오기 시작한 종목(RS_Dif &ge; 0)입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>🎯(섹터)탄력붙은놈:</strong> 해당 종목이 소속된 섹터/산업의 가중 모멘텀 가속도가 양수(WRS_Dif &ge; 0)로 진입한 유망 주도 업종군입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>Today's List 기준:</strong>
                         <ul>
-                            <li><strong>섹터/산업:</strong> Final WRS(종합 점수) 상위 20% 이내</li>
-                            <li><strong>종목:</strong> 선정된 섹터/산업 내 RS(6mo) 상위 30% 이내 & <strong>0 &lt; 50DIV &le;
-                                    35%</strong></li>
+                            <li><strong>섹터/산업:</strong> Final WRS(종합 점수) 기준 전체 상위 20% 이내의 초강세 주도 업종</li>
+                            <li><strong>종목:</strong> 해당 주도 섹터 내에서 6개월 상대강도(RS(6mo))가 상위 30% 이내인 대장주 중, 50일선 괴리율이 0% 초과 35% 이하로 과열 조정을 끝내고 올라선 종목</li>
                         </ul>
                     </li>
-                    <li><strong>Today's Main 기준:</strong>
+                    <li style="margin-bottom: 8px;"><strong>Today's Main 기준:</strong>
                         <ul>
-                            <li><strong>Today's List</strong> 조건을 만족하는 종목 중</li>
-                            <li><strong>CY Trend & NY Trend</strong> 모두 5% 이상</li>
-                            <li><strong>50DIV</strong> 30% 이하 (고점에 물리는 걸 방지하기 위해서)</li>
+                            <li>Today's List 조건을 완벽히 충족하는 종목 중</li>
+                            <li>올해 및 내년 실적 전망치(CY Trend & NY Trend)가 모두 5% 이상 상향 진행 중이며</li>
+                            <li>50DIV(50일선 이격도)가 30% 이하로 매수 안전 마진(눌림목 안정화)이 확실하게 잡힌 정예 주도주 목록입니다.</li>
                         </ul>
                     </li>
-                    <li><strong>급등/반등가능성↑종목:</strong> RS_DiF &gt; 0 이며, CY Trend 및 NY Trend가 모두 양수인 종목 (NY Trend 순 정렬)
+                    <li style="margin-bottom: 8px;"><strong>급등/반등가능성↑종목:</strong> RS_DiF > 0 이며, 올해와 내년 애널리스트 실적 전망 추이(CY/NY Trend)가 모두 양수인 종목들을 내년 성장 전망치(NY Trend)가 높은 순으로 정렬하여 바닥 탈출을 진단합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>급등/반등가능성↑섹터:</strong> WRS_Dif > 0 인 상승 가속 섹터들을 Win-rate(상승 확산 비율) 순으로 정렬한 업종군입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>BBWTHD:</strong> 볼린저 밴드의 너비(Bandwidth)입니다. 공식: <code>(상단 밴드 - 하단 밴드) / 20일 이평선(중심선)</code>. 이 값이 0.15 이하로 수축되면 매도세가 완전히 마르고 에너지가 극단적으로 뭉쳤음을 뜻합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>BBWTHD LOW:</strong> 해당 종목의 최근 60영업일 간 볼린저 밴드 폭의 최저값으로, 현재 수축 강도의 정도를 가늠하는 지표입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>BBC:</strong> 최근 5영업일 이내에 주가가 볼린저 밴드 중심선(20일 이평선)을 아래에서 위로 골든크로스 돌파(YES)하여 조정을 마감하고 반등하고 있는지 여부입니다.</li>
+
+                    <!-- [Added] Perfect Storm & Breakout columns description -->
+                    <li style="margin-bottom: 8px; border-top: 1px dashed #555; padding-top: 10px; margin-top: 10px;">
+                        <strong style="color: #00bcd4;">⚡ Perfect Storm 전략 및 돌파항목 컬럼 설명 (신고가 돌파 셋업):</strong>
+                        <ul style="margin-top: 5px; padding-left: 15px;">
+                            <li><strong>52주 대비 (%):</strong> 52주 최고가 대비 현재 주가의 비율입니다. 공식: <code>(현재 주가 / 52주 최고가) * 100</code>. 이 값이 80% 이상(즉, 고점 대비 낙폭이 -20% 이내)인 종목들은 상단에 악성 대기 매물이 거의 없는 신고가 영역에 가깝다는 뜻입니다. 마크 미너비니의 주도주 선별 1순위 조건입니다.</li>
+                            <li><strong>ADR (%) (Average Daily Range):</strong> 최근 20거래일 동안의 평균 일일 변동폭입니다. 공식: <code>((당일 고가 - 당일 저가) / 당일 저가) * 100</code>의 20일 평균. 변동성이 너무 둔한 주식은 제외하고, 한 번 돌파할 때 단기간에 30~50%씩 강력히 솟구쳐 줄 수 있는 '끼와 거래 탄력'이 살아 있는 종목(ADR 3.5%~4.0% 이상)을 걸러내는 핵심 지표입니다(크리스티안 쿨라매기 기법).</li>
+                            <li><strong>3M 상승 (%):</strong> 최근 3개월(60영업일) 간 저점 대비 고점의 최대 상승률입니다. 최근 3개월 이내에 시장에서 최소 30% 이상 폭발적으로 급등한 이력이 있는, 이미 검증된 '힘과 거래 대금의 쏠림'을 입증한 주도주를 식별합니다.</li>
+                            <li><strong>VOL_X (거래대금 폭발 비율):</strong> 돌파 당일의 거래대금(종가 × 거래량)이 최근 20영업일 평균 거래대금 대비 몇 배 폭발했는지를 나타냅니다. 이 비율이 2.0 이상(200% 이상)으로 강력하게 분출될 때만 거대 기관이나 주포의 찐매수 수급이 들어온 것으로 판단합니다.</li>
+                            <li><strong>CLS_POS (Close Position %):</strong> 당일 캔들의 전체 변동폭(고가 - 저가) 중에서 종가가 마감된 상대적 위치(%)입니다. 공식: <code>((종가 - 저가) / (고가 - 저가)) * 100</code>. 장중에만 급등했다가 윗꼬리를 길게 달고 하락 마감한 가짜 돌파(Bull Trap)를 거부하고, 장 마감까지 강한 수급을 지켜내며 캔들의 상단(50% 이상, 100%에 가까울수록 강함)에서 확실하게 마감된 진짜 돌파 캔들만 추적하기 위한 핵심 장치입니다.</li>
+                            <li><strong>60D_BRK (60일 최고가 종가 돌파):</strong> 오늘 종가가 직전 60영업일(약 3개월, 오늘 제외) 동안의 모든 장중 최고가를 돌파하며 신고가를 달성했는지 여부(YES/NO)입니다.</li>
+                        </ul>
                     </li>
-                    <li><strong>급등/반등가능성↑섹터:</strong> WRS_Dif &gt; 0 인 섹터 (Win-rate 순 정렬)</li>
-                    <li><strong>BBWTHD:</strong> 볼린저 밴드 너비(Bandwidth). (상단밴드 - 하단밴드) / 중심선(20일SMA)</li>
-                    <li><strong>BBWTHD LOW:</strong> 해당 종목의 최근 60영업일 간 BBWTHD 최저값</li>
-                    <li><strong>BBC:</strong> 최근 5영업일 기간 중에 주가가 볼린저밴드 중심선(20일 이동평균선)을 상향 돌파한 적이 있는지 여부 (YES/NO)</li>
                 </ul>
             </div>
         </div>
@@ -704,329 +710,350 @@
 
     <!-- Market Judgment Modal -->
     <div id="market-popup" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 900px; padding: 30px; border-radius: 10px;">
             <span class="close-btn" onclick="closeMarketPopup()">&times;</span>
-            <h2 style="margin-top:0;">시장 추세 판단 가이드</h2>
+            <h2 style="margin-top:0; border-bottom: 2px solid #ff5252; padding-bottom: 10px; color: #ff5252;">📊 시장 대세 추세 판단 상세 가이드 (Market Judgment)</h2>
 
-            <h3>1. 시장 장기 추세 판단(약식)</h3>
-            <ul style="line-height: 1.6;">
-                <li>(1) <strong>대세 상승</strong>: ARKK 월봉 10 우상향 (저점 2~3개 연결해서 판단)</li>
-                <li>(2) <strong>대세 하락</strong>: ARKK 월봉 10 우하향 (고점 2~3개 연결해서 판단)</li>
-                <li>(3) <strong>횡보(관망)</strong>: ARKK 월봉 10 횡보</li>
+            <h3>1. 시장 장기 대세 추세 판단 (성장주 수급 심장 점검)</h3>
+            <p style="color: #ddd; font-size: 14px;">전체 시장의 위험 선호도(Risk-on/Risk-off)를 판별하기 위해 <strong>ARKK(혁신성장 ETF)의 월봉 10선(10개월 이동평균선)</strong>을 기준으로 삼습니다. 혁신성장주로 돈이 들어오는 시기는 시장 유동성이 넘쳐나고 주도주 상승 탄력이 극대화되는 시기이기 때문입니다.</p>
+            <ul style="line-height: 1.7; font-size: 14px; color: #eee;">
+                <li>🚀 <strong>대세 상승 국면 (적극 매수 및 주도주 추종) :</strong> ARKK 월봉이 10개월 이동평균선 위에 위치하고 10개월선 기울기가 우상향할 때. (저점 2~3개를 연결했을 때 뚜렷한 추세가 상방으로 향하고 있을 때가 최적의 진입 시기입니다.)</li>
+                <li>⚠️ <strong>대세 하락 국면 (보수적 접근 및 현금 확보) :</strong> ARKK 월봉이 10개월 이동평균선 아래로 이탈하고 10개월선 기울기가 우하향할 때. (기관들의 적극적인 차익 실현 및 시장 내 성장주 자금 이탈 국면으로, 현금 비중을 대폭 늘려야 합니다.)</li>
+                <li>⚖️ <strong>박스권 횡보 국면 (비중 축소 및 방향성 대기) :</strong> ARKK 주가가 10개월선 부근에서 등락을 반복하며 10개월선 기울기가 수평(횡보)으로 누웠을 때. (확실하게 위아래 방향이 터지기 전까지 자금을 보존하고 대기합니다.)</li>
             </ul>
 
-            <h3 style="margin-top:20px;">2. 시장 중기추세와 결합 판단(약식)</h3>
-            <p>📊 <strong>월봉 10선 & 주봉 30선 조합별 대응 매트릭스</strong></p>
+            <h3 style="margin-top:25px;">2. 시장 중기 추세와 결합한 실전 대응 매트릭스 (스탠 와인스타인 Stage 분석 연동)</h3>
+            <p style="color: #ddd; font-size: 14px;">대세(월봉 10선)와 중기 추세(주봉 30선)를 조합하여, 내 주식 계좌의 실질적인 투자 비중과 적극성을 조율하는 핵심 전략 기준표입니다.</p>
 
-            <table class="matrix-table">
+            <table class="matrix-table" style="font-size: 13px;">
                 <thead>
                     <tr>
                         <th>월봉 10선 (대세)</th>
                         <th>주봉 30선 (중기)</th>
                         <th>가격 위치</th>
-                        <th>시장 해석 (국면)</th>
-                        <th>대응 전략 (Action)</th>
+                        <th>시장 해석 및 현재 국면</th>
+                        <th>구체적 대응 전략 (Action Plan)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>상승 (↑)</td>
-                        <td>상승 (↑)</td>
-                        <td>가격 > 주봉</td>
-                        <td><strong>최강의 제2단계</strong></td>
-                        <td><span class="action-highlight">적극 매수 및 홀딩.</span> 비중을 최대화하여 수익 극대화.</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td>가격 > 주봉 30선</td>
+                        <td style="color:#ff5252;"><strong>최강의 제2단계 (강세 상승장)</strong></td>
+                        <td><strong>풀매수 및 강력 홀딩.</strong> 레버리지 및 주도주 비중을 최대(80%~100%)로 확보하여 수익을 극대화하는 골든타임.</td>
                     </tr>
                     <tr>
-                        <td>상승 (↑)</td>
-                        <td>상승 (↑)</td>
-                        <td>가격 < 주봉</td>
-                        <td>일시적 눌림목</td>
-                        <td><strong>추가 매수 기회.</strong> 주봉 지지 확인 후 반등 시 진입.</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td>가격 < 주봉 30선</td>
+                        <td>일시적 되돌림 (불트랩 예외 조정)</td>
+                        <td><strong>강력한 추가 매수 기회.</strong> 주봉 30선 부근에서 지지를 확인하고 거래량 실린 양봉 반등 시 신규/추가 진입.</td>
                     </tr>
                     <tr>
-                        <td>상승 (↑)</td>
-                        <td>횡보 (→)</td>
-                        <td>주봉 부근</td>
-                        <td>에너지 응축</td>
-                        <td><strong>관심 종목 등록.</strong> 주봉 돌파 시점이 핵심 타점.</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td style="color:#ffca28; font-weight:bold;">횡보 (→)</td>
+                        <td>주봉 30선 부근</td>
+                        <td>상승 중 일시적인 숨고르기</td>
+                        <td><strong>주도주 포트폴리오 정비.</strong> 횡보 박스권을 가장 먼저 거래량을 싣고 뚫고 나가는 최상위 섹터 대장주 집중 매수.</td>
                     </tr>
                     <tr>
-                        <td>상승 (↑)</td>
-                        <td>하락 (↓)</td>
-                        <td>가격 < 주봉</td>
-                        <td>깊은 조정 구간</td>
-                        <td><strong>보수적 접근.</strong> 주봉 위로 안착 전까지 신규 매수 금지.</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td style="color:#ff5252; font-weight:bold;">하락 (↓)</td>
+                        <td>가격 < 주봉 30선</td>
+                        <td>중기 추세 훼손 및 깊은 조정</td>
+                        <td><strong>보수적 접근.</strong> 대형 우량주의 주봉 30선 위 안착을 확인하기 전까지 신규 매수 금지 및 현금 비중 50% 유지.</td>
                     </tr>
                     <tr>
-                        <td>횡보 (→)</td>
-                        <td>상승 (↑)</td>
-                        <td>가격 > 주봉</td>
-                        <td>바닥 탈출 (1→2)</td>
-                        <td><strong>분할 매수 시작.</strong> 월봉 저항 돌파 시 비중 확대.</td>
+                        <td style="color:#ffca28; font-weight:bold;">횡보 (→)</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td>가격 > 주봉 30선</td>
+                        <td>바닥 탈출 구간 (1단계 ➜ 2단계)</td>
+                        <td><strong>분할 매수 시작.</strong> 섹터 주도 대장주 중심으로 비중을 점진적으로 확대하며 월봉 저항선 돌파 여부를 추적.</td>
                     </tr>
                     <tr>
-                        <td>횡보 (→)</td>
-                        <td>횡보 (→)</td>
-                        <td>박스권</td>
-                        <td>방향성 탐색</td>
-                        <td><strong>관망.</strong> 에너지가 위로 터지는지 아래로 터지는지 대기.</td>
+                        <td style="color:#ffca28; font-weight:bold;">횡보 (→)</td>
+                        <td style="color:#ffca28; font-weight:bold;">횡보 (→)</td>
+                        <td>박스권 갇힘</td>
+                        <td>방향성 탐색 중 (에너지 수축)</td>
+                        <td><strong>자금 보존 및 관망.</strong> 에너지가 위로 터지며 돌파하는 신호가 발생할 때까지 투자 비중을 20% 이내로 엄격히 통제.</td>
                     </tr>
                     <tr>
-                        <td>횡보 (→)</td>
-                        <td>하락 (↓)</td>
-                        <td>가격 < 주봉</td>
-                        <td>하락 전환 전조</td>
-                        <td><strong>리스크 관리.</strong> 보유 비중을 줄이고 현금 확보.</td>
+                        <td style="color:#ffca28; font-weight:bold;">횡보 (→)</td>
+                        <td style="color:#ff5252; font-weight:bold;">하락 (↓)</td>
+                        <td>가격 < 주봉 30선</td>
+                        <td style="color:#ff5252;">하락 전환 전조 (Stage 3 ➜ 4)</td>
+                        <td><strong>리스크 비상 관리.</strong> 보유 주식 비중을 기계적으로 줄이고 현금 비중 70% 이상 확보하여 원금을 철저히 사수.</td>
                     </tr>
                     <tr>
-                        <td>하락 (↓)</td>
-                        <td>상승 (↑)</td>
-                        <td>가격 > 주봉</td>
-                        <td>기술적 반등</td>
-                        <td><strong>단기 매매만 허용.</strong> 월봉 저항이 강하므로 짧게 익절.</td>
+                        <td style="color:#ff5252; font-weight:bold;">하락 (↓)</td>
+                        <td style="color:#ff5252; font-weight:bold;">상승 (↑)</td>
+                        <td>가격 > 주봉 30선</td>
+                        <td>대세 하락 중 기술적 반등</td>
+                        <td><strong>초단기 트레이딩만 허용.</strong> 월봉 저항이 바로 머리 위에 있으므로 목표가와 손절가를 짧게 잡고 빠른 단타 대응.</td>
                     </tr>
                     <tr>
-                        <td>하락 (↓)</td>
-                        <td>하락 (↓)</td>
-                        <td>가격 < 주봉</td>
-                        <td>공포의 제4단계</td>
-                        <td><strong>전량 현금화.</strong> 어떤 반등도 매도 기회로 활용.</td>
+                        <td style="color:#ff5252; font-weight:bold;">하락 (↓)</td>
+                        <td style="color:#ff5252; font-weight:bold;">하락 (↓)</td>
+                        <td>가격 < 주봉 30선</td>
+                        <td style="color:#2196f3; font-weight:bold;">공포의 제4단계 (대세 폭락장)</td>
+                        <td><strong>전량 현금화 및 강제 휴식.</strong> 어떤 반등 신호도 일시적인 데드캣 바운스일 뿐이며 무조건 전량 매도로 시장 탈출.</td>
                     </tr>
                 </tbody>
             </table>
-            <p style="font-size: 12px; color: #888; margin-top: 10px;">* 가격 위치 : 가격은 주봉 종가, 주봉은 주봉 30선을 말함</p>
+            <p style="font-size: 12px; color: #aaa; margin-top: 8px;">* 가격 위치: 주봉 종가 기준이며, 주봉은 주봉 30주 이동평균선을 뜻합니다.</p>
 
-            <h3 style="margin-top:20px;">3. 주봉 30선 기반 시장 판단 로직</h3>
-            <p>📈 <strong>이 기준을 스캐너와 결합할 때 확인해야 할 3가지 체크포인트</strong></p>
-
-            <table class="matrix-table">
-                <thead>
-                    <tr>
-                        <th style="width: 35%;">상태</th>
-                        <th style="width: 25%;">시장 해석</th>
-                        <th>대응 전략</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>가격 > 주봉 30선 & 30선 우상향</strong></td>
-                        <td style="color:#ff5252; font-weight:bold;">강력한 강세장 (Stage 2)</td>
-                        <td>Today's List 종목 적극 매수 및 홀딩</td>
-                    </tr>
-                    <tr>
-                        <td><strong>가격 < 주봉 30선 & 30선 우하향</strong>
-                        </td>
-                        <td style="color:#2196f3; font-weight:bold;">명확한 하락장 (Stage 4)</td>
-                        <td>보수적 접근, 현금 비중 확대</td>
-                    </tr>
-                    <tr>
-                        <td><strong>가격이 30선 부근에서 횡보</strong></td>
-                        <td style="color:#ffca28; font-weight:bold;">전환기 (Stage 1 또는 3)</td>
-                        <td>추세가 결정될 때까지 관망 혹은 비중 조절</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3 style="margin-top:25px;">3. 주봉 30선 기반 시장 판단 로직</h3>
+            <p style="color: #ddd; font-size: 14px;">이동평균선의 방향성과 주가의 이격 정도는 시장 참여자들의 심리적 본전 단가를 보여줍니다. 주가가 주봉 30선 위에 안정적으로 안착해 있고, 30선이 우상향하고 있다면 이는 시장 참여자들이 기꺼이 더 비싼 가격을 치르고서라도 매수할 용의가 있다는 가장 강력하고 신뢰성 높은 상승장(Stage 2)의 징표입니다. 반대로 30선이 우하향하고 주가가 그 밑으로 뚫려 내려간다면 어떠한 종목의 호재나 기술적 지지선도 무의미하며 지지선이 모래성처럼 붕괴될 것입니다.</p>
         </div>
     </div>
 
     <!-- Investment Method Modal -->
     <div id="invest-popup" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 850px; padding: 30px; border-radius: 10px;">
             <span class="close-btn" onclick="closeInvestPopup()">&times;</span>
-            <h2 style="margin-top:0; color:#ff9800;">💰 투자방법 (약식)</h2>
+            <h2 style="margin-top:0; color:#ff9800; border-bottom: 2px solid #ff9800; padding-bottom: 10px;">💰 실전 투자 방법 및 매수 기준 (Investment Guide)</h2>
 
-            <div style="line-height: 1.8; font-size: 15px;">
-
+            <div style="line-height: 1.8; font-size: 14px; color: #eee;">
+                
                 <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                    1. RS_Dif가 양수인 종목들 [RS(3MO) > RS(6MO)]
+                    📈 1. 단기 모멘텀 강화 종목 [RS_Dif &gt; 0 즉, RS(3MO) &gt; RS(6MO)]
                 </h3>
+                <p style="margin-top: 5px; color: #ddd;">중기 상대강도가 장기 상대강도보다 높다는 것은 주가 상승 탄력에 뚜렷한 가속도가 붙었음을 뜻합니다.</p>
                 <ul style="list-style-type: disc; margin-left: 20px;">
-                    <li><strong>Today’s list</strong> 또는 <strong>Today’s Main</strong> 내 종목들 중에서 <strong>눌림목(상승하다가 횡보)시
-                            매수</strong></li>
-                    <li>시장상황은 가급적 <strong>월봉 10 우상향</strong>할 때!</li>
+                    <li><strong>대상 발굴:</strong> <code>Today’s list</code> 또는 <code>Today’s Main</code> 탭에 올라와 있는 종목 중 <strong>RS_Dif가 확실한 플러스(+)</strong>인 종목을 정조준합니다.</li>
+                    <li><strong>매수 타이밍:</strong> 전고점을 뚫고 직행하는 돌파 매수 혹은, 강한 거래량 상승 후 10일선 부근에서 가격 변동성이 극도로 수축되며 버티는 <strong>눌림목(Tightening) 안착 시점</strong>에 진입합니다.</li>
+                    <li><strong>시장 전제:</strong> 리스크 방지를 위해 나스닥(QQQ)의 월봉 10선이 반드시 우상향 중인 시장 상태여야 합니다.</li>
                 </ul>
 
                 <h3 style="color:#f44336; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                    2. RS_Dif가 음수인 종목들 [RS(3MO) < RS(6MO)] </h3>
-                        <ul style="list-style-type: disc; margin-left: 20px;">
-                            <li><strong>급등/반등가능성↑종목</strong> 에 포함된 종목들 중에서:
-                                <ul style="list-style-type: circle; margin-left: 20px; margin-top:5px;">
-                                    <li style="margin-bottom:5px;">
-                                        <strong>(1) 기관 매집</strong> (6개월간 횡보 + OBV 최소 3개월 상승)이 포착되고 이후 <strong>스퀴즈
-                                            돌파</strong>한 종목
-                                    </li>
-                                    <li>
-                                        <strong>(2) 회사는 매우 우량하나</strong> 회사가 포함된 섹터가 전반적으로 하락세를 보여 하락한 경우는 <strong>2파,
-                                            4파, 5파 이후 조정파, 각 단계 조정파 돌파시 매수</strong><br>
-                                        <span style="font-size:13px; color:#aaa;">* 사례 : 2026년 팔란티어 (소프트웨어 섹터에 포함되 회사는
-                                            우량하나 포함된 섹터 때문에 하락)</span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                    🔍 2. 장기 우량주 낙폭과대/턴어라운드 종목 [RS_Dif &lt; 0 즉, RS(3MO) &lt; RS(6MO)]
+                </h3>
+                <p style="margin-top: 5px; color: #ddd;">과거 장기 추세는 매우 강했으나 최근 일시적인 조정으로 인해 중기 강도가 둔화된 상태입니다.</p>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li style="margin-bottom: 8px;">
+                        <strong>(1) 세력 및 기관의 조용한 매집 포착 (OBV 활용):</strong><br>
+                        주가는 6개월간 바닥권에서 횡보하고 있지만, 누적 거래량 지표인 **OBV가 최소 3개월 이상 꾸준히 우상향(다이버전스)**하고 있다면 이는 메이저 세력이 물량을 아래에서 조용히 흡수하고 있는 증거입니다. 이후 볼린저 밴드가 극도로 좁아진 상태에서 박스권 천장을 거래량을 실어 돌파할 때(스퀴즈 돌파)가 매수 급소입니다.
+                    </li>
+                    <li>
+                        <strong>(2) 섹터 약세로 인한 억울한 동반 하락 (파동 카운팅):</strong><br>
+                        기업 자체의 실적과 펀더멘털은 견고하고 훌륭하나, 속한 섹터 전체가 무너지면서 동반 투매가 나온 경우입니다. 이 경우 무조건 하락 중일 때 낙하산을 잡지 말고, **엘리어트 조정 파동(A-B-C 파동)이 완전히 끝난 후** 주봉 30선 혹은 일봉 200일선 저항선을 거래량을 실은 양봉으로 상향 안착해 돌파할 때 진입합니다. (사례: 2026년 소프트웨어 섹터 붕괴기 당시 억울하게 빠졌던 팔란티어의 바닥 탈출 타점)
+                    </li>
+                </ul>
 
-                        <h3 style="color:#00e676; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                            3. 급등/반등가능성↑섹터 (ETF)
-                        </h3>
-                        <ul style="list-style-type: disc; margin-left: 20px;">
-                            <li>해당 ETF를 찾아서 <strong>(1)~(3)에 해당될 경우 투자</strong></li>
-                            <li style="margin-top:5px;">
-                                <strong>(1) 상승 변화기1 (하락추세 끝):</strong><br>
-                                장기선(200일선) > 단기선(5일선(한달)) > 중기선(75일(1분기))
-                            </li>
-                            <li style="margin-top:5px;">
-                                <strong>(2) 상승 변화기2 (상승추세 시작):</strong><br>
-                                단기선(5일선(한달)) > 장기선(200일선) > 중기선(75일(1분기))
-                            </li>
-                            <li style="margin-top:5px;">
-                                <strong>(3) 상승 안정기:</strong><br>
-                                단기선 > 중기선 > 장기선
-                            </li>
-                        </ul>
-
+                <h3 style="color:#00e676; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    🎯 3. 업종/섹터 대세 상승 포착 (ETF를 통한 국면 분석)
+                </h3>
+                <p style="margin-top: 5px; color: #ddd;">개별주 분석이 어렵다면 특정 산업군 ETF(예: SMH, XLK 등)의 이동평균선 배열 구조를 분석하여 3단계 국면 중 알맞은 타이밍에 투자합니다.</p>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li style="margin-top:5px;">
+                        <strong>(1) 1단계: 상승 변화기 1 (하락 추세 종결 및 매집 국면)</strong><br>
+                        <code>장기 이평선(200일) &gt; 단기 이평선(20일) &gt; 중기 이평선(60일)</code><br>
+                        역배열의 하락이 멈추고 바닥을 다진 후 단기 이평선이 먼저 장기선 돌파를 시도하는 턴어라운드 초기 국면입니다. 분할 매수로 서서히 발을 담그는 시점입니다.
+                    </li>
+                    <li style="margin-top:5px;">
+                        <strong>(2) 2단계: 상승 변화기 2 (본격 정배열 전환 진입 국면)</strong><br>
+                        <code>단기 이평선(20일) &gt; 장기 이평선(200일) &gt; 중기 이평선(60일)</code><br>
+                        단기선이 장기선을 뚫어내고 중기선 역시 바닥을 올리며 정배열 골든크로스를 완성해 나가는 가장 탄력적인 시세 초입입니다. 비중을 급격히 확대해야 하는 골든 타임입니다.
+                    </li>
+                    <li style="margin-top:5px;">
+                        <strong>(3) 3단계: 상승 안정기 (대세 정배열 질주 국면)</strong><br>
+                        <code>단기 이평선(20일) &gt; 중기 이평선(60일) &gt; 장기 이평선(200일)</code><br>
+                        모든 이평선이 아름다운 정배열을 그리며 고속도로를 달리는 추세 극대화 시점입니다. 단기 10일선 및 20일선 눌림목이 발생할 때마다 적극적으로 추가 매수하며 홀딩을 유지합니다.
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
     <!-- Prevent Top Popup Modal -->
+    <!-- Prevent Top Popup Modal -->
     <div id="prevent-top-popup" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 900px; padding: 30px; border-radius: 10px; line-height: 1.7;">
             <span class="close-btn" onclick="closePreventTopPopup()">&times;</span>
-            <h2 style="margin-top:0; color:#00bcd4;">🛡️ 투자방법(강세장)</h2>
+            <h2 style="margin-top:0; color:#00bcd4; border-bottom: 2px solid #00bcd4; padding-bottom: 10px;">🛡️ 강세장(Bull Market) 주도주 선별 및 추세 추종 상세 가이드</h2>
 
-            <div style="line-height: 1.8; font-size: 14px;">
-                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:15px;">
-                    1단계: 시장 환경 확인 (Market Direction)
+            <div style="font-size: 14px; color: #eee;">
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    1단계: 시장 환경 확인 및 필터링 (Market Direction First)
                 </h3>
-                <p>전체 시장이 하락세일 때는 상대강도 전략도 작동하기 어렵다. 나스닥(QQQ)이나 S&P500이 주요 이동평균선(50일, 200일) 위에 있는지 먼저 확인한다.</p>
+                <p style="color: #ddd;">아무리 강한 종목도 하락장에서는 10개 중 8개가 동반 폭락합니다. 나스닥 100(QQQ) 또는 S&P500(SPY) 지수가 일봉 기준 50일선 및 200일 이동평균선 위에 안착해 있는지, 그리고 월봉 10선이 상승 중인지를 가장 먼저 체크합니다. 하락장일 경우 이 강세장 전략은 무조건 멈추고 현금을 대기해야 합니다.</p>
 
                 <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                    2단계: 주도 섹터 및 산업군 식별
+                    2단계: 돈의 흐름 추적 및 주도 섹터 식별 (Sector Strength)
                 </h3>
-                <p>Sector/Industry WRS 탭에서 Final Rank가 상위 20% 이내이면서 25D CHG가 양수인 산업군을 찾는다.</p>
-                <div style="background:#2a2a2a; border-left:3px solid #00bcd4; padding:10px; margin:10px 0;">
-                    <strong>예시 분석:</strong> 현재 데이터상 'Semiconductor Equipment & Materials'가 1위를 차지하고 있으며, FRANK 25d CHG가
-                    +3으로 개선되고 있다. 이는 반도체 장비주가 현재 시장의 명확한 주도주임을 시사한다.
-                </div>
+                <p style="color: #ddd;"><code>Sector/Industry WRS</code> 탭으로 이동합니다. 전체 섹터/산업군 중 **Final WRS 종합 순위가 상위 20% 이내**에 속해 있고, **25D CHG 순위 변동폭이 양수(+)**인 산업을 찾습니다. 이는 최근 한 달간 기관 투자자들의 거대 자금이 해당 업종으로 강하게 유입되며 주도 섹터로 급부상하고 있음을 나타내는 뚜렷한 증거입니다. (예: 반도체 장비, 전력 기기 등)</p>
 
                 <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                    3단계: 산업 내 대장주 선정
+                    3단계: 섹터 내 대장주 엄선 (Ticker Level Selection)
                 </h3>
-                <p>선정된 산업군을 클릭하여 개별 종목 리스트를 연다. 여기서 RS Rank (%)가 가장 낮고(숫자가 작을수록 강함), 10D Chg가 양수인 종목을 선정한다. 더불어 최근 2년간
-                    매출과 EPS과 연평균 20% 이상 성장해왔고 향후 2년간(올해, 내년) 그 이상 성장할 기업이 중요하다.(실적이 뒷받침 되어야 주가도 계속 성장한다.) 또한 최근 CY
-                    trend와 NY trend가 5% 이상 상승한 기업, 즉 최근 애널리스트들이 최근 한달간 전망치를 상향 조정한 기업을 주목해야 한다.</p>
-                <div style="background:#2a2a2a; border-left:3px solid #ff9800; padding:10px; margin:10px 0;">
-                    <strong>차별화:</strong> 단순히 RS가 높은 것뿐만 아니라 Up/Down Ratio가 높은 종목을 우선한다. 이는 최근 애널리스트들의 실적 전망 상향이 이어지고
-                    있음을 의미하여, 기술적 강세에 펀더멘털 정당성을 부여한다.
-                </div>
-
-                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                    4단계: 기술적 진입 시점 포착 (Timing)
-                </h3>
-                <p>선택된 종목의 50DIV와 10DIV를 확인한다.</p>
-                <ul style="list-style-type: disc; margin-left: 20px;">
-                    <li><strong style="color:#f44336">진입 금지:</strong> 50DIV > 30% (너무 비쌈)</li>
-                    <li><strong style="color:#00e676">최적 진입:</strong> 50DIV 30% 이하 10DIV가 -3% ~ +3% 사이이면서 주가가 지지선에 위치할
-                        때. 즉, 대세 흐름을 탄 섹터내 종목이 10일선에서 눌림목을 보일 때 매수!!<br>
-                        <span style="font-size: 13.5px; color:#aaa;">※ 대세 상승 흐름을 탄 섹터 내 종목들은 10일선을 타고 움직이며, 10일선 근처
-                            눌림목에서 사야 승산이 매우 높다.</span>
-                    </li>
+                <p style="color: #ddd;">선정된 주도 섹터 명칭을 클릭하여 소속 개별 종목들의 상세 대시보드를 엽니다. 아래 펀더멘털 및 모멘텀 조건을 동시에 만족하는 '대장주' 1~2개만 엄선합니다.</p>
+                <ul style="list-style-type: disc; margin-left: 20px; color: #eee;">
+                    <li style="margin-bottom: 6px;"><strong>RS Rank (%) :</strong> 백분율이 가장 낮은 종목(탑 1%~10% 이내). 즉, 시장 전체에서 가장 힘이 센 종목이어야 합니다.</li>
+                    <li style="margin-bottom: 6px;"><strong>10D Chg (%) 및 25D Chg (%) :</strong> 상대강도 변화율이 모두 플러스(+)여야 합니다.</li>
+                    <li style="margin-bottom: 6px;"><strong>재무 성장성 :</strong> 지난 2년간 매출액 및 주당순이익(EPS)이 연평균 20% 이상 고성장해 왔으며, 향후 2년(올해/내년) 성장 전망치도 20% 이상이어야 신뢰도가 극대화됩니다.</li>
+                    <li style="margin-bottom: 6px;"><strong>EPS Trend & Up/Down Ratio :</strong> 최근 한 달간 애널리스트들의 실적 전망 상향폭(CY/NY Trend)이 모두 5% 이상이며, 상향 조정 비율(Up/Down Ratio)이 80% 이상이어야 기관의 동반 매수 신뢰도를 뒷받침합니다.</li>
                 </ul>
 
                 <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
-                    5단계: 손절 및 익절 규칙 적용
+                    4단계: 기술적 매수 진입 시점 포착 (Timing via Divergence)
                 </h3>
-                <ul style="list-style-type: disc; margin-left: 20px;">
-                    <li><strong style="color:#f44336">손절:</strong> 매수가 대비 7~8% 하락하거나, 종가가 20일 이동평균선을 강하게 이탈할 때.</li>
-                    <li><strong style="color:#00e676">익절:</strong> 주가가 10일 이동평균선으로부터 이격도가 20% 이상 벌어지는 '클라이맥스 런' 구간에서 분할
-                        매도.<br>
-                        <span style="font-size: 13.5px; color:#aaa;">※ 단, 주도 섹터의 순위 상위권을 유지하고 실적이 계속 상향유지될때는 월봉 10이 무너지지
-                            않는 이상 매도하지 않는다.</span>
-                    </li>
+                <p style="color: #ddd;">아무리 좋은 주도주도 이미 너무 많이 오른 상태에서 사면 큰 고통을 겪습니다. 이격도(DIV)와 지지선을 활용해 매수 단가를 통제합    <!-- Pullback Core Modal -->
+    <div id="pullback-core-popup" class="modal">
+        <div class="modal-content" style="max-width: 900px; padding: 30px; border-radius: 10px;">
+            <span class="close-btn" onclick="closePullbackCorePopup()">&times;</span>
+            <h2 style="margin-top:0; color:#ff9800; border-bottom: 2px solid #ff9800; padding-bottom: 10px;">🎯 눌림목 투자 핵심 전략 및 데이터 해석 가이드 (Pullback Core)</h2>
+            <div style="text-align: left; overflow-y: auto; max-height: 75vh; padding-right: 10px; line-height: 1.8; font-size: 14px; color: #eee;">
+                
+                <p style="color: #ddd; margin-bottom: 20px;">주도주가 강력하게 1차 급등한 후, 거래량이 급감하며 숨고르기(조정)를 할 때 리스크를 최소화하고 안전하게 매수 타이밍을 잡기 위한 **The Perfect Storm 치트시트**입니다.</p>
+
+                <h3 style="color:#2196f3; border-bottom:1px solid #444; padding-bottom:5px; margin-top:20px;">
+                    📈 [전략 1] 대시세 폭발 직전의 5단계 수급 시그널
+                </h3>
+                <p style="margin-bottom: 10px; color: #ccc;">대형 주도주가 폭발하기 직전, 차트와 거래량 지표에서 연쇄적으로 나타나는 숨은 수급 징후들입니다.</p>
+                
+                <table class="matrix-table" style="margin-bottom: 30px; font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th>단계</th>
+                            <th>수급 현황</th>
+                            <th>핵심 지표 및 관측 조건 (Checklist)</th>
+                            <th>세력의 숨은 의도 및 해석</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1단계</strong></td>
+                            <td style="color: #ffd700; font-weight: bold;">에너지 응축 (Condensation)</td>
+                            <td>볼린저 밴드 폭(BBWTHD) 0.15 이하 수축, VCP(변동성 축소 패턴) 완성, 일일 거래량의 20일 평균 대비 50% 이하 감소</td>
+                            <td>시장의 단기 매도 물량이 완전히 소진되었으며, 주가가 폭발하기 직전의 태풍의 눈(조용한 구간) 상태입니다.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2단계</strong></td>
+                            <td style="color: #ffd700; font-weight: bold;">거래량 괴리 (Divergence)</td>
+                            <td>주가는 일정 가격대에서 박스권을 그리며 횡보하지만, <strong style="color:#00bcd4;">OBV(온밸런스볼륨) 지표는 계속 우상향</strong></td>
+                            <td>주가를 위로 올리지 않은 채 아래 깔리는 호가창 물량만 티 내지 않고 조용히 물량을 모으는 중입니다.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3단계</strong></td>
+                            <td style="color: #ffd700; font-weight: bold;">과열 식힘 (Cooling Period)</td>
+                            <td>주가는 크게 내리지 않으면서, MFI(자금흐름지표)가 80(초과열)에서 <strong style="color:#00e676;">50 이하(중립 이하)</strong>로 조용히 하락</td>
+                            <td>가격 급등에 따른 피로와 단기 차익 실현 부담을 '가격 폭락'이 아닌 '기간 조정(옆으로 횡보)'으로 훌륭하게 극복해 낸 강세 시그널입니다.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4단계</strong></td>
+                            <td style="color: #ffd700; font-weight: bold;">트리거 방아쇠 (Trigger Point)</td>
+                            <td><strong style="color:#ff5252;">20일선(생명선) 부근 지지 안착</strong> + 당일 거래대금의 평균 대비 2배 돌파 + 장대 양봉 혹은 아래꼬리가 긴 도지(Doji) 캔들</td>
+                            <td>마지막 단기 조정을 마치고 20일선에서 지지를 받아 대기 매수세가 가파르게 들어오며 손바뀜이 완료되었음을 알려주는 매수 급소 신호입니다.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5단계</strong></td>
+                            <td style="color: #ffd700; font-weight: bold;">연료 폭발 (Short Squeeze Fuel)</td>
+                            <td>Short Volume Ratio(공매도 비중) 55%~60% 이상 축적, Days to Cover 5일 이상 유지</td>
+                            <td>돌파와 함께 주가가 솟구칠 때, 가격 하락에 배팅했던 공매도 세력이 파산을 막기 위해 시장가로 주식을 되사야 하는(숏커버) 폭발적인 연료가 장전된 상태입니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="color:#ffca28; border-bottom:1px solid #444; padding-bottom:5px; margin-top:30px;">
+                    💡 [핵심 이론] 20일 이동평균선이 '생명선'이자 '황금선'인 이유
+                </h3>
+                <p style="color: #ddd;">성장주 및 주도주 트레이딩에서 **20일 이동평균선(20MA)**은 단순한 선이 아니라 기관 투자자들의 **'심리적 본전 마지노선'**입니다.</p>
+                <ul style="list-style-type: disc; margin-left: 20px; color: #eee; margin-bottom: 30px;">
+                    <li style="margin-bottom: 8px;"><strong>한 달 평균 매수 단가 :</strong> 영업일 기준 20일은 정확히 한 달간 주식을 매수한 사람들의 평균 가격입니다. 주가가 하락해 이 선 근처로 오면 한 달간 산 개인 및 기관들의 본전 심리가 발동해 강력한 저가 대기 매수세가 작동합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>메이저 수급의 바로미터 :</strong> 외국계 헤지펀드나 대형 운용사들은 주가가 20일선 위에 살아있을 때만 포트폴리오 비중을 늘리고, 이 선 아래로 깨지면 비중을 줄이거나 전량 기계적 로스컷(Loss Cut)을 감행합니다. 따라서 이 선을 지켜낸다는 것은 기관의 추가 매수세가 주가를 관리하고 있다는 직접적인 뜻입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>볼린저 밴드의 무게중심 :</strong> 변동성을 측정하는 볼린저 밴드는 20일 이동평균선을 중심선으로 산출됩니다. 이 선이 깨지면 밴드의 급격한 확산과 함께 하단 밴드까지 가격이 투매될 위험이 커지므로, 수급 주체(세력)가 추세를 살리기 위해 이 선을 사수하려 합니다.</li>
                 </ul>
 
-                <h3 style="color:#ff5252; border-bottom:1px solid #444; padding-bottom:5px; margin-top:25px;">
-                    ✨ 전문가의 제언: 어떤 전략이 가장 '돈을 많이 벌어줄까'?
+                <h3 style="color:#00e676; border-bottom:1px solid #444; padding-bottom:5px; margin-top:30px;">
+                    📊 [전략 2] 공매도 거래 비중(Short Volume Ratio) 판단 기준
                 </h3>
-                <div style="background:#222; padding:15px; border-radius:5px; margin-top:10px;">
-                    <p style="margin-top:0;"><strong>1. "Final WRS가 25일 전 대비 빠르게 성장하면서 상위 10%에 오르는 기업"에
-                            투자하라.</strong><br>
-                        이것이 가장 큰 수익을 가져다줄 확률이 높다. 주식 투자에서 가장 큰 수익은 '소외주'가 '주도주'로 탈바꿈하는 구간에서 발생한다. 25d Chg는 이 거대한 변화의 초기
-                        신호를 포착하는 지표다. 다만, 이때 반드시 EPS Trend가 우상향인지 확인하여 가짜 모멘텀을 걸러내야 한다.</p>
+                <p style="color: #ddd;">개별 주식을 매수할 때는 공매도 데이터 분석이 필수적입니다. 공매도가 많이 쌓인 상태에서 주가가 밀리지 않고 지지를 받는다면, 돌파 시 공매도 환매수세(Short Cover)가 겹치며 가격이 수직 폭등(Short Squeeze)하게 됩니다.</p>
 
-                    <p><strong>2. "물리지 않으려면" 이격도와 BBWTHD를 반드시 결합하라.</strong><br>
-                        RS가 높은 종목이 물리는 이유는 '좋아서' 사는 것이 아니라 '너무 비쌀 때' 사기 때문이다. 50DIV가 낮은 상태에서 BBWTHD가 수축되어 있는 종목은 하락 변동성이
-                        제한적이다. 즉, 상위 10%의 종목을 사되, 차트가 '예쁘게 정돈된(Tightening)' 종목만 골라내면 물릴 확률은 극도로 낮아진다.</p>
+                <table class="matrix-table" style="margin-bottom: 20px; font-size: 13.5px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">공매도 일일 거래 비중</th>
+                            <th style="width: 25%;">위험도 및 국면 해석</th>
+                            <th>트레이더 대응 강령</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color:#00e676; font-weight:bold;">25% 미만</td>
+                            <td>극도의 안전 구간 (하락 베팅 거의 없음)</td>
+                            <td>시장의 매수세가 압도하고 있는 국면이며, 일반적인 추세 추종 전략을 편안하게 적용합니다.</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ffca28; font-weight:bold;">30% ~ 50%</td>
+                            <td>일반적인 우량주 정상 범위</td>
+                            <td>시장조성자(Market Maker)들의 정상적인 파생 헤지 물량 수준입니다. 특이 사항 없는 일반 국면입니다.</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ff9800; font-weight:bold;">50% ~ 60%</td>
+                            <td>공매도 집중 공격 구간 (강세 경계)</td>
+                            <td>공매도 세력이 하락 압박을 강하게 가하고 있는 상태입니다. 만약 여기서 주가가 밀리지 않고 20일선이나 50일선 지지를 지켜낸다면 매우 강력한 매집 완료 시그널로 해석합니다.</td>
+                        </tr>
+                        <tr>
+                            <td style="color:#ff5252; font-weight:bold;">60% 이상</td>
+                            <td style="font-weight: bold;">숏 스퀴즈 폭발 대기 (초강력 연료 장전)</td>
+                            <td>**숏 스퀴즈 임박 신호.** 공매도가 극도로 무리하게 누적된 상태이므로, 전고점 돌파나 강력한 양봉 하나가 나오는 즉시 공매도 숏커버 뱅크런이 터지며 주가가 폭등하므로 적극 진입 대기합니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <p style="margin-bottom:0;"><strong>3. "WRS(6MO) 상위 + 눌림목" 전략은 자산 규모가 클 때 유리하다.</strong><br>
-                        안정적인 수익을 원하는 전문가들은 이 방법을 선호한다. 이미 검증된 주도주가 일시적 시장 조정으로 인해 50일 이동평균선 근처까지 내려왔을 때(즉, 50DIV가 5% 이내일
-                        때) 매수하는 단가는 '기관 투자자와 같은 평단가'를 갖게 해주는 효과가 있다.</p>
+                <div style="background:#2a2a2a; border-left:4px solid #ffca28; padding:15px; margin:20px 0; border-radius: 4px;">
+                    <strong style="color:#ffca28; font-size: 15px;">💡 해외 숏데이터 거장들의 조언 (Fintel & S3 Partners)</strong>
+                    <p style="margin-top: 8px; margin-bottom: 0; font-style: italic; color: #ccc;">
+                        "공매도 정보의 최고 권위 기관인 **Fintel의 창립자 빌 룩스(Bill Loucks)**와 공매도 잔고 추적 분석가 **이호르 두사니우스키(Ihor Dusaniwsky)**는 **'공매도 거래 비중(Short Volume Ratio)이 비정상적으로 치솟았을 때 주가가 매수 영역 지지선을 지켜내고 횡보하거나 고개를 들 때가 숏 스퀴즈 랠리를 겨냥한 가장 매력적인 기회'**라고 입을 모아 강조합니다."
+                    </p>
                 </div>
+
+                <h3 style="color:#e91e63; border-bottom:1px solid #444; padding-bottom:5px; margin-top:30px;">
+                    🚀 실전 대응 결론
+                </h3>
+                <p style="background: rgba(233, 30, 99, 0.1); padding: 15px; border-radius: 5px; border: 1px solid rgba(233, 30, 99, 0.3); margin-top: 15px; color: #eee;">
+                    위의 모든 조건(1~3단계의 변동성 축소 및 OBV 상승 매집)이 충족되고, 공매도 비중이 55%를 넘어가며 주가가 20일선 부근에서 좁게 버텨준다면 대기하십시오. 이후 **대량 거래량이 수반되며 전고점을 강한 장대 양봉으로 뚫고 올라가는 순간**이 바로 **풀매수(Full Buy) 타점**입니다. 숏 스퀴즈 압력과 기관 매수세가 맞물리며 가장 짧은 시간 내에 가장 폭발적인 시세 상승을 가져다줄 것입니다.
+                </p>
+
             </div>
         </div>
-    </div>
-
-    <!-- Down Market Invest Method Modal -->
-    <div id="down-market-invest-popup" class="modal">
-        <div class="modal-content"
-            style="max-width: 800px; padding: 25px; border-radius: 10px; border: 1px solid #444; background-color: #1a1a1a;">
-            <span class="close-btn" onclick="closeDownMarketInvestPopup()">&times;</span>
-            <h2
-                style="margin-top:0; color:#d81b60; border-bottom:1px solid #333; padding-bottom:15px; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.2em;">📉</span> 투자방법(하락장) - 볼린저 밴드 W-패턴의 4단계
-            </h2>
-
-            <div style="line-height: 1.8; font-size: 14px; margin-top: 20px;">
-                <ol style="margin-left: 20px; color: #eee; margin-bottom: 30px;">
-                    <li><strong>첫 번째 저점 형성:</strong> 주가가 급락하며 하단 밴드(Lower Band)를 하향 돌파하거나 최소한 밴드에 닿습니다. 이때 공포 매도(Panic
-                        Selling)가 정점에 달합니다.</li>
-                    <li style="margin-top: 15px;"><strong>중심선 반등:</strong> 하단 밴드 부근에서 반등하여 중간선(20일 이평선)근처까지 올라옵니다.</li>
-                    <li style="margin-top: 15px;"><strong>두 번째 저점 (핵심!):</strong> 주가가 다시 하락하여 이전 저점 근처까지 내려오지만,
-                        <strong>주가가 하단 밴드 안쪽(Above Lower Band)</strong>에서 지지받아야 합니다.
-                        <div
-                            style="border-left:4px solid #ff9800; padding-left:15px; margin:15px 0; color:#ddd; font-size: 13.5px; background: #222; padding: 10px 15px;">
-                            <strong>포인트:</strong> 주가는 이전 저점보다 낮아질 수 있어도(수치상 신저가), 밴드 기준으로는 하단선을 침범하지 않는 <strong>'상대적
-                                강세'</strong>가 나타나야 합니다.
+    </div>리 :</strong> 수치상 주가는 더 낮아져 쌍바닥 혹은 신저가로 보이지만, 볼린저 밴드 하단선 대비 위치는 이전보다 덜 깊게 내려앉은 **'밴드 기준 상대적 강세 다이버전스'**가 나타나야 합니다. 이는 하락 에너지가 소멸하고 누군가 강하게 주가를 지지하고 있다는 뜻입니다.
                         </div>
                     </li>
-                    <li style="margin-top: 15px;"><strong>확정 및 돌파:</strong> 주가가 다시 상승하여 중간선을 돌파하거나, 직전 반등 고점을 넘어설 때 매수
-                        타점이 됩니다.</li>
+                    <li style="margin-bottom: 12px;">
+                        <strong>4단계: 확정 및 중심선 돌파 (Buy Trigger)</strong><br>
+                        지지력을 확보한 주가가 다시 양봉을 띄우며 상승하여, 20일 이동평균선(중간선)을 강한 거래량과 함께 돌파 안착하거나 2단계의 직전 반등 고점 가격을 장대 양봉으로 넘어설 때가 **가장 안전하고 완벽한 매수 타점**이 됩니다.
+                    </li>
                 </ol>
 
                 <h3
                     style="color:#2196f3; border-bottom:1px solid #333; padding-bottom:10px; margin-top:30px; display: flex; align-items: center; gap: 8px;">
-                    <span>🛠️</span> RS Investment 사이트에 적용할 전략 아이디어
+                    <span>🛠️</span> 스캐너와 볼린저 밴드 W-패턴을 결합한 실전 공략법
                 </h3>
-                <p style="color: #ddd; margin-top: 15px; margin-bottom: 15px;">기존에 활용하시던 RS(상대강도)지표와 이 W-패턴을 결합하면 승률을
-                    획기적으로 높일 수 있습니다.</p>
                 <ul style="list-style-type: disc; margin-left: 20px; color: #eee;">
-                    <li><strong>다이버전스 필터링:</strong> 두 번째 저점에서 주가는 낮아지는데 RS 지표나 RSI 같은 보조지표가 높아지고 있다면, 이는 전형적인 강세
-                        다이버전스입니다. 대시보드에서 RS 점수가 하락장에서도 굳건히 유지되는 종목 중 W-패턴의 3~4단계에 있는 종목을 우선순위에 두세요.</li>
-                    <li style="margin-top: 15px;"><strong>스퀴즈(Squeeze)와의 연계:</strong> W-패턴이 완성된 후 밴드의 폭이 좁아지는 '스퀴즈' 현상이
-                        나타난다면, 이는 곧 강력한 <strong>추세 분출(Breakout)</strong>이 임박했다는 신호입니다. 윌리엄 오닐의 컵앤핸들 패턴의 '손잡이' 형성 과정과도
-                        맥락이 닿아 있습니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>다이버전스 종목 스크리닝 :</strong> 하락장에서도 상대강도가 굳건하게 높은 상위 5% 종목(RS Rank Pct 5% 이내) 중, 최근 5영업일 이내에 중심선을 돌파한 기록(BBC = YES)이 있는 종목들을 우선적으로 정렬합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>차트 확인 및 매집 대기 :</strong> 해당 스크리닝 종목들의 개별 차트를 열어 하단 밴드 밖의 1차 저점과 밴드 내부 안착형 2차 저점(W형 쌍바닥)이 그려졌는지 직접 확인하고 4단계 돌파 시점에 진입합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>변동성 폭발 연계 :</strong> W-패턴이 성공적으로 안착하고 볼린저 밴드 폭(BBWTHD)이 수축된 상태라면, 중심선 돌파 시 강한 추세 상승 랠리(Breakout)가 가파르게 전개될 확률이 매우 큽니다.</li>
                 </ul>
 
                 <h3
-                    style="color:#ff5252; border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px; display: flex; align-items: center; gap: 8px;">
-                    <span>💡</span> 한 줄 요약
+                    style="color:#ff5252; border-bottom:1px solid #333; padding-bottom:10px; margin-top:35px; display: flex; align-items: center; gap: 8px;">
+                    <span>💡</span> 하락장 쌍바닥 기법 요약
                 </h3>
                 <div
-                    style="background:#222; padding:20px; border-radius:8px; margin-top:15px; font-weight: bold; font-size: 16px; color: #ffeb3b; text-align: center; border: 1px solid #333;">
-                    "첫 번째 하락은 밴드 밖에서, 두 번째 하락은 밴드 안에서 지지받을 때가 진짜 기회다!"
+                    style="background:#222; padding:15px; border-radius:8px; margin-top:15px; font-weight: bold; font-size: 15px; color: #ffeb3b; text-align: center; border: 1px solid #333;">
+                    "첫 번째 하락은 밴드 선 밖으로 밀리고, 두 번째 하락은 밴드 선 안쪽에서 멈추며 중심선을 뚫을 때가 진짜 승부처다!"
                 </div>
 
                 <!-- W-Pattern Filter Button -->
-                <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+                <div style="text-align: center; margin-top: 35px; margin-bottom: 20px;">
                     <button onclick="toggleWPatternFilter(); closeDownMarketInvestPopup();"
-                        style="padding: 14px 28px; font-size: 16px; background-color: #9c27b0; color: #fff; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: background-color 0.2s; display: inline-flex; align-items: center; gap: 8px;">
-                        <span>📉</span> W형 패턴 종목 보기
+                        style="padding: 12px 24px; font-size: 15px; background-color: #9c27b0; color: #fff; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: background-color 0.2s; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>📉</span> 조건 만족하는 W형 패턴 후보 종목들 즉시 보기
                     </button>
-                    <div style="font-size: 13px; color: #aaa; margin-top: 20px; line-height: 1.6;">
-                        ※ RS(6MO) 상위 5% 종목 중 <br>
-                        최근 5영업일 내 볼린저밴드 중심선(20일 이평선)을 돌파한 종목을 필터링합니다.<br>
-                        <strong style="color: #ff9800; display: block; margin-top: 5px;">해당 종목들은 차트를 통해 직접 W형 패턴이 형성되었는지
-                            눈으로 확인해야 승률이 높습니다!</strong>
+                    <div style="font-size: 12.5px; color: #aaa; margin-top: 15px; line-height: 1.6;">
+                        ※ 시장 강도 상위 5% 종목 중에서 최근 5영업일 이내에 볼린저 밴드 중심선을 상향 돌파(BBC = YES)한 종목만 실시간 필터링하여 보여줍니다. 돌파 캔들의 형태와 쌍바닥 구조를 차트로 한 번 더 검증하고 매수하십시오.
                     </div>
                 </div>
             </div>
@@ -1060,61 +1087,109 @@
         <div class="modal-content" style="max-width: 800px; text-align: left; padding: 30px; background-color: #1a1a1a; border-radius: 8px; border: 1px solid #333; line-height: 1.7; max-height: 85vh; overflow-y: auto;">
             <span class="close-btn" onclick="closePerfectStormPopup()">&times;</span>
             <h2 style="margin-top:0; color:#00e676; border-bottom: 2px solid #00e676; padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                <span>⚡</span> Perfect Storm 전략 (3단계 사전조건 & 4단계 진입시그널 상세 가이드)
+                <span>⚡</span> Perfect Storm 전략 (1~5단계 종합 가이드)
             </h2>
             
-            <h3 style="color: #00bcd4; margin-top: 20px; margin-bottom: 8px;">🔥 3단계: 종목 사전 조건 — 검증된 추세 + 시세 능력 (아래 5가지 필수 충족)</h3>
-            <ul style="list-style-type: decimal; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
+            <!-- 1단계 -->
+            <h3 style="color: #00bcd4; margin-top: 20px; margin-bottom: 8px;">🚦 1단계: 시장 신호등 — 비가 오면 우산 장사를 접는다</h3>
+            <ul style="list-style-type: none; padding-left: 0; color: #eee; font-size: 14px;">
                 <li style="margin-bottom: 12px;">
-                    <strong>52주 대비 (%) (주가 &ge; 52주 최고가의 80%) :</strong> 
-                    현재 주가가 52주 최고가 대비 낙폭 -20% 이내에 있어야 합니다 (미너비니 Trend Template 핵심 조건). 역배열 바닥에서 빌빌거리는 소외주를 원천 차단하고, 본전 매도 대기 물량이 없어 가장 가볍게 날아갈 수 있는 신고가 영역 부근의 주도주 후보군을 선별합니다.
+                    <strong>① QQQ 종가 > 50일 이동평균선 → 🟢, 아니면 🔴</strong><br>
+                    <span style="color: #aaa;">
+                        성장주와 주도주 투자에 있어 나스닥(QQQ)은 가장 확실한 체온계입니다. 기관들이 중기 추세로 중시하는 50일선이 깨지면 신뢰성 있는 돌파의 에너지가 급감합니다. 시장이 조정기일 때는 완벽해 보이는 셋업도 쉽게 실패하므로, 🔴 신호 시 신규 진입을 전면 금지하고 기존 보유 종목은 청산 규칙에 의해서만 처리합니다. (월봉 10선 대세 판단 보조지표 병행 권장)
+                    </span>
                 </li>
                 <li style="margin-bottom: 12px;">
-                    <strong>중장기 정배열 (20일 > 60일 > 120일선) :</strong> 
-                    최근 20일, 60일, 120일 이동평균선이 순서대로 위에 위치한 정배열 상태(중장기정배열 = YES)여야 합니다. 이는 해당 주식을 쥐고 있는 주주들 대다수가 수익 구간에 있어 악성 매도 매물이 나오지 않고, 본격 상승 국면(Stage 2)에 안전하게 안착했음을 의미합니다.
-                </li>
-                <li style="margin-bottom: 12px;">
-                    <strong>50DIV (%) (50일 이동평균선 이격도 &le; 30%) :</strong> 
-                    현재 주가가 50일선 대비 30% 이하로 상승한 상태여야 하며, 이를 초과할 경우 과열로 판단해 진입을 보류합니다. 급등 초입의 "강하지만 아직 많이 비싸지 않은" 구간만 공략하여 고점 추격 매수로 인한 단기 조정 리스크를 방어합니다.
-                </li>
-                <li style="margin-bottom: 12px;">
-                    <strong>ADR (%) (최근 20일간의 평균 일일 변동률 &ge; 3.5%~4.0%) :</strong> 
-                    최근 20거래일 동안의 일일 고가 대비 저가의 평균 변동폭입니다. 움직임이 무디고 둔한 주식을 걸러내고, 돈이 쏠렸을 때 탄력적으로 하루에 10~20%씩 급상승을 터뜨려 줄 수 있는 "잘 뛰는 말(끼 있는 변동성)"을 고르는 장치입니다 (쿨라매기 전략 핵심).
-                </li>
-                <li style="margin-bottom: 12px;">
-                    <strong>3M 상승 (%) (최근 3개월 최저가 대비 최고가 상승폭 &ge; 30%) :</strong> 
-                    최근 3개월(60영업일) 이내에 저점 대비 고점의 최대 상승률이 최소 30% 이상이어야 합니다. 시장에서 한번 강력하게 수급을 빨아들이며 단기 폭발력을 입증한 이력이 있는, 이미 주도주 자격증을 딴 종목들만 남겨둡니다.
+                    <strong>② 행동 기반 추가 신호: 돌파 3~4연속 실패 시 매매 중단</strong><br>
+                    <span style="color: #aaa;">
+                        지표보다 더 직접적이고 빠른 인간 행동 기반의 신호입니다. 지표가 🟢인 상태여도 실제 진입한 돌파 매매가 3~4회 연속으로 손절된다는 것은 시장 내부의 매수 여력이 고갈되었다는 직접적인 신호이므로 매매를 즉시 중단합니다. (쿨라매기 원칙)
+                    </span>
                 </li>
             </ul>
 
-            <h3 style="color: #9c27b0; margin-top: 25px; margin-bottom: 8px;">🚀 4단계: 진입 시그널 — 돌파 당일 확인 (3가지 동시 충족 시 신호 발생)</h3>
-            <ul style="list-style-type: decimal; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
+            <!-- 2단계 -->
+            <h3 style="color: #ffeb3b; margin-top: 25px; margin-bottom: 8px;">👑 2단계: 주도 섹터 선정 — 돈이 몰리는 동네만</h3>
+            <ul style="list-style-type: none; padding-left: 0; color: #eee; font-size: 14px;">
                 <li style="margin-bottom: 12px;">
-                    <strong>60D_BRK = YES (60일 최고가 종가 돌파) :</strong> 
-                    당일의 종가가 직전 60영업일(약 3개월, 당일 제외) 동안의 모든 장중 최고가를 상향 돌파해야 합니다. 이는 3개월 동안 매물을 쌓으며 다져온 박스권 저항선을 완벽하게 뚫어내고, 새로운 시세 분출 궤도에 올랐음을 나타냅니다.
-                </li>
-                <li style="margin-bottom: 12px;">
-                    <strong>VOL_X &ge; 2.0 (거래대금 돌파 비율) :</strong> 
-                    돌파 당일의 거래대금(종가 × 거래량)이 최근 20영업일 평균 거래대금의 **2배(200%) 이상** 강력히 폭발해야 합니다. 개미가 만들 수 없는 이 압도적인 거래대금 분출은 기관 투자자나 거대 세력이 주가를 올리며 본격적으로 돈을 쓸어 담기 시작한 직접적인 수급 증거입니다.
-                </li>
-                <li style="margin-bottom: 12px;">
-                    <strong>CLS_POS &ge; 50 (종가 안착률 %) :</strong> 
-                    당일 캔들의 전체 변동폭 내에서 종가가 마감된 위치 백분율입니다. 공식: `((종가 - 저가) / (고가 - 저가)) * 100`. 장중에 강하게 올랐다가 윗꼬리를 길게 달고 밀려 내려온 위장 돌파(Bull Trap)를 사전에 차단하기 위해, 캔들의 중간(50%) 이상 고가 부근에서 힘 있게 마무리한 캔들만 매수 신호로 인정합니다.
+                    <strong>조건: Final WRS 상위 + FRANK 25d CHG 양수 + F25d chg(%) 양수 (대시보드 '찐상승' 필터)</strong><br>
+                    <span style="color: #aaa;">
+                        - <strong>Final WRS 상위</strong>: 섹터 내 종목들의 시총 가중 RS + 중앙값 RS + Win-rate 합성 점수가 높은 자금 집중 구역.<br>
+                        - <strong>FRANK 25d CHG 양수 (상대 조건)</strong>: 25영업일 전 대비 순위가 상승하여 타 섹터 대비 강세를 보임.<br>
+                        - <strong>F25d chg(%) 양수 (절대 조건)</strong>: Final WRS 점수 자체가 상승. 타 섹터 하락에 따른 '반사 이익(덜 빠진 섹터)'을 거르고 실제 순수 자금 유입이 있는 섹터만 엄선하는 핵심 보완 장치.<br>
+                        - <strong>더 보수적인 버전 (찐찐상승)</strong>: 최근 10일 가속까지 확인하는 F10d chg(%) 양수 조건 결합.
+                    </span>
                 </li>
             </ul>
 
-            <h3 style="color: #ff9800; margin-top: 25px; margin-bottom: 8px;">🎯 진입 실행 & 가이드 및 리스크 관리</h3>
-            <ul style="list-style-type: disc; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
-                <li style="margin-bottom: 8px;"><strong>진입 타이밍 :</strong> 매일 장 마감 후 갱신된 대시보드를 아침에 확인한 후, 당일 밤 미국 정규장(본장)이 개장할 때 매수 진입합니다.</li>
-                <li style="margin-bottom: 8px;"><strong>오닐의 피벗 +5% 룰 (생명 규칙) :</strong> 돌파 기준 가격(60일 전고점) 대비 **+5%를 초과하는 과도한 추격 매수는 절대 엄금**합니다. 만약 시초가 갭이 너무 높게 뜨거나 급등해 버렸다면 해당 종목 매수는 미련 없이 취소하고 다음 대상을 기다립니다.</li>
-                <li style="margin-bottom: 8px;"><strong>기계적 손절매 규정 :</strong> 매수 평단가 대비 장중이든 종가든 **-7% ~ -8%**를 이탈하면 즉시 전량 손절 처리하여 내 자산을 철저하게 보호합니다.</li>
+            <!-- 3단계 -->
+            <h3 style="color: #00bcd4; margin-top: 25px; margin-bottom: 8px;">🔥 3단계: 종목 사전 조건 — 검증된 추세 + 시세 능력</h3>
+            <ul style="list-style-type: decimal; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
+                <li style="margin-bottom: 12px;">
+                    <strong>주가 &ge; 52주 최고가의 80% (1년 고점에서 20% 이내):</strong><br>
+                    <span style="color: #aaa;">역배열 상태에서 "싸 보여서" 사는 바닥 잡기 실수를 원천적으로 차단합니다. 52주 고점 부근의 주가는 위에 물려 있는 저항 매물이 거의 없고, 신고가 돌파 시 본전 매도 압력이 없기 때문에 가장 가볍고 빠르게 우상향합니다 (미너비니 Trend Template 핵심 조건).</span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>중장기 정배열 YES (20일 > 60일 > 120일선):</strong><br>
+                    <span style="color: #aaa;">단기·중기·장기 참여자 모두가 수익 중인 상태로 매도 압력이 매우 낮은 Stage 2(본격 상승 국면) 주식만을 타겟팅합니다.</span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>50DIV &le; 30%:</strong><br>
+                    <span style="color: #aaa;">현재가가 50일 이평선 대비 30% 이상 과도하게 떠 있을 시 진입을 제한합니다. 과열 국면에서의 추격 매수를 금지하고 "강하되 아직 비싸지 않은" 적정 가격대만 매수합니다. (강세장에서는 40%까지 튜닝 가능)</span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>ADR% &ge; 3.5 ~ 4%:</strong><br>
+                    <span style="color: #aaa;">산식: <code>(최근 20일간 매일의 (고가÷저가) 평균 - 1) * 100</code>. 동일한 -7% 손절 리스크 대비, 시세 분출 시 단기간 내에 30~50% 이상의 큰 보상을 가져다줄 수 있는 에너지가 넘치고 잘 뛰는 말(끼 있는 변동성 종목)만 선별합니다.</span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>[선택] 최근 1~3개월 내 +30% 이상 급등 이력:</strong><br>
+                    <span style="color: #aaa;">과거에 큰 시세를 분출했던 끼를 직접적으로 증명한 종목이 향후에도 강한 2차, 3차 시세를 이끌어 낼 확률이 매우 높습니다.</span>
+                </li>
+            </ul>
+
+            <!-- 4단계 -->
+            <h3 style="color: #9c27b0; margin-top: 25px; margin-bottom: 8px;">🚀 4단계: 진입 시그널 — 3개 동시 충족 (전 영업일 종가 기준)</h3>
+            <ul style="list-style-type: decimal; margin-left: 20px; padding-left: 0; color: #eee; font-size: 14px;">
+                <li style="margin-bottom: 12px;">
+                    <strong>60D_BRK = YES:</strong><br>
+                    <span style="color: #aaa;">당일 종가가 직전 60영업일(전일 제외) 장중 최고가를 상향 돌파해야 합니다. 한 분기 실적 주기 동안 쌓였던 박스 천장을 뚫음으로써 해당 매물대를 완전 소화했음을 직접적으로 뜻합니다.</span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>VOL_X &ge; 2.0 (거래대금 비율):</strong><br>
+                    <span style="color: #aaa;">전일 거래대금(종가 × 거래량)이 최근 20일 평균 거래대금의 2배를 초과해야 합니다. 개인 투기 세력이 아닌 거대 기관 자금이 본격 유입되었다는 확증이며 가짜 돌파를 걸러내기 위한 가장 중요한 필터입니다.</span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>CLS_POS &ge; 50 (종가 마감 위치):</strong><br>
+                    <span style="color: #aaa;">산식: <code>((종가 - 저가) / (고가 - 저가)) * 100</code>. 장중 돌파 성공 후 매물 출회로 윗꼬리가 크게 달린 실패작(Bull Trap)을 가려내고, 당일 캔들의 상단(50% 이상, 100에 가까울수록 고가 마감)에서 강하게 살아남아 종가를 올린 돌파 신호만 인정합니다.</span>
+                </li>
+                <li style="margin-bottom: 12px; list-style-type: none;">
+                    <strong>※ 진입 실행 법칙:</strong><br>
+                    <span style="color: #aaa;">시그널 감지 후 익일 밤 미국 본장 개장 시 매수하되, 돌파 가격 대비 <strong>+5% 이상 과도한 갭상승 또는 추격 매수는 피벗 룰(오닐 룰)에 의거하여 절대 금지</strong>하고 거래를 포기합니다.</span>
+                </li>
+            </ul>
+
+            <!-- 5단계 -->
+            <h3 style="color: #ff9800; margin-top: 25px; margin-bottom: 8px;">🛑 5단계: 청산 — 수익률을 결정하는 진짜 핵심</h3>
+            <ul style="list-style-type: none; padding-left: 0; color: #eee; font-size: 14px;">
+                <li style="margin-bottom: 12px;">
+                    <strong style="color: #ff5252;">🚨 손절 규정 (둘 중 먼저 터치 시 기계적으로 실행)</strong><br>
+                    <span style="color: #aaa;">
+                        ① 종가 기준 진입가 대비 <strong>-7%</strong> 도달 시 즉시 손절 (수학적 복구가 가능한 자산 수준으로 철저하게 리스크 한도 차단).<br>
+                        ② 종가가 돌파 기준선(60일 전고점) 아래로 <strong>2일 연속 마감</strong> 시 즉시 매도 (지지선 붕괴에 따른 빠른 후퇴).
+                    </span>
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong style="color: #00e676;">📈 익절 및 홀딩 (수익 극대화 규칙)</strong><br>
+                    <span style="color: #aaa;">
+                        ① 진입 후 3~5일 내에 강한 급등세가 연출되면 <strong>1/3 분할 매도</strong>하고, 동시에 남은 물량(2/3)의 손절선을 <strong>본전 평단가로 즉시 상향</strong>합니다. (최악의 경우에도 잃지 않는 공짜 포지션화)<br>
+                        ② 나머지 2/3 물량은 종가가 <strong>20일 이동평균선을 깨고 내려오기 전까지 무조건 홀딩</strong>하여 추세를 끝까지 즐깁니다.<br>
+                        ③ <strong>천장 과열 경고 시 매도 가속</strong>: 50DIV가 70% 이상으로 과열되고 대량 거래를 동반했으나 더 이상 오르지 못하는 상승 정체 현상(topping out volume) 출현 시 기존 응봉아재 가이드에 따라 분할 매도를 시작합니다.
+                    </span>
+                </li>
             </ul>
         </div>
     </div>
     </div>
     </div>
-
-
 
     <!-- Pullback Core Modal -->
     <div id="pullback-core-popup" class="modal">
