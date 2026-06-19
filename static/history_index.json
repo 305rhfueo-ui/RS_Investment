@@ -1,7 +1,127 @@
 {
-  "last_updated": "2026-05-17 22:57:22 UTC",
-  "total_history": 101,
+  "last_updated": "2026-06-19 00:00:56 UTC",
+  "total_history": 131,
   "dates": [
+    {
+      "date": "2026-06-19",
+      "filename": "history/result_2026-06-19.json"
+    },
+    {
+      "date": "2026-06-17",
+      "filename": "history/result_2026-06-17.json"
+    },
+    {
+      "date": "2026-06-16",
+      "filename": "history/result_2026-06-16.json"
+    },
+    {
+      "date": "2026-06-14",
+      "filename": "history/result_2026-06-14.json"
+    },
+    {
+      "date": "2026-06-13",
+      "filename": "history/result_2026-06-13.json"
+    },
+    {
+      "date": "2026-06-12",
+      "filename": "history/result_2026-06-12.json"
+    },
+    {
+      "date": "2026-06-11",
+      "filename": "history/result_2026-06-11.json"
+    },
+    {
+      "date": "2026-06-10",
+      "filename": "history/result_2026-06-10.json"
+    },
+    {
+      "date": "2026-06-09",
+      "filename": "history/result_2026-06-09.json"
+    },
+    {
+      "date": "2026-06-08",
+      "filename": "history/result_2026-06-08.json"
+    },
+    {
+      "date": "2026-06-07",
+      "filename": "history/result_2026-06-07.json"
+    },
+    {
+      "date": "2026-06-06",
+      "filename": "history/result_2026-06-06.json"
+    },
+    {
+      "date": "2026-06-05",
+      "filename": "history/result_2026-06-05.json"
+    },
+    {
+      "date": "2026-06-04",
+      "filename": "history/result_2026-06-04.json"
+    },
+    {
+      "date": "2026-06-03",
+      "filename": "history/result_2026-06-03.json"
+    },
+    {
+      "date": "2026-06-01",
+      "filename": "history/result_2026-06-01.json"
+    },
+    {
+      "date": "2026-05-31",
+      "filename": "history/result_2026-05-31.json"
+    },
+    {
+      "date": "2026-05-30",
+      "filename": "history/result_2026-05-30.json"
+    },
+    {
+      "date": "2026-05-29",
+      "filename": "history/result_2026-05-29.json"
+    },
+    {
+      "date": "2026-05-28",
+      "filename": "history/result_2026-05-28.json"
+    },
+    {
+      "date": "2026-05-27",
+      "filename": "history/result_2026-05-27.json"
+    },
+    {
+      "date": "2026-05-26",
+      "filename": "history/result_2026-05-26.json"
+    },
+    {
+      "date": "2026-05-25",
+      "filename": "history/result_2026-05-25.json"
+    },
+    {
+      "date": "2026-05-24",
+      "filename": "history/result_2026-05-24.json"
+    },
+    {
+      "date": "2026-05-23",
+      "filename": "history/result_2026-05-23.json"
+    },
+    {
+      "date": "2026-05-22",
+      "filename": "history/result_2026-05-22.json"
+    },
+    {
+      "date": "2026-05-21",
+      "filename": "history/result_2026-05-21.json"
+    },
+    {
+      "date": "2026-05-20",
+      "filename": "history/result_2026-05-20.json"
+    },
+    {
+      "date": "2026-05-19",
+      "filename": "history/result_2026-05-19.json"
+    },
+    {
+      "date": "2026-05-18",
+      "filename": "history/result_2026-05-18.json"
+    },
     {
       "date": "2026-05-17",
       "filename": "history/result_2026-05-17.json"
