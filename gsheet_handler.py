@@ -51,8 +51,23 @@ def update_sheet(data_list):
             print(f"[GSheet] '{TARGET_TAB_NAME}' 탭을 찾았습니다.")
 
         # 기존 데이터 읽기 (중복/변동 확인용)
-        existing_data = sheet.get_all_records()
-        existing_df = pd.DataFrame(existing_data)
+        try:
+            all_values = sheet.get_all_values()
+            if all_values:
+                headers = all_values[0]
+                sanitized_headers = []
+                for idx, h in enumerate(headers):
+                    h_clean = str(h).strip()
+                    if not h_clean:
+                        h_clean = f"Unnamed_{idx}"
+                    sanitized_headers.append(h_clean)
+                rows = all_values[1:]
+                existing_df = pd.DataFrame(rows, columns=sanitized_headers)
+            else:
+                existing_df = pd.DataFrame()
+        except Exception as ge:
+            print(f"[GSheet] 기존 데이터 읽기 실패, 빈 DataFrame으로 우회: {ge}")
+            existing_df = pd.DataFrame()
         
         # DataFrame이 비어있을 경우 처리
         if existing_df.empty:
