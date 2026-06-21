@@ -2047,7 +2047,7 @@
             appState.filterText = '';
             document.getElementById('search-input').value = '';
             appState.industryFilter = null;
-            appState.sort = { key: 'Ticker', asc: true };
+            appState.sort = { key: 'VOL_X', asc: false };
 
             if (groupedData.length === 0) {
                 calculateWRS();
@@ -2146,7 +2146,7 @@
             appState.filterText = '';
             document.getElementById('search-input').value = '';
             appState.industryFilter = null;
-            appState.sort = { key: 'Ticker', asc: true }; // Ticker 가나다순 정렬이 기본으로 적합
+            appState.sort = { key: 'VOL_X', asc: false }; // Ticker 가나다순 정렬이 기본으로 적합
             updateUI();
         }
 
@@ -2904,8 +2904,9 @@
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
                     <th onclick="sortTable('Price')">Price ($) ⬍</th>
-                    <th onclick="sortTable('High_52W_Pct')">52주 대비 (%) ⬍</th>
-                    <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">중장기정배열 ⬍</th>
+                    <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
+                    <th onclick="sortTable('High_52W_Pct')">52주 고점 (%) ⬍</th>
+                    <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">정배열 ⬍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
                     <th onclick="sortTable('Max_Rise_3M_Pct')">3M 상승 (%) ⬍</th>
@@ -2933,6 +2934,7 @@
                         <td>${item.Sector}</td>
                         <td>${item.Industry}</td>
                         <td>${priceStr}</td>
+                        <td>${isValidNumber(item.RS_6mo) ? item.RS_6mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
                         <td class="${jbColor}">${jb}</td>
                         <td>${item['50DIV']}%</td>
