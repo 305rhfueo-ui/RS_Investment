@@ -528,10 +528,16 @@
                     </button>
 
                     <!-- [Added] Perfect Storm Breakout View Link -->
-                    <button id="breakout-btn" onclick="showBreakout()" class="download-btn"
-                        style="background-color:#00bcd4; color:#000;">
-                        돌파항목
-                    </button>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap: 5px;">
+                        <button id="breakout-btn" onclick="showBreakout()" class="download-btn"
+                            style="background-color:#00bcd4; color:#000;">
+                            돌파항목
+                        </button>
+                        <a href="#" id="brk-60d-btn" onclick="toggleBrk60dFilter(); return false;"
+                            style="color: #00bcd4; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                            60돌파
+                        </a>
+                    </div>
 
                     <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
                 </div>
@@ -1446,6 +1452,7 @@
             realRealRiseFilter: false,
             halfRealRiseFilter: false,
             industryFilter: null, // [Added] Industry Filter State (Array of selected industries, or null)
+            brk60dFilter: false, // [Added] 60D Breakout Filter State
             date10D: '',
             date25D: ''
         };
@@ -1928,6 +1935,10 @@
                 subtitleText = "Rising/Rebound Sectors (WRS_Dif > 0)";
                 subtitle.style.color = "#ffca28";
                 if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
+            } else if (appState.mode === 'BREAKOUT') {
+                subtitleText = "돌파항목";
+                subtitle.style.color = "#00bcd4"; // Cyan
+                if (wrsBtn) wrsBtn.innerText = "Sector/Industry WRS";
             }
 
 
@@ -1980,6 +1991,20 @@
                 if (realRiseBtn) realRiseBtn.style.display = 'none';
                 if (realRealRiseBtn) realRealRiseBtn.style.display = 'none';
                 if (halfRealRiseBtn) halfRealRiseBtn.style.display = 'none';
+            }
+
+            // [Added] 60D Breakout Filter UI Update
+            const brk60dBtn = document.getElementById('brk-60d-btn');
+            if (appState.mode === 'BREAKOUT') {
+                if (brk60dBtn) brk60dBtn.style.display = 'inline-block';
+                if (appState.brk60dFilter) {
+                    if (brk60dBtn) brk60dBtn.innerText = "돌아가기";
+                    subtitleText += " (60돌파)";
+                } else {
+                    if (brk60dBtn) brk60dBtn.innerText = "60돌파";
+                }
+            } else {
+                if (brk60dBtn) brk60dBtn.style.display = 'none';
             }
 
             // [Added] Sector FS Click UI Update
@@ -2135,18 +2160,27 @@
             // WRS 드릴다운 상태(DRILLDOWN) 또는 이미 BREAKOUT인 상태에서 drillDownKey가 설정되어 있는 상황
             if (appState.mode === 'DRILLDOWN' || appState.mode === 'TODAYS_LIST_FS_DRILLDOWN') {
                 appState.mode = 'BREAKOUT';
+                appState.brk60dFilter = false; // 진입 시 필터 해제
             } else if (appState.mode === 'BREAKOUT') {
-                // 이미 돌파항목 모드면 상태 유지
+                // 이미 돌파항목 모드에서 재클릭 시 필터 해제 (초기화)
+                appState.brk60dFilter = false;
             } else {
                 // 드릴다운 상태가 아닌 일반 모드에서 누르면 드릴다운 키 리셋
                 appState.mode = 'BREAKOUT';
                 appState.drillDownKey = null;
+                appState.brk60dFilter = false;
             }
             
             appState.filterText = '';
             document.getElementById('search-input').value = '';
             appState.industryFilter = null;
-            appState.sort = { key: 'VOL_X', asc: false }; // Ticker 가나다순 정렬이 기본으로 적합
+            appState.sort = { key: 'VOL_X', asc: false }; // VOL_X 내림차순 정렬이 기본
+            updateUI();
+        }
+
+        // [Added] Toggle 60D Breakout Filter
+        function toggleBrk60dFilter() {
+            appState.brk60dFilter = !appState.brk60dFilter;
             updateUI();
         }
 
@@ -2480,6 +2514,10 @@
                     });
                 } else {
                     targetData = [...globalData];
+                }
+                // [Added] 60D Breakout Filter
+                if (appState.brk60dFilter) {
+                    targetData = targetData.filter(item => item.BRK_60D === 'YES');
                 }
             } else if (appState.mode === 'WRS') {
                 targetData = [...groupedData];
