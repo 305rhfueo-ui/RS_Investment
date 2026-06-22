@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 종목 추천</title>
+    <link rel="shortcut icon" href="static/favicon.png">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #00e676;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 900px;
+            margin-top: 40px;
+            flex-grow: 1;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .date-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h2 span.sector {
+            font-size: 14px;
+            color: #888;
+            margin-left: 15px;
+            font-weight: normal;
+        }
+
+        .strategy-tag {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .strategy-tag.eungbong { background-color: #3f51b5; }
+        .strategy-tag.perfect-storm { background-color: #00bcd4; color: #000; }
+
+        .content-section {
+            margin-bottom: 20px;
+        }
+
+        .content-section h3 {
+            font-size: 16px;
+            color: #eee;
+            margin-bottom: 10px;
+        }
+
+        .content-section p, .content-section ul {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+        }
+
+        .chart-img {
+            max-width: 100%;
+            border-radius: 5px;
+            border: 1px solid #444;
+            margin-top: 15px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            background-color: rgba(255, 82, 82, 0.1);
+            border-left: 4px solid #ff5252;
+            padding: 15px;
+            font-size: 13px;
+            color: #ddd;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 메인 대시보드로 돌아가기</a>
+        
+        <h1>📈 오늘의 추천 종목 및 투자 전략</h1>
+        <div class="date-subtitle">기준일: 2026-06-23</div>
+
+        <!-- STRL Card -->
+        <div class="card">
+            <h2>STRL (Sterling Infrastructure) <span class="sector">🏭 Industrials</span></h2>
+            <div class="strategy-tag eungbong">👨‍🏫 응봉아재보소 (눌림목 및 실적 상승 주도주)</div>
+            
+            <div class="content-section">
+                <h3>추천 사유</h3>
+                <ul>
+                    <li><strong>재무 건전성 및 성장세</strong>: 매출액이 꾸준히 성장 중이며 (2.11B -> 2.49B), 당기순이익(Net Income) 역시 257M에서 290M으로 탄탄한 증가세를 보이고 있습니다. Free Cash Flow(잉여현금흐름)도 강력한 양(+)의 흐름을 유지하고 있어 사업 수익 모델이 확실하게 작동 중입니다.</li>
+                    <li><strong>차트 및 수급</strong>: 중장기 정배열 상태를 유지 중이며 50일 이동평균선 근처(50DIV 30% 이내)에서 지지를 받으며 올라오는 이상적인 눌림목 매수 타점을 형성하고 있습니다.</li>
+                    <li><strong>모멘텀</strong>: 상대강도(RS 6mo) 기준 1.94로, 시장 대비 압도적인 아웃퍼폼(Outperform)을 기록 중입니다.</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>투자 전략 (비중 확대)</h3>
+                <p>안정적인 실적 모멘텀이 뒷받침되는 만큼 저항선 돌파 후 지지 여부를 확인하며 분할 매수. 단기뿐 아니라 중장기 스윙으로도 적합합니다.</p>
+            </div>
+
+            <img src="STRL_chart.png" alt="STRL Chart" class="chart-img">
+        </div>
+
+        <!-- KYMR Card -->
+        <div class="card">
+            <h2>KYMR (Kymera Therapeutics) <span class="sector">🧬 Healthcare / Biotechnology</span></h2>
+            <div class="strategy-tag perfect-storm">⚡ Perfect Storm (신고가 돌파 셋업)</div>
+            
+            <div class="content-section">
+                <h3>추천 사유</h3>
+                <ul>
+                    <li><strong>차트 및 수급 폭발력</strong>: 52주 고점 대비 80% 이상 상단에 위치해 있어 악성 매물이 거의 없는 신고가 영역에 진입했습니다.</li>
+                    <li><strong>변동성 및 모멘텀</strong>: 최근 3개월간 저점 대비 최대 상승률(Max Rise 3M)이 30%를 상회하며, 당일 거래대금 폭발(VOL_X > 2.0)을 동반한 확실한 60일 신고가 돌파(60D BRK: YES) 캔들을 형성했습니다. 기관의 수급 쏠림이 뚜렷하게 관찰되는 전형적인 '힘과 거래 대금의 쏠림'을 입증한 주도주입니다.</li>
+                    <li><em>참고</em>: 바이오 섹터 특성상 적자가 지속 중이나, 시장은 파이프라인 기대감과 강력한 펀더멘털 모멘텀을 반영해 급등 중이므로 철저한 기술적 대응(손절라인 세팅)이 동반되어야 합니다.</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>투자 전략 (단기 트레이딩)</h3>
+                <p>전형적인 돌파 셋업이므로 1차 매수 진입 후, 돌파 캔들의 저점이나 10일선 이탈 시 칼같이 손절하는 원칙으로 '달리는 말에 올라타기' 전략 수행.</p>
+            </div>
+
+            <img src="KYMR_chart.png" alt="KYMR Chart" class="chart-img">
+        </div>
+
+        <div class="footer-note">
+            <strong>면책 조항 (Disclaimer):</strong> 이 추천은 데이터 및 퀀트 룰 베이스에 기반한 것으로, 실제 투자 책임은 본인에게 있습니다. 반드시 장중 흐름을 확인하고 진입하세요.
+        </div>
+    </div>
+</body>
+</html>
