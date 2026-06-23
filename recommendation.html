@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘의 종목 추천 (Top 5)</title>
+    <title>오늘의 폭등 유망 종목 (Top 5)</title>
     <link rel="shortcut icon" href="static/favicon.png">
     <style>
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
-            --primary-color: #00e676;
+            --primary-color: #ff5252; /* Changed to red for explosive theme */
             --text-color: #ffffff;
             --text-secondary: #b0b0b0;
             --border-color: #333;
@@ -53,6 +53,7 @@
             border-radius: 8px;
             padding: 25px;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(255, 82, 82, 0.1);
         }
 
         .card h2 {
@@ -83,8 +84,7 @@
             margin-bottom: 15px;
         }
 
-        .strategy-tag.eungbong { background-color: #3f51b5; }
-        .strategy-tag.perfect-storm { background-color: #00bcd4; color: #000; }
+        .strategy-tag.explosive { background-color: #ff1744; }
 
         .content-section {
             margin-bottom: 20px;
@@ -105,11 +105,9 @@
             margin-bottom: 8px;
         }
 
-        .chart-img {
-            max-width: 100%;
-            border-radius: 5px;
-            border: 1px solid #444;
-            margin-top: 15px;
+        .highlight-text {
+            color: #ff8a80;
+            font-weight: bold;
         }
 
         .back-link {
@@ -138,32 +136,32 @@
     <div class="container">
         <a href="index.html" class="back-link">← 메인 대시보드로 돌아가기</a>
         
-        <h1>📈 오늘의 추천 종목 및 투자 전략 (FRANK Top 10 주도 섹터 찐상승)</h1>
-        <div class="date-subtitle">기준일: 2026-06-23</div>
+        <h1>🚀 오늘의 폭등 잠재력 대장주 (Top 5)</h1>
+        <div class="date-subtitle">기준일: 2026-06-23 | 필터링 기준: 자금 유입량, 변동성(ADR), 단기 모멘텀 극대화</div>
 
-        <!-- STRL Card -->
+        <!-- Q Card -->
         <div class="card">
-            <h2>STRL (Sterling Infrastructure) <span class="sector">🏭 Industrials</span></h2>
-            <div class="strategy-tag eungbong">👨‍🏫 응봉아재보소 (눌림목 및 실적 상승 주도주)</div>
+            <h2>Q (Qorvo, Inc.) <span class="sector">💻 Technology</span></h2>
+            <div class="strategy-tag explosive">🔥 폭등 에너자이저 (최고점수)</div>
             <div class="content-section">
-                <h3>추천 사유 및 재무 분석</h3>
+                <h3>차트 및 모멘텀 분석</h3>
                 <ul>
-                    <li><strong>최상위 주도 섹터 (Top 10)</strong>: 수많은 산업군 중 자금이 가장 강하게 쏠리는 FRANK Top 10 핵심 주도주.</li>
-                    <li><strong>폭발적인 실적 성장</strong>: 당기순이익이 138M(23년) ➔ 257M(24년) ➔ 290M(25년)으로 지속 급증 중.</li>
-                    <li><strong>강력한 현금 창출력</strong>: Free Cash Flow 362M을 기록하며 탄탄한 현금흐름.</li>
+                    <li><strong>높은 변동성 (ADR 4.85%)</strong>: 하루 등락폭이 평균 약 4.8%에 달해 단기 트레이딩 및 추세 폭발 시 어마어마한 수익률을 안겨줄 수 있는 가벼운 움직임을 보입니다.</li>
+                    <li><strong>과거 폭등 이력 (Max Rise 67%)</strong>: 최근 3개월 내 바닥 대비 단숨에 67%나 치솟았던 강력한 랠리 이력을 보유하고 있어, 시세 분출 시 파괴력이 검증되었습니다.</li>
+                    <li><strong>최상위 주도 섹터</strong>: 강력한 테크놀로지 자금 유입 섹터 내에서 현재 가장 폭발력 높은 위치에 자리잡고 있습니다.</li>
                 </ul>
             </div>
         </div>
 
-        <!-- IESC Card -->
+        <!-- ACA Card -->
         <div class="card">
-            <h2>IESC (IES Holdings) <span class="sector">🏭 Industrials</span></h2>
-            <div class="strategy-tag eungbong">👨‍🏫 응봉아재보소 (눌림목 및 실적 상승 주도주)</div>
+            <h2>ACA (Arcosa, Inc.) <span class="sector">🏭 Industrials</span></h2>
+            <div class="strategy-tag explosive">🔥 미친 거래량 터짐 (Volume Spike)</div>
             <div class="content-section">
-                <h3>추천 사유 및 재무 분석</h3>
+                <h3>차트 및 모멘텀 분석</h3>
                 <ul>
-                    <li><strong>믿기 힘든 어닝 서프라이즈</strong>: 당기순이익이 108M ➔ 219M ➔ 305M으로 3배 가까이 폭발적으로 성장! (CAN SLIM 부합)</li>
-                    <li><strong>잉여현금흐름(FCF)</strong>: 136M ➔ 189M ➔ 218M 꾸준한 증가. 이익의 질(Quality of Earnings) 우수.</li>
+                    <li><span class="highlight-text">역대급 거래량 폭발 (VOL_X: 9.43배)</span>: 평소 거래량 대비 무려 <strong>9.4배</strong>에 달하는 엄청난 기관/외인 자금이 단기 유입되었습니다. 누군가 대량으로 쓸어담았다는 강력한 증거입니다.</li>
+                    <li><strong>안정적인 베이스와 모멘텀</strong>: 변동성(ADR 3.29%)이 살아있는 가운데, 최근 3개월 최대 상승률 46%를 기록하며 힘을 비축하다가 대량 거래량을 동반하며 폭발 직전의 셋업을 완성했습니다.</li>
                 </ul>
             </div>
         </div>
@@ -171,44 +169,44 @@
         <!-- AGX Card -->
         <div class="card">
             <h2>AGX (Argan, Inc.) <span class="sector">🏭 Industrials</span></h2>
-            <div class="strategy-tag eungbong">👨‍🏫 응봉아재보소 (눌림목 및 실적 상승 주도주)</div>
+            <div class="strategy-tag explosive">🔥 극강의 변동성과 수익률</div>
             <div class="content-section">
-                <h3>추천 사유 및 재무 분석</h3>
+                <h3>차트 및 모멘텀 분석</h3>
                 <ul>
-                    <li><strong>순이익 & FCF 폭발적 턴어라운드</strong>: 당기순이익이 32M(24년) ➔ 85M(25년) ➔ 137M(26년)으로 매년 기하급수적으로 폭등.</li>
-                    <li><strong>강력한 현금흐름 랠리</strong>: FCF가 114M에서 410M으로 무려 4배 가까이 퀀텀 점프! 가장 눈여겨볼 강력한 펀더멘털 주도주입니다.</li>
+                    <li><span class="highlight-text">가공할 만한 시세 분출 이력 (Max Rise 98.5%)</span>: 최근 3개월 만에 주가가 거의 <strong>2배(98.5%)</strong> 가까이 올랐던 극강의 주도주입니다.</li>
+                    <li><strong>초고변동성 (ADR 7.03%)</strong>: 하루에 7% 이상 쉽게 오르내리는 종목으로, 한 번 추세를 타기 시작하면 그 누구도 따라잡기 힘든 무서운 상승 각도를 보여줍니다. 실적 턴어라운드 재료와 기술적 폭발력이 완벽히 맞물려 있습니다.</li>
                 </ul>
             </div>
         </div>
 
-        <!-- DY Card -->
+        <!-- AMAT Card -->
         <div class="card">
-            <h2>DY (Dycom Industries) <span class="sector">🏭 Industrials</span></h2>
-            <div class="strategy-tag eungbong">👨‍🏫 응봉아재보소 (눌림목 및 실적 상승 주도주)</div>
+            <h2>AMAT (Applied Materials) <span class="sector">💻 Technology</span></h2>
+            <div class="strategy-tag explosive">🔥 우량주를 가장한 로켓</div>
             <div class="content-section">
-                <h3>추천 사유 및 재무 분석</h3>
+                <h3>차트 및 모멘텀 분석</h3>
                 <ul>
-                    <li><strong>안정적인 매출액 성장</strong>: 4.1B ➔ 4.7B ➔ 5.5B로 인프라 사이클에 맞춰 꾸준한 외형 성장을 보여주고 있습니다.</li>
-                    <li><strong>FCF 급격한 흑자 폭발</strong>: 40M 수준이었던 FCF가 최근 결산 401M으로 10배 이상 대폭 상승하며 우량한 펀더멘털을 입증했습니다.</li>
+                    <li><span class="highlight-text">대형주의 100% 폭등 (Max Rise 100.1%)</span>: 시가총액이 거대한 반도체 장비 대장주임에도 불구하고 최근 3개월 만에 100% 상승이라는 경이로운 폭발력을 보여주었습니다.</li>
+                    <li><strong>높은 탄력성 (ADR 5.47%)</strong>: 대형주임에도 ADR이 5%를 넘어, 기술주 랠리 시 시장을 이끄는 가장 강력한 선봉장 역할을 하고 있습니다.</li>
                 </ul>
             </div>
         </div>
 
-        <!-- MYRG Card -->
+        <!-- TER Card -->
         <div class="card">
-            <h2>MYRG (MYR Group) <span class="sector">🏭 Industrials</span></h2>
-            <div class="strategy-tag eungbong">👨‍🏫 응봉아재보소 (눌림목 및 실적 상승 주도주)</div>
+            <h2>TER (Teradyne) <span class="sector">💻 Technology</span></h2>
+            <div class="strategy-tag explosive">🔥 고변동성 모멘텀 플레이</div>
             <div class="content-section">
-                <h3>추천 사유 및 재무 분석</h3>
+                <h3>차트 및 모멘텀 분석</h3>
                 <ul>
-                    <li><strong>눈부신 이익률 회복</strong>: 24년 일시적 부진(30M)을 딛고 25년 118M의 순이익을 달성하며 폭발적인 V자 반등에 성공했습니다.</li>
-                    <li><strong>FCF의 놀라운 점프</strong>: 작년 11M에 불과했던 잉여현금흐름이 올해 232M으로 20배 넘게 폭증하며 역대급 현금 창출력을 과시 중입니다.</li>
+                    <li><strong>빠른 추세 전환 (ADR 6.81%)</strong>: 반도체 장비/테스트 주도주로, ADR이 거의 7%에 육박해 매우 날카로운 상승각을 보여줍니다.</li>
+                    <li><strong>견고한 모멘텀 (Max Rise 68.2%)</strong>: 3개월 단기 상승률 68%를 달성하며 기술적 상승 셋업을 완벽하게 다져놓은 상태입니다. 지금 매수세가 붙으면 전고점을 가볍게 뚫고 갈 잠재력이 있습니다.</li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-note">
-            <strong>면책 조항 (Disclaimer):</strong> 이 추천은 데이터 및 퀀트 룰 베이스에 기반한 것으로, 실제 투자 책임은 본인에게 있습니다. 반드시 장중 흐름을 확인하고 진입하세요. (해당 문서는 AI가 재무제표 팩트체크 후 생성한 자료입니다.)
+            <strong>면책 조항 (Disclaimer):</strong> 본 추천은 '실적' 중심의 안전지향적 투자가 아닌, 거래량(Volume), 변동성(ADR), 과거 폭등력(Max Rise), 단기 모멘텀(RS)에 가중치를 극대화한 하이리스크 하이리턴 트레이딩 전략을 기반으로 합니다. 진입 시 반드시 본인만의 손절 매뉴얼을 지켜주세요.
         </div>
     </div>
 </body>
