@@ -3,7 +3,9 @@ import json
 import os
 import time
 import shutil
+import socket
 from datetime import datetime
+socket.setdefaulttimeout(15)  # 방지: yfinance 네트워크 무한 대기 (Hang) 방지
 # utils에 있는 강력한 병렬 처리 함수 가져오기
 import utils
 import gsheet_handler
