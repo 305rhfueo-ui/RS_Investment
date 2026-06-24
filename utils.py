@@ -598,13 +598,18 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         
         # 3. 50-day Moving Average Divergence (50DIV)
         div_50 = None
+        div_200 = None
         try:
             if len(hist) >= 50:
                 ma_50 = hist.iloc[-50:].mean()
                 if ma_50 != 0:
                     div_50 = round(((latest_price - ma_50) / ma_50) * 100, 2)
+            if len(hist) >= 200:
+                ma_200 = hist.iloc[-200:].mean()
+                if ma_200 != 0:
+                    div_200 = round(((latest_price - ma_200) / ma_200) * 100, 2)
         except Exception as e:
-            print(f"50DIV 계산 에러 ({original_ticker}): {e}")
+            print(f"50DIV/200DIV 계산 에러 ({original_ticker}): {e}")
 
         # 4. RS Estimate Calculation with Caching (3 Days)
         cy_trend = None
@@ -789,6 +794,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'RS_3mo': float(rs_3mo),
             'RS_1mo': float(rs_1mo),
             '50DIV': div_50,  # 50일 이동평균 괴리율
+            '200DIV': div_200,  # 200일 이동평균 괴리율
             'Sector': sector,
             'Industry': industry,
             # [Updated] RS Estimate Columns matching user request

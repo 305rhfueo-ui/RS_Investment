@@ -419,6 +419,7 @@
                     <li style="margin-bottom: 8px;"><strong>FRANK 25d CHG:</strong> 25영업일(5주) 전 대비 FRANK 순위의 변동폭입니다. 값이 큰 양수(+)일수록 소외 업종에서 최근 주도 섹터로 급격히 턴어라운드하여 치고 올라왔다는 강력한 신호입니다.</li>
                     <li style="margin-bottom: 8px;"><strong>RS_DiF / WRS_Dif:</strong> <code>(3개월 RS) - (6개월 RS)</code>로 계산되는 상대강도 스프레드입니다. 이 스프레드가 양수(+)로 돌아서면 중단기 모멘텀이 장기 모멘텀을 넘어서 상승 흐름에 가속도가 붙었음을 입증합니다.</li>
                     <li style="margin-bottom: 8px;"><strong>50DIV(%):</strong> 현재 주가와 50일 이동평균선 간의 괴리율(%)입니다. 수치가 30%를 넘는 등 지나치게 높으면 단기 과열 국면이므로 눌림목 조정을 기다렸다가 진입하는 것이 유리합니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>200DIV(%):</strong> 현재 주가와 200일 이동평균선 간의 괴리율(%)입니다. 주가의 장기 추세 이탈 여부를 판단하는 지표로 활용됩니다.</li>
                     <li style="margin-bottom: 8px;"><strong>10DIV(%):</strong> 현재 주가와 10일 이동평균선 간의 괴리율(%)입니다. 10일선 근처인 -3% ~ +3% 구간에 딱 붙을 때가 주도주 추종 시 최적의 분할 매수 타점을 제공합니다.</li>
                     <li style="margin-bottom: 8px;"><strong>중장기정배열:</strong> 최근 20일선 > 60일선 > 120일선 순으로 이동평균선이 안정적인 우상향 정배열 구조(Stage 2)를 보이고 있는지 여부(YES/NO)입니다. 정배열 상태(YES)에서만 매수를 고려하는 것이 자산 보호에 절대적으로 유리합니다.</li>
 
@@ -426,6 +427,8 @@
                     <li style="margin-bottom: 8px;"><strong>SALE NY(%):</strong> 내년(Next Year) 예상 매출액의 전년대비 증가율 전망치입니다.</li>
                     <li style="margin-bottom: 8px;"><strong>EPS CY(%):</strong> 올해 예상 주당순이익(EPS)의 전년대비 증가율 전망치입니다.</li>
                     <li style="margin-bottom: 8px;"><strong>EPS NY(%):</strong> 내년 예상 주당순이익(EPS)의 전년대비 증가율 전망치입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>0SALE(%), 1SALE(%), 2SALE(%):</strong> 각각 최근 분기(0), 다음 분기(1), 다다음 분기(2) 예상 매출액의 전년 동기 대비 증가율 전망치입니다.</li>
+                    <li style="margin-bottom: 8px;"><strong>0NI(%), 1NI(%), 2NI(%):</strong> 각각 최근 분기(0), 다음 분기(1), 다다음 분기(2) 예상 순이익(Net Income)의 전년 동기 대비 증가율 전망치입니다.</li>
                     <li style="margin-bottom: 8px;"><strong>EPS Trend:</strong> 시장 애널리스트들의 올해(CY)와 내년(NY) EPS 전망치가 한 달(30일) 전 추정치 대비 얼마나 상향 조정되었는지의 추세 증감율입니다. 두 항목이 모두 5% 이상인 종목은 향후 실적 대시세를 분출할 잠재력이 가장 높습니다.</li>
                     <li style="margin-bottom: 8px;"><strong>Up/Down #:</strong> 최근 30일간 해당 종목의 실적 추정치를 상향(Up)/하향(Down) 조정한 애널리스트의 수입니다.</li>
                     <li style="margin-bottom: 8px;"><strong>Up/Down Ratio:</strong> 상향 조정 비율 <code>(Up / (Up + Down)) * 100</code>입니다. 수치가 80% 이상이면 애널리스트 대다수가 긍정적인 실적 상향을 내다보고 있음을 뜻합니다.</li>
@@ -2864,6 +2867,7 @@
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="sortTable('Industry')">Industry ⬍</th>
                     <th onclick="sortTable('50DIV')">50 div(%) ⬍</th>
+                    <th onclick="sortTable('200DIV')">200 div(%) ⬍</th>
                     <th onclick="sortTable('10DIV')">10 div(%) ⬍</th>
                     <th onclick="sortTable('0SALE')">0SALE% ⬍</th>
                     <th onclick="sortTable('1SALE')">1SALE% ⬍</th>
@@ -2927,6 +2931,7 @@
                         <td>${item.Sector || ''}</td>
                         <td>${item.Industry || ''}</td>
                         <td style="${getChgColor(item['50DIV'])}">${isValidNumber(item['50DIV']) ? parseFloat(item['50DIV']).toFixed(1) + '%' : '-'}</td>
+                        <td style="${getChgColor(item['200DIV'])}">${isValidNumber(item['200DIV']) ? parseFloat(item['200DIV']).toFixed(1) + '%' : '-'}</td>
                         <td style="${getChgColor(item['10DIV'])}">${isValidNumber(item['10DIV']) ? parseFloat(item['10DIV']).toFixed(1) + '%' : '-'}</td>
                         <td class="${getFsColor(fs['0SALE'])}">${sale0}</td>
                         <td class="${getFsColor(fs['1SALE'])}">${sale1}</td>
@@ -2955,6 +2960,7 @@
                     <th onclick="sortTable('High_52W_Pct')">52주 고점 (%) ⬍</th>
                     <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">정배열 ⬍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
+                    <th onclick="sortTable('200DIV')">200DIV (%) ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
                     <th onclick="sortTable('Max_Rise_3M_Pct')">3M 상승 (%) ⬍</th>
                     <th onclick="sortTable('BRK_60D')">60D BRK ⬍</th>
@@ -2985,6 +2991,7 @@
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
                         <td class="${jbColor}">${jb}</td>
                         <td>${item['50DIV']}%</td>
+                        <td>${item['200DIV'] !== undefined && item['200DIV'] !== null ? item['200DIV'] + '%' : '-'}</td>
                         <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) + '%' : '-'}</td>
                         <td>${isValidNumber(item.Max_Rise_3M_Pct) ? item.Max_Rise_3M_Pct.toFixed(1) + '%' : '-'}</td>
                         <td class="${item.BRK_60D === 'YES' ? 'rs-pos' : ''}">${item.BRK_60D || 'NO'}</td>
@@ -3014,6 +3021,7 @@
                         <span style="font-size:12px; cursor:pointer;" onclick="showFilterPopup(event, 'RS_DiF')">🔍</span>
                     </th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
+                    <th onclick="sortTable('200DIV')">200DIV (%) ⬍</th>
                     <th onclick="sortTable('CY_Trend')">CY Trend (%) ⬍</th>
                     <th onclick="sortTable('NY_Trend')">NY Trend (%) ⬍</th>
                     <th onclick="sortTable('SALE_CY')">SALE CY(%) ⬍</th>
@@ -3107,6 +3115,7 @@
                         <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
                         <td>${item['50DIV']}%</td>
+                        <td>${item['200DIV'] !== undefined && item['200DIV'] !== null ? item['200DIV'] + '%' : '-'}</td>
                         <td class="${cyColor}">${isValidNumber(cy) ? cy.toFixed(2) + '%' : '-'}</td>
                         <td class="${nyColor}">${isValidNumber(ny) ? ny.toFixed(2) + '%' : '-'}</td>
                         <td class="${sCyColor}">${isValidNumber(sCy) ? sCy.toFixed(2) + '%' : '-'}</td>
@@ -3194,6 +3203,7 @@
                     'RS(1mo)': item.RS_1mo,
                     'RS_DiF': item.RS_DiF ? parseFloat(item.RS_DiF.toFixed(4)) : null, // Add new column
                     '50DIV': item['50DIV'],
+                    '200DIV': item['200DIV'],
                     'CY Trend': item.CY_Trend,
                     'NY Trend': item.NY_Trend,
                     'SALE CY(%)': item.SALE_CY,
