@@ -388,14 +388,14 @@
 
         </div>
 
-        <div class="info-box">
+        <div class="info-box" style="position: relative;">
             <h3 onclick="toggleDescription()"
                 style="cursor: pointer; margin: 0; padding: 10px; background-color: #333; border-radius: 5px; display: flex; justify-content: space-between; align-items: center;">
                 <span>📝 컬럼 등에 대한 설명 (Click to Open/Close)</span>
                 <span id="desc-arrow">▼</span>
             </h3>
             <div id="description-content"
-                style="display: none; margin-top: 10px; padding: 15px; background-color: #222; border-radius: 5px; line-height: 1.7;">
+                style="display: none; position: absolute; z-index: 9999; margin-top: 5px; padding: 15px; background-color: #222; border-radius: 5px; line-height: 1.7; width: 100%; box-sizing: border-box; box-shadow: 0px 8px 16px rgba(0,0,0,0.8); border: 1px solid #555;">
                 <ul style="margin: 0; padding-left: 20px;">
                     <li style="margin-bottom: 8px;"><strong>일일 자동 업데이트</strong>: 매일 미국 장 마감 후 서버가 자동으로 데이터를 갱신합니다. (매일 UTC 21:00 / 한국 시간 오전 6:00)</li>
                     <li style="margin-bottom: 8px;"><strong>RS Logic (상대 강도 지표)</strong>: (개별종목 기간 수익률) - (QQQ 기간 수익률)
