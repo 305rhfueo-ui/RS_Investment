@@ -475,6 +475,42 @@
 
         <!-- ... -->
 
+        <!-- AI Paper Trading Portfolio -->
+        <div id="ai-portfolio-area" style="max-width: 1200px; margin: 20px auto; padding: 20px; background: rgba(30,30,30,0.8); border: 1px solid #444; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+            <h2 style="color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; margin-top: 0;">📊 AI 펀드 매니저 모의투자 현황</h2>
+            <div id="portfolio-summary" style="display: flex; gap: 20px; margin-bottom: 20px;">
+                <div style="flex: 1; padding: 15px; background: #2a2a2a; border-radius: 8px;">
+                    <div style="color: #aaa; font-size: 14px;">총 자산 (Total Equity)</div>
+                    <div id="pt-total-equity" style="font-size: 24px; font-weight: bold; color: #fff;">$0.00</div>
+                </div>
+                <div style="flex: 1; padding: 15px; background: #2a2a2a; border-radius: 8px;">
+                    <div style="color: #aaa; font-size: 14px;">가용 현금 (Cash)</div>
+                    <div id="pt-cash" style="font-size: 24px; font-weight: bold; color: #fff;">$0.00</div>
+                </div>
+                <div style="flex: 1; padding: 15px; background: #2a2a2a; border-radius: 8px;">
+                    <div style="color: #aaa; font-size: 14px;">누적 수익률 (Total Return)</div>
+                    <div id="pt-total-return" style="font-size: 24px; font-weight: bold;">0.00%</div>
+                </div>
+            </div>
+            
+            <h3 style="color: #ddd;">현재 보유 종목 (Holdings)</h3>
+            <table id="portfolio-table" style="width: 100%; border-collapse: collapse; background: #222; border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background: #333; color: #ccc;">
+                        <th style="padding: 10px; text-align: left;">Ticker</th>
+                        <th style="padding: 10px; text-align: left;">Buy Date</th>
+                        <th style="padding: 10px; text-align: right;">Buy Price</th>
+                        <th style="padding: 10px; text-align: right;">Current Price</th>
+                        <th style="padding: 10px; text-align: right;">Quantity</th>
+                        <th style="padding: 10px; text-align: right;">Current Value</th>
+                        <th style="padding: 10px; text-align: right;">Unrealized PnL</th>
+                    </tr>
+                </thead>
+                <tbody id="portfolio-tbody">
+                </tbody>
+            </table>
+        </div>
+
         <!-- Loading Message -->
         <div id="loading-msg" style="text-align: center; padding: 50px; font-size: 18px; color: var(--primary-color);">
             ⏳ 데이터 불러오는 중...
@@ -1545,6 +1581,57 @@
                 console.log("History index load failed:", e);
             }
         }
+
+        async function loadPortfolio() {
+            try {
+                const response = await fetch('./data/portfolio.json');
+                if (!response.ok) return;
+                const data = await response.json();
+                
+                const INITIAL_CAPITAL = 100000.0;
+                
+                // Update Summary
+                document.getElementById('pt-total-equity').innerText = `$${data.total_equity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('pt-cash').innerText = `$${data.cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                
+                const returnPct = ((data.total_equity - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
+                const returnEl = document.getElementById('pt-total-return');
+                returnEl.innerText = `${returnPct > 0 ? '+' : ''}${returnPct.toFixed(2)}%`;
+                returnEl.style.color = returnPct >= 0 ? '#4CAF50' : '#ff5252';
+                
+                // Update Table
+                const tbody = document.getElementById('portfolio-tbody');
+                tbody.innerHTML = '';
+                
+                if (data.holdings && data.holdings.length > 0) {
+                    data.holdings.forEach(h => {
+                        const tr = document.createElement('tr');
+                        tr.style.borderBottom = '1px solid #333';
+                        
+                        const pnlColor = h.unrealized_pnl >= 0 ? '#4CAF50' : '#ff5252';
+                        const pnlSign = h.unrealized_pnl >= 0 ? '+' : '';
+                        
+                        tr.innerHTML = `
+                            <td style="padding: 10px; font-weight: bold; color: #fff;">${h.ticker}</td>
+                            <td style="padding: 10px; color: #aaa;">${h.buy_date}</td>
+                            <td style="padding: 10px; text-align: right;">$${h.buy_price.toFixed(2)}</td>
+                            <td style="padding: 10px; text-align: right; color: ${pnlColor}">$${h.current_price.toFixed(2)}</td>
+                            <td style="padding: 10px; text-align: right;">${h.quantity.toFixed(2)}</td>
+                            <td style="padding: 10px; text-align: right;">$${h.current_value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                            <td style="padding: 10px; text-align: right; color: ${pnlColor}; font-weight: bold;">${pnlSign}${h.unrealized_pnl.toFixed(2)}%</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="7" style="padding: 20px; text-align: center; color: #aaa;">현재 보유 종목이 없습니다 (현금 100%).</td></tr>`;
+                }
+            } catch (error) {
+                console.error("Error loading portfolio:", error);
+            }
+        }
+        
+        // Call it
+        loadPortfolio();
 
         async function loadData(url = './static/result.json') {
             const loader = document.getElementById('loading-msg');
