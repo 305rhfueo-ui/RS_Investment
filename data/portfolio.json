@@ -1,34 +1,5 @@
 {
-    "cash": 40000.0,
-    "total_equity": 105000.0,
-    "holdings": [
-        {
-            "ticker": "INTC",
-            "buy_date": "2026-05-01",
-            "buy_price": 40.0,
-            "quantity": 500.0,
-            "current_price": 50.0,
-            "unrealized_pnl": 25.0,
-            "current_value": 25000.0
-        },
-        {
-            "ticker": "PLTR",
-            "buy_date": "2026-06-15",
-            "buy_price": 20.0,
-            "quantity": 1000.0,
-            "current_price": 22.0,
-            "unrealized_pnl": 10.0,
-            "current_value": 22000.0
-        },
-        {
-            "ticker": "MU",
-            "buy_date": "2026-07-01",
-            "buy_price": 100.0,
-            "quantity": 200.0,
-            "current_price": 90.0,
-            "unrealized_pnl": -10.0,
-            "current_value": 18000.0
-        }
-    ],
-    "last_updated": "2026-07-05"
+    "cash": 100000.0,
+    "total_equity": 100000.0,
+    "holdings": []
 }
