@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>안티그래비 AI 모의투자 현황</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #4CAF50;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #333;
+            --danger-color: #ff5252;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .summary-cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .card {
+            flex: 1;
+            min-width: 250px;
+            background: var(--surface-color);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .card-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .card-value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .section-title {
+            color: #ddd;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #2a2a2a;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover {
+            background-color: #252525;
+        }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        .positive { color: var(--primary-color); font-weight: bold; }
+        .negative { color: var(--danger-color); font-weight: bold; }
+        .tag {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .tag-buy { background: rgba(76, 175, 80, 0.2); color: var(--primary-color); }
+        .tag-sell { background: rgba(255, 82, 82, 0.2); color: var(--danger-color); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 안티그래비 AI 수석 애널리스트 모의투자 (Paper Trading)</h1>
+        
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-label">총 자산 (Total Equity)</div>
+                <div id="total-equity" class="card-value">$0.00</div>
+            </div>
+            <div class="card">
+                <div class="card-label">가용 현금 (Cash)</div>
+                <div id="cash" class="card-value">$0.00</div>
+            </div>
+            <div class="card">
+                <div class="card-label">누적 수익률 (Total Return)</div>
+                <div id="total-return" class="card-value">0.00%</div>
+            </div>
+        </div>
+
+        <div class="section-title">현재 보유 종목 (Current Holdings)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th>매수 일자 (Buy Date)</th>
+                    <th class="text-right">매수 단가 (Buy Price)</th>
+                    <th class="text-right">현재가 (Current Price)</th>
+                    <th class="text-right">보유 수량 (Quantity)</th>
+                    <th class="text-right">평가 금액 (Value)</th>
+                    <th class="text-right">미실현 수익률 (Unrealized PnL)</th>
+                </tr>
+            </thead>
+            <tbody id="holdings-tbody">
+                <tr><td colspan="7" class="text-center" style="color:#aaa;">데이터 로딩 중...</td></tr>
+            </tbody>
+        </table>
+
+        <div class="section-title">매매 히스토리 (Trade History)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>일자 (Date)</th>
+                    <th>Action</th>
+                    <th>Ticker</th>
+                    <th class="text-right">체결 단가 (Price)</th>
+                    <th class="text-right">수량 (Quantity)</th>
+                    <th class="text-right">실현 손익 (Realized PnL)</th>
+                    <th>매매 사유 (Reason)</th>
+                </tr>
+            </thead>
+            <tbody id="history-tbody">
+                <tr><td colspan="7" class="text-center" style="color:#aaa;">데이터 로딩 중...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const INITIAL_CAPITAL = 100000.0;
+
+        async function loadData() {
+            try {
+                const [ptRes, histRes] = await Promise.all([
+                    fetch('./data/portfolio.json'),
+                    fetch('./data/trade_history.json')
+                ]);
+                
+                if (ptRes.ok) {
+                    const pt = await ptRes.json();
+                    document.getElementById('total-equity').innerText = `$${pt.total_equity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                    document.getElementById('cash').innerText = `$${pt.cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                    
+                    const returnPct = ((pt.total_equity - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100;
+                    const returnEl = document.getElementById('total-return');
+                    returnEl.innerText = `${returnPct > 0 ? '+' : ''}${returnPct.toFixed(2)}%`;
+                    returnEl.className = `card-value ${returnPct >= 0 ? 'positive' : 'negative'}`;
+                    
+                    const tbody = document.getElementById('holdings-tbody');
+                    tbody.innerHTML = '';
+                    if (pt.holdings && pt.holdings.length > 0) {
+                        pt.holdings.forEach(h => {
+                            const pnlClass = h.unrealized_pnl >= 0 ? 'positive' : 'negative';
+                            const pnlSign = h.unrealized_pnl >= 0 ? '+' : '';
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td style="font-weight: bold;">${h.ticker}</td>
+                                    <td style="color: #aaa;">${h.buy_date}</td>
+                                    <td class="text-right">$${h.buy_price.toFixed(2)}</td>
+                                    <td class="text-right ${pnlClass}">$${h.current_price.toFixed(2)}</td>
+                                    <td class="text-right">${h.quantity.toFixed(2)}</td>
+                                    <td class="text-right">$${h.current_value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                    <td class="text-right ${pnlClass}">${pnlSign}${h.unrealized_pnl.toFixed(2)}%</td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="7" class="text-center" style="color:#aaa;">현재 보유 종목이 없습니다 (현금 100%).</td></tr>`;
+                    }
+                }
+
+                if (histRes.ok) {
+                    const hist = await histRes.json();
+                    const tbody = document.getElementById('history-tbody');
+                    tbody.innerHTML = '';
+                    
+                    // Sort descending by date
+                    hist.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    
+                    if (hist.length > 0) {
+                        hist.forEach(h => {
+                            const pnlStr = h.realized_pnl !== 0 
+                                ? `<span class="${h.realized_pnl > 0 ? 'positive' : 'negative'}">$${h.realized_pnl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>`
+                                : '<span style="color:#666;">-</span>';
+                            
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td style="color: #aaa;">${h.date}</td>
+                                    <td><span class="tag ${h.action === 'BUY' ? 'tag-buy' : 'tag-sell'}">${h.action}</span></td>
+                                    <td style="font-weight: bold;">${h.ticker}</td>
+                                    <td class="text-right">$${h.price.toFixed(2)}</td>
+                                    <td class="text-right">${h.quantity.toFixed(2)}</td>
+                                    <td class="text-right">${pnlStr}</td>
+                                    <td style="color: #ccc;">${h.reason || ''}</td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="7" class="text-center" style="color:#aaa;">매매 히스토리가 없습니다.</td></tr>`;
+                    }
+                }
+
+            } catch (err) {
+                console.error("Error loading data", err);
+            }
+        }
+        
+        loadData();
+    </script>
+</body>
+</html>
