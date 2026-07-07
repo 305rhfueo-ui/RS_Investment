@@ -1,1 +1,29 @@
-[]
+[
+    {
+        "date": "2026-07-06 16:58:46",
+        "action": "BUY",
+        "ticker": "SXI",
+        "price": 327.8699951171875,
+        "quantity": 60.999787409188166,
+        "realized_pnl": 0.0,
+        "reason": ""
+    },
+    {
+        "date": "2026-07-06 16:58:46",
+        "action": "BUY",
+        "ticker": "APH",
+        "price": 164.58999633789062,
+        "quantity": 121.51406795672767,
+        "realized_pnl": 0.0,
+        "reason": ""
+    },
+    {
+        "date": "2026-07-06 16:58:46",
+        "action": "BUY",
+        "ticker": "UCTT",
+        "price": 106.4800033569336,
+        "quantity": 187.82869430382743,
+        "realized_pnl": 0.0,
+        "reason": ""
+    }
+]
