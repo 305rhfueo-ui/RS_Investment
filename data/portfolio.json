@@ -1,34 +1,43 @@
 {
-    "cash": 40000.0,
-    "total_equity": 100000.0,
+    "cash": 20000.0,
+    "total_equity": 99597.83520304394,
     "holdings": [
         {
             "ticker": "SXI",
             "buy_date": "2026-07-06",
             "buy_price": 327.8699951171875,
             "quantity": 60.999787409188166,
-            "current_price": 327.8699951171875,
-            "unrealized_pnl": 0.0,
-            "current_value": 20000.0
+            "current_price": 319.7799987792969,
+            "unrealized_pnl": -2.4674402837621945,
+            "current_value": 19506.511943247562
         },
         {
             "ticker": "APH",
             "buy_date": "2026-07-06",
             "buy_price": 164.58999633789062,
             "quantity": 121.51406795672767,
-            "current_price": 164.58999633789062,
-            "unrealized_pnl": 0.0,
-            "current_value": 20000.0
+            "current_price": 166.80999755859375,
+            "unrealized_pnl": 1.3488068959826895,
+            "current_value": 20269.761379196538
         },
         {
             "ticker": "UCTT",
             "buy_date": "2026-07-06",
             "buy_price": 106.4800033569336,
             "quantity": 187.82869430382743,
-            "current_price": 106.4800033569336,
+            "current_price": 105.52999877929688,
+            "unrealized_pnl": -0.8921905970008198,
+            "current_value": 19821.561880599835
+        },
+        {
+            "ticker": "MIDD",
+            "buy_date": "2026-07-07",
+            "buy_price": 179.1999969482422,
+            "quantity": 111.60714475780121,
+            "current_price": 179.1999969482422,
             "unrealized_pnl": 0.0,
             "current_value": 20000.0
         }
     ],
-    "last_updated": "2026-07-06"
+    "last_updated": "2026-07-07"
 }

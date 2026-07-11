@@ -25,5 +25,14 @@
         "quantity": 187.82869430382743,
         "realized_pnl": 0.0,
         "reason": ""
+    },
+    {
+        "date": "2026-07-07 12:44:29",
+        "action": "BUY",
+        "ticker": "MIDD",
+        "price": 179.1999969482422,
+        "quantity": 111.60714475780121,
+        "realized_pnl": 0.0,
+        "reason": ""
     }
 ]
