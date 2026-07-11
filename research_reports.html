@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리서치팀 일일 분석 자료</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #3F51B5;
+            --accent-color: #00bcd4;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #333;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1000px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .report-card {
+            background: var(--surface-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(63, 81, 181, 0.3);
+            border-color: var(--primary-color);
+        }
+        .report-header {
+            background-color: #252525;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ticker {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+        .date {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .report-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .report-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .report-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .report-footer {
+            padding: 0 20px 20px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            box-sizing: border-box;
+        }
+        .btn:hover {
+            background-color: #303f9f;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 메인으로 돌아가기</a>
+        <h1>📑 리서치팀 일일 분석 자료</h1>
+
+        <div class="report-grid">
+            <!-- CRDO Report Card -->
+            <div class="report-card">
+                <div class="report-header">
+                    <span class="ticker">CRDO</span>
+                    <span class="date">2026-07-11</span>
+                </div>
+                <div class="report-body">
+                    <div class="report-title">철저한 RS 심층 분석 (CAN SLIM & 퍼펙트 스톰)</div>
+                    <div class="report-desc">
+                        157% 매출 성장의 폭발적인 모멘텀. 3nm 파운드리/광학 공급망 결측치 집중 점검 및 내부자 매도 의도 분석. VCP 수축 대기 구간.
+                    </div>
+                </div>
+                <div class="report-footer">
+                    <a href="https://notebooklm.google.com/notebook/7503520d-5445-4ef6-b594-3a15f6a94e34" target="_blank" class="btn">🎧 팟캐스트 및 보고서 보기</a>
+                </div>
+            </div>
+            
+            <!-- Future reports can be added here -->
+        </div>
+    </div>
+</body>
+</html>
