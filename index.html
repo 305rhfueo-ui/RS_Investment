@@ -461,7 +461,9 @@
                         <ul style="margin-top: 5px; padding-left: 15px;">
                             <li><strong>52주 대비 (%):</strong> 52주 최고가 대비 현재 주가의 비율입니다. 공식: <code>(현재 주가 / 52주 최고가) * 100</code>. 이 값이 80% 이상(즉, 고점 대비 낙폭이 -20% 이내)인 종목들은 상단에 악성 대기 매물이 거의 없는 신고가 영역에 가깝다는 뜻입니다. 마크 미너비니의 주도주 선별 1순위 조건입니다.</li>
                             <li><strong>ADR (%) (Average Daily Range):</strong> 최근 20거래일 동안의 평균 일일 변동폭입니다. 공식: <code>((당일 고가 - 당일 저가) / 당일 저가) * 100</code>의 20일 평균. 변동성이 너무 둔한 주식은 제외하고, 한 번 돌파할 때 단기간에 30~50%씩 강력히 솟구쳐 줄 수 있는 '끼와 거래 탄력'이 살아 있는 종목(ADR 3.5%~4.0% 이상)을 걸러내는 핵심 지표입니다(크리스티안 쿨라매기 기법).</li>
+                            <li><strong>1M 상승 (%):</strong> 최근 1개월(20영업일) 간 저점 대비 고점의 최대 상승률입니다. 단기간 폭발적인 모멘텀을 확인합니다.</li>
                             <li><strong>3M 상승 (%):</strong> 최근 3개월(60영업일) 간 저점 대비 고점의 최대 상승률입니다. 최근 3개월 이내에 시장에서 최소 30% 이상 폭발적으로 급등한 이력이 있는, 이미 검증된 '힘과 거래 대금의 쏠림'을 입증한 주도주를 식별합니다.</li>
+                            <li><strong>6M 상승 (%):</strong> 최근 6개월(120영업일) 간 저점 대비 고점의 최대 상승률입니다. 중장기적인 상승 추세와 누적 수익률을 확인합니다.</li>
                             <li><strong>VOL_X (거래대금 폭발 비율):</strong> 돌파 당일의 거래대금(종가 × 거래량)이 최근 20영업일 평균 거래대금 대비 몇 배 폭발했는지를 나타냅니다. 이 비율이 2.0 이상(200% 이상)으로 강력하게 분출될 때만 거대 기관이나 주포의 찐매수 수급이 들어온 것으로 판단합니다.</li>
                             <li><strong>CLS_POS (Close Position %):</strong> 당일 캔들의 전체 변동폭(고가 - 저가) 중에서 종가가 마감된 상대적 위치(%)입니다. 공식: <code>((종가 - 저가) / (고가 - 저가)) * 100</code>. 장중에만 급등했다가 윗꼬리를 길게 달고 하락 마감한 가짜 돌파(Bull Trap)를 거부하고, 장 마감까지 강한 수급을 지켜내며 캔들의 상단(50% 이상, 100%에 가까울수록 강함)에서 확실하게 마감된 진짜 돌파 캔들만 추적하기 위한 핵심 장치입니다.</li>
                             <li><strong>60D_BRK (60일 최고가 종가 돌파):</strong> 오늘 종가가 직전 60영업일(약 3개월, 오늘 제외) 동안의 모든 장중 최고가를 돌파하며 신고가를 달성했는지 여부(YES/NO)입니다.</li>
@@ -2977,7 +2979,9 @@
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
                     <th onclick="sortTable('200DIV')">200DIV (%) ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
+                    <th onclick="sortTable('Max_Rise_1M_Pct')">1M 상승 (%) ⬍</th>
                     <th onclick="sortTable('Max_Rise_3M_Pct')">3M 상승 (%) ⬍</th>
+                    <th onclick="sortTable('Max_Rise_6M_Pct')">6M 상승 (%) ⬍</th>
                     <th onclick="sortTable('BRK_60D')">60D BRK ⬍</th>
                     <th onclick="sortTable('VOL_X')">VOL_X ⬍</th>
                     <th onclick="sortTable('CLS_POS')">CLS_POS ⬍</th>
@@ -3008,7 +3012,9 @@
                         <td>${item['50DIV']}%</td>
                         <td>${item['200DIV'] !== undefined && item['200DIV'] !== null ? item['200DIV'] + '%' : '-'}</td>
                         <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) + '%' : '-'}</td>
+                        <td>${isValidNumber(item.Max_Rise_1M_Pct) ? item.Max_Rise_1M_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.Max_Rise_3M_Pct) ? item.Max_Rise_3M_Pct.toFixed(1) + '%' : '-'}</td>
+                        <td>${isValidNumber(item.Max_Rise_6M_Pct) ? item.Max_Rise_6M_Pct.toFixed(1) + '%' : '-'}</td>
                         <td class="${item.BRK_60D === 'YES' ? 'rs-pos' : ''}">${item.BRK_60D || 'NO'}</td>
                         <td class="${isValidNumber(item.VOL_X) && item.VOL_X >= 2.0 ? 'rs-pos' : ''}">${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(item.CLS_POS) && item.CLS_POS >= 50 ? 'rs-pos' : ''}">${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) + '%' : '-'}</td>
@@ -3053,7 +3059,9 @@
                     <th onclick="sortTable('BB_Center_Breakout_5D')">BBC ⬍</th>
                     <th onclick="sortTable('High_52W_Pct')">52주 대비 (%) ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
+                    <th onclick="sortTable('Max_Rise_1M_Pct')">1M 상승 (%) ⬍</th>
                     <th onclick="sortTable('Max_Rise_3M_Pct')">3M 상승 (%) ⬍</th>
+                    <th onclick="sortTable('Max_Rise_6M_Pct')">6M 상승 (%) ⬍</th>
                     <th onclick="sortTable('BRK_60D')">60D BRK ⬍</th>
                     <th onclick="sortTable('VOL_X')">VOL_X ⬍</th>
                     <th onclick="sortTable('CLS_POS')">CLS_POS ⬍</th>
@@ -3147,7 +3155,9 @@
                         <td class="${item.BB_Center_Breakout_5D === 'YES' ? 'rs-pos' : ''}">${item.BB_Center_Breakout_5D || 'NO'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) + '%' : '-'}</td>
+                        <td>${isValidNumber(item.Max_Rise_1M_Pct) ? item.Max_Rise_1M_Pct.toFixed(1) + '%' : '-'}</td>
                         <td>${isValidNumber(item.Max_Rise_3M_Pct) ? item.Max_Rise_3M_Pct.toFixed(1) + '%' : '-'}</td>
+                        <td>${isValidNumber(item.Max_Rise_6M_Pct) ? item.Max_Rise_6M_Pct.toFixed(1) + '%' : '-'}</td>
                         <td class="${item.BRK_60D === 'YES' ? 'rs-pos' : ''}">${item.BRK_60D || 'NO'}</td>
                         <td class="${isValidNumber(item.VOL_X) && item.VOL_X >= 2.0 ? 'rs-pos' : ''}">${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(item.CLS_POS) && item.CLS_POS >= 50 ? 'rs-pos' : ''}">${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) + '%' : '-'}</td>
@@ -3235,7 +3245,9 @@
                     'BBC': item.BB_Center_Breakout_5D || 'NO',
                     'High_52W_Pct': item.High_52W_Pct,
                     'ADR_20D': item.ADR_20D,
+                    'Max_Rise_1M_Pct': item.Max_Rise_1M_Pct,
                     'Max_Rise_3M_Pct': item.Max_Rise_3M_Pct,
+                    'Max_Rise_6M_Pct': item.Max_Rise_6M_Pct,
                     'BRK_60D': item.BRK_60D,
                     'VOL_X': item.VOL_X,
                     'CLS_POS': item.CLS_POS

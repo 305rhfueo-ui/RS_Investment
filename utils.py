@@ -477,13 +477,30 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                 daily_adr = (recent_highs[valid_mask] / recent_lows[valid_mask]) - 1
                 adr_20d = round(daily_adr.mean() * 100, 2)
 
+        max_rise_1m_pct = None
         max_rise_3m_pct = None
+        max_rise_6m_pct = None
         if 'High' in df.columns and 'Low' in df.columns and len(df) >= 5:
+            # 1M (20 days)
+            period_1m = min(len(df), 20)
+            low_1m = df['Low'].iloc[-period_1m:].min()
+            high_1m = df['High'].iloc[-period_1m:].max()
+            if low_1m > 0:
+                max_rise_1m_pct = round(((high_1m - low_1m) / low_1m) * 100, 2)
+            
+            # 3M (60 days)
             period_3m = min(len(df), 60)
             low_3m = df['Low'].iloc[-period_3m:].min()
             high_3m = df['High'].iloc[-period_3m:].max()
             if low_3m > 0:
                 max_rise_3m_pct = round(((high_3m - low_3m) / low_3m) * 100, 2)
+                
+            # 6M (120 days)
+            period_6m = min(len(df), 120)
+            low_6m = df['Low'].iloc[-period_6m:].min()
+            high_6m = df['High'].iloc[-period_6m:].max()
+            if low_6m > 0:
+                max_rise_6m_pct = round(((high_6m - low_6m) / low_6m) * 100, 2)
 
         brk_60d = "NO"
         if len(df) >= 61:
@@ -827,7 +844,9 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             # [Added] Perfect Storm Strategy Metrics
             'High_52W_Pct': high_52w_pct,
             'ADR_20D': adr_20d,
+            'Max_Rise_1M_Pct': max_rise_1m_pct,
             'Max_Rise_3M_Pct': max_rise_3m_pct,
+            'Max_Rise_6M_Pct': max_rise_6m_pct,
             'BRK_60D': brk_60d,
             'VOL_X': vol_x,
             'CLS_POS': cls_pos,
