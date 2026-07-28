@@ -502,6 +502,10 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             if low_6m > 0:
                 max_rise_6m_pct = round(((high_6m - low_6m) / low_6m) * 100, 2)
 
+        ret_1m_pct = round(stock_ret_1mo * 100, 2) if stock_ret_1mo is not None else None
+        ret_3m_pct = round(stock_ret_3mo * 100, 2) if stock_ret_3mo is not None else None
+        ret_6m_pct = round(stock_ret_6mo * 100, 2) if stock_ret_6mo is not None else None
+
         brk_60d = "NO"
         if len(df) >= 61:
             recent_60_high = df['High'].iloc[-61:-1].max()
@@ -847,6 +851,9 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'Max_Rise_1M_Pct': max_rise_1m_pct,
             'Max_Rise_3M_Pct': max_rise_3m_pct,
             'Max_Rise_6M_Pct': max_rise_6m_pct,
+            'Ret_1M_Pct': ret_1m_pct,
+            'Ret_3M_Pct': ret_3m_pct,
+            'Ret_6M_Pct': ret_6m_pct,
             'BRK_60D': brk_60d,
             'VOL_X': vol_x,
             'CLS_POS': cls_pos,
