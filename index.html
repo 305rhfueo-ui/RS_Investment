@@ -1601,24 +1601,6 @@ indPopup.style.display = 'none';
                             item['0NI'] = fs['0NI'] === '흑자전환' ? 999999 : fs['0NI'];
                             item['1NI'] = fs['1NI'] === '흑자전환' ? 999999 : fs['1NI'];
                             item['2NI'] = fs['2NI'] === '흑자전환' ? 999999 : fs['2NI'];
-                            
-                            // [Added] RS Rank Filter UI Update
-                            const rsTop2Btn = document.getElementById('rs-top2-btn');
-                            if (appState.mode === 'RS_RANK') {
-                                if (rsTop2Btn) rsTop2Btn.style.display = 'inline-block';
-                            } else {
-                                if (rsTop2Btn) rsTop2Btn.style.display = 'none';
-                            }
-
-                            // [Added] WRS Rank Filter UI Update
-                            const wrsTop2Btn = document.getElementById('wrs-top2-btn');
-                            if (appState.mode === 'WRS_RANK') {
-                                if (wrsTop2Btn) wrsTop2Btn.style.display = 'inline-block';
-                            } else {
-                                if (wrsTop2Btn) wrsTop2Btn.style.display = 'none';
-                            }
-
-                            // [Added] Breakout Filter UI Update
                             item['0OPM'] = fs['0OPM'];
                             item['1OPM'] = fs['1OPM'];
                             item['2OPM'] = fs['2OPM'];
@@ -2143,6 +2125,34 @@ indPopup.style.display = 'none';
                 if (realRiseBtn) realRiseBtn.style.display = 'none';
                 if (realRealRiseBtn) realRealRiseBtn.style.display = 'none';
                 if (halfRealRiseBtn) halfRealRiseBtn.style.display = 'none';
+            }
+
+            // [Added] RS Rank Filter UI Update
+            const rsTop2Btn = document.getElementById('rs-top2-btn');
+            if (appState.mode === 'RS_RANK') {
+                if (rsTop2Btn) rsTop2Btn.style.display = 'inline-block';
+                if (appState.filterRSTop2) {
+                    if (rsTop2Btn) rsTop2Btn.innerText = "돌아가기";
+                    subtitleText += " (상위 2% 이내)";
+                } else {
+                    if (rsTop2Btn) rsTop2Btn.innerText = "상위 2% 이내";
+                }
+            } else {
+                if (rsTop2Btn) rsTop2Btn.style.display = 'none';
+            }
+
+            // [Added] WRS Rank Filter UI Update
+            const wrsTop2Btn = document.getElementById('wrs-top2-btn');
+            if (appState.mode === 'WRS_RANK') {
+                if (wrsTop2Btn) wrsTop2Btn.style.display = 'inline-block';
+                if (appState.filterWRSTop2) {
+                    if (wrsTop2Btn) wrsTop2Btn.innerText = "돌아가기";
+                    subtitleText += " (상위 2% 이내)";
+                } else {
+                    if (wrsTop2Btn) wrsTop2Btn.innerText = "상위 2% 이내";
+                }
+            } else {
+                if (wrsTop2Btn) wrsTop2Btn.style.display = 'none';
             }
 
             // [Added] 60D Breakout Filter UI Update
