@@ -3345,12 +3345,27 @@ indPopup.style.display = 'none';
             } else if (appState.mode === 'RS_RANK') {
                 thead.innerHTML = `
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
+                    <th onclick="sortTable('Sector')">Sector ⬍</th>
+                    <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo_Rank_Pct')">1mo rnk ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_3mo_Rank_Pct')">3mo rnk ⬍</th>
                     <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
                     <th onclick="sortTable('RS_Rank_Pct')">6mo rnk ⬍</th>
+                    <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
+                    <th onclick="sortTable('High_52W_Pct')">52주대비 (%) ⬍</th>
+                    <th onclick="sortTable('CLS_POS')">cls_pos ⬍</th>
+                    <th onclick="sortTable('VOL_X')">vol_x ⬍</th>
+                    <th onclick="sortTable('Vol_Surge_Wk')" title="일간 차트 기준 전주 평균 거래량보다 오늘 거래량이 몇 배 이상 늘었는지 보여줍니다.">거래량급증(배) ⬍</th>
+                    <th onclick="sortTable('CY_Trend')">CY trend ⬍</th>
+                    <th onclick="sortTable('NY_Trend')">Ny trend ⬍</th>
+                    <th onclick="sortTable('Up_Count')">up# ⬍</th>
+                    <th onclick="sortTable('Down_Count')">down# ⬍</th>
+                    <th onclick="sortTable('Up_Down_Ratio')">up/(up+down) ⬍</th>
+                    <th onclick="sortTable('BBWTHD')">bbwthd ⬍</th>
+                    <th onclick="sortTable('Above_50_SMA')">&gt;50 SMA ⬍</th>
+                    <th onclick="sortTable('Above_150_SMA')">&gt;150 SMA ⬍</th>
                 `;
                 
                 data.forEach(item => {
@@ -3372,12 +3387,27 @@ indPopup.style.display = 'none';
                                 ${item.Ticker}
                             </a>
                         </td>
+                        <td style="font-weight:bold; cursor:pointer;" class="drilldown-link" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Sector || '-'}</td>
+                        <td style="font-weight:bold; cursor:pointer;" class="drilldown-link" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Industry || '-'}</td>
                         <td>${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(rnk1) && rnk1 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk1)}</td>
                         <td>${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(rnk3) && rnk3 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk3)}</td>
                         <td>${isValidNumber(rs6) ? rs6.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(rnk6) && rnk6 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk6)}</td>
+                        <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) : '-'}</td>
+                        <td>${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
+                        <td style="${isValidNumber(item.Vol_Surge_Wk) && item.Vol_Surge_Wk > 2 ? 'font-weight:bold; color:var(--primary-color)' : ''}">${isValidNumber(item.Vol_Surge_Wk) ? item.Vol_Surge_Wk.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.CY_Trend) ? item.CY_Trend.toFixed(1) : '-'}</td>
+                        <td>${isValidNumber(item.NY_Trend) ? item.NY_Trend.toFixed(1) : '-'}</td>
+                        <td>${isValidNumber(item.Up_Count) ? item.Up_Count : '-'}</td>
+                        <td>${isValidNumber(item.Down_Count) ? item.Down_Count : '-'}</td>
+                        <td>${isValidNumber(item.Up_Down_Ratio) ? item.Up_Down_Ratio.toFixed(2) : '-'}</td>
+                        <td>${isValidNumber(item.BBWTHD) ? item.BBWTHD.toFixed(2) : '-'}</td>
+                        <td style="${item.Above_50_SMA === 'O' ? 'color:var(--primary-color); font-weight:bold;' : ''}">${item.Above_50_SMA || '-'}</td>
+                        <td style="${item.Above_150_SMA === 'O' ? 'color:var(--primary-color); font-weight:bold;' : ''}">${item.Above_150_SMA || '-'}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -3608,7 +3638,10 @@ indPopup.style.display = 'none';
                     'Max_Rise_6M_Pct': item.Max_Rise_6M_Pct,
                     'BRK_60D': item.BRK_60D,
                     'VOL_X': item.VOL_X,
-                    'CLS_POS': item.CLS_POS
+                    'CLS_POS': item.CLS_POS,
+                    'Vol Surge (Wk)': item.Vol_Surge_Wk,
+                    '>50 SMA': item.Above_50_SMA,
+                    '>150 SMA': item.Above_150_SMA
                 }));
             }
 

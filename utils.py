@@ -392,6 +392,10 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         is_order = (latest_price > ma50) and (ma50 > ma150) and (ma150 > ma200)
         order_val = "YES" if is_order else "NO"
 
+        # [Added] SMA 50 and 150 Indicator
+        above_50_sma = "O" if (ma50 > 0 and latest_price > ma50) else "X"
+        above_150_sma = "O" if (ma150 > 0 and latest_price > ma150) else "X"
+
         # [Added] New Order Logic (Jungjanggi Jeongbaeyeol) & 10DIV
         # MA20 > MA60 > MA120 (Modified from MA10>MA20>MA60>MA120)
         ma10 = closes.rolling(window=10).mean().iloc[-1] if len(closes) >= 10 else 0
@@ -513,12 +517,20 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                 brk_60d = "YES"
 
         vol_x = None
+        vol_surge_wk = None
         if 'Volume' in df.columns and len(df) >= 20:
             daily_value = df['Close'] * df['Volume']
             latest_value = daily_value.iloc[-1]
             avg_value_20d = daily_value.iloc[-20:].mean()
             if avg_value_20d > 0:
                 vol_x = round(latest_value / avg_value_20d, 2)
+            
+            # [Added] Vol Surge (Wk) = Today's Volume / Last 5 days average volume (excluding today)
+            latest_vol = float(df['Volume'].iloc[-1])
+            if len(df) >= 6:
+                avg_vol_5d_prev = df['Volume'].iloc[-6:-1].mean()
+                if avg_vol_5d_prev > 0:
+                    vol_surge_wk = round(latest_vol / avg_vol_5d_prev, 2)
 
         cls_pos = None
         if 'High' in df.columns and 'Low' in df.columns and not df.empty:
@@ -857,6 +869,9 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'BRK_60D': brk_60d,
             'VOL_X': vol_x,
             'CLS_POS': cls_pos,
+            'Above_50_SMA': above_50_sma,
+            'Above_150_SMA': above_150_sma,
+            'Vol_Surge_Wk': vol_surge_wk,
             'api_called': api_called
         }
 
