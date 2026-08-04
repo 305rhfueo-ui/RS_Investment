@@ -117,6 +117,27 @@ def calculate_ni_growth(series):
             rates.append(None)
     return rates
 
+def calculate_op_margin(df):
+    rates = []
+    op_col = 'Operating Income' if 'Operating Income' in df.columns else None
+    rev_col = 'Revenue' if 'Revenue' in df.columns else None
+    
+    for i in range(3):
+        if i < len(df):
+            try:
+                op_inc = df[op_col].iloc[i] if op_col else None
+                rev = df[rev_col].iloc[i] if rev_col else None
+                
+                if pd.notna(op_inc) and pd.notna(rev) and rev != 0:
+                    rates.append(round((op_inc / rev) * 100, 2))
+                else:
+                    rates.append(None)
+            except:
+                rates.append(None)
+        else:
+            rates.append(None)
+    return rates
+
 def calculate_growth_rate(series):
     rates = []
     for i in range(3):
@@ -200,6 +221,7 @@ def main():
         res = {
             "0SALE": None, "1SALE": None, "2SALE": None,
             "0NI": None, "1NI": None, "2NI": None,
+            "0OPM": None, "1OPM": None, "2OPM": None,
             "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
         
@@ -209,6 +231,11 @@ def main():
             res["1SALE"] = sale_rates[1]
             res["2SALE"] = sale_rates[2]
             
+            opm_rates = calculate_op_margin(df)
+            res["0OPM"] = opm_rates[0]
+            res["1OPM"] = opm_rates[1]
+            res["2OPM"] = opm_rates[2]
+            
         if 'Net Income' in df.columns:
             ni_rates = calculate_ni_growth(df['Net Income'])
             res["0NI"] = ni_rates[0]
@@ -216,7 +243,7 @@ def main():
             res["2NI"] = ni_rates[2]
             
         fs_data[ticker] = res
-        print(f" -> Success: SALE={[res['0SALE'], res['1SALE'], res['2SALE']]} NI={[res['0NI'], res['1NI'], res['2NI']]}")
+        print(f" -> Success: SALE={[res['0SALE'], res['1SALE'], res['2SALE']]} NI={[res['0NI'], res['1NI'], res['2NI']]} OPM={[res['0OPM'], res['1OPM'], res['2OPM']]}")
         
         # Save explicitly
         with open(SAVE_PATH, 'w', encoding='utf-8') as f:

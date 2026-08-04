@@ -1,0 +1,154 @@
+{
+    "Success_Stats": {
+        "Count": 898,
+        "Avg_RS_Rank_Pct": 44.918340757238305,
+        "Avg_RS_6mo": 0.3025453402297571,
+        "Avg_RS_3mo": 0.3366669431053581,
+        "Avg_RS_1mo": 0.16407432258186674,
+        "Avg_VOL_X": 1.6475723830734967,
+        "Avg_ADR_20D": 3.501358574610245,
+        "Avg_Market_Cap_B": 39.62596881959911,
+        "Jungjanggi_YES_Ratio": 63.02895322939867,
+        "Target_Status_YES_Ratio": 5.011135857461024,
+        "Top_Sectors": [
+            [
+                "Financial Services",
+                285
+            ],
+            [
+                "Healthcare",
+                230
+            ],
+            [
+                "Industrials",
+                87
+            ],
+            [
+                "Consumer Cyclical",
+                81
+            ],
+            [
+                "Technology",
+                69
+            ]
+        ],
+        "Top_Industries": [
+            [
+                "Banks - Regional",
+                117
+            ],
+            [
+                "Biotechnology",
+                88
+            ],
+            [
+                "Insurance - Property & Casualty",
+                67
+            ],
+            [
+                "Diagnostics & Research",
+                47
+            ],
+            [
+                "Software - Application",
+                35
+            ],
+            [
+                "Credit Services",
+                30
+            ],
+            [
+                "Restaurants",
+                24
+            ],
+            [
+                "Medical Care Facilities",
+                24
+            ],
+            [
+                "Aerospace & Defense",
+                22
+            ],
+            [
+                "Software - Infrastructure",
+                22
+            ]
+        ]
+    },
+    "Fail_Stats": {
+        "Count": 977,
+        "Avg_RS_Rank_Pct": 45.52428863868987,
+        "Avg_RS_6mo": 0.5025239374459594,
+        "Avg_RS_3mo": 0.43418814150813295,
+        "Avg_RS_1mo": 0.19158000071986156,
+        "Avg_VOL_X": 1.597594677584442,
+        "Avg_ADR_20D": 3.6776356192425794,
+        "Avg_Market_Cap_B": 71.28705220061413,
+        "Jungjanggi_YES_Ratio": 67.24667349027635,
+        "Target_Status_YES_Ratio": 6.550665301944729,
+        "Top_Sectors": [
+            [
+                "Financial Services",
+                244
+            ],
+            [
+                "Healthcare",
+                155
+            ],
+            [
+                "Technology",
+                131
+            ],
+            [
+                "Industrials",
+                129
+            ],
+            [
+                "Consumer Cyclical",
+                89
+            ]
+        ],
+        "Top_Industries": [
+            [
+                "Banks - Regional",
+                112
+            ],
+            [
+                "Biotechnology",
+                55
+            ],
+            [
+                "Insurance - Property & Casualty",
+                48
+            ],
+            [
+                "Utilities - Regulated Electric",
+                47
+            ],
+            [
+                "Semiconductors",
+                39
+            ],
+            [
+                "Semiconductor Equipment & Materials",
+                38
+            ],
+            [
+                "Credit Services",
+                27
+            ],
+            [
+                "Specialty Industrial Machinery",
+                25
+            ],
+            [
+                "Specialty Chemicals",
+                24
+            ],
+            [
+                "Diagnostics & Research",
+                24
+            ]
+        ]
+    }
+}
