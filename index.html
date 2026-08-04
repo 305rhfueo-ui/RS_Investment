@@ -495,6 +495,10 @@
                             RS rank
                         </button>
                         <div style="display:flex; gap: 10px;">
+                            <a href="#" id="rs-top1-btn" onclick="toggleRSTop1(); return false;"
+                                style="color: #9c27b0; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                                상위 1% 이내
+                            </a>
                             <a href="#" id="rs-top2-btn" onclick="toggleRSTop2(); return false;"
                                 style="color: #9c27b0; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
                                 상위 2% 이내
@@ -536,6 +540,10 @@
                             WRS rank
                         </button>
                         <div style="display:flex; gap: 10px;">
+                            <a href="#" id="wrs-top1-btn" onclick="toggleWRSTop1(); return false;"
+                                style="color: #00897b; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                                상위 1% 이내
+                            </a>
                             <a href="#" id="wrs-top2-btn" onclick="toggleWRSTop2(); return false;"
                                 style="color: #00897b; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
                                 상위 2% 이내
@@ -1913,15 +1921,55 @@ indPopup.style.display = 'none';
             updateUI();
         }
 
-        function toggleRSTop2() {
-            const btn = document.getElementById('rs-top2-btn');
-            if (!appState.filterRSTop2) {
-                appState.filterRSTop2 = true;
+        function toggleRSTop1() {
+            const btn = document.getElementById('rs-top1-btn');
+            const otherBtn = document.getElementById('rs-top2-btn');
+            if (!appState.filterRSTop1) {
+                appState.filterRSTop1 = true;
+                appState.filterRSTop2 = false;
                 btn.style.backgroundColor = '#9c27b0';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
                 btn.style.borderRadius = '3px';
                 btn.style.textDecoration = 'none';
+                
+                if (otherBtn) {
+                    otherBtn.style.backgroundColor = 'transparent';
+                    otherBtn.style.color = '#9c27b0';
+                    otherBtn.style.padding = '0';
+                    otherBtn.style.borderRadius = '0';
+                    otherBtn.style.textDecoration = 'underline';
+                }
+            } else {
+                appState.filterRSTop1 = false;
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#9c27b0';
+                btn.style.padding = '0';
+                btn.style.borderRadius = '0';
+                btn.style.textDecoration = 'underline';
+            }
+            updateUI();
+        }
+
+        function toggleRSTop2() {
+            const btn = document.getElementById('rs-top2-btn');
+            const otherBtn = document.getElementById('rs-top1-btn');
+            if (!appState.filterRSTop2) {
+                appState.filterRSTop2 = true;
+                appState.filterRSTop1 = false;
+                btn.style.backgroundColor = '#9c27b0';
+                btn.style.color = 'white';
+                btn.style.padding = '2px 5px';
+                btn.style.borderRadius = '3px';
+                btn.style.textDecoration = 'none';
+                
+                if (otherBtn) {
+                    otherBtn.style.backgroundColor = 'transparent';
+                    otherBtn.style.color = '#9c27b0';
+                    otherBtn.style.padding = '0';
+                    otherBtn.style.borderRadius = '0';
+                    otherBtn.style.textDecoration = 'underline';
+                }
             } else {
                 appState.filterRSTop2 = false;
                 btn.style.backgroundColor = 'transparent';
@@ -1955,15 +2003,55 @@ indPopup.style.display = 'none';
             updateUI();
         }
 
-        function toggleWRSTop2() {
-            const btn = document.getElementById('wrs-top2-btn');
-            if (!appState.filterWRSTop2) {
-                appState.filterWRSTop2 = true;
+        function toggleWRSTop1() {
+            const btn = document.getElementById('wrs-top1-btn');
+            const otherBtn = document.getElementById('wrs-top2-btn');
+            if (!appState.filterWRSTop1) {
+                appState.filterWRSTop1 = true;
+                appState.filterWRSTop2 = false;
                 btn.style.backgroundColor = '#00897b';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
                 btn.style.borderRadius = '3px';
                 btn.style.textDecoration = 'none';
+                
+                if (otherBtn) {
+                    otherBtn.style.backgroundColor = 'transparent';
+                    otherBtn.style.color = '#00897b';
+                    otherBtn.style.padding = '0';
+                    otherBtn.style.borderRadius = '0';
+                    otherBtn.style.textDecoration = 'underline';
+                }
+            } else {
+                appState.filterWRSTop1 = false;
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#00897b';
+                btn.style.padding = '0';
+                btn.style.borderRadius = '0';
+                btn.style.textDecoration = 'underline';
+            }
+            updateUI();
+        }
+
+        function toggleWRSTop2() {
+            const btn = document.getElementById('wrs-top2-btn');
+            const otherBtn = document.getElementById('wrs-top1-btn');
+            if (!appState.filterWRSTop2) {
+                appState.filterWRSTop2 = true;
+                appState.filterWRSTop1 = false;
+                btn.style.backgroundColor = '#00897b';
+                btn.style.color = 'white';
+                btn.style.padding = '2px 5px';
+                btn.style.borderRadius = '3px';
+                btn.style.textDecoration = 'none';
+                
+                if (otherBtn) {
+                    otherBtn.style.backgroundColor = 'transparent';
+                    otherBtn.style.color = '#00897b';
+                    otherBtn.style.padding = '0';
+                    otherBtn.style.borderRadius = '0';
+                    otherBtn.style.textDecoration = 'underline';
+                }
             } else {
                 appState.filterWRSTop2 = false;
                 btn.style.backgroundColor = 'transparent';
@@ -2128,30 +2216,50 @@ indPopup.style.display = 'none';
             }
 
             // [Added] RS Rank Filter UI Update
+            const rsTop1Btn = document.getElementById('rs-top1-btn');
             const rsTop2Btn = document.getElementById('rs-top2-btn');
             if (appState.mode === 'RS_RANK') {
+                if (rsTop1Btn) rsTop1Btn.style.display = 'inline-block';
                 if (rsTop2Btn) rsTop2Btn.style.display = 'inline-block';
-                if (appState.filterRSTop2) {
+                
+                if (appState.filterRSTop1) {
+                    if (rsTop1Btn) rsTop1Btn.innerText = "돌아가기";
+                    if (rsTop2Btn) rsTop2Btn.innerText = "상위 2% 이내";
+                    subtitleText += " (상위 1% 이내)";
+                } else if (appState.filterRSTop2) {
                     if (rsTop2Btn) rsTop2Btn.innerText = "돌아가기";
+                    if (rsTop1Btn) rsTop1Btn.innerText = "상위 1% 이내";
                     subtitleText += " (상위 2% 이내)";
                 } else {
+                    if (rsTop1Btn) rsTop1Btn.innerText = "상위 1% 이내";
                     if (rsTop2Btn) rsTop2Btn.innerText = "상위 2% 이내";
                 }
             } else {
+                if (rsTop1Btn) rsTop1Btn.style.display = 'none';
                 if (rsTop2Btn) rsTop2Btn.style.display = 'none';
             }
 
             // [Added] WRS Rank Filter UI Update
+            const wrsTop1Btn = document.getElementById('wrs-top1-btn');
             const wrsTop2Btn = document.getElementById('wrs-top2-btn');
             if (appState.mode === 'WRS_RANK') {
+                if (wrsTop1Btn) wrsTop1Btn.style.display = 'inline-block';
                 if (wrsTop2Btn) wrsTop2Btn.style.display = 'inline-block';
-                if (appState.filterWRSTop2) {
+                
+                if (appState.filterWRSTop1) {
+                    if (wrsTop1Btn) wrsTop1Btn.innerText = "돌아가기";
+                    if (wrsTop2Btn) wrsTop2Btn.innerText = "상위 2% 이내";
+                    subtitleText += " (상위 1% 이내)";
+                } else if (appState.filterWRSTop2) {
                     if (wrsTop2Btn) wrsTop2Btn.innerText = "돌아가기";
+                    if (wrsTop1Btn) wrsTop1Btn.innerText = "상위 1% 이내";
                     subtitleText += " (상위 2% 이내)";
                 } else {
+                    if (wrsTop1Btn) wrsTop1Btn.innerText = "상위 1% 이내";
                     if (wrsTop2Btn) wrsTop2Btn.innerText = "상위 2% 이내";
                 }
             } else {
+                if (wrsTop1Btn) wrsTop1Btn.style.display = 'none';
                 if (wrsTop2Btn) wrsTop2Btn.style.display = 'none';
             }
 
@@ -2708,7 +2816,14 @@ indPopup.style.display = 'none';
                 });
             }
 
-            if (appState.mode === 'RS_RANK' && appState.filterRSTop2) {
+            if (appState.mode === 'RS_RANK' && appState.filterRSTop1) {
+                targetData = targetData.filter(item => {
+                    const r1 = parseFloat(item.RS_1mo_Rank_Pct);
+                    const r3 = parseFloat(item.RS_3mo_Rank_Pct);
+                    const r6 = parseFloat(item.RS_Rank_Pct);
+                    return (!isNaN(r1) && r1 <= 1) || (!isNaN(r3) && r3 <= 1) || (!isNaN(r6) && r6 <= 1);
+                });
+            } else if (appState.mode === 'RS_RANK' && appState.filterRSTop2) {
                 targetData = targetData.filter(item => {
                     const r1 = parseFloat(item.RS_1mo_Rank_Pct);
                     const r3 = parseFloat(item.RS_3mo_Rank_Pct);
@@ -2717,7 +2832,14 @@ indPopup.style.display = 'none';
                 });
             }
 
-            if (appState.mode === 'WRS_RANK' && appState.filterWRSTop2) {
+            if (appState.mode === 'WRS_RANK' && appState.filterWRSTop1) {
+                targetData = targetData.filter(item => {
+                    const r1 = parseFloat(item.WRS_1mo_Rank_Pct);
+                    const r3 = parseFloat(item.WRS_3mo_Rank_Pct);
+                    const r6 = parseFloat(item.WRS_Rank_Pct);
+                    return (!isNaN(r1) && r1 <= 1) || (!isNaN(r3) && r3 <= 1) || (!isNaN(r6) && r6 <= 1);
+                });
+            } else if (appState.mode === 'WRS_RANK' && appState.filterWRSTop2) {
                 targetData = targetData.filter(item => {
                     const r1 = parseFloat(item.WRS_1mo_Rank_Pct);
                     const r3 = parseFloat(item.WRS_3mo_Rank_Pct);
