@@ -385,6 +385,12 @@
                 👨‍🏫 응봉아재보소
             </a>
 
+            <!-- [Added] Position Sizing Calculator Link -->
+            <a href="#" onclick="openCalculatorPopup(); return false;"
+                style="color: #ff9800; text-decoration: underline; font-size: 16px; font-weight: bold; margin-left: 15px;">
+                💰 투자비중계산
+            </a>
+
 
         </div>
 
@@ -609,6 +615,63 @@
                 </thead>
                 <tbody id="table-body"></tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- [Added] Position Sizing Calculator Modal -->
+    <div id="calculator-popup" class="modal">
+        <div class="modal-content" style="max-width: 500px; padding-top: 10px;">
+            <span class="close-btn" onclick="closeCalculatorPopup()">&times;</span>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; margin-top: 15px;">
+                <button onclick="switchCalcTab('short')" id="calc-short-btn" style="flex:1; padding:10px; background:#ff9800; color:#000; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">단기용</button>
+                <button onclick="switchCalcTab('long')" id="calc-long-btn" style="flex:1; padding:10px; background:#444; color:#fff; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">장기용</button>
+            </div>
+
+            <div id="calc-short-content">
+                <h3 style="margin-top:0; color:#ff9800;">💰 단기 투자비중 계산기</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display:block; margin-bottom:5px;">Ticker명 입력:</label>
+                    <input type="text" id="calc-ticker" placeholder="예: AAPL" onkeyup="updateCalculator()" style="width:100%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px;">
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div style="flex:1; background:#333; padding:10px; border-radius:4px; text-align:center;">
+                        <div style="font-size:12px; color:#aaa;">현재가 (Price)</div>
+                        <div id="calc-price" style="font-size:18px; font-weight:bold; color:#fff;">-</div>
+                    </div>
+                    <div style="flex:1; background:#333; padding:10px; border-radius:4px; text-align:center;">
+                        <div style="font-size:12px; color:#aaa;">변동성 (ADR)</div>
+                        <div id="calc-adr" style="font-size:18px; font-weight:bold; color:#ffeb3b;">-</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display:block; margin-bottom:5px;">전체 투자자산 ($):</label>
+                    <input type="number" id="calc-capital" value="1000" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:100%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px;">
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <label style="display:block; margin-bottom:5px;">전체 손실율 (%):</label>
+                    <input type="number" id="calc-risk" value="2" step="0.1" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:100%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px;">
+                </div>
+
+                <div style="background:#2a2a2a; border: 1px solid #444; border-radius:4px; padding: 15px; margin-bottom: 10px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <span>최대 투자가능금액 ($):</span>
+                        <span id="calc-max-amount" style="font-weight:bold; font-size:18px; color:#4caf50;">$0.00</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span>매수 가능 주식수 (Shares):</span>
+                        <span id="calc-shares" style="font-weight:bold; font-size:18px; color:#2196f3;">0 주</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="calc-long-content" style="display:none; text-align:center; padding: 40px 20px;">
+                <h3 style="color:#aaa;">🚧 장기용 계산기</h3>
+                <p style="color:#888;">장기 투자 비중 계산 로직은<br>추후 아이디어에 따라 업데이트 될 예정입니다.</p>
+            </div>
         </div>
     </div>
 
@@ -1396,6 +1459,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script>
         // --- Eungbong Ajussi Popup Functions ---
+        // --- Position Sizing Calculator ---
+        function openCalculatorPopup() {
+            document.getElementById('calculator-popup').style.display = 'block';
+            switchCalcTab('short');
+        }
+
+        function closeCalculatorPopup() {
+            document.getElementById('calculator-popup').style.display = 'none';
+        }
+
+        function switchCalcTab(tab) {
+            if (tab === 'short') {
+                document.getElementById('calc-short-content').style.display = 'block';
+                document.getElementById('calc-long-content').style.display = 'none';
+                document.getElementById('calc-short-btn').style.background = '#ff9800';
+                document.getElementById('calc-short-btn').style.color = '#000';
+                document.getElementById('calc-long-btn').style.background = '#444';
+                document.getElementById('calc-long-btn').style.color = '#fff';
+            } else {
+                document.getElementById('calc-short-content').style.display = 'none';
+                document.getElementById('calc-long-content').style.display = 'block';
+                document.getElementById('calc-short-btn').style.background = '#444';
+                document.getElementById('calc-short-btn').style.color = '#fff';
+                document.getElementById('calc-long-btn').style.background = '#ff9800';
+                document.getElementById('calc-long-btn').style.color = '#000';
+            }
+        }
+
+        function updateCalculator() {
+            const ticker = document.getElementById('calc-ticker').value.trim().toUpperCase();
+            const capital = parseFloat(document.getElementById('calc-capital').value);
+            const riskPct = parseFloat(document.getElementById('calc-risk').value);
+
+            let price = null;
+            let adr = null;
+
+            if (ticker && globalData) {
+                const stock = globalData.find(d => d.Ticker.toUpperCase() === ticker);
+                if (stock) {
+                    price = parseFloat(stock.Price);
+                    adr = parseFloat(stock.ADR_20D);
+                }
+            }
+
+            // Update UI with Price and ADR
+            document.getElementById('calc-price').textContent = isValidNumber(price) ? '$' + price.toFixed(2) : '-';
+            document.getElementById('calc-adr').textContent = isValidNumber(adr) ? adr.toFixed(2) + '%' : '-';
+
+            // Calculate values
+            let maxAmount = 0;
+            let maxShares = 0;
+
+            if (isValidNumber(price) && isValidNumber(adr) && adr > 0 && isValidNumber(capital) && isValidNumber(riskPct)) {
+                // 허용 손실금액
+                const riskAmount = capital * (riskPct / 100);
+                // 최대 투자가능금액 = 허용 손실금액 / (ADR / 100)
+                maxAmount = riskAmount / (adr / 100);
+                // 매수 가능 주식수 = 최대 투자가능금액 / 현재가
+                maxShares = maxAmount / price;
+            }
+
+            document.getElementById('calc-max-amount').textContent = '$' + maxAmount.toFixed(2);
+            document.getElementById('calc-shares').textContent = Math.floor(maxShares) + ' 주';
+        }
+
         function openEungbongPopup() {
             document.getElementById('eungbong-popup').style.display = 'block';
         }
