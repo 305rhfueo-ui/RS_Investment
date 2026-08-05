@@ -594,6 +594,7 @@
                     <button onclick="window.location.href='daily_picks/2026-07-07.html'" class="download-btn" style="background-color:#e040fb; color:white; font-weight:bold;">🚀 추천(제미나이)</button>
                     <button onclick="window.open('research_reports.html', '_blank')" class="download-btn" style="background-color:#3F51B5; color:white; font-weight:bold;">📑 리서치팀 분석자료</button>
                     <button onclick="window.open('https://305rhfueo-ui.github.io/investment-agent-team/dashboard/minimi-room.html', '_blank')" class="download-btn" style="background-color:#00acc1; color:white; font-weight:bold;">🤖 클로드분석</button>
+                    <button onclick="window.open('https://305rhfueo-ui.github.io/breakout-team/', '_blank')" class="download-btn" style="background-color:#00acc1; color:white; font-weight:bold;">🤖 클로드분석2</button>
                     <button onclick="downloadExcel()" class="download-btn">📥 엑셀 다운로드</button>
                 </div>
             </div>
@@ -632,17 +633,17 @@
                 
                 <div style="margin-bottom: 15px;">
                     <label style="display:block; margin-bottom:5px;">Ticker명 입력:</label>
-                    <input type="text" id="calc-ticker" placeholder="예: AAPL" onkeyup="updateCalculator()" style="width:100%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px;">
+                    <input type="text" id="calc-ticker" placeholder="예: AAPL" onkeyup="onCalcTickerChange()" style="width:100%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px;">
                 </div>
                 
                 <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                     <div style="flex:1; background:#333; padding:10px; border-radius:4px; text-align:center;">
-                        <div style="font-size:12px; color:#aaa;">현재가 (Price)</div>
-                        <div id="calc-price" style="font-size:18px; font-weight:bold; color:#fff;">-</div>
+                        <div style="font-size:12px; color:#aaa; margin-bottom:5px;">매수가격 (Price)</div>
+                        <input type="number" id="calc-price" placeholder="0.00" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:80%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px; text-align:center; font-weight:bold; display:inline-block; box-sizing:border-box;">
                     </div>
                     <div style="flex:1; background:#333; padding:10px; border-radius:4px; text-align:center;">
-                        <div style="font-size:12px; color:#aaa;">변동성 (ADR)</div>
-                        <div id="calc-adr" style="font-size:18px; font-weight:bold; color:#ffeb3b;">-</div>
+                        <div style="font-size:12px; color:#aaa; margin-bottom:5px;">변동성 (ADR %)</div>
+                        <input type="number" id="calc-adr" placeholder="0.0" step="0.1" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:80%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px; text-align:center; font-weight:bold; color:#ffeb3b; display:inline-block; box-sizing:border-box;">
                     </div>
                 </div>
 
@@ -661,9 +662,13 @@
                         <span>최대 투자가능금액 ($):</span>
                         <span id="calc-max-amount" style="font-weight:bold; font-size:18px; color:#4caf50;">$0.00</span>
                     </div>
-                    <div style="display:flex; justify-content:space-between;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                         <span>매수 가능 주식수 (Shares):</span>
                         <span id="calc-shares" style="font-weight:bold; font-size:18px; color:#2196f3;">0 주</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span>손절 주당 가격 ($):</span>
+                        <span id="calc-stop-loss" style="font-weight:bold; font-size:18px; color:#ff5252;">$0.00</span>
                     </div>
                 </div>
             </div>
@@ -1487,29 +1492,33 @@
             }
         }
 
-        function updateCalculator() {
+        function onCalcTickerChange() {
             const ticker = document.getElementById('calc-ticker').value.trim().toUpperCase();
-            const capital = parseFloat(document.getElementById('calc-capital').value);
-            const riskPct = parseFloat(document.getElementById('calc-risk').value);
-
-            let price = null;
-            let adr = null;
-
             if (ticker && globalData) {
                 const stock = globalData.find(d => d.Ticker.toUpperCase() === ticker);
                 if (stock) {
-                    price = parseFloat(stock.Price);
-                    adr = parseFloat(stock.ADR_20D);
+                    const price = parseFloat(stock.Price);
+                    const adr = parseFloat(stock.ADR_20D);
+                    if (isValidNumber(price)) {
+                        document.getElementById('calc-price').value = price.toFixed(2);
+                    }
+                    if (isValidNumber(adr)) {
+                        document.getElementById('calc-adr').value = adr.toFixed(2);
+                    }
                 }
             }
+            updateCalculator();
+        }
 
-            // Update UI with Price and ADR
-            document.getElementById('calc-price').textContent = isValidNumber(price) ? '$' + price.toFixed(2) : '-';
-            document.getElementById('calc-adr').textContent = isValidNumber(adr) ? adr.toFixed(2) + '%' : '-';
+        function updateCalculator() {
+            const capital = parseFloat(document.getElementById('calc-capital').value);
+            const riskPct = parseFloat(document.getElementById('calc-risk').value);
+            const price = parseFloat(document.getElementById('calc-price').value);
+            const adr = parseFloat(document.getElementById('calc-adr').value);
 
-            // Calculate values
             let maxAmount = 0;
             let maxShares = 0;
+            let stopLossPrice = 0;
 
             if (isValidNumber(price) && isValidNumber(adr) && adr > 0 && isValidNumber(capital) && isValidNumber(riskPct)) {
                 // 허용 손실금액
@@ -1518,10 +1527,13 @@
                 maxAmount = riskAmount / (adr / 100);
                 // 매수 가능 주식수 = 최대 투자가능금액 / 현재가
                 maxShares = maxAmount / price;
+                // 손절 주당 가격 = 매수한 주당 가격 * (1 - ADR / 100)
+                stopLossPrice = price * (1 - (adr / 100));
             }
 
             document.getElementById('calc-max-amount').textContent = '$' + maxAmount.toFixed(2);
             document.getElementById('calc-shares').textContent = Math.floor(maxShares) + ' 주';
+            document.getElementById('calc-stop-loss').textContent = '$' + stopLossPrice.toFixed(2);
         }
 
         function openEungbongPopup() {
