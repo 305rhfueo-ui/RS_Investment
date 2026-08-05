@@ -366,7 +366,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:08:26"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:13:07"
   },
   "PAG": {
     "0SALE": -1.13,
@@ -402,7 +405,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:22:08"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:25:22"
   },
   "AMZN": {
     "0SALE": 16.61,
@@ -549,13 +555,16 @@
     "last_updated": "2026-07-27 04:47:58"
   },
   "SPHR": {
-    "0SALE": 37.72,
-    "1SALE": null,
-    "2SALE": 15.18,
-    "0NI": "적자축소",
-    "1NI": null,
-    "2NI": "적자축소",
-    "last_updated": "2026-07-21 04:31:37"
+    "0SALE": 10.95,
+    "1SALE": 37.72,
+    "2SALE": null,
+    "0NI": -125.55,
+    "1NI": "적자축소",
+    "2NI": null,
+    "0OPM": -19.53,
+    "1OPM": 1.86,
+    "2OPM": 7.34,
+    "last_updated": "2026-08-05 04:46:47"
   },
   "FAF": {
     "0SALE": 14.99,
@@ -825,7 +834,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:05:14"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:39:56"
   },
   "TCI": {
     "0SALE": 2.77,
@@ -1050,7 +1062,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:51:08"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:33:35"
   },
   "BC": {
     "0SALE": 12.79,
@@ -1707,7 +1722,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:46:12"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:06:46"
   },
   "LYV": {
     "0SALE": 12.15,
@@ -1941,7 +1959,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:07:05"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:16:40"
   },
   "BALL": {
     "0SALE": 16.34,
@@ -2454,7 +2475,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:28:25"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:42:54"
   },
   "BR": {
     "0SALE": 7.83,
@@ -2796,7 +2820,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 05:09:45"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:37:49"
   },
   "MMS": {
     "0SALE": -4.1,
@@ -3426,7 +3453,10 @@
     "0NI": "적자확대",
     "1NI": "적자축소",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:34:41"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:01:45"
   },
   "ASGN": {
     "0SALE": 0.0,
@@ -3804,7 +3834,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:47:21"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:29:16"
   },
   "L": {
     "0SALE": 1.36,
@@ -4452,7 +4485,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:06:46"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:32:34"
   },
   "SAFT": {
     "0SALE": 4.39,
@@ -4596,7 +4632,10 @@
     "0NI": null,
     "1NI": 16.17,
     "2NI": 29.01,
-    "last_updated": "2026-08-04 04:28:05"
+    "0OPM": null,
+    "1OPM": 5.62,
+    "2OPM": 5.87,
+    "last_updated": "2026-08-05 05:02:09"
   },
   "ITW": {
     "0SALE": 4.61,
@@ -4992,7 +5031,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:30:19"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:00:25"
   },
   "MTZ": {
     "0SALE": 34.45,
@@ -5091,7 +5133,10 @@
     "0NI": "흑자전환",
     "1NI": -184.43,
     "2NI": -1390.74,
-    "last_updated": "2026-07-22 04:19:44"
+    "0OPM": 2.51,
+    "1OPM": 1.27,
+    "2OPM": -14.73,
+    "last_updated": "2026-08-05 04:32:14"
   },
   "ABBV": {
     "0SALE": 12.43,
@@ -5244,7 +5289,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:11:25"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:45:33"
   },
   "LECO": {
     "0SALE": 11.65,
@@ -5766,7 +5814,10 @@
     "0NI": null,
     "1NI": 9.78,
     "2NI": 25.25,
-    "last_updated": "2026-08-04 04:35:43"
+    "0OPM": null,
+    "1OPM": 17.01,
+    "2OPM": 17.09,
+    "last_updated": "2026-08-05 04:46:07"
   },
   "FCX": {
     "0SALE": -7.29,
@@ -5829,7 +5880,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:19:21"
+    "0OPM": 2.16,
+    "1OPM": null,
+    "2OPM": 5.25,
+    "last_updated": "2026-08-05 04:48:41"
   },
   "IIPR": {
     "0SALE": -3.8,
@@ -6738,7 +6792,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:56:38"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:43:17"
   },
   "CW": {
     "0SALE": 13.41,
@@ -6972,7 +7029,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:39:45"
+    "0OPM": 16.45,
+    "1OPM": null,
+    "2OPM": 11.53,
+    "last_updated": "2026-08-05 04:25:42"
   },
   "DJCO": {
     "0SALE": 24.98,
@@ -7521,7 +7581,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:54:44"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:55:36"
   },
   "ANAB": {
     "0SALE": -7.98,
@@ -8304,7 +8367,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:49:21"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:07:04"
   },
   "BKNG": {
     "0SALE": 16.17,
@@ -8709,7 +8775,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:52:50"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:56:26"
   },
   "TECH": {
     "0SALE": -1.51,
@@ -9231,7 +9300,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 05:03:57"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:19:29"
   },
   "UTHR": {
     "0SALE": -1.62,
@@ -9285,7 +9357,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:52:31"
+    "0OPM": 20.61,
+    "1OPM": null,
+    "2OPM": 21.32,
+    "last_updated": "2026-08-05 04:49:46"
   },
   "W": {
     "0SALE": 7.36,
@@ -9834,7 +9909,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:50:01"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:44:54"
   },
   "DY": {
     "0SALE": 56.11,
@@ -10014,7 +10092,10 @@
     "0NI": "적자확대",
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:47:38"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:08:10"
   },
   "SCL": {
     "0SALE": 1.9,
@@ -10626,7 +10707,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:56:58"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:31:54"
   },
   "SCHW": {
     "0SALE": 20.87,
@@ -10878,7 +10962,10 @@
     "0NI": "적자확대",
     "1NI": -15429.38,
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:49:42"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:21:37"
   },
   "CBRE": {
     "0SALE": 18.61,
@@ -10995,7 +11082,10 @@
     "0NI": null,
     "1NI": -34.17,
     "2NI": -10.86,
-    "last_updated": "2026-08-04 04:31:37"
+    "0OPM": null,
+    "1OPM": 9.52,
+    "2OPM": 11.05,
+    "last_updated": "2026-08-05 04:26:25"
   },
   "SYF": {
     "0SALE": 0.28,
@@ -11211,7 +11301,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:48:18"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:54:46"
   },
   "AFRM": {
     "0SALE": 32.64,
@@ -11445,7 +11538,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 05:04:18"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:18:05"
   },
   "YUMC": {
     "0SALE": 9.73,
@@ -11724,7 +11820,10 @@
     "0NI": "적자축소",
     "1NI": "적자축소",
     "2NI": "적자축소",
-    "last_updated": "2026-08-04 04:16:37"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:38:08"
   },
   "ESTC": {
     "0SALE": 16.03,
@@ -11841,7 +11940,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:04:56"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:26:03"
   },
   "ASTE": {
     "0SALE": 20.31,
@@ -11904,7 +12006,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:05:35"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:55:07"
   },
   "GIS": {
     "0SALE": -8.37,
@@ -12129,7 +12234,10 @@
     "0NI": null,
     "1NI": -56.5,
     "2NI": 26.95,
-    "last_updated": "2026-08-04 05:01:31"
+    "0OPM": null,
+    "1OPM": 6.99,
+    "2OPM": 15.23,
+    "last_updated": "2026-08-05 04:51:35"
   },
   "COST": {
     "0SALE": 11.58,
@@ -12291,7 +12399,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:18:40"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:02:49"
   },
   "RGA": {
     "0SALE": 23.46,
@@ -12363,7 +12474,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:55:54"
+    "0OPM": 8.1,
+    "1OPM": null,
+    "2OPM": 5.72,
+    "last_updated": "2026-08-05 04:18:42"
   },
   "VCYT": {
     "0SALE": 15.49,
@@ -12399,7 +12513,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:12:54"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:00:45"
   },
   "GLNG": {
     "0SALE": null,
@@ -12408,7 +12525,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": "흑자전환",
-    "last_updated": "2026-08-04 05:18:14"
+    "0OPM": 81.79,
+    "1OPM": null,
+    "2OPM": 39.45,
+    "last_updated": "2026-08-05 04:37:26"
   },
   "FET": {
     "0SALE": 7.98,
@@ -12444,7 +12564,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:19:41"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:55:54"
   },
   "KGS": {
     "0SALE": 4.89,
@@ -12489,7 +12612,10 @@
     "0NI": null,
     "1NI": -130.23,
     "2NI": 370.56,
-    "last_updated": "2026-08-04 05:05:56"
+    "0OPM": null,
+    "1OPM": 2.74,
+    "2OPM": 5.23,
+    "last_updated": "2026-08-05 04:33:56"
   },
   "VSAT": {
     "0SALE": 2.11,
@@ -12597,7 +12723,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:53:26"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:26:54"
   },
   "CDNL": {
     "0SALE": null,
@@ -12606,7 +12735,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 05:01:11"
+    "0OPM": 8.82,
+    "1OPM": null,
+    "2OPM": 9.67,
+    "last_updated": "2026-08-05 04:39:36"
   },
   "CNC": {
     "0SALE": 9.92,
@@ -12669,7 +12801,10 @@
     "0NI": "적자확대",
     "1NI": "적자확대",
     "2NI": "적자축소",
-    "last_updated": "2026-08-04 05:16:49"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:45:49"
   },
   "YOU": {
     "0SALE": 19.7,
@@ -12705,7 +12840,10 @@
     "0NI": "적자확대",
     "1NI": "적자축소",
     "2NI": "적자확대",
-    "last_updated": "2026-08-04 04:27:43"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 04:29:36"
   },
   "PARR": {
     "0SALE": 4.51,
@@ -12813,7 +12951,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:56:15"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:00:04"
   },
   "TGTX": {
     "0SALE": 69.56,
@@ -13182,7 +13323,10 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:47:57"
+    "0OPM": -41.39,
+    "1OPM": null,
+    "2OPM": 0.66,
+    "last_updated": "2026-08-05 05:04:53"
   },
   "MGRT": {
     "0SALE": null,
@@ -13191,6 +13335,9 @@
     "0NI": null,
     "1NI": null,
     "2NI": null,
-    "last_updated": "2026-08-04 04:49:00"
+    "0OPM": null,
+    "1OPM": null,
+    "2OPM": null,
+    "last_updated": "2026-08-05 05:02:28"
   }
 }
