@@ -467,10 +467,15 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
 
         # [Added] Perfect Storm Strategy Metrics (3단계 사전 조건 & 4단계 진입 시그널용)
         high_52w_pct = 0.0
+        new_high_52w = 'N'
         if 'High' in df.columns and not df.empty:
             high_52w = df['High'].max()
             if high_52w > 0:
                 high_52w_pct = round((latest_price / high_52w) * 100, 2)
+            
+            latest_high = df['High'].iloc[-1]
+            if pd.notna(latest_high) and latest_high >= high_52w:
+                new_high_52w = 'Y'
 
         adr_20d = None
         if 'High' in df.columns and 'Low' in df.columns and len(df) >= 20:
@@ -859,6 +864,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'BB_Center_Breakout_5D': bb_center_breakout_5d,
             # [Added] Perfect Storm Strategy Metrics
             'High_52W_Pct': high_52w_pct,
+            'New_High_52W': new_high_52w,
             'ADR_20D': adr_20d,
             'Max_Rise_1M_Pct': max_rise_1m_pct,
             'Max_Rise_3M_Pct': max_rise_3m_pct,

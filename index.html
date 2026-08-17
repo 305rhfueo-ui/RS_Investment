@@ -489,7 +489,10 @@
 
         <div id="result-area">
             <div class="btn-group">
-                <span id="result-count" style="font-size:14px; color:#aaa;"></span>
+                <div style="display:flex; align-items:center;">
+                    <span id="result-count" style="font-size:14px; color:#aaa;"></span>
+                    <a href="#" onclick="downloadExcel(); return false;" style="margin-left: 15px; font-size: 14px; color: #4caf50; text-decoration: underline; font-weight: bold;">📥 현재 목록 엑셀 다운로드</a>
+                </div>
 
                 <div style="display:flex; gap:10px; align-items:center;">
                     <input type="text" id="search-input" placeholder="Search..."
@@ -508,6 +511,10 @@
                             <a href="#" id="rs-top2-btn" onclick="toggleRSTop2(); return false;"
                                 style="color: #9c27b0; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
                                 상위 2% 이내
+                            </a>
+                            <a href="#" id="rs-high-btn" onclick="toggleRSHigh(); return false;"
+                                style="color: #9c27b0; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                                High
                             </a>
                         </div>
                     </div>
@@ -639,11 +646,11 @@
                 <div style="display: flex; gap: 10px; margin-bottom: 15px;">
                     <div style="flex:1; background:#333; padding:10px; border-radius:4px; text-align:center;">
                         <div style="font-size:12px; color:#aaa; margin-bottom:5px;">매수가격 (Price)</div>
-                        <input type="number" id="calc-price" placeholder="0.00" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:80%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px; text-align:center; font-weight:bold; display:inline-block; box-sizing:border-box;">
+                        <input type="number" id="calc-price" placeholder="0.00" step="any" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:80%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px; text-align:center; font-weight:bold; display:inline-block; box-sizing:border-box;">
                     </div>
                     <div style="flex:1; background:#333; padding:10px; border-radius:4px; text-align:center;">
                         <div style="font-size:12px; color:#aaa; margin-bottom:5px;">변동성 (ADR %)</div>
-                        <input type="number" id="calc-adr" placeholder="0.0" step="0.1" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:80%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px; text-align:center; font-weight:bold; color:#ffeb3b; display:inline-block; box-sizing:border-box;">
+                        <input type="number" id="calc-adr" placeholder="0.0" step="any" onkeyup="updateCalculator()" onchange="updateCalculator()" style="width:80%; padding:8px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; font-size:16px; text-align:center; font-weight:bold; color:#ffeb3b; display:inline-block; box-sizing:border-box;">
                     </div>
                 </div>
 
@@ -1655,6 +1662,7 @@
             halfRealRiseFilter: false,
             industryFilter: null, // [Added] Industry Filter State (Array of selected industries, or null)
             brk60dFilter: false, // [Added] 60D Breakout Filter State
+            filterRSHigh: false, // [Added] High Filter State
             date10D: '',
             date25D: ''
         };
@@ -2064,9 +2072,11 @@ indPopup.style.display = 'none';
         function toggleRSTop1() {
             const btn = document.getElementById('rs-top1-btn');
             const otherBtn = document.getElementById('rs-top2-btn');
+            const highBtn = document.getElementById('rs-high-btn');
             if (!appState.filterRSTop1) {
                 appState.filterRSTop1 = true;
                 appState.filterRSTop2 = false;
+                appState.filterRSHigh = false;
                 btn.style.backgroundColor = '#9c27b0';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
@@ -2079,6 +2089,13 @@ indPopup.style.display = 'none';
                     otherBtn.style.padding = '0';
                     otherBtn.style.borderRadius = '0';
                     otherBtn.style.textDecoration = 'underline';
+                }
+                if (highBtn) {
+                    highBtn.style.backgroundColor = 'transparent';
+                    highBtn.style.color = '#9c27b0';
+                    highBtn.style.padding = '0';
+                    highBtn.style.borderRadius = '0';
+                    highBtn.style.textDecoration = 'underline';
                 }
             } else {
                 appState.filterRSTop1 = false;
@@ -2094,9 +2111,11 @@ indPopup.style.display = 'none';
         function toggleRSTop2() {
             const btn = document.getElementById('rs-top2-btn');
             const otherBtn = document.getElementById('rs-top1-btn');
+            const highBtn = document.getElementById('rs-high-btn');
             if (!appState.filterRSTop2) {
                 appState.filterRSTop2 = true;
                 appState.filterRSTop1 = false;
+                appState.filterRSHigh = false;
                 btn.style.backgroundColor = '#9c27b0';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
@@ -2110,8 +2129,54 @@ indPopup.style.display = 'none';
                     otherBtn.style.borderRadius = '0';
                     otherBtn.style.textDecoration = 'underline';
                 }
+                if (highBtn) {
+                    highBtn.style.backgroundColor = 'transparent';
+                    highBtn.style.color = '#9c27b0';
+                    highBtn.style.padding = '0';
+                    highBtn.style.borderRadius = '0';
+                    highBtn.style.textDecoration = 'underline';
+                }
             } else {
                 appState.filterRSTop2 = false;
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#9c27b0';
+                btn.style.padding = '0';
+                btn.style.borderRadius = '0';
+                btn.style.textDecoration = 'underline';
+            }
+            updateUI();
+        }
+
+        function toggleRSHigh() {
+            const btn = document.getElementById('rs-high-btn');
+            const top1Btn = document.getElementById('rs-top1-btn');
+            const top2Btn = document.getElementById('rs-top2-btn');
+            if (!appState.filterRSHigh) {
+                appState.filterRSHigh = true;
+                appState.filterRSTop1 = false;
+                appState.filterRSTop2 = false;
+                btn.style.backgroundColor = '#9c27b0';
+                btn.style.color = 'white';
+                btn.style.padding = '2px 5px';
+                btn.style.borderRadius = '3px';
+                btn.style.textDecoration = 'none';
+                
+                if (top1Btn) {
+                    top1Btn.style.backgroundColor = 'transparent';
+                    top1Btn.style.color = '#9c27b0';
+                    top1Btn.style.padding = '0';
+                    top1Btn.style.borderRadius = '0';
+                    top1Btn.style.textDecoration = 'underline';
+                }
+                if (top2Btn) {
+                    top2Btn.style.backgroundColor = 'transparent';
+                    top2Btn.style.color = '#9c27b0';
+                    top2Btn.style.padding = '0';
+                    top2Btn.style.borderRadius = '0';
+                    top2Btn.style.textDecoration = 'underline';
+                }
+            } else {
+                appState.filterRSHigh = false;
                 btn.style.backgroundColor = 'transparent';
                 btn.style.color = '#9c27b0';
                 btn.style.padding = '0';
@@ -2358,25 +2423,36 @@ indPopup.style.display = 'none';
             // [Added] RS Rank Filter UI Update
             const rsTop1Btn = document.getElementById('rs-top1-btn');
             const rsTop2Btn = document.getElementById('rs-top2-btn');
+            const rsHighBtn = document.getElementById('rs-high-btn');
             if (appState.mode === 'RS_RANK') {
                 if (rsTop1Btn) rsTop1Btn.style.display = 'inline-block';
                 if (rsTop2Btn) rsTop2Btn.style.display = 'inline-block';
+                if (rsHighBtn) rsHighBtn.style.display = 'inline-block';
                 
                 if (appState.filterRSTop1) {
                     if (rsTop1Btn) rsTop1Btn.innerText = "돌아가기";
                     if (rsTop2Btn) rsTop2Btn.innerText = "상위 2% 이내";
+                    if (rsHighBtn) rsHighBtn.innerText = "High";
                     subtitleText += " (상위 1% 이내)";
                 } else if (appState.filterRSTop2) {
                     if (rsTop2Btn) rsTop2Btn.innerText = "돌아가기";
                     if (rsTop1Btn) rsTop1Btn.innerText = "상위 1% 이내";
+                    if (rsHighBtn) rsHighBtn.innerText = "High";
                     subtitleText += " (상위 2% 이내)";
+                } else if (appState.filterRSHigh) {
+                    if (rsHighBtn) rsHighBtn.innerText = "돌아가기";
+                    if (rsTop1Btn) rsTop1Btn.innerText = "상위 1% 이내";
+                    if (rsTop2Btn) rsTop2Btn.innerText = "상위 2% 이내";
+                    subtitleText += " (High)";
                 } else {
                     if (rsTop1Btn) rsTop1Btn.innerText = "상위 1% 이내";
                     if (rsTop2Btn) rsTop2Btn.innerText = "상위 2% 이내";
+                    if (rsHighBtn) rsHighBtn.innerText = "High";
                 }
             } else {
                 if (rsTop1Btn) rsTop1Btn.style.display = 'none';
                 if (rsTop2Btn) rsTop2Btn.style.display = 'none';
+                if (rsHighBtn) rsHighBtn.style.display = 'none';
             }
 
             // [Added] WRS Rank Filter UI Update
@@ -2970,6 +3046,8 @@ indPopup.style.display = 'none';
                     const r6 = parseFloat(item.RS_Rank_Pct);
                     return (!isNaN(r1) && r1 <= 2) || (!isNaN(r3) && r3 <= 2) || (!isNaN(r6) && r6 <= 2);
                 });
+            } else if (appState.mode === 'RS_RANK' && appState.filterRSHigh) {
+                targetData = targetData.filter(item => item.New_High_52W === 'Y');
             }
 
             if (appState.mode === 'WRS_RANK' && appState.filterWRSTop1) {
@@ -3437,6 +3515,7 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('High_52W_Pct')">52주 고점 (%) ⬍</th>
+                    <th onclick="sortTable('New_High_52W')">52주 신고가 ⬍</th>
                     <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">정배열 ⬍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
                     <th onclick="sortTable('200DIV')">200DIV (%) ⬍</th>
@@ -3470,6 +3549,7 @@ indPopup.style.display = 'none';
                         <td>${isValidNumber(item.RS_3mo) ? item.RS_3mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.RS_1mo) ? item.RS_1mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
+                        <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
                         <td class="${jbColor}">${jb}</td>
                         <td>${item['50DIV']}%</td>
                         <td>${item['200DIV'] !== undefined && item['200DIV'] !== null ? item['200DIV'] + '%' : '-'}</td>
@@ -3495,6 +3575,7 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('RS_Rank_Pct')">6mo rnk ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
                     <th onclick="sortTable('High_52W_Pct')">52주대비 (%) ⬍</th>
+                    <th onclick="sortTable('New_High_52W')">52주 신고가 ⬍</th>
                     <th onclick="sortTable('CLS_POS')">cls_pos ⬍</th>
                     <th onclick="sortTable('VOL_X')">vol_x ⬍</th>
                     <th onclick="sortTable('Vol_Surge_Wk')" title="일간 차트 기준 전주 평균 거래량보다 오늘 거래량이 몇 배 이상 늘었는지 보여줍니다.">거래량급증(배) ⬍</th>
@@ -3537,6 +3618,7 @@ indPopup.style.display = 'none';
                         <td class="${isValidNumber(rnk6) && rnk6 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk6)}</td>
                         <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(2) : '-'}</td>
+                        <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
                         <td>${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) : '-'}</td>
                         <td>${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
                         <td style="${isValidNumber(item.Vol_Surge_Wk) && item.Vol_Surge_Wk > 2 ? 'font-weight:bold; color:var(--primary-color)' : ''}">${isValidNumber(item.Vol_Surge_Wk) ? item.Vol_Surge_Wk.toFixed(2) : '-'}</td>
@@ -3565,6 +3647,7 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('RS_6mo_10D_Chg')">10D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_6mo_25D_Chg')">25D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
+                    <th onclick="sortTable('New_High_52W')">52주 신고가 ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('RS_DiF')">
                         RS_DiF ⬍
@@ -3662,6 +3745,7 @@ indPopup.style.display = 'none';
                             ${isValidNumber(item.RS_6mo_25D_Chg) ? item.RS_6mo_25D_Chg.toFixed(1) + '%' : '-'}
                         </td>
                         <td class="${rs3Class}">${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
+                        <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
                         <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
                         <td>${item['50DIV']}%</td>
@@ -3718,7 +3802,7 @@ indPopup.style.display = 'none';
 
             let excelData = [];
 
-            if (appState.mode === 'WRS') {
+            if (appState.mode === 'WRS' || appState.mode === 'WRS_RANK') {
                 excelData = data.map(item => ({
                     'Sector': item.Sector,
                     'Industry': item.Industry,
@@ -3788,7 +3872,7 @@ indPopup.style.display = 'none';
             const ws = XLSX.utils.json_to_sheet(excelData);
             const wb = XLSX.utils.book_new();
 
-            const sheetName = (appState.mode === 'WRS') ? 'Sector_WRS' : 'Individual_RS';
+            const sheetName = (appState.mode === 'WRS' || appState.mode === 'WRS_RANK') ? 'Sector_WRS' : 'Individual_RS';
 
             XLSX.utils.book_append_sheet(wb, ws, sheetName);
 
