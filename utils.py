@@ -105,14 +105,28 @@ def save_analysis_cache():
 load_sector_cache()
 load_analysis_cache()
 
+def _finite(v):
+    """숫자이면서 NaN/Inf 가 아닌 값만 True. `is not None` 은 float('nan') 을 통과시킨다.
+
+    2026-09-07 실측: NaN 이 섞인 리스트를 sorted() 하면 순서가 깨져 RS_Rank_Pct 가 1,392종목 중
+    1,378개에서 틀렸다(예: RS 상위 0.5% 종목이 91% 로 표시). WRS 그룹핑도 같은 이유로 20개 그룹이 NaN 오염.
+    """
+    import math
+    if v is None or isinstance(v, bool):
+        return False
+    if isinstance(v, (int, float)):
+        return math.isfinite(v)
+    return False
+
+
 def calculate_percentile_rank(value, all_values):
     """
     퍼센타일 순위 계산 (값이 클수록 순위가 높음, top X% 반환)
     예: 10개 중 1등이면 10% (top 10%), 10등이면 100% (top 100%)
     """
-    if value is None:
+    if not _finite(value):
         return None
-    sorted_desc = sorted([v for v in all_values if v is not None], reverse=True)
+    sorted_desc = sorted([v for v in all_values if _finite(v)], reverse=True)
     if len(sorted_desc) == 0:
         return None
     try:

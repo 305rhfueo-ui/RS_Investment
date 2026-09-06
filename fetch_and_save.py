@@ -156,11 +156,15 @@ def main():
     # ===== 퍼센타일 순위 계산 =====
     print(f"[{time.strftime('%X')}] RS 퍼센타일 순위 계산 중...")
     
-    # 개별 RS(6MO) 퍼센타일
-    rs_6mo_values = [r['RS_6mo'] for r in results if r.get('RS_6mo') is not None]
+    # 개별 RS 퍼센타일 — 6개월(기존 RS_Rank_Pct) + 1개월·3개월 추가 (2026-09-07)
+    # ⚠️ `is not None` 은 NaN 을 통과시켜 sorted() 를 망가뜨린다 → utils._finite 로 거른다
+    rs_6mo_values = [r['RS_6mo'] for r in results if utils._finite(r.get('RS_6mo'))]
+    rs_3mo_values = [r['RS_3mo'] for r in results if utils._finite(r.get('RS_3mo'))]
+    rs_1mo_values = [r['RS_1mo'] for r in results if utils._finite(r.get('RS_1mo'))]
     for item in results:
-        rs_val = item.get('RS_6mo')
-        item['RS_Rank_Pct'] = utils.calculate_percentile_rank(rs_val, rs_6mo_values)
+        item['RS_Rank_Pct'] = utils.calculate_percentile_rank(item.get('RS_6mo'), rs_6mo_values)
+        item['RS_3mo_Rank_Pct'] = utils.calculate_percentile_rank(item.get('RS_3mo'), rs_3mo_values)
+        item['RS_1mo_Rank_Pct'] = utils.calculate_percentile_rank(item.get('RS_1mo'), rs_1mo_values)
     
     # WRS 계산을 위한 Sector/Industry 그룹핑
     from collections import defaultdict
@@ -170,7 +174,7 @@ def main():
     for item in results:
         if (item.get('Sector') and item['Sector'] not in ['N/A', 'nan'] and
             item.get('Industry') and item['Industry'] not in ['N/A', 'nan'] and
-            item.get('RS_6mo') is not None):
+            utils._finite(item.get('RS_6mo'))):   # NaN 행이 그룹에 섞이면 weighted_sum 이 NaN 이 된다
             key = f"{item['Sector']}|{item['Industry']}"
             mc = parse_market_cap(item.get('Market Cap'))
             sector_groups[key].append({
@@ -238,42 +242,107 @@ def main():
         "wrs_data": wrs_data,
         "data": results
     }
-    
+
+    # ===== 수집 품질 평가 + 발행 (결측률 초과면 보류) =====
+    quality = assess_quality(results, duration)
+    output_data["data_quality"] = quality
+    degraded = publish(output_data, quality)
+
+    if not degraded:
+        # [Added] Google Sheets Accumulation Update
+        print(f"[{time.strftime('%X')}] 구글 시트 누적 데이터 업데이트 중...")
+        try:
+            # results 리스트에는 utils.py에서 추가한 'CY_Est' 등의 Raw Data가 포함되어 있음
+            gsheet_handler.update_sheet(results)
+        except Exception as e:
+            print(f"⚠️ 구글 시트 업데이트 실패: {e}")
+    else:
+        print(f"[{time.strftime('%X')}] ⚠️ 발행 보류일 — 구글 시트 누적 업데이트를 건너뜁니다")
+
+    # ===== GitHub 자동 업로드 =====
+    utils.git_push()
+
+    print(f"[{time.strftime('%X')}] 모든 작업 완료!")
+
+
+# ===== 수집 품질 =====
+# 2026-09-04 실제 사고: yfinance 부분 실패로 1,412행 중 616행(43.6%)이 RS·50DIV·200DIV 전부 None 인 채
+# 그대로 발행됐다. Above_150_SMA 는 그런 행에서 "X" 로 나와(utils.py `ma150 > 0 and …`) 소비자가
+# "150일선 이탈"로 오독한다. 결측률이 임계를 넘으면 전날 result.json 을 유지하고 부분 수집본은 따로 남긴다.
+NULL_RATE_MAX = 0.15
+PARTIAL_FILE = "static/result_partial.json"
+
+
+def _is_blank_row(r):
+    return not (utils._finite(r.get('RS_6mo')) or utils._finite(r.get('200DIV')) or utils._finite(r.get('50DIV')))
+
+
+def assess_quality(results, duration_s):
+    total = len(results)
+    blank = sum(1 for r in results if _is_blank_row(r))
+    api_called = sum(1 for r in results if r.get('api_called') is True)
+    null_rate = round(blank / total, 4) if total else 1.0
+    return {
+        "total": total,
+        "blank_rows": blank,
+        "null_rate": null_rate,
+        "api_called_count": api_called,
+        "duration_s": round(float(duration_s), 1),
+        "threshold": NULL_RATE_MAX,
+    }
+
+
+def publish(output_data, quality):
+    """
+    정상: result.json 저장 + history 복사 + history_index 갱신 → False 반환
+    보류(결측률 > NULL_RATE_MAX 또는 행 0개): 새 결과는 result_partial.json 에만 쓰고,
+      기존 result.json 은 data 를 그대로 둔 채 degraded 플래그·data_quality 만 덧붙여 재저장.
+      history·history_index 는 건드리지 않는다 → True 반환
+    """
+    degraded = quality["total"] == 0 or quality["null_rate"] > NULL_RATE_MAX
+    if degraded:
+        print(f"⚠️ 수집 품질 미달 — 결측 행 {quality['blank_rows']}/{quality['total']} ({quality['null_rate']*100:.1f}%) > {NULL_RATE_MAX*100:.0f}%. 발행을 보류합니다")
+        with open(PARTIAL_FILE, 'w', encoding='utf-8') as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
+        print(f"  → 부분 수집본은 {PARTIAL_FILE} 에 저장")
+        prev = None
+        if os.path.exists(OUTPUT_FILE):
+            try:
+                with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                    prev = json.load(f)
+            except Exception as e:
+                print(f"  ⚠️ 기존 result.json 을 읽지 못함: {e}")
+        if prev is None:
+            # 되돌릴 이전 데이터가 없으면 부분본이라도 내보내되 degraded 를 명시한다
+            prev = output_data
+        prev["degraded"] = True
+        prev["degraded_at"] = time.strftime("%Y-%m-%d %H:%M:%S UTC")
+        prev["data_quality"] = quality
+        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+            json.dump(prev, f, ensure_ascii=False, indent=2)
+        print(f"  → {OUTPUT_FILE} 은 전날 데이터 유지 (degraded=true). history·history_index 갱신 생략")
+        return True
+
+    output_data["degraded"] = False
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
-        
-    print(f"결과 파일 저장 완료: {OUTPUT_FILE}")
-    
+    print(f"결과 파일 저장 완료: {OUTPUT_FILE} (결측 {quality['blank_rows']}/{quality['total']}, 신규 조회 {quality['api_called_count']})")
+
     # ===== 금일 데이터 히스토리 즉시 저장 =====
     try:
         if not os.path.exists(HISTORY_DIR):
             os.makedirs(HISTORY_DIR)
-        
-        # 날짜 추출 (UTC 기준)
-        today_str = datetime.utcnow().strftime("%Y-%m-%d") # UTC 기준 오늘 날짜
+        today_str = datetime.utcnow().strftime("%Y-%m-%d")  # UTC 기준 오늘 날짜
         history_file = os.path.join(HISTORY_DIR, f"result_{today_str}.json")
-        
         shutil.copy(OUTPUT_FILE, history_file)
         print(f"[{time.strftime('%X')}] 히스토리 즉시 아카이빙 완료: {history_file}")
     except Exception as e:
         print(f"⚠️ 히스토리 저장 실패: {e}")
-    
-    # ===== 히스토리 인덱스 업데이트 =====
+
     print(f"[{time.strftime('%X')}] 히스토리 인덱스 업데이트 중...")
     update_history_index()
+    return False
 
-    # [Added] Google Sheets Accumulation Update
-    print(f"[{time.strftime('%X')}] 구글 시트 누적 데이터 업데이트 중...")
-    try:
-        # results 리스트에는 utils.py에서 추가한 'CY_Est' 등의 Raw Data가 포함되어 있음
-        gsheet_handler.update_sheet(results)
-    except Exception as e:
-        print(f"⚠️ 구글 시트 업데이트 실패: {e}")
-    
-    # ===== GitHub 자동 업로드 =====
-    utils.git_push()
-    
-    print(f"[{time.strftime('%X')}] 모든 작업 완료!")
 
 if __name__ == "__main__":
     main()
