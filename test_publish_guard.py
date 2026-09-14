@@ -50,11 +50,15 @@ ok("결측 6/16 → null_rate 0.375", q_bad["blank_rows"] == 6 and abs(q_bad["nu
 print("\n[3] publish 가드 (임시 디렉터리)")
 tmp = tempfile.mkdtemp()
 try:
-    orig = (fas.OUTPUT_FILE, fas.HISTORY_DIR, fas.HISTORY_INDEX, fas.PARTIAL_FILE)
+    orig = (fas.OUTPUT_FILE, fas.HISTORY_DIR, fas.HISTORY_INDEX, fas.PARTIAL_FILE, fas.SUMMARY_FILE)
     fas.OUTPUT_FILE = os.path.join(tmp, "result.json")
     fas.HISTORY_DIR = os.path.join(tmp, "history")
     fas.HISTORY_INDEX = os.path.join(tmp, "history_index.json")
     fas.PARTIAL_FILE = os.path.join(tmp, "result_partial.json")
+    # SUMMARY_FILE 도 반드시 임시 경로로 돌려야 합니다.
+    # 빠뜨리면 publish 가 실제 static/high_low_summary.json 을
+    # 테스트용 가짜 히스토리로 덮어씁니다.
+    fas.SUMMARY_FILE = os.path.join(tmp, "high_low_summary.json")
 
     prev = {"last_updated": "2026-09-03 23:00:00 UTC", "total_count": 10, "data": rows, "wrs_data": []}
     with open(fas.OUTPUT_FILE, "w", encoding="utf-8") as f:
@@ -77,7 +81,11 @@ try:
     ok("정상 → degraded False, result.json 갱신", degraded2 is False and cur2["last_updated"] == good_out["last_updated"] and cur2.get("degraded") is False)
     ok("history 파일 생성", os.path.isdir(fas.HISTORY_DIR) and len(os.listdir(fas.HISTORY_DIR)) == 1)
     ok("history_index 갱신", os.path.exists(fas.HISTORY_INDEX))
-    fas.OUTPUT_FILE, fas.HISTORY_DIR, fas.HISTORY_INDEX, fas.PARTIAL_FILE = orig
+    ok("신고가/신저가 요약 생성", os.path.exists(fas.SUMMARY_FILE))
+    ok("요약이 실제 static 경로를 건드리지 않는다",
+       os.path.abspath(fas.SUMMARY_FILE).startswith(os.path.abspath(tmp)))
+    (fas.OUTPUT_FILE, fas.HISTORY_DIR, fas.HISTORY_INDEX,
+     fas.PARTIAL_FILE, fas.SUMMARY_FILE) = orig
 finally:
     shutil.rmtree(tmp, ignore_errors=True)
 
