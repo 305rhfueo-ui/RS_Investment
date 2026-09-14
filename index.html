@@ -217,6 +217,79 @@
             background-color: #333;
         }
 
+        /* 헤더 우측 52주 신고가/신저가 요약 패널 */
+        .header-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-main {
+            flex: 1 1 320px;
+            min-width: 0;
+        }
+
+        .hl-panel {
+            flex: 0 0 auto;
+            box-sizing: border-box;
+            max-width: 100%;
+            background: #1b1b1b;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-top: 4px;
+        }
+
+        .hl-panel-title {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 6px;
+            white-space: nowrap;
+        }
+
+        .hl-table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: auto;
+        }
+
+        .hl-table th,
+        .hl-table td {
+            padding: 2px 8px;
+            text-align: right;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .hl-table th {
+            color: #888;
+            font-weight: normal;
+            border-bottom: 1px solid #333;
+            cursor: help;
+        }
+
+        .hl-table td:first-child,
+        .hl-table th:first-child {
+            text-align: left;
+            color: #ccc;
+        }
+
+        .hl-table tbody tr.hl-current td {
+            background: #2a2a2a;
+            font-weight: bold;
+        }
+
+        .hl-high { color: #00e676; }
+        .hl-low  { color: #ff5252; }
+        .hl-na   { color: #666; }
+
+        @media (max-width: 700px) {
+            .hl-panel { width: 100%; }
+            .hl-table { width: 100%; }
+        }
+
         .rs-pos {
             color: #00e676;
         }
@@ -330,12 +403,32 @@
 <body>
 
     <div class="container">
-        <h1 id="page-title" style="margin-bottom:5px;">US Market Multi-Timeframe RS Investment (v1.1)</h1>
+        <div class="header-row">
+            <div class="header-main">
+                <h1 id="page-title" style="margin-bottom:5px;">US Market Multi-Timeframe RS Investment (v1.1)</h1>
 
-        <h2 id="mode-subtitle" style="margin-top:0; margin-bottom:10px; font-size:24px; min-height:30px;"></h2>
+                <h2 id="mode-subtitle" style="margin-top:0; margin-bottom:10px; font-size:24px; min-height:30px;"></h2>
 
-        <p class="subtitle" id="last-updated" style="margin-bottom:15px;">업데이트 확인 중...</p>
-        <p id="history-debug" style="font-size: 12px; color: #ff9800; display: none;"></p>
+                <p class="subtitle" id="last-updated" style="margin-bottom:15px;">업데이트 확인 중...</p>
+                <p id="history-debug" style="font-size: 12px; color: #ff9800; display: none;"></p>
+            </div>
+
+            <!-- 날짜별 52주 신고가 / 신저가 요약 -->
+            <div class="hl-panel" id="hl-panel" style="display:none;">
+                <div class="hl-panel-title">📈 52주 신고가 / 신저가</div>
+                <table class="hl-table">
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th title="그날 52주 신고가를 기록한 종목 수">신고가</th>
+                            <th title="그날 52주 신저가를 기록한 종목 수">신저가</th>
+                            <th title="그날 집계에 포함된 전체 종목 수">전체</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hl-tbody"></tbody>
+                </table>
+            </div>
+        </div>
 
         <!-- 날짜 선택 드롭다운 -->
         <div style="margin-bottom:30px;">
@@ -608,7 +701,7 @@
                 </div>
             </div>
 
-            <table>
+            <table id="main-table">
                 <thead>
                     <tr>
                         <th onclick="sortTable('Ticker')">Ticker ⬍</th>
@@ -1699,7 +1792,57 @@ indPopup.style.display = 'none';
 
             loadData();
             loadHistoryIndex();
+            loadHighLowSummary();
         };
+
+        // 날짜별 52주 신고가/신저가 요약 패널
+        // static/high_low_summary.json 은 날짜당 숫자 세 개만 담은 작은 파일이라
+        // 히스토리 스냅샷을 전부 받지 않고도 날짜별 집계를 보여줄 수 있습니다.
+        const HL_PANEL_ROWS = 10;
+        let hlSummaryDates = [];
+
+        async function loadHighLowSummary() {
+            try {
+                const res = await fetch('./static/high_low_summary.json?t=' + new Date().getTime());
+                if (!res.ok) return;
+
+                const json = await res.json();
+                hlSummaryDates = (json.dates || []).filter(d => d.filled);
+                renderHighLowPanel();
+            } catch (e) {
+                console.log("High/Low summary load failed:", e);
+            }
+        }
+
+        // currentDate 가 주어지면 그 날짜가 패널에 반드시 포함되고 강조됩니다.
+        function renderHighLowPanel(currentDate = null) {
+            const panel = document.getElementById('hl-panel');
+            const tbody = document.getElementById('hl-tbody');
+            if (!panel || !tbody || hlSummaryDates.length === 0) return;
+
+            // 기본은 최신 10일. 과거 날짜를 보고 있으면 그 날짜부터 10일.
+            // 가장 오래된 날짜를 고르면 남은 줄이 모자라므로 끝에서 10줄로 맞춥니다.
+            let start = 0;
+            if (currentDate) {
+                const idx = hlSummaryDates.findIndex(d => d.date === currentDate);
+                if (idx > 0) {
+                    start = Math.min(idx, Math.max(0, hlSummaryDates.length - HL_PANEL_ROWS));
+                }
+            }
+            const rows = hlSummaryDates.slice(start, start + HL_PANEL_ROWS);
+
+            tbody.innerHTML = rows.map(d => {
+                const cls = d.date === currentDate ? ' class="hl-current"' : '';
+                return `<tr${cls}>
+                    <td>${d.date.slice(5)}</td>
+                    <td class="hl-high">${d.highs}</td>
+                    <td class="hl-low">${d.lows}</td>
+                    <td>${d.total}</td>
+                </tr>`;
+            }).join('');
+
+            panel.style.display = '';
+        }
 
         // Load History Index and populate dropdown
         async function loadHistoryIndex() {
@@ -1721,6 +1864,9 @@ indPopup.style.display = 'none';
                 // Add change listener
                 selector.addEventListener('change', function () {
                     loadData(this.value);
+                    // 파일명(result_2026-09-14.json)에서 날짜를 뽑아 패널을 그 날짜에 맞춥니다.
+                    const m = this.value.match(/result_(\d{4}-\d{2}-\d{2})\.json/);
+                    renderHighLowPanel(m ? m[1] : null);
                 });
 
             } catch (e) {
@@ -2527,7 +2673,8 @@ indPopup.style.display = 'none';
             }
 
             // 3. Table Layout Adjustment (Compact center for WRS)
-            const tableElement = document.querySelector('table');
+            // 헤더 요약 패널의 표가 아니라 메인 테이블의 폭만 조정해야 합니다.
+            const tableElement = document.querySelector('#main-table');
             if (tableElement) {
                 if (appState.mode === 'WRS') {
                     tableElement.style.width = 'auto'; // Shrink to fit
@@ -3299,7 +3446,9 @@ indPopup.style.display = 'none';
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
 
-            const thead = document.querySelector('table thead tr');
+            // 헤더 요약 패널에도 table 이 있으므로 메인 테이블을 id 로 특정합니다.
+            // (예전처럼 'table thead tr' 로 잡으면 문서의 첫 번째 표를 덮어씁니다.)
+            const thead = document.querySelector('#main-table thead tr');
 
             if (appState.mode === 'WRS_RANK') {
                 thead.innerHTML = `

@@ -9,6 +9,7 @@ socket.setdefaulttimeout(15)  # 방지: yfinance 네트워크 무한 대기 (Han
 # utils에 있는 강력한 병렬 처리 함수 가져오기
 import utils
 import gsheet_handler
+import high_low_summary
 
 # 설정
 # 기존 엑셀 대신 구글 시트 사용
@@ -18,6 +19,7 @@ GOOGLE_SHEET_URL = f"https://docs.google.com/spreadsheets/d/{GOOGLE_SHEET_ID}/ex
 OUTPUT_FILE = "static/result.json"
 HISTORY_DIR = "static/history"
 HISTORY_INDEX = "static/history_index.json"
+SUMMARY_FILE = "static/high_low_summary.json"
 
 def parse_market_cap(mc_str):
     if not mc_str or mc_str == 'N/A':
@@ -341,6 +343,14 @@ def publish(output_data, quality):
 
     print(f"[{time.strftime('%X')}] 히스토리 인덱스 업데이트 중...")
     update_history_index()
+
+    # 헤더의 날짜별 신고가/신저가 패널이 읽는 요약 파일 갱신.
+    # 실패해도 본 데이터 발행에는 영향이 없어야 하므로 예외를 삼킵니다.
+    try:
+        high_low_summary.build_summary(HISTORY_DIR, SUMMARY_FILE)
+    except Exception as e:
+        print(f"⚠️ 신고가/신저가 요약 갱신 실패: {e}")
+
     return False
 
 
