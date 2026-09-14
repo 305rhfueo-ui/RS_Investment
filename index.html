@@ -276,12 +276,73 @@
             line-height: 1.1;
         }
 
+        .hl-stat-value.hl-sm {
+            font-size: 16px;
+        }
+
+        .hl-sub {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #333;
+        }
+
+        .hl-sub-title {
+            font-size: 11px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 6px;
+            white-space: nowrap;
+        }
+
+        .hl-sub-date {
+            color: #666;
+        }
+
+        .hl-link-row {
+            text-align: center;
+        }
+
+        .hl-market-link {
+            color: #00bcd4;
+            font-size: 13px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .hl-market-link:hover {
+            text-decoration: underline;
+        }
+
         .hl-high { color: #00e676; }
         .hl-low  { color: #ff5252; }
         .hl-na   { color: #666; }
 
+        /* Market 팝업 차트 */
+        .mc-section {
+            margin-bottom: 28px;
+        }
+
+        .mc-section h3 {
+            font-size: 16px;
+            color: #00bcd4;
+            margin: 0 0 4px 0;
+        }
+
+        .mc-section p {
+            font-size: 12px;
+            color: #999;
+            margin: 0 0 10px 0;
+            line-height: 1.5;
+        }
+
+        .mc-canvas-wrap {
+            position: relative;
+            height: 300px;
+        }
+
         @media (max-width: 700px) {
             .hl-panel { width: 100%; }
+            .mc-canvas-wrap { height: 240px; }
         }
 
         .rs-pos {
@@ -419,10 +480,39 @@
                         <span class="hl-stat-label">52주 신저가</span>
                         <span class="hl-stat-value hl-low" id="hl-lows">-</span>
                     </div>
+                    <div class="hl-stat" title="52주 신고가 개수 빼기 신저가 개수. 양수면 신고가 종목이 더 많아 시장 폭이 넓다는 뜻입니다.">
+                        <span class="hl-stat-label">NH - NL</span>
+                        <span class="hl-stat-value" id="hl-diff">-</span>
+                    </div>
                     <div class="hl-stat" title="이 날짜 집계에 포함된 전체 종목 수">
                         <span class="hl-stat-label">전체 종목</span>
                         <span class="hl-stat-value" id="hl-total">-</span>
                     </div>
+                </div>
+
+                <!-- AAII 개인투자자 심리 설문 (주간) -->
+                <div class="hl-sub" id="hl-sent-box">
+                    <div class="hl-sub-title">
+                        AAII Sentiment <span id="hl-sent-date" class="hl-sub-date"></span>
+                    </div>
+                    <div class="hl-stats">
+                        <div class="hl-stat" title="향후 6개월 주가가 오를 것으로 본 개인투자자 비율">
+                            <span class="hl-stat-label">Bullish</span>
+                            <span class="hl-stat-value hl-high hl-sm" id="hl-bull">-</span>
+                        </div>
+                        <div class="hl-stat" title="향후 6개월 주가가 내릴 것으로 본 개인투자자 비율">
+                            <span class="hl-stat-label">Bearish</span>
+                            <span class="hl-stat-value hl-low hl-sm" id="hl-bear">-</span>
+                        </div>
+                        <div class="hl-stat" title="Bullish 빼기 Bearish. 음수가 깊을수록 개인 심리가 위축된 상태입니다.">
+                            <span class="hl-stat-label">Bull - Bear</span>
+                            <span class="hl-stat-value hl-sm" id="hl-spread">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hl-sub hl-link-row">
+                    <a href="#" class="hl-market-link" onclick="openMarketChartPopup(event)">📊 Market</a>
                 </div>
             </div>
         </div>
@@ -719,6 +809,37 @@
     </div>
 
     <!-- [Added] Position Sizing Calculator Modal -->
+    <!-- Market 차트 팝업 (QQQ / NH-NL 이격 / 센티먼트) -->
+    <div id="market-chart-popup" class="modal">
+        <div class="modal-content" style="max-width: 900px; padding: 25px 30px 30px; border-radius: 10px;">
+            <span class="close-btn" onclick="closeMarketChartPopup()">&times;</span>
+            <h2 style="margin-top:0; color:#00bcd4; border-bottom:2px solid #00bcd4; padding-bottom:10px;">
+                📊 Market
+            </h2>
+
+            <div class="mc-section">
+                <h3>1. QQQ 차트</h3>
+                <p>최근 3개월 일봉과 10일·20일 이동평균선입니다. 두 이동평균선의 기울기와 배열로 추세를 확인합니다.</p>
+                <div class="mc-canvas-wrap"><canvas id="mc-qqq"></canvas></div>
+            </div>
+
+            <div class="mc-section">
+                <h3>2. NH - NL 와 QQQ 이격</h3>
+                <p>최근 2개월입니다. 왼쪽 축은 QQQ 종가, 오른쪽 축은 52주 신고가 빼기 신저가 값입니다.
+                   QQQ는 오르는데 NH-NL이 내려가면 지수는 버티지만 시장 폭이 좁아지는 상태로, 상승의 힘이 약해지고 있다는 신호입니다.
+                   반대로 QQQ는 내리는데 NH-NL이 올라가면 하락이 잦아들고 있다는 뜻입니다.</p>
+                <div class="mc-canvas-wrap"><canvas id="mc-diverge"></canvas></div>
+            </div>
+
+            <div class="mc-section" style="margin-bottom:0;">
+                <h3>3. Sentiment Survey</h3>
+                <p>최근 2개월 AAII 개인투자자 심리 설문의 Bullish 빼기 Bearish 추이입니다.
+                   과도하게 낮아진 구간은 비관이 극에 달한 지점으로, 흔히 반대 지표로 읽습니다.</p>
+                <div class="mc-canvas-wrap"><canvas id="mc-sentiment"></canvas></div>
+            </div>
+        </div>
+    </div>
+
     <div id="calculator-popup" class="modal">
         <div class="modal-content" style="max-width: 500px; padding-top: 10px;">
             <span class="close-btn" onclick="closeCalculatorPopup()">&times;</span>
@@ -1561,6 +1682,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script>
         // --- Eungbong Ajussi Popup Functions ---
         // --- Position Sizing Calculator ---
@@ -1715,8 +1837,13 @@
             const oldStrategyModal = document.getElementById('old-strategy-popup');
             const perfectStormModal = document.getElementById('perfect-storm-popup');
 
+            const marketChartModal = document.getElementById('market-chart-popup');
+
             if (event.target == marketModal) {
                 marketModal.style.display = "none";
+            }
+            if (event.target == marketChartModal) {
+                marketChartModal.style.display = "none";
             }
             if (event.target == investModal) {
                 investModal.style.display = "none";
@@ -1790,7 +1917,304 @@ indPopup.style.display = 'none';
             loadData();
             loadHistoryIndex();
             loadHighLowSummary();
+            loadSentiment();
         };
+
+        // AAII 개인투자자 심리 설문(주간). 오래된 날짜 -> 최신 순서입니다.
+        let sentimentData = [];
+
+        async function loadSentiment() {
+            try {
+                const res = await fetch('./static/sentiment.json?t=' + new Date().getTime());
+                if (!res.ok) return;
+                const json = await res.json();
+                sentimentData = json.data || [];
+                renderSentimentBox();
+            } catch (e) {
+                console.log("Sentiment load failed:", e);
+            }
+        }
+
+        // 설문은 주 1회라 날짜가 정확히 맞지 않습니다.
+        // 선택한 날짜 이하에서 가장 가까운 설문을 씁니다.
+        function sentimentAsOf(dateStr) {
+            if (sentimentData.length === 0) return null;
+            if (!dateStr) return sentimentData[sentimentData.length - 1];
+            let found = null;
+            for (const e of sentimentData) {
+                if (e.date <= dateStr) found = e; else break;
+            }
+            return found;
+        }
+
+        function renderSentimentBox(currentDate = null) {
+            const box = document.getElementById('hl-sent-box');
+            if (!box || sentimentData.length === 0) return;
+
+            const e = sentimentAsOf(currentDate);
+            const dateEl = document.getElementById('hl-sent-date');
+            const bullEl = document.getElementById('hl-bull');
+            const bearEl = document.getElementById('hl-bear');
+            const spreadEl = document.getElementById('hl-spread');
+
+            if (!e) {
+                dateEl.innerText = '';
+                bullEl.innerText = bearEl.innerText = spreadEl.innerText = '-';
+                spreadEl.className = 'hl-stat-value hl-sm hl-na';
+                return;
+            }
+
+            dateEl.innerText = '(' + e.date.slice(5) + ')';
+            bullEl.innerText = e.bullish.toFixed(1) + '%';
+            bearEl.innerText = e.bearish.toFixed(1) + '%';
+            spreadEl.innerText = (e.spread > 0 ? '+' : '') + e.spread.toFixed(1) + '%p';
+            spreadEl.className = 'hl-stat-value hl-sm ' + (e.spread >= 0 ? 'hl-high' : 'hl-low');
+        }
+
+        // ===== Market 차트 팝업 =====
+        // 캔들차트 플러그인 없이 Chart.js 막대 두 개로 일봉을 그립니다.
+        // 얇은 막대는 고가~저가(꼬리), 굵은 막대는 시가~종가(몸통)입니다.
+        let qqqChartData = null;
+        const mcCharts = {};
+
+        const MC_UP = '#00e676';
+        const MC_DOWN = '#ff5252';
+        const MC_GRID = 'rgba(255,255,255,0.07)';
+        const MC_TICK = '#999';
+
+        async function loadQqqChartData() {
+            if (qqqChartData) return qqqChartData;
+            const res = await fetch('./static/qqq_chart.json?t=' + new Date().getTime());
+            if (!res.ok) throw new Error('qqq_chart.json ' + res.status);
+            qqqChartData = (await res.json()).data || [];
+            return qqqChartData;
+        }
+
+        function mcBaseOptions(extra) {
+            return Object.assign({
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { labels: { color: '#ccc', boxWidth: 12, font: { size: 11 } } },
+                    tooltip: { backgroundColor: 'rgba(0,0,0,0.85)' }
+                }
+            }, extra || {});
+        }
+
+        function mcTimeScale(maxTicks) {
+            return {
+                ticks: { color: MC_TICK, maxTicksLimit: maxTicks || 10, font: { size: 10 } },
+                grid: { color: MC_GRID }
+            };
+        }
+
+        function drawQqqCandleChart(rows) {
+            const ctx = document.getElementById('mc-qqq');
+            if (mcCharts.qqq) mcCharts.qqq.destroy();
+
+            const labels = rows.map(r => r.date.slice(5));
+            const colors = rows.map(r => (r.c >= r.o ? MC_UP : MC_DOWN));
+
+            mcCharts.qqq = new Chart(ctx, {
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            type: 'bar', label: '고저',
+                            data: rows.map(r => [r.l, r.h]),
+                            backgroundColor: colors, barPercentage: 0.12,
+                            categoryPercentage: 0.9, order: 3
+                        },
+                        {
+                            type: 'bar', label: 'QQQ 일봉',
+                            data: rows.map(r => [Math.min(r.o, r.c), Math.max(r.o, r.c)]),
+                            backgroundColor: colors, barPercentage: 0.6,
+                            categoryPercentage: 0.9, order: 2
+                        },
+                        {
+                            type: 'line', label: '10일선',
+                            data: rows.map(r => r.ma10),
+                            borderColor: '#ffb74d', borderWidth: 1.6,
+                            pointRadius: 0, tension: 0.25, order: 1
+                        },
+                        {
+                            type: 'line', label: '20일선',
+                            data: rows.map(r => r.ma20),
+                            borderColor: '#4fc3f7', borderWidth: 1.6,
+                            pointRadius: 0, tension: 0.25, order: 0
+                        }
+                    ]
+                },
+                options: mcBaseOptions({
+                    scales: {
+                        x: mcTimeScale(12),
+                        y: {
+                            position: 'left',
+                            // 막대 차트 기본값(0부터)을 쓰면 주가 캔들이 위쪽에 눌려 보입니다.
+                            beginAtZero: false,
+                            ticks: { color: MC_TICK, font: { size: 10 } },
+                            grid: { color: MC_GRID }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ccc', boxWidth: 12, font: { size: 11 },
+                                filter: item => item.text !== '고저'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.85)',
+                            callbacks: {
+                                label: c => {
+                                    const r = rows[c.dataIndex];
+                                    if (c.dataset.label === 'QQQ 일봉') {
+                                        return `시 ${r.o} / 고 ${r.h} / 저 ${r.l} / 종 ${r.c}`;
+                                    }
+                                    if (c.dataset.label === '고저') return null;
+                                    return `${c.dataset.label} ${c.parsed.y}`;
+                                }
+                            }
+                        }
+                    }
+                })
+            });
+        }
+
+        function drawDivergenceChart(qqqRows, hlRows) {
+            const ctx = document.getElementById('mc-diverge');
+            if (mcCharts.diverge) mcCharts.diverge.destroy();
+
+            // x축은 QQQ 거래일로 고정합니다. 히스토리 스냅샷은 주말에도 생성되는데,
+            // 그 날짜까지 축에 넣으면 QQQ 선이 끊기고 NH-NL 은 금요일 값이 반복됩니다.
+            // 각 거래일에는 그 날짜 이하의 가장 최근 스냅샷 값을 씁니다.
+            const dates = qqqRows.map(r => r.date);
+            const hlSorted = hlRows.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+
+            let cursor = 0, lastDiff = null;
+            const diffSeries = dates.map(d => {
+                while (cursor < hlSorted.length && hlSorted[cursor].date <= d) {
+                    lastDiff = hlSorted[cursor].highs - hlSorted[cursor].lows;
+                    cursor++;
+                }
+                return lastDiff;
+            });
+
+            mcCharts.diverge = new Chart(ctx, {
+                data: {
+                    labels: dates.map(d => d.slice(5)),
+                    datasets: [
+                        {
+                            type: 'line', label: 'QQQ 종가',
+                            data: qqqRows.map(r => r.c),
+                            borderColor: '#4fc3f7', borderWidth: 2, pointRadius: 0,
+                            tension: 0.25, spanGaps: true, yAxisID: 'yQqq'
+                        },
+                        {
+                            type: 'line', label: 'NH - NL',
+                            data: diffSeries,
+                            borderColor: '#ffb74d', borderWidth: 2, pointRadius: 0,
+                            tension: 0.25, spanGaps: true, yAxisID: 'yDiff'
+                        }
+                    ]
+                },
+                options: mcBaseOptions({
+                    scales: {
+                        x: mcTimeScale(10),
+                        yQqq: {
+                            position: 'left',
+                            title: { display: true, text: 'QQQ', color: '#4fc3f7', font: { size: 11 } },
+                            ticks: { color: '#4fc3f7', font: { size: 10 } },
+                            grid: { color: MC_GRID }
+                        },
+                        yDiff: {
+                            position: 'right',
+                            title: { display: true, text: 'NH - NL', color: '#ffb74d', font: { size: 11 } },
+                            ticks: { color: '#ffb74d', font: { size: 10 } },
+                            grid: { drawOnChartArea: false }
+                        }
+                    }
+                })
+            });
+        }
+
+        function drawSentimentChart(rows) {
+            const ctx = document.getElementById('mc-sentiment');
+            if (mcCharts.sentiment) mcCharts.sentiment.destroy();
+
+            mcCharts.sentiment = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: rows.map(r => r.date.slice(5)),
+                    datasets: [{
+                        label: 'Bull - Bear (%p)',
+                        data: rows.map(r => r.spread),
+                        backgroundColor: rows.map(r => r.spread >= 0 ? MC_UP : MC_DOWN)
+                    }]
+                },
+                options: mcBaseOptions({
+                    scales: {
+                        x: mcTimeScale(12),
+                        y: {
+                            ticks: { color: MC_TICK, font: { size: 10 } },
+                            grid: { color: MC_GRID }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#ccc', boxWidth: 12, font: { size: 11 } } },
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.85)',
+                            callbacks: {
+                                label: c => {
+                                    const r = rows[c.dataIndex];
+                                    return `Bull ${r.bullish}% / Bear ${r.bearish}% / 차 ${r.spread}%p`;
+                                }
+                            }
+                        }
+                    }
+                })
+            });
+        }
+
+        // 최근 n개월 구간의 시작 날짜(YYYY-MM-DD). 기준은 데이터의 마지막 날짜입니다.
+        function monthsBefore(lastDate, months) {
+            const d = new Date(lastDate + 'T00:00:00');
+            d.setMonth(d.getMonth() - months);
+            return d.toISOString().slice(0, 10);
+        }
+
+        async function openMarketChartPopup(ev) {
+            if (ev) ev.preventDefault();
+            const modal = document.getElementById('market-chart-popup');
+            modal.style.display = 'block';
+
+            try {
+                const qqq = await loadQqqChartData();
+                if (qqq.length === 0) return;
+
+                // 1. QQQ 일봉 + 이동평균 (3개월)
+                const last = qqq[qqq.length - 1].date;
+                const from3m = monthsBefore(last, 3);
+                drawQqqCandleChart(qqq.filter(r => r.date >= from3m));
+
+                // 2. NH-NL 이격 (2개월)
+                const from2m = monthsBefore(last, 2);
+                const hl = hlSummaryDates
+                    .filter(d => d.filled && d.date >= from2m)
+                    .slice().sort((a, b) => a.date < b.date ? -1 : 1);
+                drawDivergenceChart(qqq.filter(r => r.date >= from2m), hl);
+
+                // 3. 센티먼트 (2개월)
+                drawSentimentChart(sentimentData.filter(r => r.date >= from2m));
+            } catch (e) {
+                console.log("Market chart load failed:", e);
+            }
+        }
+
+        function closeMarketChartPopup() {
+            document.getElementById('market-chart-popup').style.display = 'none';
+        }
 
         // 선택한 날짜의 52주 신고가/신저가/전체 종목수 패널.
         // static/high_low_summary.json 은 날짜당 숫자 세 개만 담은 작은 파일이라
@@ -1822,11 +2246,12 @@ indPopup.style.display = 'none';
             const dateEl = document.getElementById('hl-date');
             const highsEl = document.getElementById('hl-highs');
             const lowsEl = document.getElementById('hl-lows');
+            const diffEl = document.getElementById('hl-diff');
             const totalEl = document.getElementById('hl-total');
 
             if (!entry) {
                 dateEl.innerText = currentDate || '-';
-                highsEl.innerText = lowsEl.innerText = totalEl.innerText = '-';
+                highsEl.innerText = lowsEl.innerText = diffEl.innerText = totalEl.innerText = '-';
                 panel.style.display = '';
                 return;
             }
@@ -1840,6 +2265,15 @@ indPopup.style.display = 'none';
             lowsEl.innerText = entry.filled ? entry.lows.toLocaleString() : '-';
             highsEl.className = 'hl-stat-value ' + (entry.filled ? 'hl-high' : 'hl-na');
             lowsEl.className = 'hl-stat-value ' + (entry.filled ? 'hl-low' : 'hl-na');
+
+            if (entry.filled) {
+                const diff = entry.highs - entry.lows;
+                diffEl.innerText = (diff > 0 ? '+' : '') + diff.toLocaleString();
+                diffEl.className = 'hl-stat-value ' + (diff >= 0 ? 'hl-high' : 'hl-low');
+            } else {
+                diffEl.innerText = '-';
+                diffEl.className = 'hl-stat-value hl-na';
+            }
 
             panel.style.display = '';
         }
@@ -1867,6 +2301,7 @@ indPopup.style.display = 'none';
                     // 파일명(result_2026-09-14.json)에서 날짜를 뽑아 패널을 그 날짜에 맞춥니다.
                     const m = this.value.match(/result_(\d{4}-\d{2}-\d{2})\.json/);
                     renderHighLowPanel(m ? m[1] : null);
+                    renderSentimentBox(m ? m[1] : null);
                 });
 
             } catch (e) {

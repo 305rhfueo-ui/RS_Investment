@@ -10,6 +10,7 @@ socket.setdefaulttimeout(15)  # 방지: yfinance 네트워크 무한 대기 (Han
 import utils
 import gsheet_handler
 import high_low_summary
+import market_panel_data
 
 # 설정
 # 기존 엑셀 대신 구글 시트 사용
@@ -20,6 +21,8 @@ OUTPUT_FILE = "static/result.json"
 HISTORY_DIR = "static/history"
 HISTORY_INDEX = "static/history_index.json"
 SUMMARY_FILE = "static/high_low_summary.json"
+SENTIMENT_FILE = "static/sentiment.json"
+QQQ_CHART_FILE = "static/qqq_chart.json"
 
 def parse_market_cap(mc_str):
     if not mc_str or mc_str == 'N/A':
@@ -350,6 +353,13 @@ def publish(output_data, quality):
         high_low_summary.build_summary(HISTORY_DIR, SUMMARY_FILE)
     except Exception as e:
         print(f"⚠️ 신고가/신저가 요약 갱신 실패: {e}")
+
+    # Market 팝업용 AAII 센티먼트 / QQQ 차트 데이터.
+    # 외부 사이트에 의존하므로 실패해도 발행을 막지 않습니다(기존 파일 유지).
+    try:
+        market_panel_data.build_all(SENTIMENT_FILE, QQQ_CHART_FILE)
+    except Exception as e:
+        print(f"⚠️ 마켓 패널 데이터 갱신 실패: {e}")
 
     return False
 
