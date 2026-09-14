@@ -833,7 +833,8 @@
 
             <div class="mc-section" style="margin-bottom:0;">
                 <h3>3. Sentiment Survey</h3>
-                <p>최근 2개월 AAII 개인투자자 심리 설문의 Bullish 빼기 Bearish 추이입니다.
+                <p>7월 1일 이후 AAII 개인투자자 심리 설문의 Bullish 빼기 Bearish 추이입니다.
+                   설문이 주 1회 발표라 막대 하나가 한 주입니다.
                    과도하게 낮아진 구간은 비관이 극에 달한 지점으로, 흔히 반대 지표로 읽습니다.</p>
                 <div class="mc-canvas-wrap"><canvas id="mc-sentiment"></canvas></div>
             </div>
@@ -2205,8 +2206,9 @@ indPopup.style.display = 'none';
                     .slice().sort((a, b) => a.date < b.date ? -1 : 1);
                 drawDivergenceChart(qqq.filter(r => r.date >= from2m), hl);
 
-                // 3. 센티먼트 (2개월)
-                drawSentimentChart(sentimentData.filter(r => r.date >= from2m));
+                // 3. 센티먼트 — 확보한 전 구간(2026-07-01 이후).
+                // 설문이 주 1회라 2개월로 자르면 막대가 9개뿐이라 추세가 잘 안 보입니다.
+                drawSentimentChart(sentimentData);
             } catch (e) {
                 console.log("Market chart load failed:", e);
             }
