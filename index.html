@@ -242,43 +242,38 @@
             margin-top: 4px;
         }
 
-        .hl-panel-title {
+        .hl-panel-date {
             font-size: 12px;
-            color: #aaa;
-            margin-bottom: 6px;
-            white-space: nowrap;
-        }
-
-        .hl-table {
-            border-collapse: collapse;
-            font-size: 12px;
-            width: auto;
-        }
-
-        .hl-table th,
-        .hl-table td {
-            padding: 2px 8px;
-            text-align: right;
-            white-space: nowrap;
-            border: none;
-        }
-
-        .hl-table th {
             color: #888;
-            font-weight: normal;
-            border-bottom: 1px solid #333;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .hl-stats {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+
+        .hl-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
             cursor: help;
+            white-space: nowrap;
         }
 
-        .hl-table td:first-child,
-        .hl-table th:first-child {
-            text-align: left;
-            color: #ccc;
+        .hl-stat-label {
+            font-size: 11px;
+            color: #888;
         }
 
-        .hl-table tbody tr.hl-current td {
-            background: #2a2a2a;
+        .hl-stat-value {
+            font-size: 20px;
             font-weight: bold;
+            line-height: 1.1;
         }
 
         .hl-high { color: #00e676; }
@@ -287,7 +282,6 @@
 
         @media (max-width: 700px) {
             .hl-panel { width: 100%; }
-            .hl-table { width: 100%; }
         }
 
         .rs-pos {
@@ -413,20 +407,23 @@
                 <p id="history-debug" style="font-size: 12px; color: #ff9800; display: none;"></p>
             </div>
 
-            <!-- 날짜별 52주 신고가 / 신저가 요약 -->
+            <!-- 선택한 날짜의 52주 신고가 / 신저가 / 전체 종목수 -->
             <div class="hl-panel" id="hl-panel" style="display:none;">
-                <div class="hl-panel-title">📈 52주 신고가 / 신저가</div>
-                <table class="hl-table">
-                    <thead>
-                        <tr>
-                            <th>날짜</th>
-                            <th title="그날 52주 신고가를 기록한 종목 수">신고가</th>
-                            <th title="그날 52주 신저가를 기록한 종목 수">신저가</th>
-                            <th title="그날 집계에 포함된 전체 종목 수">전체</th>
-                        </tr>
-                    </thead>
-                    <tbody id="hl-tbody"></tbody>
-                </table>
+                <div class="hl-panel-date" id="hl-date"></div>
+                <div class="hl-stats">
+                    <div class="hl-stat" title="이 날짜에 52주 신고가를 기록한 종목 수">
+                        <span class="hl-stat-label">52주 신고가</span>
+                        <span class="hl-stat-value hl-high" id="hl-highs">-</span>
+                    </div>
+                    <div class="hl-stat" title="이 날짜에 52주 신저가를 기록한 종목 수">
+                        <span class="hl-stat-label">52주 신저가</span>
+                        <span class="hl-stat-value hl-low" id="hl-lows">-</span>
+                    </div>
+                    <div class="hl-stat" title="이 날짜 집계에 포함된 전체 종목 수">
+                        <span class="hl-stat-label">전체 종목</span>
+                        <span class="hl-stat-value" id="hl-total">-</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1795,10 +1792,9 @@ indPopup.style.display = 'none';
             loadHighLowSummary();
         };
 
-        // 날짜별 52주 신고가/신저가 요약 패널
+        // 선택한 날짜의 52주 신고가/신저가/전체 종목수 패널.
         // static/high_low_summary.json 은 날짜당 숫자 세 개만 담은 작은 파일이라
-        // 히스토리 스냅샷을 전부 받지 않고도 날짜별 집계를 보여줄 수 있습니다.
-        const HL_PANEL_ROWS = 10;
+        // 2MB 짜리 히스토리 스냅샷을 받지 않고도 집계를 바로 보여줄 수 있습니다.
         let hlSummaryDates = [];
 
         async function loadHighLowSummary() {
@@ -1807,39 +1803,43 @@ indPopup.style.display = 'none';
                 if (!res.ok) return;
 
                 const json = await res.json();
-                hlSummaryDates = (json.dates || []).filter(d => d.filled);
+                hlSummaryDates = json.dates || [];   // 최신순
                 renderHighLowPanel();
             } catch (e) {
                 console.log("High/Low summary load failed:", e);
             }
         }
 
-        // currentDate 가 주어지면 그 날짜가 패널에 반드시 포함되고 강조됩니다.
+        // currentDate 가 없으면(최초 로드) 가장 최근 날짜를 보여줍니다.
         function renderHighLowPanel(currentDate = null) {
             const panel = document.getElementById('hl-panel');
-            const tbody = document.getElementById('hl-tbody');
-            if (!panel || !tbody || hlSummaryDates.length === 0) return;
+            if (!panel || hlSummaryDates.length === 0) return;
 
-            // 기본은 최신 10일. 과거 날짜를 보고 있으면 그 날짜부터 10일.
-            // 가장 오래된 날짜를 고르면 남은 줄이 모자라므로 끝에서 10줄로 맞춥니다.
-            let start = 0;
-            if (currentDate) {
-                const idx = hlSummaryDates.findIndex(d => d.date === currentDate);
-                if (idx > 0) {
-                    start = Math.min(idx, Math.max(0, hlSummaryDates.length - HL_PANEL_ROWS));
-                }
+            const entry = currentDate
+                ? hlSummaryDates.find(d => d.date === currentDate)
+                : hlSummaryDates[0];
+
+            const dateEl = document.getElementById('hl-date');
+            const highsEl = document.getElementById('hl-highs');
+            const lowsEl = document.getElementById('hl-lows');
+            const totalEl = document.getElementById('hl-total');
+
+            if (!entry) {
+                dateEl.innerText = currentDate || '-';
+                highsEl.innerText = lowsEl.innerText = totalEl.innerText = '-';
+                panel.style.display = '';
+                return;
             }
-            const rows = hlSummaryDates.slice(start, start + HL_PANEL_ROWS);
 
-            tbody.innerHTML = rows.map(d => {
-                const cls = d.date === currentDate ? ' class="hl-current"' : '';
-                return `<tr${cls}>
-                    <td>${d.date.slice(5)}</td>
-                    <td class="hl-high">${d.highs}</td>
-                    <td class="hl-low">${d.lows}</td>
-                    <td>${d.total}</td>
-                </tr>`;
-            }).join('');
+            dateEl.innerText = entry.date;
+            totalEl.innerText = entry.total.toLocaleString();
+
+            // 2026-07-01 이전 스냅샷에는 신고가/신저가 필드 자체가 없습니다.
+            // 그런 날짜를 0 으로 쓰면 '그날 신고가가 없었다'로 오해되므로 '-' 로 둡니다.
+            highsEl.innerText = entry.filled ? entry.highs.toLocaleString() : '-';
+            lowsEl.innerText = entry.filled ? entry.lows.toLocaleString() : '-';
+            highsEl.className = 'hl-stat-value ' + (entry.filled ? 'hl-high' : 'hl-na');
+            lowsEl.className = 'hl-stat-value ' + (entry.filled ? 'hl-low' : 'hl-na');
 
             panel.style.display = '';
         }
