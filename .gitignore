@@ -29,3 +29,6 @@ Thumbs.db
 
 # Secrets
 service_account.json
+
+# Backfill price cache (재다운로드 가능)
+backfill_52w_cache.parquet

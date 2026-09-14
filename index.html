@@ -472,6 +472,8 @@
                             <li><strong>VOL_X (거래대금 폭발 비율):</strong> 돌파 당일의 거래대금(종가 × 거래량)이 최근 20영업일 평균 거래대금 대비 몇 배 폭발했는지를 나타냅니다. 이 비율이 2.0 이상(200% 이상)으로 강력하게 분출될 때만 거대 기관이나 주포의 찐매수 수급이 들어온 것으로 판단합니다.</li>
                             <li><strong>CLS_POS (Close Position %):</strong> 당일 캔들의 전체 변동폭(고가 - 저가) 중에서 종가가 마감된 상대적 위치(%)입니다. 공식: <code>((종가 - 저가) / (고가 - 저가)) * 100</code>. 장중에만 급등했다가 윗꼬리를 길게 달고 하락 마감한 가짜 돌파(Bull Trap)를 거부하고, 장 마감까지 강한 수급을 지켜내며 캔들의 상단(50% 이상, 100%에 가까울수록 강함)에서 확실하게 마감된 진짜 돌파 캔들만 추적하기 위한 핵심 장치입니다.</li>
                             <li><strong>60D_BRK (60일 최고가 종가 돌파):</strong> 오늘 종가가 직전 60영업일(약 3개월, 오늘 제외) 동안의 모든 장중 최고가를 돌파하며 신고가를 달성했는지 여부(YES/NO)입니다.</li>
+                            <li><strong>52주 신고가 (New_High_52W):</strong> 최근 1년(52주) 구간에서 당일 장중 고가가 그 기간의 최고가에 도달했으면 <code>Y</code>, 아니면 <code>N</code>입니다. 판정식: <code>당일 고가 &ge; 52주 최고가</code>. <code>Y</code>인 종목은 위쪽에 손실을 안고 버티는 대기 매물이 한 주도 없는 상태라서, 저항 없이 추세가 이어지기 가장 좋은 자리입니다. 미너비니와 쿨라매기가 공통으로 강조하는 주도주의 출발 신호이며, 화면에서는 초록색으로 표시됩니다.</li>
+                            <li><strong>52주 신저가 (New_Low_52W):</strong> 최근 1년(52주) 구간에서 당일 장중 저가가 그 기간의 최저가에 도달했으면 <code>Y</code>, 아니면 <code>N</code>입니다. 판정식: <code>당일 저가 &le; 52주 최저가</code>. 신고가의 정반대 개념으로, 보유자 전원이 손실 구간에 놓여 반등할 때마다 매물이 쏟아지는 최악의 수급 상태를 뜻합니다. 화면에서는 빨간색으로 표시됩니다. 매수 후보를 거르는 용도보다는, 보유 종목의 손절 판단과 산업군 전체가 무너지고 있는지를 확인하는 위험 관리 지표로 활용하십시오. 값이 싸 보인다는 이유로 <code>Y</code> 종목을 매수하는 바닥 잡기는 가장 흔한 실패 패턴입니다.</li>
                         </ul>
                     </li>
                 </ul>
@@ -3515,7 +3517,8 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('High_52W_Pct')">52주 고점 (%) ⬍</th>
-                    <th onclick="sortTable('New_High_52W')">52주 신고가 ⬍</th>
+                    <th onclick="sortTable('New_High_52W')" title="최근 1년(52주) 구간에서 당일 고가가 기간 내 최고가에 도달했으면 Y. 위쪽에 대기 매물이 없는 신고가 돌파 상태를 뜻합니다.">52주 신고가 ⬍</th>
+                    <th onclick="sortTable('New_Low_52W')" title="최근 1년(52주) 구간에서 당일 저가가 기간 내 최저가에 도달했으면 Y. 매도 압력이 가장 강한 신저가 갱신 상태로 약세 신호입니다.">52주 신저가 ⬍</th>
                     <th onclick="sortTable('Jungjanggi Jeongbaeyeol')">정배열 ⬍</th>
                     <th onclick="sortTable('50DIV')">50DIV (%) ⬍</th>
                     <th onclick="sortTable('200DIV')">200DIV (%) ⬍</th>
@@ -3550,6 +3553,7 @@ indPopup.style.display = 'none';
                         <td>${isValidNumber(item.RS_1mo) ? item.RS_1mo.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(1) + '%' : '-'}</td>
                         <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
+                        <td class="${item.New_Low_52W === 'Y' ? 'rs-neg' : ''}">${item.New_Low_52W || '-'}</td>
                         <td class="${jbColor}">${jb}</td>
                         <td>${item['50DIV']}%</td>
                         <td>${item['200DIV'] !== undefined && item['200DIV'] !== null ? item['200DIV'] + '%' : '-'}</td>
@@ -3567,6 +3571,8 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('Ticker')">Ticker ⬍</th>
                     <th onclick="sortTable('Sector')">Sector ⬍</th>
                     <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
+                    <th onclick="sortTable('New_High_52W')" title="최근 1년(52주) 구간에서 당일 고가가 기간 내 최고가에 도달했으면 Y. 위쪽에 대기 매물이 없는 신고가 돌파 상태를 뜻합니다.">52주 신고가 ⬍</th>
+                    <th onclick="sortTable('New_Low_52W')" title="최근 1년(52주) 구간에서 당일 저가가 기간 내 최저가에 도달했으면 Y. 매도 압력이 가장 강한 신저가 갱신 상태로 약세 신호입니다.">52주 신저가 ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo_Rank_Pct')">1mo rnk ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
@@ -3575,7 +3581,6 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('RS_Rank_Pct')">6mo rnk ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
                     <th onclick="sortTable('High_52W_Pct')">52주대비 (%) ⬍</th>
-                    <th onclick="sortTable('New_High_52W')">52주 신고가 ⬍</th>
                     <th onclick="sortTable('CLS_POS')">cls_pos ⬍</th>
                     <th onclick="sortTable('VOL_X')">vol_x ⬍</th>
                     <th onclick="sortTable('Vol_Surge_Wk')" title="일간 차트 기준 전주 평균 거래량보다 오늘 거래량이 몇 배 이상 늘었는지 보여줍니다.">거래량급증(배) ⬍</th>
@@ -3610,6 +3615,8 @@ indPopup.style.display = 'none';
                         </td>
                         <td style="font-weight:bold; cursor:pointer;" class="drilldown-link" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Sector || '-'}</td>
                         <td style="font-weight:bold; cursor:pointer;" class="drilldown-link" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Industry || '-'}</td>
+                        <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
+                        <td class="${item.New_Low_52W === 'Y' ? 'rs-neg' : ''}">${item.New_Low_52W || '-'}</td>
                         <td>${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(rnk1) && rnk1 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk1)}</td>
                         <td>${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
@@ -3618,7 +3625,6 @@ indPopup.style.display = 'none';
                         <td class="${isValidNumber(rnk6) && rnk6 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk6)}</td>
                         <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(2) : '-'}</td>
-                        <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
                         <td>${isValidNumber(item.CLS_POS) ? item.CLS_POS.toFixed(1) : '-'}</td>
                         <td>${isValidNumber(item.VOL_X) ? item.VOL_X.toFixed(2) : '-'}</td>
                         <td style="${isValidNumber(item.Vol_Surge_Wk) && item.Vol_Surge_Wk > 2 ? 'font-weight:bold; color:var(--primary-color)' : ''}">${isValidNumber(item.Vol_Surge_Wk) ? item.Vol_Surge_Wk.toFixed(2) : '-'}</td>
@@ -3647,7 +3653,8 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('RS_6mo_10D_Chg')">10D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_6mo_25D_Chg')">25D Chg (%) ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
-                    <th onclick="sortTable('New_High_52W')">52주 신고가 ⬍</th>
+                    <th onclick="sortTable('New_High_52W')" title="최근 1년(52주) 구간에서 당일 고가가 기간 내 최고가에 도달했으면 Y. 위쪽에 대기 매물이 없는 신고가 돌파 상태를 뜻합니다.">52주 신고가 ⬍</th>
+                    <th onclick="sortTable('New_Low_52W')" title="최근 1년(52주) 구간에서 당일 저가가 기간 내 최저가에 도달했으면 Y. 매도 압력이 가장 강한 신저가 갱신 상태로 약세 신호입니다.">52주 신저가 ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('RS_DiF')">
                         RS_DiF ⬍
@@ -3746,6 +3753,7 @@ indPopup.style.display = 'none';
                         </td>
                         <td class="${rs3Class}">${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
                         <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
+                        <td class="${item.New_Low_52W === 'Y' ? 'rs-neg' : ''}">${item.New_Low_52W || '-'}</td>
                         <td class="${rs1Class}">${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${difClass}">${isValidNumber(rsDif) ? rsDif.toFixed(2) : '-'}</td>
                         <td>${item['50DIV']}%</td>

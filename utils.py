@@ -491,6 +491,20 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             if pd.notna(latest_high) and latest_high >= high_52w:
                 new_high_52w = 'Y'
 
+        # [Added] 52주 신저가 (New_Low_52W) / 52주 저점 대비 비율 (Low_52W_Pct)
+        # Low_52W_Pct : 현재가가 52주 최저가보다 몇 % 위에 있는지 (100 = 저점과 동일)
+        # New_Low_52W : 당일 저가가 52주 최저가 이하이면 'Y'
+        low_52w_pct = 0.0
+        new_low_52w = 'N'
+        if 'Low' in df.columns and not df.empty:
+            low_52w = df['Low'].min()
+            if pd.notna(low_52w) and low_52w > 0:
+                low_52w_pct = round((latest_price / low_52w) * 100, 2)
+
+                latest_low = df['Low'].iloc[-1]
+                if pd.notna(latest_low) and latest_low <= low_52w:
+                    new_low_52w = 'Y'
+
         adr_20d = None
         if 'High' in df.columns and 'Low' in df.columns and len(df) >= 20:
             recent_highs = df['High'].iloc[-20:]
@@ -879,6 +893,8 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             # [Added] Perfect Storm Strategy Metrics
             'High_52W_Pct': high_52w_pct,
             'New_High_52W': new_high_52w,
+            'Low_52W_Pct': low_52w_pct,
+            'New_Low_52W': new_low_52w,
             'ADR_20D': adr_20d,
             'Max_Rise_1M_Pct': max_rise_1m_pct,
             'Max_Rise_3M_Pct': max_rise_3m_pct,
