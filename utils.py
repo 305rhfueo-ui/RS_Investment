@@ -255,9 +255,16 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
         except Exception as e:
             print(f"Batch 처리 중 에러: {e}")
             
-        # 실제 API 호출이 있었을 때만 10초 대기
-        if batch_api_called:
-            time.sleep(10)
+        # 배치 간 대기.
+        # ⚠️ 예전에는 이 sleep 이 `if batch_api_called:` 안에 있었다. 시총 조회가 새로
+        #    필요한 배치에서만 쉰다는 뜻인데, 캐시가 따뜻한 날은 그 비율이 10% 미만이라
+        #    배치 71개가 사실상 쉬지 않고 야후를 연속으로 때렸다.
+        #    그러면 야후가 에러 대신 "잘린 이력"을 돌려준다 — 2026-09-15 실측으로
+        #    EA 6일치·AVB 27일치·EQR 14일치가 왔다. RS_6mo 는 121거래일이 필요하므로
+        #    통째로 결측이 되고, 예외가 안 나니 조용히 지나간다.
+        #    그날 결측 485개를 다시 받아보니 461개(95%)가 정상이었다 — 죽은 티커가
+        #    아니라 수집 속도 문제였다.
+        time.sleep(10 if batch_api_called else 3)
     
     # --- Retry Logic (재시도) ---
     # 1. 실패하거나 RS가 NaN인 티커 식별
@@ -280,7 +287,14 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
     
     if failed_tickers:
         print(f"\n[Retry] RS 수집 실패/NaN {len(failed_tickers)}개 발견. 배치 재시도 중...")
-        
+
+        # 재시도 전 냉각. 실패가 몰렸다는 건 이미 야후에 차단당한 상태라는 뜻이라,
+        # 곧바로 다시 때리면 같은 잘린 응답을 받고 재시도가 통째로 헛돈다.
+        # 실패가 많을수록 더 오래 쉰다 (최대 2분).
+        cooldown = min(120, 30 + len(failed_tickers) // 5)
+        print(f"  → 재시도 전 {cooldown}초 냉각 (차단 해제 대기)")
+        time.sleep(cooldown)
+
         # 재시도도 배치로 처리
         retry_batch_size = 10
         for i in range(0, len(failed_tickers), retry_batch_size):
