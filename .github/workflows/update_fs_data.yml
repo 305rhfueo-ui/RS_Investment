@@ -9,10 +9,15 @@ on:
     paths:
       - 'trigger.txt'
 
+# RS 수집(update_data.yml)과 같은 그룹 — 서로 겹치지 않게 기다린다.
+concurrency:
+  group: rs-investment-data
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     permissions:
       contents: write # 저장소 쓰기 권한 필요
 
@@ -38,8 +43,10 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git pull --rebase
         git add static/fs_data.json
         # 변경사항이 있을 때만 커밋
         git commit -m "Auto-update FS Data (Today's List): $(date +'%Y-%m-%d')" || echo "No changes to commit"
+        # ⚠️ rebase 는 커밋 뒤에 한다. 작업 트리가 더러우면 git 이 pull --rebase 를 거부한다
+        #    (전에는 add 앞에 있어 받을 커밋이 있는 날에만 조용히 실패했다).
+        git pull --rebase
         git push
