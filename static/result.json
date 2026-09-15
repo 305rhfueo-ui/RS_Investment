@@ -76524,11 +76524,12 @@
   ],
   "data_quality": {
     "total": 1412,
-    "blank_rows": 6,
-    "null_rate": 0.0042,
-    "api_called_count": 138,
-    "duration_s": 855.3,
+    "blank_rows": 244,
+    "null_rate": 0.1728,
+    "api_called_count": 112,
+    "duration_s": 1291.6,
     "threshold": 0.15
   },
-  "degraded": false
+  "degraded": true,
+  "degraded_at": "2026-09-15 00:14:50 UTC"
 }
