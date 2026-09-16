@@ -16319,7 +16319,7 @@
     }
   },
   "WHLRL": {
-    "timestamp": "2026-09-13",
+    "timestamp": "2026-09-16",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
@@ -32693,7 +32693,7 @@
     }
   },
   "MTUL": {
-    "timestamp": "2026-09-13",
+    "timestamp": "2026-09-16",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
@@ -33639,7 +33639,7 @@
     }
   },
   "GOOGM": {
-    "timestamp": "2026-09-13",
+    "timestamp": "2026-09-16",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
@@ -33656,7 +33656,7 @@
       "SALE_NY": null,
       "EPS_CY": null,
       "EPS_NY": null,
-      "BB_Center_Breakout_5D": "NO",
+      "BB_Center_Breakout_5D": "YES",
       "Market_Cap": null
     }
   },
