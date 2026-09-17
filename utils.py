@@ -203,6 +203,40 @@ def get_tickers_from_excel(file_path):
         print(f"엑셀 로드 에러: {e}")
         return []
 
+# 야후는 GitHub 러너 같은 공유 IP 에서 빠르게 때리면 에러 대신 "잘린 이력"을 돌려준다.
+# 2026-09-17 실측: 러너에서 1,412종목 중 1,010개가 121봉 미만으로 왔는데, 같은 시각 로컬 IP 에서는
+# 같은 티커 전부 251봉이었다 — 티커 문제가 아니라 IP 차단이다. 두 가지로 막는다:
+#   1) threads=False — yf.download 가 배치 안에서 20개를 동시에 쏘던 것을 순차로 바꾼다
+#   2) 배치의 절반 넘게 잘려 오면 차단 상태로 보고 60·120초 쉬었다가 같은 배치를 다시 받는다
+MIN_BARS = 121   # RS_6mo 계산에 필요한 최소 봉 수
+
+def _truncated_count(data, tickers):
+    n = 0
+    for t in tickers:
+        try:
+            if isinstance(data.columns, pd.MultiIndex):
+                s = data[t]['Close'] if t in data.columns.levels[0] else None
+            else:
+                s = data['Close']
+            n += 1 if s is None or s.dropna().shape[0] < MIN_BARS else 0
+        except Exception:
+            n += 1
+    return n
+
+def download_batch(tickers, tries=3):
+    data = pd.DataFrame()
+    for attempt in range(tries):
+        data = yf.download(tickers, period="1y", progress=False, group_by='ticker', threads=False)
+        short = _truncated_count(data, tickers)
+        if short * 2 <= len(tickers) or attempt == tries - 1:
+            if short:
+                print(f"  · {len(tickers)}개 중 {short}개가 {MIN_BARS}봉 미만 (재시도 단계에서 다시 받음)")
+            return data
+        wait = 60 * (attempt + 1)
+        print(f"  ⚠️ {len(tickers)}개 중 {short}개가 {MIN_BARS}봉 미만 — 차단 의심, {wait}초 쉬고 같은 배치를 다시 받습니다")
+        time.sleep(wait)
+    return data
+
 def get_market_cap_and_rs(ticker_info_list, batch_size=20):
     """
     티커 리스트를 받아 Market Cap과 RS를 계산합니다.
@@ -233,8 +267,8 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
             # Yahoo Finance용 포맷으로 변환
             sanitized_batch_tickers = [sanitize_ticker_for_yf(t) for t in batch_tickers]
             
-            # 6개월(120영업일) 데이터를 위해 1년치 가져옴
-            data = yf.download(sanitized_batch_tickers, period="1y", progress=False, group_by='ticker')
+            # 6개월(120영업일) 데이터를 위해 1년치 가져옴 — 잘려 오면 쉬었다가 다시 받는다 (download_batch)
+            data = download_batch(sanitized_batch_tickers)
             
             # 2. 각 티커별 정보 처리
             # 메타데이터(시총 등)는 별도 호출이 필요할 수 있으나, 
@@ -264,7 +298,9 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
         #    통째로 결측이 되고, 예외가 안 나니 조용히 지나간다.
         #    그날 결측 485개를 다시 받아보니 461개(95%)가 정상이었다 — 죽은 티커가
         #    아니라 수집 속도 문제였다.
-        time.sleep(10 if batch_api_called else 3)
+        # ⚠️ 2026-09-17: 캐시가 따뜻하면 3초만 쉬던 것도 부족했다(러너에서 71배치가 10분 만에 돌고 1,010개 결측).
+        #    항상 10초 쉰다. 71배치 × 10초 = 12분이면 150분 타임아웃 안에 충분하다.
+        time.sleep(10)
     
     # --- Retry Logic (재시도) ---
     # 1. 실패하거나 RS가 NaN인 티커 식별
@@ -304,7 +340,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
             try:
                 # 배치 다운로드 (Sanitized Ticker 사용)
                 sanitized_retry_batch = [sanitize_ticker_for_yf(t) for t in batch]
-                data = yf.download(sanitized_retry_batch, period="1y", progress=False, group_by='ticker')
+                data = download_batch(sanitized_retry_batch)
                 
                 # 순차 처리 (Retry)
                 for t in batch:
