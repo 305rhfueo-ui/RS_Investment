@@ -76500,12 +76500,12 @@
   ],
   "data_quality": {
     "total": 1412,
-    "blank_rows": 578,
-    "null_rate": 0.4093,
-    "api_called_count": 591,
-    "duration_s": 3460.3,
+    "blank_rows": 385,
+    "null_rate": 0.2727,
+    "api_called_count": 56,
+    "duration_s": 2951.1,
     "threshold": 0.15
   },
   "degraded": true,
-  "degraded_at": "2026-09-17 00:51:57 UTC"
+  "degraded_at": "2026-09-17 01:53:24 UTC"
 }
