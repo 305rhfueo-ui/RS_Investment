@@ -11,7 +11,12 @@
    QQQ 일봉(OHLC)과 10일·20일 이동평균. Market 팝업의 1번·2번 차트에 씁니다.
    이동평균이 첫날부터 채워지도록 표시 구간보다 넉넉히 받아서 계산한 뒤 잘라냅니다.
 
-두 파일 모두 오래된 날짜 -> 최신 날짜 순서(오름차순)입니다. 차트에 그대로 넣기
+3) static/vix.json
+   ^VIX 일별 종가(Yahoo Finance history 페이지의 Close 와 같은 값). 헤더 패널에는
+   선택한 날짜의 종가를, Market 팝업 4번 차트에는 최근 6개월을 씁니다.
+   히스토리 드롭다운의 과거 날짜도 조회할 수 있도록 1년치를 저장합니다.
+
+세 파일 모두 오래된 날짜 -> 최신 날짜 순서(오름차순)입니다. 차트에 그대로 넣기
 위해서이며, 최신값은 배열의 마지막 원소입니다.
 
 단독 실행:
@@ -27,6 +32,7 @@ from datetime import datetime, timedelta
 SENTIMENT_URL = "https://www.aaii.com/sentimentsurvey/sent_results"
 SENTIMENT_FILE = "static/sentiment.json"
 QQQ_FILE = "static/qqq_chart.json"
+VIX_FILE = "static/vix.json"
 
 # 패널·차트가 다루는 시작일. 히스토리 백필 시작일과 맞춥니다.
 START_DATE = "2026-07-01"
@@ -177,8 +183,41 @@ def build_qqq_chart(out_file=QQQ_FILE, display_days=QQQ_DISPLAY_DAYS):
     return payload
 
 
-def build_all(sentiment_file=SENTIMENT_FILE, qqq_file=QQQ_FILE):
-    """둘 중 하나가 실패해도 나머지는 갱신되도록 각각 감쌉니다."""
+def build_vix(out_file=VIX_FILE):
+    """^VIX 일별 종가 1년치를 vix.json 으로 저장."""
+    import pandas as pd
+    import yfinance as yf
+
+    df = yf.download("^VIX", period="1y", progress=False, auto_adjust=False)
+    if df is None or df.empty:
+        raise ValueError("VIX 데이터를 받지 못했습니다")
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+
+    # 장 마감 직후 당일 봉 종가가 null 로 오는 경우가 있어 비어 있는 행은 뺍니다.
+    close = df["Close"].dropna()
+    data = [{"date": idx.strftime("%Y-%m-%d"), "close": round(float(v), 2)}
+            for idx, v in close.items()]
+    if not data:
+        raise ValueError("VIX 종가가 비어 있습니다")
+
+    payload = {
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "source": "https://finance.yahoo.com/quote/%5EVIX/history/",
+        "count": len(data),
+        "data": data,
+    }
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    print(f"  → VIX 갱신: {len(data)}일 ({data[0]['date']} ~ {data[-1]['date']}, "
+          f"최근 종가 {data[-1]['close']})")
+    return payload
+
+
+def build_all(sentiment_file=SENTIMENT_FILE, qqq_file=QQQ_FILE, vix_file=VIX_FILE):
+    """하나가 실패해도 나머지는 갱신되도록 각각 감쌉니다."""
     ok = True
     try:
         build_sentiment(out_file=sentiment_file)
@@ -189,6 +228,11 @@ def build_all(sentiment_file=SENTIMENT_FILE, qqq_file=QQQ_FILE):
         build_qqq_chart(out_file=qqq_file)
     except Exception as exc:
         print(f"  ⚠️ QQQ 차트 데이터 갱신 실패(기존 파일 유지): {exc}")
+        ok = False
+    try:
+        build_vix(out_file=vix_file)
+    except Exception as exc:
+        print(f"  ⚠️ VIX 갱신 실패(기존 파일 유지): {exc}")
         ok = False
     return ok
 

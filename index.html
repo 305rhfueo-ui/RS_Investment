@@ -340,6 +340,18 @@
             height: 300px;
         }
 
+        .mc-remember {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-left: 3px solid #ffb74d;
+            background: rgba(255, 183, 77, 0.08);
+            color: #ddd;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .mc-remember b { color: #ffb74d; }
+
         @media (max-width: 700px) {
             .hl-panel { width: 100%; }
             .mc-canvas-wrap { height: 240px; }
@@ -507,6 +519,19 @@
                         <div class="hl-stat" title="Bullish 빼기 Bearish. 음수가 깊을수록 개인 심리가 위축된 상태입니다.">
                             <span class="hl-stat-label">Bull - Bear</span>
                             <span class="hl-stat-value hl-sm" id="hl-spread">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIX (CBOE 변동성 지수) — 선택한 날짜의 종가 -->
+                <div class="hl-sub" id="hl-vix-box">
+                    <div class="hl-sub-title">
+                        VIX <span id="hl-vix-date" class="hl-sub-date"></span>
+                    </div>
+                    <div class="hl-stats">
+                        <div class="hl-stat" title="^VIX 종가(Yahoo Finance history 의 Close). 30 이상이면 공포가 큰 구간입니다.">
+                            <span class="hl-stat-label">Close</span>
+                            <span class="hl-stat-value hl-sm" id="hl-vix">-</span>
                         </div>
                     </div>
                 </div>
@@ -831,12 +856,23 @@
                 <div class="mc-canvas-wrap"><canvas id="mc-diverge"></canvas></div>
             </div>
 
-            <div class="mc-section" style="margin-bottom:0;">
+            <div class="mc-section">
                 <h3>3. Sentiment Survey</h3>
                 <p>7월 1일 이후 AAII 개인투자자 심리 설문의 Bullish 빼기 Bearish 추이입니다.
                    설문이 주 1회 발표라 막대 하나가 한 주입니다.
                    과도하게 낮아진 구간은 비관이 극에 달한 지점으로, 흔히 반대 지표로 읽습니다.</p>
                 <div class="mc-canvas-wrap"><canvas id="mc-sentiment"></canvas></div>
+            </div>
+
+            <div class="mc-section" style="margin-bottom:0;">
+                <h3>4. VIX</h3>
+                <p>최근 6개월 ^VIX 일별 종가입니다. 점선은 30입니다.</p>
+                <div class="mc-canvas-wrap"><canvas id="mc-vix"></canvas></div>
+                <div class="mc-remember">
+                    <b>기억!</b><br>
+                    Sentiment Survey -30% 바닥 근접<br>
+                    VIX 30 이상 상승 후 하락 시 바닥 근접
+                </div>
             </div>
         </div>
     </div>
@@ -1919,7 +1955,50 @@ indPopup.style.display = 'none';
             loadHistoryIndex();
             loadHighLowSummary();
             loadSentiment();
+            loadVix();
         };
+
+        // ^VIX 일별 종가. 오래된 날짜 -> 최신 순서입니다.
+        let vixData = [];
+
+        async function loadVix() {
+            try {
+                const res = await fetch('./static/vix.json?t=' + new Date().getTime());
+                if (!res.ok) return;
+                vixData = (await res.json()).data || [];
+                renderVixBox();
+            } catch (e) {
+                console.log("VIX load failed:", e);
+            }
+        }
+
+        // 선택한 날짜의 종가. 휴장일이면 그 이전 가장 가까운 거래일 종가를 씁니다.
+        function vixAsOf(dateStr) {
+            if (vixData.length === 0) return null;
+            if (!dateStr) return vixData[vixData.length - 1];
+            let found = null;
+            for (const e of vixData) {
+                if (e.date <= dateStr) found = e; else break;
+            }
+            return found;
+        }
+
+        function renderVixBox(currentDate = null) {
+            const valEl = document.getElementById('hl-vix');
+            const dateEl = document.getElementById('hl-vix-date');
+            if (!valEl || vixData.length === 0) return;
+
+            const e = vixAsOf(currentDate);
+            if (!e) {
+                dateEl.innerText = '';
+                valEl.innerText = '-';
+                valEl.className = 'hl-stat-value hl-sm hl-na';
+                return;
+            }
+            dateEl.innerText = '(' + e.date.slice(5) + ')';
+            valEl.innerText = e.close.toFixed(2);
+            valEl.className = 'hl-stat-value hl-sm' + (e.close >= 30 ? ' hl-low' : '');
+        }
 
         // AAII 개인투자자 심리 설문(주간). 오래된 날짜 -> 최신 순서입니다.
         let sentimentData = [];
@@ -2178,6 +2257,39 @@ indPopup.style.display = 'none';
             });
         }
 
+        function drawVixChart(rows) {
+            const ctx = document.getElementById('mc-vix');
+            if (mcCharts.vix) mcCharts.vix.destroy();
+
+            mcCharts.vix = new Chart(ctx, {
+                data: {
+                    labels: rows.map(r => r.date.slice(5)),
+                    datasets: [
+                        {
+                            type: 'line', label: 'VIX 종가',
+                            data: rows.map(r => r.close),
+                            borderColor: '#ce93d8', borderWidth: 2, pointRadius: 0,
+                            tension: 0.2, spanGaps: true
+                        },
+                        {
+                            type: 'line', label: '30',
+                            data: rows.map(() => 30),
+                            borderColor: MC_DOWN, borderWidth: 1, borderDash: [6, 4], pointRadius: 0
+                        }
+                    ]
+                },
+                options: mcBaseOptions({
+                    scales: {
+                        x: mcTimeScale(12),
+                        y: {
+                            ticks: { color: MC_TICK, font: { size: 10 } },
+                            grid: { color: MC_GRID }
+                        }
+                    }
+                })
+            });
+        }
+
         // 최근 n개월 구간의 시작 날짜(YYYY-MM-DD). 기준은 데이터의 마지막 날짜입니다.
         function monthsBefore(lastDate, months) {
             const d = new Date(lastDate + 'T00:00:00');
@@ -2209,6 +2321,12 @@ indPopup.style.display = 'none';
                 // 3. 센티먼트 — 확보한 전 구간(2026-07-01 이후).
                 // 설문이 주 1회라 2개월로 자르면 막대가 9개뿐이라 추세가 잘 안 보입니다.
                 drawSentimentChart(sentimentData);
+
+                // 4. VIX — 최근 6개월
+                if (vixData.length) {
+                    const vLast = vixData[vixData.length - 1].date;
+                    drawVixChart(vixData.filter(r => r.date >= monthsBefore(vLast, 6)));
+                }
             } catch (e) {
                 console.log("Market chart load failed:", e);
             }
@@ -2304,6 +2422,7 @@ indPopup.style.display = 'none';
                     const m = this.value.match(/result_(\d{4}-\d{2}-\d{2})\.json/);
                     renderHighLowPanel(m ? m[1] : null);
                     renderSentimentBox(m ? m[1] : null);
+                    renderVixBox(m ? m[1] : null);
                 });
 
             } catch (e) {
