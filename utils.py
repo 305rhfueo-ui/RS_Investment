@@ -392,8 +392,11 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
         if 'Close' not in df.columns or df.empty:
             return None
             
-        hist = df['Close']
-        
+        # ⚠️ 야후는 장 마감 후 몇 시간 동안 당일 봉의 종가를 null 로 주는 종목이 있다 (2026-09-17 실측: FROG·HOOD 등).
+        #    배치 프레임은 날짜 합집합이라 그 종목만 마지막 행이 NaN 이 되고, iloc[-1] 이 NaN → RS 전부 NaN → 빈 행.
+        #    NaN 봉은 건너뛴다 — 그 종목만 직전 세션 종가로 계산되는 쪽이 통째로 결측되는 것보다 낫다.
+        hist = df['Close'].dropna()
+
         # --- RS Calculation Logic Update ---
         # 기간: 
         # 1mo = 20영업일
@@ -432,7 +435,7 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             qqq_ret_3mo = 0
             qqq_ret_6mo = 0
         else:
-            q_hist = qqq_data['Close']
+            q_hist = qqq_data['Close'].dropna()   # QQQ 마지막 봉이 null 이면 전 종목 RS 가 NaN 이 된다
             qqq_ret_1mo = calc_return(q_hist, idx_1mo, idx_latest) or 0
             qqq_ret_3mo = calc_return(q_hist, idx_3mo, idx_latest) or 0
             qqq_ret_6mo = calc_return(q_hist, idx_6mo, idx_latest) or 0
