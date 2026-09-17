@@ -12,9 +12,9 @@
    이동평균이 첫날부터 채워지도록 표시 구간보다 넉넉히 받아서 계산한 뒤 잘라냅니다.
 
 3) static/vix.json
-   ^VIX 일별 종가(Yahoo Finance history 페이지의 Close 와 같은 값). 헤더 패널에는
-   선택한 날짜의 종가를, Market 팝업 4번 차트에는 최근 6개월을 씁니다.
-   히스토리 드롭다운의 과거 날짜도 조회할 수 있도록 1년치를 저장합니다.
+   ^VIX 일별 종가(Yahoo Finance history 페이지의 Close 와 같은 값)와 같은 날짜의
+   QQQ·SPY 종가 1년치. 헤더 패널에는 선택한 날짜의 VIX 종가를, Market 팝업 4번
+   차트에는 1년 전체(VIX + QQQ + SPY)를 씁니다.
 
 세 파일 모두 오래된 날짜 -> 최신 날짜 순서(오름차순)입니다. 차트에 그대로 넣기
 위해서이며, 최신값은 배열의 마지막 원소입니다.
@@ -184,20 +184,25 @@ def build_qqq_chart(out_file=QQQ_FILE, display_days=QQQ_DISPLAY_DAYS):
 
 
 def build_vix(out_file=VIX_FILE):
-    """^VIX 일별 종가 1년치를 vix.json 으로 저장."""
+    """^VIX 일별 종가 1년치 + 같은 날짜의 QQQ·SPY 종가를 vix.json 으로 저장.
+
+    행: {date, close(VIX), qqq, spy}. QQQ·SPY 는 그날 값이 없으면 null.
+    """
     import pandas as pd
     import yfinance as yf
 
-    df = yf.download("^VIX", period="1y", progress=False, auto_adjust=False)
+    df = yf.download(["^VIX", "QQQ", "SPY"], period="1y", progress=False, auto_adjust=False)
     if df is None or df.empty:
         raise ValueError("VIX 데이터를 받지 못했습니다")
-    if isinstance(df.columns, pd.MultiIndex):
-        df.columns = df.columns.get_level_values(0)
+    close = df["Close"]
 
-    # 장 마감 직후 당일 봉 종가가 null 로 오는 경우가 있어 비어 있는 행은 뺍니다.
-    close = df["Close"].dropna()
-    data = [{"date": idx.strftime("%Y-%m-%d"), "close": round(float(v), 2)}
-            for idx, v in close.items()]
+    def num(v):
+        return None if pd.isna(v) else round(float(v), 2)
+
+    # 장 마감 직후 당일 봉 종가가 null 로 오는 경우가 있어 VIX 가 비어 있는 행은 뺍니다.
+    data = [{"date": idx.strftime("%Y-%m-%d"), "close": num(row["^VIX"]),
+             "qqq": num(row["QQQ"]), "spy": num(row["SPY"])}
+            for idx, row in close.iterrows() if not pd.isna(row["^VIX"])]
     if not data:
         raise ValueError("VIX 종가가 비어 있습니다")
 
