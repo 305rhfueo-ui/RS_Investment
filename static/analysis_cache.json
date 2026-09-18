@@ -15418,25 +15418,25 @@
     }
   },
   "KTOS": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 5.25,
-      "NY_Trend": 2.4,
+      "CY_Trend": -0.23,
+      "NY_Trend": -1.15,
       "Up_Count": 25,
       "Down_Count": 21,
       "Up_Down_Ratio": 54.35,
       "Order": "NO",
-      "CY_Est": 0.81746,
-      "CY_30": 0.77665,
-      "NY_Est": 1.11739,
-      "NY_30": 1.09116,
+      "CY_Est": 0.81149,
+      "CY_30": 0.81334,
+      "NY_Est": 1.10121,
+      "NY_30": 1.11405,
       "Target_Status": "NO",
-      "SALE_CY": 33.23,
-      "SALE_NY": 23.52,
-      "EPS_CY": 48.63,
-      "EPS_NY": 36.69,
+      "SALE_CY": 33.25,
+      "SALE_NY": 23.49,
+      "EPS_CY": 47.54,
+      "EPS_NY": 35.7,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 8931780738.66
+      "Market_Cap": 8946798444.82
     }
   },
   "MDT": {
@@ -16473,7 +16473,7 @@
     }
   },
   "WGS": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 15.91,
       "NY_Trend": -5.08,
@@ -16491,7 +16491,7 @@
       "EPS_CY": -90.89,
       "EPS_NY": 816.67,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 2676274829.3399997
+      "Market_Cap": 3129875677.9500003
     }
   },
   "CHD": {
@@ -18298,7 +18298,7 @@
     }
   },
   "LMND": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 7.92,
       "NY_Trend": 34.01,
@@ -18316,7 +18316,7 @@
       "EPS_CY": -16.74,
       "EPS_NY": -40.88,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 3872152648.4500003
+      "Market_Cap": 3759927556.7
     }
   },
   "PAM": {
@@ -19354,7 +19354,7 @@
     }
   },
   "DOX": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.18,
       "NY_Trend": -0.35,
@@ -19372,7 +19372,7 @@
       "EPS_CY": 6.18,
       "EPS_NY": 8.17,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 6595895550.0
+      "Market_Cap": 6318151650.0
     }
   },
   "SSNC": {
@@ -21465,25 +21465,25 @@
     }
   },
   "AOS": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": -0.33,
-      "NY_Trend": -1.7,
+      "CY_Trend": -0.1,
+      "NY_Trend": -0.24,
       "Up_Count": 5,
       "Down_Count": 36,
       "Up_Down_Ratio": 12.2,
       "Order": "NO",
-      "CY_Est": 3.74322,
-      "CY_30": 3.75559,
-      "NY_Est": 4.09059,
-      "NY_30": 4.16146,
+      "CY_Est": 3.73932,
+      "CY_30": 3.74322,
+      "NY_Est": 4.08631,
+      "NY_30": 4.09609,
       "Target_Status": "NO",
-      "SALE_CY": 1.69,
-      "SALE_NY": 3.94,
-      "EPS_CY": -2.77,
+      "SALE_CY": 1.61,
+      "SALE_NY": 3.95,
+      "EPS_CY": -2.87,
       "EPS_NY": 9.28,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 7798433918.740001
+      "Market_Cap": 7737275060.89
     }
   },
   "EMBJ": {
@@ -21971,7 +21971,7 @@
     }
   },
   "EXPO": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 1.76,
       "NY_Trend": 2.82,
@@ -21988,8 +21988,8 @@
       "SALE_NY": 8.57,
       "EPS_CY": 21.36,
       "EPS_NY": 12.97,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 3289713551.96
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 3242167467.96
     }
   },
   "GPN": {
@@ -22411,7 +22411,7 @@
     }
   },
   "PSN": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.16,
       "NY_Trend": -0.04,
@@ -22429,7 +22429,7 @@
       "EPS_CY": -23.18,
       "EPS_NY": 40.41,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 5013445194.36
+      "Market_Cap": 4931205040.9800005
     }
   },
   "GHM": {
@@ -22499,25 +22499,25 @@
     }
   },
   "FRPT": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 0.41,
-      "NY_Trend": 9.62,
+      "CY_Trend": 7.53,
+      "NY_Trend": 0.06,
       "Up_Count": 9,
       "Down_Count": 6,
       "Up_Down_Ratio": 60.0,
       "Order": "NO",
       "CY_Est": 1.67827,
-      "CY_30": 1.67139,
+      "CY_30": 1.56074,
       "NY_Est": 1.96262,
-      "NY_30": 1.79043,
+      "NY_30": 1.96152,
       "Target_Status": "NO",
-      "SALE_CY": 11.14,
-      "SALE_NY": 8.51,
+      "SALE_CY": 11.17,
+      "SALE_NY": 8.54,
       "EPS_CY": -40.64,
       "EPS_NY": 16.94,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 3064663378.98
+      "Market_Cap": 2958935616.18
     }
   },
   "IBOC": {
@@ -22565,7 +22565,7 @@
     }
   },
   "BXC": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 108.47,
       "NY_Trend": 23.52,
@@ -22583,18 +22583,18 @@
       "EPS_CY": 94.5,
       "EPS_NY": 51.24,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 619620906.11
+      "Market_Cap": 588180038.11
     }
   },
   "GRVY": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
       "Up_Count": null,
       "Down_Count": null,
       "Up_Down_Ratio": null,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": null,
       "CY_30": null,
       "NY_Est": null,
@@ -22604,8 +22604,8 @@
       "SALE_NY": null,
       "EPS_CY": null,
       "EPS_NY": null,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 502127514.00000006
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 489897450.0
     }
   },
   "PSTG": {
@@ -23048,7 +23048,7 @@
     }
   },
   "UL": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.22,
       "NY_Trend": 1.13,
@@ -23061,12 +23061,12 @@
       "NY_Est": 3.4004,
       "NY_30": 3.3624,
       "Target_Status": "NO",
-      "SALE_CY": 2.3,
-      "SALE_NY": 4.17,
+      "SALE_CY": 2.27,
+      "SALE_NY": 4.2,
       "EPS_CY": 3.02,
       "EPS_NY": 7.17,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 136883040538.92
+      "Market_Cap": 133976133118.31999
     }
   },
   "WFG": {
@@ -23752,13 +23752,13 @@
     }
   },
   "LTM": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 6.04,
       "NY_Trend": 2.01,
       "Up_Count": 4,
-      "Down_Count": 7,
-      "Up_Down_Ratio": 36.36,
+      "Down_Count": 8,
+      "Up_Down_Ratio": 33.33,
       "Order": "NO",
       "CY_Est": 4.71757,
       "CY_30": 4.44892,
@@ -23770,7 +23770,7 @@
       "EPS_CY": -14.17,
       "EPS_NY": 35.72,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 14874319540.59
+      "Market_Cap": 15032401267.65
     }
   },
   "NGVT": {
@@ -23906,7 +23906,7 @@
     }
   },
   "OMF": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -0.51,
       "NY_Trend": 0.36,
@@ -23924,7 +23924,7 @@
       "EPS_CY": 6.48,
       "EPS_NY": 21.18,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 7270620840.8
+      "Market_Cap": 7010627120.86
     }
   },
   "APGE": {
@@ -23972,25 +23972,25 @@
     }
   },
   "TSN": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -4.96,
       "NY_Trend": -6.78,
-      "Up_Count": 9,
-      "Down_Count": 19,
-      "Up_Down_Ratio": 32.14,
+      "Up_Count": 10,
+      "Down_Count": 16,
+      "Up_Down_Ratio": 38.46,
       "Order": "NO",
       "CY_Est": 3.7545,
       "CY_30": 3.95055,
       "NY_Est": 4.17437,
       "NY_30": 4.478,
       "Target_Status": "NO",
-      "SALE_CY": 3.42,
-      "SALE_NY": -0.35,
+      "SALE_CY": 3.43,
+      "SALE_NY": -0.22,
       "EPS_CY": -8.87,
       "EPS_NY": 11.18,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 18701768377.92
+      "Market_Cap": 18385147017.12
     }
   },
   "MPTI": {
@@ -24301,10 +24301,10 @@
     }
   },
   "CSR": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -273.83,
-      "NY_Trend": -20.34,
+      "NY_Trend": 0.0,
       "Up_Count": 4,
       "Down_Count": 1,
       "Up_Down_Ratio": 80.0,
@@ -24312,14 +24312,14 @@
       "CY_Est": 0.62,
       "CY_30": -0.35667,
       "NY_Est": -0.36,
-      "NY_30": -0.45192,
+      "NY_30": -0.36,
       "Target_Status": "NO",
       "SALE_CY": -6.62,
       "SALE_NY": -1.64,
       "EPS_CY": -39.22,
       "EPS_NY": -158.06,
-      "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 984674432.6999999
+      "BB_Center_Breakout_5D": "NO",
+      "Market_Cap": 954774731.4000001
     }
   },
   "CNS": {
@@ -24433,7 +24433,7 @@
     }
   },
   "TECH": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -1.32,
       "NY_Trend": 0.28,
@@ -24450,8 +24450,8 @@
       "SALE_NY": 9.79,
       "EPS_CY": 4.58,
       "EPS_NY": 14.27,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 11333254060.26
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 11355208613.58
     }
   },
   "BHF": {
@@ -26455,25 +26455,25 @@
     }
   },
   "TBBK": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.0,
-      "NY_Trend": 0.0,
+      "NY_Trend": -1.23,
       "Up_Count": 4,
       "Down_Count": 4,
       "Up_Down_Ratio": 50.0,
       "Order": "NO",
       "CY_Est": 5.98667,
       "CY_30": 5.98667,
-      "NY_Est": 8.1,
+      "NY_Est": 8.0,
       "NY_30": 8.1,
       "Target_Status": "NO",
       "SALE_CY": -3.98,
-      "SALE_NY": 0.16,
+      "SALE_NY": 0.49,
       "EPS_CY": 21.68,
-      "EPS_NY": 35.3,
+      "EPS_NY": 33.63,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 2048721416.07
+      "Market_Cap": 2065851875.85
     }
   },
   "NVO": {
@@ -26653,7 +26653,7 @@
     }
   },
   "TXNM": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.35,
       "NY_Trend": -0.26,
@@ -26671,7 +26671,7 @@
       "EPS_CY": 23.2,
       "EPS_NY": 13.26,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 5943699682.48
+      "Market_Cap": 6037471643.490001
     }
   },
   "TPG": {
@@ -27356,7 +27356,7 @@
     }
   },
   "BALL": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.5,
       "NY_Trend": 0.04,
@@ -27374,7 +27374,7 @@
       "EPS_CY": 12.73,
       "EPS_NY": 12.38,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 16070140803.47
+      "Market_Cap": 16080728937.75
     }
   },
   "AA": {
@@ -27488,25 +27488,25 @@
     }
   },
   "BMRN": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": -0.17,
-      "NY_Trend": -1.31,
-      "Up_Count": 28,
-      "Down_Count": 23,
-      "Up_Down_Ratio": 54.9,
-      "Order": "NO",
-      "CY_Est": 5.02314,
-      "CY_30": 5.03165,
-      "NY_Est": 6.54087,
-      "NY_30": 6.62798,
+      "CY_Trend": -0.1,
+      "NY_Trend": -0.15,
+      "Up_Count": 29,
+      "Down_Count": 22,
+      "Up_Down_Ratio": 56.86,
+      "Order": "YES",
+      "CY_Est": 5.02944,
+      "CY_30": 5.03425,
+      "NY_Est": 6.61889,
+      "NY_30": 6.62856,
       "Target_Status": "NO",
-      "SALE_CY": 21.36,
-      "SALE_NY": 14.23,
-      "EPS_CY": 59.46,
-      "EPS_NY": 30.21,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 12855233335.189999
+      "SALE_CY": 21.34,
+      "SALE_NY": 14.28,
+      "EPS_CY": 59.66,
+      "EPS_NY": 31.6,
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 12597780235.72
     }
   },
   "SPYU": {
@@ -27575,14 +27575,14 @@
     }
   },
   "WHD": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.97,
       "NY_Trend": 0.57,
       "Up_Count": 17,
       "Down_Count": 5,
       "Up_Down_Ratio": 77.27,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 2.95973,
       "CY_30": 2.93116,
       "NY_Est": 3.62338,
@@ -27592,8 +27592,8 @@
       "SALE_NY": 4.07,
       "EPS_CY": 10.03,
       "EPS_NY": 22.42,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4674911582.72
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 4690252879.68
     }
   },
   "NYAX": {
@@ -27619,25 +27619,25 @@
     }
   },
   "USB": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 0.05,
+      "CY_Trend": -0.02,
       "NY_Trend": -0.08,
       "Up_Count": 39,
       "Down_Count": 3,
       "Up_Down_Ratio": 92.86,
       "Order": "NO",
-      "CY_Est": 5.24026,
+      "CY_Est": 5.23657,
       "CY_30": 5.23763,
       "NY_Est": 5.78583,
       "NY_30": 5.79057,
       "Target_Status": "NO",
       "SALE_CY": 8.47,
       "SALE_NY": 6.93,
-      "EPS_CY": 13.43,
-      "EPS_NY": 10.41,
+      "EPS_CY": 13.35,
+      "EPS_NY": 10.49,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 97658664635.28
+      "Market_Cap": 93872599621.5
     }
   },
   "BKR": {
@@ -27685,13 +27685,13 @@
     }
   },
   "MPLX": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 1.19,
       "NY_Trend": 0.63,
-      "Up_Count": 3,
-      "Down_Count": 5,
-      "Up_Down_Ratio": 37.5,
+      "Up_Count": 8,
+      "Down_Count": 8,
+      "Up_Down_Ratio": 50.0,
       "Order": "NO",
       "CY_Est": 4.37138,
       "CY_30": 4.32007,
@@ -27703,7 +27703,7 @@
       "EPS_CY": 0.9,
       "EPS_NY": 10.4,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 59706112401.39
+      "Market_Cap": 59432370673.619995
     }
   },
   "HUT": {
@@ -28037,7 +28037,7 @@
     }
   },
   "GGAL": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 9.34,
       "NY_Trend": 3.58,
@@ -28055,7 +28055,7 @@
       "EPS_CY": 447.67,
       "EPS_NY": 47.52,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 7279719997.2
+      "Market_Cap": 7222105825.9
     }
   },
   "KNX": {
@@ -28081,25 +28081,25 @@
     }
   },
   "BMY": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 0.04,
-      "NY_Trend": 0.12,
+      "CY_Trend": -0.01,
+      "NY_Trend": 0.1,
       "Up_Count": 80,
       "Down_Count": 6,
       "Up_Down_Ratio": 93.02,
       "Order": "NO",
-      "CY_Est": 6.94924,
-      "CY_30": 6.94672,
-      "NY_Est": 6.5577,
-      "NY_30": 6.55007,
+      "CY_Est": 6.94853,
+      "CY_30": 6.94908,
+      "NY_Est": 6.56484,
+      "NY_30": 6.55796,
       "Target_Status": "NO",
-      "SALE_CY": 3.43,
-      "SALE_NY": -3.44,
-      "EPS_CY": 13.0,
-      "EPS_NY": -5.63,
+      "SALE_CY": 3.42,
+      "SALE_NY": -3.28,
+      "EPS_CY": 12.98,
+      "EPS_NY": -5.52,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 130938009449.59999
+      "Market_Cap": 128364188983.04001
     }
   },
   "ASO": {
@@ -28125,7 +28125,7 @@
     }
   },
   "SFST": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -0.89,
       "NY_Trend": 0.16,
@@ -28143,7 +28143,7 @@
       "EPS_CY": 33.33,
       "EPS_NY": 23.5,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 597667740.5
+      "Market_Cap": 585449176.5500001
     }
   },
   "FROG": {
@@ -28169,7 +28169,7 @@
     }
   },
   "MAA-I": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
@@ -28182,8 +28182,8 @@
       "NY_Est": null,
       "NY_30": null,
       "Target_Status": "NO",
-      "SALE_CY": 0.89,
-      "SALE_NY": 2.61,
+      "SALE_CY": 0.88,
+      "SALE_NY": 2.45,
       "EPS_CY": null,
       "EPS_NY": null,
       "BB_Center_Breakout_5D": "NO",
@@ -28411,7 +28411,7 @@
     }
   },
   "EPR": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.56,
       "NY_Trend": 2.25,
@@ -28429,7 +28429,7 @@
       "EPS_CY": -6.59,
       "EPS_NY": 3.79,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4505370702.820001
+      "Market_Cap": 4378965981.5199995
     }
   },
   "FBIN": {
@@ -28477,14 +28477,14 @@
     }
   },
   "UNTY": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.82,
       "NY_Trend": 0.0,
       "Up_Count": 11,
       "Down_Count": 3,
       "Up_Down_Ratio": 78.57,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 5.894,
       "CY_30": 5.846,
       "NY_Est": 6.358,
@@ -28495,11 +28495,11 @@
       "EPS_CY": 3.95,
       "EPS_NY": 7.87,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 602052551.1
+      "Market_Cap": 590503586.4
     }
   },
   "SPG-J": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
@@ -28512,8 +28512,8 @@
       "NY_Est": null,
       "NY_30": null,
       "Target_Status": "NO",
-      "SALE_CY": 14.32,
-      "SALE_NY": 3.81,
+      "SALE_CY": 14.17,
+      "SALE_NY": 3.82,
       "EPS_CY": null,
       "EPS_NY": null,
       "BB_Center_Breakout_5D": "YES",
@@ -28543,7 +28543,7 @@
     }
   },
   "IREN": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 159.57,
       "NY_Trend": 32.5,
@@ -28556,12 +28556,12 @@
       "NY_Est": -0.265,
       "NY_30": -0.2,
       "Target_Status": "YES",
-      "SALE_CY": 298.77,
-      "SALE_NY": 155.54,
+      "SALE_CY": 299.36,
+      "SALE_NY": 168.89,
       "EPS_CY": 416.29,
       "EPS_NY": -89.14,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 17011511920.5
+      "Market_Cap": 17133670101.999998
     }
   },
   "LAZ": {
@@ -28697,25 +28697,25 @@
     }
   },
   "CRC": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 1.58,
-      "NY_Trend": 4.88,
+      "CY_Trend": 6.09,
+      "NY_Trend": 4.54,
       "Up_Count": 9,
       "Down_Count": 16,
       "Up_Down_Ratio": 36.0,
       "Order": "NO",
-      "CY_Est": 3.86995,
-      "CY_30": 3.80966,
-      "NY_Est": 4.39484,
-      "NY_30": 4.19039,
+      "CY_Est": 3.86762,
+      "CY_30": 3.64552,
+      "NY_Est": 4.27652,
+      "NY_30": 4.09061,
       "Target_Status": "NO",
-      "SALE_CY": -3.64,
-      "SALE_NY": 3.03,
-      "EPS_CY": -5.84,
-      "EPS_NY": 13.56,
+      "SALE_CY": -4.62,
+      "SALE_NY": 3.99,
+      "EPS_CY": -5.9,
+      "EPS_NY": 10.57,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4955261830.47
+      "Market_Cap": 4833578577.06
     }
   },
   "DNTH": {
@@ -28785,7 +28785,7 @@
     }
   },
   "FTS": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.36,
       "NY_Trend": 0.35,
@@ -28802,8 +28802,8 @@
       "SALE_NY": 5.85,
       "EPS_CY": -0.34,
       "EPS_NY": 7.09,
-      "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 27624363000.0
+      "BB_Center_Breakout_5D": "NO",
+      "Market_Cap": 27833832000.0
     }
   },
   "FHI": {
@@ -28851,25 +28851,25 @@
     }
   },
   "BAC": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": -0.23,
-      "NY_Trend": -0.23,
-      "Up_Count": 31,
+      "CY_Trend": -0.33,
+      "NY_Trend": -0.24,
+      "Up_Count": 0,
       "Down_Count": 4,
-      "Up_Down_Ratio": 88.57,
+      "Up_Down_Ratio": 0.0,
       "Order": "NO",
-      "CY_Est": 4.6692,
+      "CY_Est": 4.66415,
       "CY_30": 4.67973,
-      "NY_Est": 5.27941,
+      "NY_Est": 5.27867,
       "NY_30": 5.29151,
       "Target_Status": "NO",
       "SALE_CY": 9.65,
       "SALE_NY": 5.14,
-      "EPS_CY": 22.55,
-      "EPS_NY": 13.07,
-      "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 415858745266.55
+      "EPS_CY": 22.42,
+      "EPS_NY": 13.18,
+      "BB_Center_Breakout_5D": "NO",
+      "Market_Cap": 406838099875.7
     }
   },
   "RAL": {
@@ -28895,14 +28895,14 @@
     }
   },
   "SU": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 4.71,
       "NY_Trend": 2.02,
-      "Up_Count": 17,
-      "Down_Count": 10,
-      "Up_Down_Ratio": 62.96,
-      "Order": "NO",
+      "Up_Count": 20,
+      "Down_Count": 9,
+      "Up_Down_Ratio": 68.97,
+      "Order": "YES",
       "CY_Est": 10.18201,
       "CY_30": 9.72439,
       "NY_Est": 7.96939,
@@ -28913,7 +28913,7 @@
       "EPS_CY": 120.87,
       "EPS_NY": -21.73,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 81140809388.08
+      "Market_Cap": 82049983183.61
     }
   },
   "ETSY": {
@@ -29071,7 +29071,7 @@
     }
   },
   "CBSH": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.37,
       "NY_Trend": 0.09,
@@ -29088,30 +29088,30 @@
       "SALE_NY": 3.68,
       "EPS_CY": 6.55,
       "EPS_NY": 6.45,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 8412297239.7
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 8240178626.1
     }
   },
   "AMRZ": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": -3.76,
-      "NY_Trend": -6.8,
+      "CY_Trend": -1.01,
+      "NY_Trend": -4.4,
       "Up_Count": 0,
       "Down_Count": 32,
       "Up_Down_Ratio": 0.0,
       "Order": "NO",
-      "CY_Est": 2.48873,
-      "CY_30": 2.58608,
-      "NY_Est": 2.85858,
-      "NY_30": 3.06702,
+      "CY_Est": 2.4852,
+      "CY_30": 2.51065,
+      "NY_Est": 2.82917,
+      "NY_30": 2.95947,
       "Target_Status": "NO",
-      "SALE_CY": 6.34,
-      "SALE_NY": 4.95,
-      "EPS_CY": 16.3,
-      "EPS_NY": 14.86,
+      "SALE_CY": 6.08,
+      "SALE_NY": 4.98,
+      "EPS_CY": 16.13,
+      "EPS_NY": 13.84,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 21565278142.92
+      "Market_Cap": 20887090344.36
     }
   },
   "AFJK": {
@@ -29335,14 +29335,14 @@
     }
   },
   "HTO": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -0.42,
       "NY_Trend": -1.81,
       "Up_Count": 9,
       "Down_Count": 7,
       "Up_Down_Ratio": 56.25,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 2.73483,
       "CY_30": 2.7465,
       "NY_Est": 2.70883,
@@ -29353,7 +29353,7 @@
       "EPS_CY": -8.53,
       "EPS_NY": -0.95,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 2611027433.52
+      "Market_Cap": 2640327196.3199997
     }
   },
   "DINO": {
@@ -29423,7 +29423,7 @@
     }
   },
   "NTB": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 1.89,
       "NY_Trend": 2.12,
@@ -29441,7 +29441,7 @@
       "EPS_CY": 12.32,
       "EPS_NY": 14.68,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 2356848351.91
+      "Market_Cap": 2327746603.5299997
     }
   },
   "DFIN": {
@@ -29862,14 +29862,14 @@
     }
   },
   "WABC": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 4.27,
       "NY_Trend": 8.85,
       "Up_Count": 8,
       "Down_Count": 0,
       "Up_Down_Ratio": 100.0,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 4.635,
       "CY_30": 4.445,
       "NY_Est": 4.675,
@@ -29880,18 +29880,18 @@
       "EPS_CY": 2.54,
       "EPS_NY": 0.86,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 1385513622.3500001
+      "Market_Cap": 1394064748.96
     }
   },
   "ACNB": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 4.86,
       "NY_Trend": 3.93,
       "Up_Count": 16,
       "Down_Count": 0,
       "Up_Down_Ratio": 100.0,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 5.6625,
       "CY_30": 5.4,
       "NY_Est": 5.6925,
@@ -29902,7 +29902,7 @@
       "EPS_CY": 11.17,
       "EPS_NY": 0.53,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 660943750.6999999
+      "Market_Cap": 651485715.8000001
     }
   },
   "CXT": {
@@ -30103,7 +30103,7 @@
     }
   },
   "PLBC": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 2.49,
       "NY_Trend": 1.73,
@@ -30120,8 +30120,8 @@
       "SALE_NY": 3.53,
       "EPS_CY": 7.39,
       "EPS_NY": 1.73,
-      "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 436051941.4981384
+      "BB_Center_Breakout_5D": "NO",
+      "Market_Cap": 434103425.513031
     }
   },
   "VPG": {
@@ -30389,7 +30389,7 @@
     }
   },
   "NJR": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.03,
       "NY_Trend": -0.49,
@@ -30407,7 +30407,7 @@
       "EPS_CY": 8.24,
       "EPS_NY": -3.35,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 5387947932.6
+      "Market_Cap": 5425491072.62
     }
   },
   "YUMC": {
@@ -30499,25 +30499,25 @@
     }
   },
   "IFS": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 1.2,
-      "NY_Trend": 2.73,
+      "CY_Trend": -0.21,
+      "NY_Trend": 2.76,
       "Up_Count": 3,
       "Down_Count": 5,
       "Up_Down_Ratio": 37.5,
       "Order": "NO",
-      "CY_Est": 20.5005,
-      "CY_30": 20.258,
-      "NY_Est": 23.499,
-      "NY_30": 22.8745,
+      "CY_Est": 20.466,
+      "CY_30": 20.51,
+      "NY_Est": 23.465,
+      "NY_30": 22.8345,
       "Target_Status": "NO",
-      "SALE_CY": 14.1,
-      "SALE_NY": 17.87,
-      "EPS_CY": 18.51,
-      "EPS_NY": 14.63,
+      "SALE_CY": 13.72,
+      "SALE_NY": 18.28,
+      "EPS_CY": 18.31,
+      "EPS_NY": 14.65,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 6073451900.5199995
+      "Market_Cap": 6114548776.95
     }
   },
   "KKR-D": {
@@ -30586,25 +30586,25 @@
     }
   },
   "ENB": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": -0.04,
-      "NY_Trend": 0.23,
-      "Up_Count": 18,
-      "Down_Count": 25,
-      "Up_Down_Ratio": 41.86,
+      "CY_Trend": -0.41,
+      "NY_Trend": 0.09,
+      "Up_Count": 13,
+      "Down_Count": 19,
+      "Up_Down_Ratio": 40.62,
       "Order": "NO",
-      "CY_Est": 2.91094,
+      "CY_Est": 2.89997,
       "CY_30": 2.91203,
-      "NY_Est": 3.22466,
+      "NY_Est": 3.22015,
       "NY_30": 3.21734,
       "Target_Status": "NO",
-      "SALE_CY": 26.9,
-      "SALE_NY": -12.18,
-      "EPS_CY": -3.61,
-      "EPS_NY": 10.78,
+      "SALE_CY": 27.28,
+      "SALE_NY": -8.58,
+      "EPS_CY": -3.97,
+      "EPS_NY": 11.04,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 105186672054.23999
+      "Market_Cap": 106475296151.25
     }
   },
   "ALRM": {
@@ -30849,14 +30849,14 @@
     }
   },
   "BWFG": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 6.0,
       "NY_Trend": 5.78,
       "Up_Count": 7,
       "Down_Count": 1,
       "Up_Down_Ratio": 87.5,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 5.77,
       "CY_30": 5.44333,
       "NY_Est": 5.91667,
@@ -30866,8 +30866,8 @@
       "SALE_NY": 6.51,
       "EPS_CY": 29.66,
       "EPS_NY": 2.54,
-      "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 544087089.0
+      "BB_Center_Breakout_5D": "NO",
+      "Market_Cap": 532687169.03999996
     }
   },
   "ISBA": {
@@ -31024,25 +31024,25 @@
     }
   },
   "AAP": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 1.84,
-      "NY_Trend": -2.87,
+      "CY_Trend": 1.95,
+      "NY_Trend": -2.74,
       "Up_Count": 31,
       "Down_Count": 44,
       "Up_Down_Ratio": 41.33,
       "Order": "NO",
       "CY_Est": 2.99215,
-      "CY_30": 2.93797,
+      "CY_30": 2.93478,
       "NY_Est": 3.89269,
-      "NY_30": 4.00786,
+      "NY_30": 4.00223,
       "Target_Status": "NO",
       "SALE_CY": -0.87,
       "SALE_NY": 2.28,
       "EPS_CY": 32.4,
       "EPS_NY": 30.1,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 2715417652.08
+      "Market_Cap": 2532620151.8399997
     }
   },
   "SON": {
@@ -31155,14 +31155,14 @@
     }
   },
   "MEOH": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -0.5,
       "NY_Trend": 3.91,
-      "Up_Count": 5,
-      "Down_Count": 8,
-      "Up_Down_Ratio": 38.46,
-      "Order": "NO",
+      "Up_Count": 0,
+      "Down_Count": 4,
+      "Up_Down_Ratio": 0.0,
+      "Order": "YES",
       "CY_Est": 9.02147,
       "CY_30": 9.06647,
       "NY_Est": 5.77336,
@@ -31173,7 +31173,7 @@
       "EPS_CY": 344.41,
       "EPS_NY": -36.0,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4851512932.7300005
+      "Market_Cap": 4721540970.89
     }
   },
   "HUBG": {
@@ -31309,7 +31309,7 @@
     }
   },
   "ANAB": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.0,
       "NY_Trend": 0.0,
@@ -31327,7 +31327,7 @@
       "EPS_CY": -49.84,
       "EPS_NY": -2369.18,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 1602114906.91
+      "Market_Cap": 1630242963.8600001
     }
   },
   "BWA": {
@@ -32979,7 +32979,7 @@
     }
   },
   "CTRN": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 22.93,
       "NY_Trend": 18.11,
@@ -32997,40 +32997,40 @@
       "EPS_CY": -391.81,
       "EPS_NY": 45.34,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 502034709.40000004
+      "Market_Cap": 488274621.84999996
     }
   },
   "RDVT": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 12.46,
-      "NY_Trend": 7.69,
+      "CY_Trend": 1.53,
+      "NY_Trend": 2.33,
       "Up_Count": 5,
       "Down_Count": 3,
       "Up_Down_Ratio": 62.5,
-      "Order": "NO",
-      "CY_Est": 1.67,
-      "CY_30": 1.485,
-      "NY_Est": 1.75,
-      "NY_30": 1.625,
-      "Target_Status": "YES",
-      "SALE_CY": 18.05,
-      "SALE_NY": 13.26,
-      "EPS_CY": 28.46,
-      "EPS_NY": 4.79,
+      "Order": "YES",
+      "CY_Est": 1.66,
+      "CY_30": 1.635,
+      "NY_Est": 1.76,
+      "NY_30": 1.72,
+      "Target_Status": "NO",
+      "SALE_CY": 18.19,
+      "SALE_NY": 13.23,
+      "EPS_CY": 27.69,
+      "EPS_NY": 6.02,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 1224223722.75
+      "Market_Cap": 1237542712.0
     }
   },
   "BATRA": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
       "Up_Count": null,
       "Down_Count": null,
       "Up_Down_Ratio": null,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": null,
       "CY_30": null,
       "NY_Est": null,
@@ -33041,18 +33041,18 @@
       "EPS_CY": null,
       "EPS_NY": null,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 3545917988.22
+      "Market_Cap": 3585060405.39
     }
   },
   "BRKR": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 0.04,
       "NY_Trend": -0.7,
       "Up_Count": 19,
       "Down_Count": 24,
       "Up_Down_Ratio": 44.19,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 2.12238,
       "CY_30": 2.1215,
       "NY_Est": 2.38955,
@@ -33062,18 +33062,18 @@
       "SALE_NY": 4.06,
       "EPS_CY": 15.98,
       "EPS_NY": 12.59,
-      "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 8023241580.559999
+      "BB_Center_Breakout_5D": "YES",
+      "Market_Cap": 9606254873.8
     }
   },
   "IONQ": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 20.27,
       "NY_Trend": 10.12,
-      "Up_Count": 2,
-      "Down_Count": 11,
-      "Up_Down_Ratio": 15.38,
+      "Up_Count": 4,
+      "Down_Count": 13,
+      "Up_Down_Ratio": 23.53,
       "Order": "NO",
       "CY_Est": -4.48333,
       "CY_30": -3.72761,
@@ -33085,33 +33085,33 @@
       "EPS_CY": 146.34,
       "EPS_NY": -27.14,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 15192587100.0
+      "Market_Cap": 16343172363.04
     }
   },
   "SEDG": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
-      "CY_Trend": 19.86,
-      "NY_Trend": -15.59,
+      "CY_Trend": 10.93,
+      "NY_Trend": -13.67,
       "Up_Count": 8,
       "Down_Count": 74,
       "Up_Down_Ratio": 9.76,
       "Order": "NO",
       "CY_Est": -0.34345,
-      "CY_30": -0.28655,
+      "CY_30": -0.3096,
       "NY_Est": 0.87734,
-      "NY_30": 1.03934,
+      "NY_30": 1.0163,
       "Target_Status": "NO",
       "SALE_CY": 10.44,
       "SALE_NY": 10.81,
       "EPS_CY": -85.57,
       "EPS_NY": -355.45,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 2173704676.8399997
+      "Market_Cap": 2214926928.0
     }
   },
   "CENX": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": 1.55,
       "NY_Trend": 10.74,
@@ -33129,18 +33129,18 @@
       "EPS_CY": 303.72,
       "EPS_NY": 21.59,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4112181474.2999997
+      "Market_Cap": 4033976771.25
     }
   },
   "KNSA": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -3.54,
       "NY_Trend": -7.97,
       "Up_Count": 6,
       "Down_Count": 8,
       "Up_Down_Ratio": 42.86,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 1.1575,
       "CY_30": 1.2,
       "NY_Est": 1.6175,
@@ -33151,18 +33151,18 @@
       "EPS_CY": 54.33,
       "EPS_NY": 39.74,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 5975078915.54
+      "Market_Cap": 6189644951.29
     }
   },
   "TVTX": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": -1.07,
       "NY_Trend": 3.32,
       "Up_Count": 11,
       "Down_Count": 6,
       "Up_Down_Ratio": 64.71,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Est": 1.74155,
       "CY_30": 1.7603,
       "NY_Est": 5.6724,
@@ -33173,11 +33173,11 @@
       "EPS_CY": 91.38,
       "EPS_NY": 225.71,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 6201436584.780001
+      "Market_Cap": 6102462448.679999
     }
   },
   "VSECU": {
-    "timestamp": "2026-09-15",
+    "timestamp": "2026-09-18",
     "data": {
       "CY_Trend": null,
       "NY_Trend": null,
@@ -33190,8 +33190,8 @@
       "NY_Est": null,
       "NY_30": null,
       "Target_Status": "NO",
-      "SALE_CY": 62.88,
-      "SALE_NY": 21.48,
+      "SALE_CY": 62.87,
+      "SALE_NY": 21.42,
       "EPS_CY": null,
       "EPS_NY": null,
       "BB_Center_Breakout_5D": "NO",
