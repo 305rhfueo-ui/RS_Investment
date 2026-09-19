@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-19 00:32:03 UTC",
+  "last_updated": "2026-09-19 23:55:49 UTC",
   "source": "https://finance.yahoo.com/quote/%5EVIX/history/",
   "count": 254,
   "data": [
@@ -1524,8 +1524,8 @@
     {
       "date": "2026-09-18",
       "close": 14.81,
-      "qqq": null,
-      "spy": null
+      "qqq": 721.45,
+      "spy": 761.69
     }
   ]
 }
