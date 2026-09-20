@@ -33,7 +33,7 @@
     "0OPM": 23.82,
     "1OPM": 8.12,
     "2OPM": 9.81,
-    "last_updated": "2026-09-06 05:47:15"
+    "last_updated": "2026-09-20 06:02:25"
   },
   "AWI": {
     "0SALE": 11.16,
@@ -348,7 +348,7 @@
     "0OPM": 8.63,
     "1OPM": 7.79,
     "2OPM": 8.42,
-    "last_updated": "2026-09-06 05:40:09"
+    "last_updated": "2026-09-20 05:52:40"
   },
   "CQP": {
     "0SALE": 5.21,
@@ -441,7 +441,7 @@
     "0OPM": 12.07,
     "1OPM": 18.69,
     "2OPM": 15.48,
-    "last_updated": "2026-09-06 06:04:26"
+    "last_updated": "2026-09-20 06:05:56"
   },
   "J": {
     "0SALE": 34.46,
@@ -477,7 +477,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:05:09"
+    "last_updated": "2026-09-20 06:33:39"
   },
   "PAG": {
     "0SALE": 5.98,
@@ -525,7 +525,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:34:11"
+    "last_updated": "2026-09-20 06:03:07"
   },
   "AMZN": {
     "0SALE": 19.62,
@@ -669,7 +669,7 @@
     "0OPM": 16.98,
     "1OPM": 30.93,
     "2OPM": 24.38,
-    "last_updated": "2026-09-05 06:11:14"
+    "last_updated": "2026-09-20 06:38:16"
   },
   "PLMR": {
     "0SALE": 54.65,
@@ -774,7 +774,7 @@
     "0OPM": 60.22,
     "1OPM": 58.43,
     "2OPM": 55.76,
-    "last_updated": "2026-09-06 05:49:20"
+    "last_updated": "2026-09-20 06:07:29"
   },
   "DRI": {
     "0SALE": 13.67,
@@ -972,7 +972,7 @@
     "0OPM": 23.17,
     "1OPM": 23.22,
     "2OPM": 23.42,
-    "last_updated": "2026-09-06 05:46:55"
+    "last_updated": "2026-09-20 06:14:00"
   },
   "BCO": {
     "0SALE": 7.06,
@@ -1005,7 +1005,7 @@
     "0OPM": 27.49,
     "1OPM": 27.78,
     "2OPM": 23.03,
-    "last_updated": "2026-09-06 05:57:15"
+    "last_updated": "2026-09-20 06:02:48"
   },
   "FLUT": {
     "0SALE": 3.32,
@@ -1074,7 +1074,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:55:23"
+    "last_updated": "2026-09-20 06:39:34"
   },
   "TCI": {
     "0SALE": 2.77,
@@ -1371,7 +1371,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:50:50"
+    "last_updated": "2026-09-20 05:55:19"
   },
   "BC": {
     "0SALE": 7.66,
@@ -1521,7 +1521,7 @@
     "0OPM": 28.34,
     "1OPM": 36.65,
     "2OPM": 24.35,
-    "last_updated": "2026-09-06 06:26:02"
+    "last_updated": "2026-09-20 06:29:33"
   },
   "ELV": {
     "0SALE": 1.4,
@@ -1545,7 +1545,7 @@
     "0OPM": 20.04,
     "1OPM": 18.86,
     "2OPM": 20.44,
-    "last_updated": "2026-09-06 05:54:33"
+    "last_updated": "2026-09-20 06:09:40"
   },
   "CCS": {
     "0SALE": -7.34,
@@ -2070,7 +2070,7 @@
     "0OPM": 19.22,
     "1OPM": 13.97,
     "2OPM": 10.6,
-    "last_updated": "2026-09-06 05:47:37"
+    "last_updated": "2026-09-20 06:37:37"
   },
   "VLTO": {
     "0SALE": 7.51,
@@ -2220,7 +2220,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:15:21"
+    "last_updated": "2026-09-20 06:30:33"
   },
   "LYV": {
     "0SALE": 9.42,
@@ -2517,7 +2517,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:14:20"
+    "last_updated": "2026-09-20 06:15:59"
   },
   "BALL": {
     "0SALE": 19.74,
@@ -3186,7 +3186,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:18:34"
+    "last_updated": "2026-09-20 05:57:59"
   },
   "BR": {
     "0SALE": 7.49,
@@ -3633,7 +3633,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:15:49"
+    "last_updated": "2026-09-20 05:55:01"
   },
   "MMS": {
     "0SALE": -5.15,
@@ -5190,7 +5190,7 @@
     "0OPM": null,
     "1OPM": 34.9,
     "2OPM": 29.71,
-    "last_updated": "2026-09-19 06:22:09"
+    "last_updated": "2026-09-20 06:10:48"
   },
   "CRAI": {
     "0SALE": 12.81,
@@ -5973,7 +5973,7 @@
     "0OPM": null,
     "1OPM": 5.62,
     "2OPM": 5.87,
-    "last_updated": "2026-09-19 05:39:02"
+    "last_updated": "2026-09-20 06:42:41"
   },
   "ITW": {
     "0SALE": 6.12,
@@ -6486,7 +6486,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:02:54"
+    "last_updated": "2026-09-20 06:14:44"
   },
   "MTZ": {
     "0SALE": 23.38,
@@ -6813,7 +6813,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:07:04"
+    "last_updated": "2026-09-20 06:08:42"
   },
   "LECO": {
     "0SALE": 12.03,
@@ -6906,7 +6906,7 @@
     "0OPM": 5.57,
     "1OPM": 29.75,
     "2OPM": 22.76,
-    "last_updated": "2026-09-06 05:59:58"
+    "last_updated": "2026-09-20 06:06:16"
   },
   "PSMT": {
     "0SALE": 12.49,
@@ -9087,7 +9087,7 @@
     "0OPM": 5.03,
     "1OPM": 16.45,
     "2OPM": 10.76,
-    "last_updated": "2026-09-06 06:07:20"
+    "last_updated": "2026-09-20 06:30:12"
   },
   "DJCO": {
     "0SALE": 15.25,
@@ -9738,7 +9738,7 @@
     "0OPM": null,
     "1OPM": 4.12,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:06:24"
+    "last_updated": "2026-09-20 05:56:51"
   },
   "GEV": {
     "0SALE": 21.87,
@@ -9798,7 +9798,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:04:10"
+    "last_updated": "2026-09-20 06:24:39"
   },
   "ANAB": {
     "0SALE": -7.98,
@@ -10833,7 +10833,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:07:27"
+    "last_updated": "2026-09-20 06:34:21"
   },
   "BKNG": {
     "0SALE": 8.15,
@@ -12051,7 +12051,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:39:40"
+    "last_updated": "2026-09-20 06:12:09"
   },
   "UTHR": {
     "0SALE": -1.92,
@@ -12741,7 +12741,7 @@
     "0OPM": 10.2,
     "1OPM": 8.19,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:47:54"
+    "last_updated": "2026-09-20 06:21:01"
   },
   "DBD": {
     "0SALE": 1.7,
@@ -12834,7 +12834,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:20:42"
+    "last_updated": "2026-09-20 06:38:55"
   },
   "DY": {
     "0SALE": 45.57,
@@ -13065,7 +13065,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:57:31"
+    "last_updated": "2026-09-20 06:33:17"
   },
   "SCL": {
     "0SALE": 15.04,
@@ -14190,7 +14190,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:35:21"
+    "last_updated": "2026-09-20 05:58:49"
   },
   "CBRE": {
     "0SALE": 15.53,
@@ -14934,7 +14934,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:13:47"
+    "last_updated": "2026-09-20 05:54:40"
   },
   "YUMC": {
     "0SALE": 9.73,
@@ -15540,7 +15540,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:39:22"
+    "last_updated": "2026-09-20 06:06:36"
   },
   "GIS": {
     "0SALE": -8.37,
@@ -15819,7 +15819,7 @@
     "0OPM": null,
     "1OPM": 6.99,
     "2OPM": 15.23,
-    "last_updated": "2026-09-19 05:57:10"
+    "last_updated": "2026-09-20 06:16:16"
   },
   "COST": {
     "0SALE": 11.58,
@@ -16032,7 +16032,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:55:42"
+    "last_updated": "2026-09-20 06:15:02"
   },
   "RGA": {
     "0SALE": 18.54,
@@ -16056,7 +16056,7 @@
     "0OPM": 25.75,
     "1OPM": 27.39,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:19:28"
+    "last_updated": "2026-09-20 06:37:56"
   },
   "KR": {
     "0SALE": 2.22,
@@ -16173,7 +16173,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:08:07"
+    "last_updated": "2026-09-20 05:56:15"
   },
   "GLNG": {
     "0SALE": null,
@@ -16293,7 +16293,7 @@
     "0OPM": null,
     "1OPM": 2.74,
     "2OPM": 5.23,
-    "last_updated": "2026-09-19 05:49:24"
+    "last_updated": "2026-09-20 06:15:41"
   },
   "VSAT": {
     "0SALE": -1.24,
@@ -16533,7 +16533,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:10:59"
+    "last_updated": "2026-09-20 06:30:53"
   },
   "YOU": {
     "0SALE": 26.56,
@@ -16581,7 +16581,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:19:07"
+    "last_updated": "2026-09-20 06:13:40"
   },
   "PARR": {
     "0SALE": 56.8,
@@ -16725,7 +16725,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:07:49"
+    "last_updated": "2026-09-20 06:02:07"
   },
   "TGTX": {
     "0SALE": 70.27,
@@ -16977,7 +16977,7 @@
     "0OPM": null,
     "1OPM": 21.1,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:04:31"
+    "last_updated": "2026-09-20 06:09:01"
   },
   "RDVT": {
     "0SALE": 22.71,
@@ -17229,7 +17229,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:38:43"
+    "last_updated": "2026-09-20 06:14:21"
   },
   "CBRS": {
     "0SALE": null,
@@ -17241,19 +17241,19 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 05:38:01"
+    "last_updated": "2026-09-20 06:29:54"
   },
   "FPS": {
-    "0SALE": 103.36,
-    "1SALE": 69.05,
-    "2SALE": 83.93,
-    "0NI": 165.72,
-    "1NI": -94.64,
-    "2NI": 59.42,
-    "0OPM": 10.39,
-    "1OPM": 6.78,
-    "2OPM": 11.0,
-    "last_updated": "2026-09-06 06:24:00"
+    "0SALE": 94.3,
+    "1SALE": 103.36,
+    "2SALE": 69.05,
+    "0NI": "흑자전환",
+    "1NI": 165.72,
+    "2NI": -94.64,
+    "0OPM": 19.91,
+    "1OPM": 10.39,
+    "2OPM": 6.78,
+    "last_updated": "2026-09-20 06:39:14"
   },
   "MANE": {
     "0SALE": null,
@@ -17265,7 +17265,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:16:28"
+    "last_updated": "2026-09-20 06:13:18"
   },
   "SUNB": {
     "0SALE": 21.35,
@@ -17289,7 +17289,7 @@
     "0OPM": 19.91,
     "1OPM": 14.37,
     "2OPM": 17.52,
-    "last_updated": "2026-09-06 06:28:22"
+    "last_updated": "2026-09-20 06:41:16"
   },
   "FDXF": {
     "0SALE": null,
@@ -17301,7 +17301,7 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:10:36"
+    "last_updated": "2026-09-20 06:00:42"
   },
   "QNT": {
     "0SALE": null,
@@ -17313,6 +17313,6 @@
     "0OPM": null,
     "1OPM": null,
     "2OPM": null,
-    "last_updated": "2026-09-19 06:16:10"
+    "last_updated": "2026-09-20 06:38:35"
   }
 }
