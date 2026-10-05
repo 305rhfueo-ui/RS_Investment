@@ -679,6 +679,10 @@
                             <li><strong>60D_BRK (60일 최고가 종가 돌파):</strong> 오늘 종가가 직전 60영업일(약 3개월, 오늘 제외) 동안의 모든 장중 최고가를 돌파하며 신고가를 달성했는지 여부(YES/NO)입니다.</li>
                             <li><strong>52주 신고가 (New_High_52W):</strong> 최근 1년(52주) 구간에서 당일 장중 고가가 그 기간의 최고가에 도달했으면 <code>Y</code>, 아니면 <code>N</code>입니다. 판정식: <code>당일 고가 &ge; 52주 최고가</code>. <code>Y</code>인 종목은 위쪽에 손실을 안고 버티는 대기 매물이 한 주도 없는 상태라서, 저항 없이 추세가 이어지기 가장 좋은 자리입니다. 미너비니와 쿨라매기가 공통으로 강조하는 주도주의 출발 신호이며, 화면에서는 초록색으로 표시됩니다.</li>
                             <li><strong>52주 신저가 (New_Low_52W):</strong> 최근 1년(52주) 구간에서 당일 장중 저가가 그 기간의 최저가에 도달했으면 <code>Y</code>, 아니면 <code>N</code>입니다. 판정식: <code>당일 저가 &le; 52주 최저가</code>. 신고가의 정반대 개념으로, 보유자 전원이 손실 구간에 놓여 반등할 때마다 매물이 쏟아지는 최악의 수급 상태를 뜻합니다. 화면에서는 빨간색으로 표시됩니다. 매수 후보를 거르는 용도보다는, 보유 종목의 손절 판단과 산업군 전체가 무너지고 있는지를 확인하는 위험 관리 지표로 활용하십시오. 값이 싸 보인다는 이유로 <code>Y</code> 종목을 매수하는 바닥 잡기는 가장 흔한 실패 패턴입니다.</li>
+                            <li><strong>전일比 (%) (Ret_1D_Pct):</strong> 데이터 기준일(사이트 상단 <em>last_updated</em>가 가리키는 마지막 미국 세션) 종가를 <strong>전영업일 종가</strong>와 비교한 상승률입니다. 공식: <code>(기준일 종가 / 전영업일 종가 − 1) × 100</code>. 양수는 빨강, 음수는 파랑. 하루 급등은 호재(실적·계약)나 거래량 유입을 뜻하므로, 아래 거래대금과 같이 봐야 의미가 있습니다.</li>
+                            <li><strong>5일比 (%) (Ret_5D_Pct):</strong> 기준일 종가를 <strong>5영업일 전 종가</strong>와 비교한 상승률입니다. 공식: <code>(기준일 종가 / 5영업일 전 종가 − 1) × 100</code>. 한 주 동안의 방향을 보여 주며, 전일比는 크고 5일比는 작으면 "오늘 처음 움직인 종목", 둘 다 크면 "이미 한 주 내내 오른 종목"으로 읽습니다.</li>
+                            <li><strong>거래대금 ($M) (Dollar_Vol_M):</strong> 기준일의 <code>종가 × 거래량</code>을 백만 달러로 나타낸 값입니다. 거래량(주 수)과 달리 주가가 다른 종목끼리 비교할 수 있고, 값이 클수록 큰 돈이 그날 오간 종목입니다. 유동성이 적은 종목(수십 $M 이하)은 슬리피지가 커서 진입·청산이 어렵습니다.</li>
+                            <li><strong>거래대금 상승 버튼 (RS Rank 화면):</strong> <strong>전일比 +5% 이상</strong> 오른 종목만 남기고 <strong>거래대금이 큰 순서</strong>로 정렬합니다. "큰 돈이 들어오면서 크게 오른 종목"을 한눈에 보는 용도입니다. 다시 누르면 전체 목록(RS 6mo 순)으로 돌아갑니다. 과거 날짜 스냅샷에는 이 세 값이 없어 <code>-</code>로 표시되고 버튼 결과도 비어 있습니다(2026-10-06 수집분부터 제공).</li>
                         </ul>
                     </li>
                 </ul>
@@ -722,6 +726,11 @@
                             <a href="#" id="rs-high-btn" onclick="toggleRSHigh(); return false;"
                                 style="color: #9c27b0; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
                                 High
+                            </a>
+                            <a href="#" id="rs-dollar-btn" onclick="toggleRSDollar(); return false;"
+                                title="전영업일 대비 +5% 이상 오른 종목만, 거래대금 큰 순"
+                                style="color: #9c27b0; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
+                                거래대금 상승
                             </a>
                         </div>
                     </div>
@@ -1920,6 +1929,7 @@
             industryFilter: null, // [Added] Industry Filter State (Array of selected industries, or null)
             brk60dFilter: false, // [Added] 60D Breakout Filter State
             filterRSHigh: false, // [Added] High Filter State
+            filterRSDollar: false, // [Added 2026-10-05] 거래대금 상승 (전일比 ≥ 5%, 거래대금 내림차순)
             date10D: '',
             date25D: ''
         };
@@ -2800,6 +2810,7 @@ indPopup.style.display = 'none';
                 appState.filterRSTop1 = true;
                 appState.filterRSTop2 = false;
                 appState.filterRSHigh = false;
+                appState.filterRSDollar = false; resetRSDollarBtn();
                 btn.style.backgroundColor = '#9c27b0';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
@@ -2839,6 +2850,7 @@ indPopup.style.display = 'none';
                 appState.filterRSTop2 = true;
                 appState.filterRSTop1 = false;
                 appState.filterRSHigh = false;
+                appState.filterRSDollar = false; resetRSDollarBtn();
                 btn.style.backgroundColor = '#9c27b0';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
@@ -2870,6 +2882,34 @@ indPopup.style.display = 'none';
             updateUI();
         }
 
+        // [Added 2026-10-05] 거래대금 상승 — 전영업일 대비 +5% 이상 오른 종목만, 거래대금($M) 내림차순.
+        //   데이터 기준일(사이트 last_updated 의 미국 세션) 종가·거래량이다.
+        function resetRSDollarBtn() {
+            const b = document.getElementById('rs-dollar-btn');
+            if (!b) return;
+            b.style.backgroundColor = 'transparent'; b.style.color = '#9c27b0'; b.style.padding = '0';
+            b.style.borderRadius = '0'; b.style.textDecoration = 'underline';
+        }
+        function toggleRSDollar() {
+            const btn = document.getElementById('rs-dollar-btn');
+            if (!appState.filterRSDollar) {
+                appState.filterRSDollar = true;
+                appState.filterRSTop1 = false; appState.filterRSTop2 = false; appState.filterRSHigh = false;
+                for (const id of ['rs-top1-btn', 'rs-top2-btn', 'rs-high-btn']) {
+                    const o = document.getElementById(id);
+                    if (o) { o.style.backgroundColor = 'transparent'; o.style.color = '#9c27b0'; o.style.padding = '0'; o.style.borderRadius = '0'; o.style.textDecoration = 'underline'; }
+                }
+                btn.style.backgroundColor = '#9c27b0'; btn.style.color = 'white'; btn.style.padding = '2px 5px';
+                btn.style.borderRadius = '3px'; btn.style.textDecoration = 'none';
+                appState.sort = { key: 'Dollar_Vol_M', asc: false };
+            } else {
+                appState.filterRSDollar = false;
+                resetRSDollarBtn();
+                appState.sort = { key: 'RS_6mo', asc: false };
+            }
+            updateUI();
+        }
+
         function toggleRSHigh() {
             const btn = document.getElementById('rs-high-btn');
             const top1Btn = document.getElementById('rs-top1-btn');
@@ -2878,6 +2918,7 @@ indPopup.style.display = 'none';
                 appState.filterRSHigh = true;
                 appState.filterRSTop1 = false;
                 appState.filterRSTop2 = false;
+                appState.filterRSDollar = false; resetRSDollarBtn();
                 btn.style.backgroundColor = '#9c27b0';
                 btn.style.color = 'white';
                 btn.style.padding = '2px 5px';
@@ -3147,10 +3188,13 @@ indPopup.style.display = 'none';
             const rsTop1Btn = document.getElementById('rs-top1-btn');
             const rsTop2Btn = document.getElementById('rs-top2-btn');
             const rsHighBtn = document.getElementById('rs-high-btn');
+            const rsDollarBtn = document.getElementById('rs-dollar-btn');
             if (appState.mode === 'RS_RANK') {
                 if (rsTop1Btn) rsTop1Btn.style.display = 'inline-block';
                 if (rsTop2Btn) rsTop2Btn.style.display = 'inline-block';
                 if (rsHighBtn) rsHighBtn.style.display = 'inline-block';
+                if (rsDollarBtn) { rsDollarBtn.style.display = 'inline-block'; rsDollarBtn.innerText = appState.filterRSDollar ? '돌아가기' : '거래대금 상승'; }
+                if (appState.filterRSDollar) subtitleText += " (전일比 +5% 이상 · 거래대금 순)";
                 
                 if (appState.filterRSTop1) {
                     if (rsTop1Btn) rsTop1Btn.innerText = "돌아가기";
@@ -3176,6 +3220,7 @@ indPopup.style.display = 'none';
                 if (rsTop1Btn) rsTop1Btn.style.display = 'none';
                 if (rsTop2Btn) rsTop2Btn.style.display = 'none';
                 if (rsHighBtn) rsHighBtn.style.display = 'none';
+                if (rsDollarBtn) rsDollarBtn.style.display = 'none';
             }
 
             // [Added] WRS Rank Filter UI Update
@@ -3772,6 +3817,8 @@ indPopup.style.display = 'none';
                 });
             } else if (appState.mode === 'RS_RANK' && appState.filterRSHigh) {
                 targetData = targetData.filter(item => item.New_High_52W === 'Y');
+            } else if (appState.mode === 'RS_RANK' && appState.filterRSDollar) {
+                targetData = targetData.filter(item => { const r = parseFloat(item.Ret_1D_Pct); return !isNaN(r) && r >= 5; });
             }
 
             if (appState.mode === 'WRS_RANK' && appState.filterWRSTop1) {
