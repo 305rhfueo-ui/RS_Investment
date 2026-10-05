@@ -618,6 +618,26 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
                 if avg_vol_5d_prev > 0:
                     vol_surge_wk = round(latest_vol / avg_vol_5d_prev, 2)
 
+        # [Added 2026-10-05] 전영업일 대비 · 5영업일 전 대비 주가 상승률(%), 당일 거래대금(백만 달러)
+        #   사이트 RS Rank 표에 표시한다. 봉이 모자라면 None → 화면에 '-'.
+        ret_1d_pct = None
+        ret_5d_pct = None
+        dollar_vol_m = None
+        #   ⚠️ 위 hist 와 같은 이유로 NaN 봉은 건너뛴다 (장 마감 직후 종가가 null 인 종목).
+        c = hist
+        if len(c) >= 2:
+            prev1 = float(c.iloc[-2])
+            if prev1 > 0:
+                ret_1d_pct = round((float(c.iloc[-1]) / prev1 - 1) * 100, 2)
+        if len(c) >= 6:
+            prev5 = float(c.iloc[-6])
+            if prev5 > 0:
+                ret_5d_pct = round((float(c.iloc[-1]) / prev5 - 1) * 100, 2)
+        if 'Volume' in df.columns and len(c) >= 1:
+            v = df['Volume'].reindex(c.index).dropna()
+            if len(v) >= 1 and v.index[-1] == c.index[-1]:
+                dollar_vol_m = round(float(c.iloc[-1]) * float(v.iloc[-1]) / 1e6, 1)
+
         cls_pos = None
         if 'High' in df.columns and 'Low' in df.columns and not df.empty:
             latest_high = float(df['High'].iloc[-1])
@@ -961,6 +981,9 @@ def process_single_ticker(original_ticker, batch_data, qqq_data):
             'Above_50_SMA': above_50_sma,
             'Above_150_SMA': above_150_sma,
             'Vol_Surge_Wk': vol_surge_wk,
+            'Ret_1D_Pct': ret_1d_pct,
+            'Ret_5D_Pct': ret_5d_pct,
+            'Dollar_Vol_M': dollar_vol_m,
             'api_called': api_called
         }
 

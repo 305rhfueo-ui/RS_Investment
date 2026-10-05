@@ -4297,6 +4297,9 @@ indPopup.style.display = 'none';
                     <th onclick="handleIndustryHeaderClick(event)">Industry ⬍</th>
                     <th onclick="sortTable('New_High_52W')" title="최근 1년(52주) 구간에서 당일 고가가 기간 내 최고가에 도달했으면 Y. 위쪽에 대기 매물이 없는 신고가 돌파 상태를 뜻합니다.">52주 신고가 ⬍</th>
                     <th onclick="sortTable('New_Low_52W')" title="최근 1년(52주) 구간에서 당일 저가가 기간 내 최저가에 도달했으면 Y. 매도 압력이 가장 강한 신저가 갱신 상태로 약세 신호입니다.">52주 신저가 ⬍</th>
+                    <th onclick="sortTable('Ret_1D_Pct')" title="전영업일 종가 대비 당일 종가 상승률">전일比 (%) ⬍</th>
+                    <th onclick="sortTable('Ret_5D_Pct')" title="5영업일 전 종가 대비 당일 종가 상승률">5일比 (%) ⬍</th>
+                    <th onclick="sortTable('Dollar_Vol_M')" title="당일 종가 × 거래량, 백만 달러 단위">거래대금 ($M) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo_Rank_Pct')">1mo rnk ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
@@ -4341,6 +4344,9 @@ indPopup.style.display = 'none';
                         <td style="font-weight:bold; cursor:pointer;" class="drilldown-link" onclick="drillDown('${item.Sector}|${item.Industry}')">${item.Industry || '-'}</td>
                         <td class="${item.New_High_52W === 'Y' ? 'rs-pos' : ''}">${item.New_High_52W || '-'}</td>
                         <td class="${item.New_Low_52W === 'Y' ? 'rs-neg' : ''}">${item.New_Low_52W || '-'}</td>
+                        <td class="${isValidNumber(item.Ret_1D_Pct) ? (item.Ret_1D_Pct > 0 ? 'rs-pos' : item.Ret_1D_Pct < 0 ? 'rs-neg' : '') : ''}">${isValidNumber(item.Ret_1D_Pct) ? (item.Ret_1D_Pct > 0 ? '+' : '') + item.Ret_1D_Pct.toFixed(2) + '%' : '-'}</td>
+                        <td class="${isValidNumber(item.Ret_5D_Pct) ? (item.Ret_5D_Pct > 0 ? 'rs-pos' : item.Ret_5D_Pct < 0 ? 'rs-neg' : '') : ''}">${isValidNumber(item.Ret_5D_Pct) ? (item.Ret_5D_Pct > 0 ? '+' : '') + item.Ret_5D_Pct.toFixed(2) + '%' : '-'}</td>
+                        <td>${isValidNumber(item.Dollar_Vol_M) ? item.Dollar_Vol_M.toLocaleString('en-US', {maximumFractionDigits: 1}) : '-'}</td>
                         <td>${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
                         <td class="${isValidNumber(rnk1) && rnk1 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk1)}</td>
                         <td>${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
