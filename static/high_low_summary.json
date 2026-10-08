@@ -1,7 +1,14 @@
 {
-  "last_updated": "2026-10-07 01:57:55 UTC",
-  "total_dates": 235,
+  "last_updated": "2026-10-08 01:52:56 UTC",
+  "total_dates": 236,
   "dates": [
+    {
+      "date": "2026-10-08",
+      "total": 1412,
+      "highs": 11,
+      "lows": 25,
+      "filled": true
+    },
     {
       "date": "2026-10-07",
       "total": 1412,
