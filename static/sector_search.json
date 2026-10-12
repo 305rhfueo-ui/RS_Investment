@@ -6266,5 +6266,65 @@
   "SLG": {
     "Sector": "Real Estate",
     "Industry": "REIT - Office"
+  },
+  "NFEGP": {
+    "Sector": "N/A",
+    "Industry": "N/A"
+  },
+  "SKHY": {
+    "Sector": "Technology",
+    "Industry": "Semiconductors"
+  },
+  "HONA": {
+    "Sector": "Industrials",
+    "Industry": "Aerospace & Defense"
+  },
+  "DD": {
+    "Sector": "Basic Materials",
+    "Industry": "Specialty Chemicals"
+  },
+  "KOD": {
+    "Sector": "Healthcare",
+    "Industry": "Biotechnology"
+  },
+  "ECHO": {
+    "Sector": "Communication Services",
+    "Industry": "Telecom Services"
+  },
+  "PBAM": {
+    "Sector": "Financial Services",
+    "Industry": "Banks - Regional"
+  },
+  "PBF": {
+    "Sector": "Energy",
+    "Industry": "Oil & Gas Refining & Marketing"
+  },
+  "TXG": {
+    "Sector": "Healthcare",
+    "Industry": "Medical Devices"
+  },
+  "RNG": {
+    "Sector": "Technology",
+    "Industry": "Software - Application"
+  },
+  "IOND": {
+    "Sector": "Financial Services",
+    "Industry": "Capital Markets"
+  },
+  "NTNX": {
+    "Sector": "Technology",
+    "Industry": "Software - Infrastructure"
+  },
+  "DK": {
+    "Sector": "Energy",
+    "Industry": "Oil & Gas Refining & Marketing"
+  },
+  "HPE": {
+    "Sector": "Technology",
+    "Industry": "Communication Equipment"
+  },
+  "VYLR": {
+    "Sector": "Financial Services",
+    "Industry": "Shell Companies"
   }
 }
