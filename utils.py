@@ -223,10 +223,41 @@ def _truncated_count(data, tickers):
             n += 1
     return n
 
+# 야후는 장 마감 뒤 몇 시간 동안 당일 일봉을 비워서 준다 — 종가가 null 이고, yfinance 는 그 행의 시가·고가·저가·종가를 NaN 으로 만든다.
+# 2026-10-22 실측: 갱신 시각(미 동부 20시 전후)에는 대부분 종목이 그 상태라, NaN 행을 버린 결과 평일 갱신마다 55~85% 종목이
+# 하루 전 종가로 계산됐다(MRNA 10/21: 사이트 242.08·+6.69% ↔ 실제 245.81·+1.54%). 주말 갱신만 맞았다.
+# 같은 요청의 메타(regularMarketPrice·DayHigh·DayLow·Volume)는 그날 확정값이라 **마지막 봉 하나만** 메운다.
+# 야후 호출 수는 그대로다(yf.download 도 threads=False 면 종목마다 history 를 한 번씩 부른다). 시가는 메타에 없어 비워 둔다(이 파일은 시가를 안 쓴다).
+FILLED_LAST = 0
+
+def history_filled(ticker, period="1y"):
+    global FILLED_LAST
+    try:
+        tk = yf.Ticker(ticker)
+        h = tk.history(period=period, auto_adjust=True)
+        m = tk.history_metadata or {}
+    except Exception:
+        return pd.DataFrame()
+    if h is None or h.empty:
+        return pd.DataFrame()
+    h.index = h.index.tz_localize(None)          # yf.download 처럼 날짜만
+    t = m.get('regularMarketTime')
+    if pd.isna(h['Close'].iloc[-1]) and m.get('regularMarketPrice') and t is not None and pd.Timestamp(t).date() == h.index[-1].date():
+        for col, key in (('Close', 'regularMarketPrice'), ('High', 'regularMarketDayHigh'), ('Low', 'regularMarketDayLow'), ('Volume', 'regularMarketVolume')):
+            if pd.isna(h[col].iloc[-1]) and m.get(key) is not None:
+                h.loc[h.index[-1], col] = m[key]
+        FILLED_LAST += 1
+    return h
+
 def download_batch(tickers, tries=3):
     data = pd.DataFrame()
     for attempt in range(tries):
-        data = yf.download(tickers, period="1y", progress=False, group_by='ticker', threads=False)
+        frames = {}
+        for t in tickers:
+            f = history_filled(t)
+            if not f.empty:
+                frames[t] = f
+        data = pd.concat(frames, axis=1) if frames else pd.DataFrame()   # (티커, 항목) 2단 열 — group_by='ticker' 와 같은 모양
         short = _truncated_count(data, tickers)
         if short * 2 <= len(tickers) or attempt == tries - 1:
             if short:
@@ -249,7 +280,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
     print("벤치마크 (QQQ) 데이터 다운로드 중...")
     try:
         # 120영업일(6mo) 확보를 위해 1년치 데이터 요청
-        qqq_data = yf.download("QQQ", period="1y", progress=False)
+        qqq_data = history_filled("QQQ")   # QQQ 도 마지막 봉을 메운다 — 종목만 메우면 RS 가 다른 날끼리 비교된다
         if len(qqq_data) < 121:
             print("경고: QQQ 데이터가 충분하지 않아 RS 계산이 부정확할 수 있습니다.")
     except Exception as e:
@@ -360,6 +391,7 @@ def get_market_cap_and_rs(ticker_info_list, batch_size=20):
             
             time.sleep(20) # 재시도 배치 간 딜레이 (20초로 보수적 설정)
 
+    print(f"마지막 봉(당일 종가 null)을 메타 종가로 메움: {FILLED_LAST}종목")
     # 작업 완료 후 캐시 저장
     save_sector_cache()
     save_analysis_cache()
