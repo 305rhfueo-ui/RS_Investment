@@ -17946,25 +17946,25 @@
     }
   },
   "BAH": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
-      "CY_Trend": -1.1,
-      "NY_Trend": -0.25,
-      "Up_Count": 5,
-      "Down_Count": 13,
-      "Up_Down_Ratio": 27.78,
+      "CY_Trend": 1.42,
+      "NY_Trend": 0.28,
+      "Up_Count": 7,
+      "Down_Count": 10,
+      "Up_Down_Ratio": 41.18,
       "Order": "NO",
-      "CY_Est": 6.33925,
+      "CY_Est": 6.50024,
       "CY_30": 6.40948,
-      "NY_Est": 6.72473,
+      "NY_Est": 6.76045,
       "NY_30": 6.74137,
       "Target_Status": "NO",
-      "SALE_CY": 1.81,
-      "SALE_NY": 4.66,
-      "EPS_CY": -2.62,
-      "EPS_NY": 6.08,
-      "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 9026184373.92
+      "SALE_CY": 1.51,
+      "SALE_NY": 4.7,
+      "EPS_CY": -0.15,
+      "EPS_NY": 4.0,
+      "BB_Center_Breakout_5D": "NO",
+      "Market_Cap": 9327674497.41449
     }
   },
   "ACLS": {
@@ -17990,7 +17990,7 @@
     }
   },
   "TXT": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
       "CY_Trend": 0.13,
       "NY_Trend": -0.54,
@@ -18008,7 +18008,7 @@
       "EPS_CY": 5.99,
       "EPS_NY": 11.73,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 13291148945.76
+      "Market_Cap": 13213755148.02745
     }
   },
   "HSBC": {
@@ -19486,7 +19486,7 @@
     }
   },
   "HHH": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
       "CY_Trend": -5.86,
       "NY_Trend": 0.0,
@@ -19504,7 +19504,7 @@
       "EPS_CY": 102.18,
       "EPS_NY": -23.23,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4101532650.1600003
+      "Market_Cap": 4191709183.579468
     }
   },
   "CIB": {
@@ -19706,7 +19706,7 @@
     }
   },
   "BCC": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
       "CY_Trend": -0.47,
       "NY_Trend": -1.29,
@@ -19724,7 +19724,7 @@
       "EPS_CY": 10.81,
       "EPS_NY": 33.45,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 2637437222.09
+      "Market_Cap": 2712453552.204033
     }
   },
   "INDB": {
@@ -23180,7 +23180,7 @@
     }
   },
   "NWE": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
       "CY_Trend": -0.42,
       "NY_Trend": -0.07,
@@ -23198,7 +23198,7 @@
       "EPS_CY": 4.33,
       "EPS_NY": 6.22,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 4681508385.0
+      "Market_Cap": 4773169756.214905
     }
   },
   "SYBT": {
@@ -25509,25 +25509,25 @@
     }
   },
   "CTBI": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
-      "CY_Trend": -2.82,
-      "NY_Trend": 0.26,
+      "CY_Trend": -3.4,
+      "NY_Trend": -0.26,
       "Up_Count": 3,
       "Down_Count": 1,
       "Up_Down_Ratio": 75.0,
       "Order": "NO",
-      "CY_Est": 6.2,
+      "CY_Est": 6.16333,
       "CY_30": 6.38,
-      "NY_Est": 6.51667,
+      "NY_Est": 6.48333,
       "NY_30": 6.5,
       "Target_Status": "NO",
-      "SALE_CY": 10.44,
-      "SALE_NY": 4.55,
-      "EPS_CY": 14.18,
-      "EPS_NY": 5.11,
+      "SALE_CY": 9.75,
+      "SALE_NY": 4.67,
+      "EPS_CY": 13.51,
+      "EPS_NY": 5.19,
       "BB_Center_Breakout_5D": "YES",
-      "Market_Cap": 1241416296.82
+      "Market_Cap": 1280840757.0
     }
   },
   "MKC.V": {
@@ -26125,25 +26125,25 @@
     }
   },
   "FCX": {
-    "timestamp": "2026-10-22",
+    "timestamp": "2026-10-25",
     "data": {
-      "CY_Trend": 4.29,
-      "NY_Trend": 4.33,
+      "CY_Trend": 5.07,
+      "NY_Trend": 5.13,
       "Up_Count": 30,
       "Down_Count": 3,
       "Up_Down_Ratio": 90.91,
       "Order": "NO",
-      "CY_Est": 3.17727,
+      "CY_Est": 3.20091,
       "CY_30": 3.04643,
-      "NY_Est": 4.32169,
+      "NY_Est": 4.35504,
       "NY_30": 4.14244,
-      "Target_Status": "NO",
-      "SALE_CY": 16.22,
-      "SALE_NY": 21.11,
-      "EPS_CY": 79.51,
-      "EPS_NY": 36.02,
+      "Target_Status": "YES",
+      "SALE_CY": 16.31,
+      "SALE_NY": 21.2,
+      "EPS_CY": 80.84,
+      "EPS_NY": 36.06,
       "BB_Center_Breakout_5D": "NO",
-      "Market_Cap": 98941607334.70001
+      "Market_Cap": 93599622587.37778
     }
   },
   "D": {
