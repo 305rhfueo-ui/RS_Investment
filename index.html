@@ -615,6 +615,7 @@
                             <li><strong>RS(3mo)</strong>: 60영업일(최근 3개월) 간의 상대강도로 중기 탄력을 가늠합니다.</li>
                             <li><strong>RS(1mo)</strong>: 20영업일(최근 1개월) 간의 상대강도로 가장 최근 수급 쏠림 여부를 판단합니다.</li>
                             <li>양수(+)면 시장 평균(QQQ) 대비 아웃퍼폼(초과 수익)을 의미하며, 음수(-)면 마켓 언더퍼폼(열위 성과)을 뜻합니다.</li>
+                            <li><strong>등락률 (1mo) / 등락률 (3mo) / 등락률 (6mo)</strong> (RS Rank 화면, 각 RS 바로 오른쪽): RS와 <b>같은 기간</b>(20·60·120영업일) 동안 종목 주가 <b>자체</b>의 등락률(%)입니다. 공식: <code>(기준일 종가 / N영업일 전 종가 − 1) × 100</code>. RS는 이 값에서 같은 기간 QQQ 등락률을 뺀 값이라(RS는 소수 단위 — 0.40 = +40%p), <code>등락률 − RS × 100</code> = 그 기간 QQQ 등락률입니다. 예: 등락률(1mo) +31.5%, RS(1mo) 0.40이면 그 한 달 QQQ는 −8.7%. 시장이 빠질 때는 RS가 커도 실제 주가는 덜 올랐거나 내렸을 수 있으니 둘을 함께 봅니다. 과거 날짜 스냅샷은 2026-07-28 수집분부터 있습니다.</li>
                         </ul>
                     </li>
                     <li style="margin-bottom: 8px;"><strong>시가총액</strong>: 주가 × 발행주식수 (기업의 총 시장 가치이며 주도 대장주와 소형 테마주를 구별하는 척도입니다.)</li>
@@ -4348,10 +4349,13 @@ indPopup.style.display = 'none';
                     <th onclick="sortTable('Ret_5D_Pct')" title="5영업일 전 종가 대비 당일 종가 상승률">5일比 (%) ⬍</th>
                     <th onclick="sortTable('Dollar_Vol_M')" title="당일 종가 × 거래량, 백만 달러 단위">거래대금 ($M) ⬍</th>
                     <th onclick="sortTable('RS_1mo')">RS (1mo) ⬍</th>
+                    <th onclick="sortTable('Ret_1M_Pct')" title="RS(1mo)와 같은 20영업일(1개월) 동안 이 종목 주가 자체의 등락률. (기준일 종가 / 20영업일 전 종가 − 1) × 100">등락률 (1mo) ⬍</th>
                     <th onclick="sortTable('RS_1mo_Rank_Pct')">1mo rnk ⬍</th>
                     <th onclick="sortTable('RS_3mo')">RS (3mo) ⬍</th>
+                    <th onclick="sortTable('Ret_3M_Pct')" title="RS(3mo)와 같은 60영업일(3개월) 동안 이 종목 주가 자체의 등락률. (기준일 종가 / 60영업일 전 종가 − 1) × 100">등락률 (3mo) ⬍</th>
                     <th onclick="sortTable('RS_3mo_Rank_Pct')">3mo rnk ⬍</th>
                     <th onclick="sortTable('RS_6mo')">RS (6mo) ⬍</th>
+                    <th onclick="sortTable('Ret_6M_Pct')" title="RS(6mo)와 같은 120영업일(6개월) 동안 이 종목 주가 자체의 등락률. (기준일 종가 / 120영업일 전 종가 − 1) × 100">등락률 (6mo) ⬍</th>
                     <th onclick="sortTable('RS_Rank_Pct')">6mo rnk ⬍</th>
                     <th onclick="sortTable('ADR_20D')">ADR (%) ⬍</th>
                     <th onclick="sortTable('High_52W_Pct')">52주대비 (%) ⬍</th>
@@ -4380,6 +4384,7 @@ indPopup.style.display = 'none';
                     const rnk6 = parseFloat(item.RS_Rank_Pct);
                     
                     const formatRnk = (val) => isValidNumber(val) ? val.toFixed(2) + '%' : '-';
+                    const retCell = (v) => `<td class="${isValidNumber(v) ? (v > 0 ? 'rs-pos' : v < 0 ? 'rs-neg' : '') : ''}">${isValidNumber(v) ? (v > 0 ? '+' : '') + v.toFixed(2) + '%' : '-'}</td>`;
                     
                     tr.innerHTML = `
                         <td style="font-weight:bold;">
@@ -4395,10 +4400,13 @@ indPopup.style.display = 'none';
                         <td class="${isValidNumber(item.Ret_5D_Pct) ? (item.Ret_5D_Pct > 0 ? 'rs-pos' : item.Ret_5D_Pct < 0 ? 'rs-neg' : '') : ''}">${isValidNumber(item.Ret_5D_Pct) ? (item.Ret_5D_Pct > 0 ? '+' : '') + item.Ret_5D_Pct.toFixed(2) + '%' : '-'}</td>
                         <td>${isValidNumber(item.Dollar_Vol_M) ? item.Dollar_Vol_M.toLocaleString('en-US', {maximumFractionDigits: 1}) : '-'}</td>
                         <td>${isValidNumber(rs1) ? rs1.toFixed(2) : '-'}</td>
+                        ${retCell(item.Ret_1M_Pct)}
                         <td class="${isValidNumber(rnk1) && rnk1 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk1)}</td>
                         <td>${isValidNumber(rs3) ? rs3.toFixed(2) : '-'}</td>
+                        ${retCell(item.Ret_3M_Pct)}
                         <td class="${isValidNumber(rnk3) && rnk3 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk3)}</td>
                         <td>${isValidNumber(rs6) ? rs6.toFixed(2) : '-'}</td>
+                        ${retCell(item.Ret_6M_Pct)}
                         <td class="${isValidNumber(rnk6) && rnk6 <= 5 ? 'rs-pos' : ''}">${formatRnk(rnk6)}</td>
                         <td>${isValidNumber(item.ADR_20D) ? item.ADR_20D.toFixed(2) : '-'}</td>
                         <td>${isValidNumber(item.High_52W_Pct) ? item.High_52W_Pct.toFixed(2) : '-'}</td>
