@@ -1,19 +1,13 @@
 {
-  "last_updated": "2026-11-05 02:53:46 UTC",
+  "last_updated": "2026-11-06 02:06:53 UTC",
   "source": "https://finance.yahoo.com/quote/%5EVIX/history/",
   "count": 254,
   "data": [
     {
-      "date": "2025-11-04",
-      "close": 19.0,
-      "qqq": null,
-      "spy": null
-    },
-    {
       "date": "2025-11-05",
       "close": 18.01,
-      "qqq": 623.28,
-      "spy": 677.58
+      "qqq": null,
+      "spy": null
     },
     {
       "date": "2025-11-06",
@@ -1526,6 +1520,12 @@
       "close": 16.61,
       "qqq": 691.95,
       "spy": 766.81
+    },
+    {
+      "date": "2026-11-05",
+      "close": 28.18,
+      "qqq": null,
+      "spy": null
     }
   ]
 }

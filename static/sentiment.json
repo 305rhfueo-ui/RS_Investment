@@ -1,7 +1,7 @@
 {
-  "last_updated": "2026-11-05 02:53:45 UTC",
+  "last_updated": "2026-11-06 02:06:52 UTC",
   "source": "https://www.aaii.com/sentimentsurvey/sent_results",
-  "count": 18,
+  "count": 19,
   "data": [
     {
       "date": "2026-07-01",
@@ -128,6 +128,13 @@
       "neutral": 20.7,
       "bearish": 41.4,
       "spread": -3.6
+    },
+    {
+      "date": "2026-11-04",
+      "bullish": 34.1,
+      "neutral": 17.5,
+      "bearish": 48.4,
+      "spread": -14.3
     }
   ]
 }
