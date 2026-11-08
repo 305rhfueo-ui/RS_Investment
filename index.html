@@ -2426,7 +2426,7 @@ indPopup.style.display = 'none';
             const yMin = Math.floor(Math.min(...all) / 0.25) * 0.25, yMax = Math.ceil(Math.max(...all) / 0.25) * 0.25;
 
             document.getElementById('wrs-graph-note').innerHTML =
-                `${dates[0]} ~ ${dates[last]} 평일 ${dates.length}일 · 순서는 ${dates[last]} FRANK 순위 · 모든 칸이 같은 세로 눈금입니다.<br>` +
+                `${dates[0]} ~ ${dates[last]} 수집 ${dates.length}회 · 순서는 ${dates[last]} FRANK 순위 · 모든 칸이 같은 세로 눈금입니다.<br>` +
                 `칸 숫자: 현재 Final WRS · 3개월 동안 바뀐 폭 · 3개월 전 순위` +
                 (trend.dropped && trend.dropped.length ? `<br>수집 이상(하루만 업종 전체가 튐)으로 뺀 날: ${trend.dropped.slice().sort().join(', ')}` : '');
 

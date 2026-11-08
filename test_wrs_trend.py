@@ -4,7 +4,8 @@ wrs_trend 회귀 테스트 — 히스토리 전체를 돌리지 않는다.
 
 1. final_wrs: index.html calculateWRS 와 같은 식 (시총 가중·중앙값·승률·Count/(Count+5)), 종목 1개 업종 제외, NaN RS = 0
 2. parse_market_cap: T/B/M/K, N/A → 0
-3. build_trend: 주말 파일 건너뜀, 3개월 밖 날짜 제외, 없는 업종은 null
+3. build_trend: 3개월 밖 날짜 제외, 없는 업종은 null
+4. drop_spikes: 하루만 튄 날만 빼고 마지막 날(= 표)은 남긴다
 """
 import json
 import os
@@ -52,13 +53,13 @@ with tempfile.TemporaryDirectory() as tmp:
     os.makedirs(hist)
     two = [row("A", "1B", 0.2), row("A", "1B", 0.4)]
     days = {"2026-07-01": two, "2026-11-06": two, "2026-11-07": two, "2026-11-05": [row("B", "1B", 0.1), row("B", "1B", 0.3)]}
-    for d, rs in days.items():   # 2026-11-07 = 토요일, 2026-07-01 = 3개월 밖
+    for d, rs in days.items():   # 2026-07-01 = 3개월 밖
         with open(os.path.join(hist, f"result_{d}.json"), "w") as f:
             json.dump({"data": rs}, f)
     out = os.path.join(tmp, "trend.json")
     wt.build_trend(hist, out)
     t = json.load(open(out))
-    ok("주말·3개월 밖 날짜는 빠진다", t["dates"] == ["2026-11-05", "2026-11-06"], t["dates"])
+    ok("3개월 밖 날짜만 빠진다(주말 파일도 점 하나)", t["dates"] == ["2026-11-05", "2026-11-06", "2026-11-07"], t["dates"])
     ok("그날 없는 업종은 null", t["groups"]["Tech|A"][0] is None and t["groups"]["Tech|B"][1] is None, t["groups"])
 
 print("4. drop_spikes")

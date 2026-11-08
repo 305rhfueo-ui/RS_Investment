@@ -9,9 +9,10 @@ Sector/Industry WRS 그래프 팝업용 Final WRS 추이 파일(static/wrs_trend
     종목 2개 이상인 업종만.
 그래서 그래프의 마지막 점 = 표의 Final WRS 입니다.
 
-토·일 날짜 파일은 건너뜁니다. 파일 날짜는 UTC 실행일 = 미국 거래일이라,
-주말 파일은 금요일 종가를 다시 받은 것이기 때문입니다.
-하루만 업종 전체가 튀었다 돌아온 수집 이상 날짜도 뺍니다(drop_spikes, 뺀 날은 "dropped").
+사이트의 10일·25일 비교(loadHistoryIndex)처럼 히스토리 파일 하나 = 점 하나입니다.
+(파일 날짜는 실행이 끝난 UTC 날짜라 미국 거래일과 하루씩 어긋나기도 하고 주말 실행분도 값이 조금 다릅니다.
+ 그래도 마지막 점이 표와 같아야 하므로 거르지 않습니다.)
+하루만 업종 전체가 튀었다 돌아온 수집 이상 날짜만 뺍니다(drop_spikes, 뺀 날은 "dropped").
 
 출력 형식:
     {
@@ -126,7 +127,7 @@ def drop_spikes(dates, per_day, spike=SPIKE):
 
 
 def build_trend(history_dir=HISTORY_DIR, trend_file=TREND_FILE, days=DAYS):
-    """최근 days 일(평일 파일만)의 업종별 Final WRS 를 새로 씁니다."""
+    """최근 days 일 히스토리 파일의 업종별 Final WRS 를 새로 씁니다."""
     if not os.path.isdir(history_dir):
         print(f"  ⚠️ 히스토리 폴더 없음: {history_dir}")
         return None
@@ -139,8 +140,7 @@ def build_trend(history_dir=HISTORY_DIR, trend_file=TREND_FILE, days=DAYS):
             d = date.fromisoformat(name[len("result_"):-len(".json")])
         except ValueError:
             continue
-        if d.weekday() < 5:
-            dated.append((d, name))
+        dated.append((d, name))
     if not dated:
         return None
     dated.sort()
