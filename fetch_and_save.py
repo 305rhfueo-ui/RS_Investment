@@ -11,6 +11,7 @@ import utils
 import gsheet_handler
 import high_low_summary
 import market_panel_data
+import wrs_trend
 
 # 설정
 # 기존 엑셀 대신 구글 시트 사용
@@ -354,6 +355,12 @@ def publish(output_data, quality):
         high_low_summary.build_summary(HISTORY_DIR, SUMMARY_FILE)
     except Exception as e:
         print(f"⚠️ 신고가/신저가 요약 갱신 실패: {e}")
+
+    # Sector/Industry WRS 그래프 팝업용 업종별 Final WRS 3개월 추이. 실패해도 발행은 막지 않습니다.
+    try:
+        wrs_trend.build_trend(HISTORY_DIR)
+    except Exception as e:
+        print(f"⚠️ Final WRS 추이 갱신 실패: {e}")
 
     # Market 팝업용 AAII 센티먼트 / QQQ 차트 / VIX 데이터.
     # 외부 사이트에 의존하므로 실패해도 발행을 막지 않습니다(기존 파일 유지).

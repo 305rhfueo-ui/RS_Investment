@@ -417,6 +417,15 @@
             cursor: pointer;
         }
 
+        /* Sector/Industry WRS 그래프 팝업 — 상위 20개 업종 작은 그래프 */
+        .wrs-graph-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+        @media (max-width: 900px) { .wrs-graph-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 520px) { .wrs-graph-grid { grid-template-columns: 1fr; } }
+        .wrs-tile { background: #262626; border: 1px solid #333; border-radius: 8px; padding: 10px 10px 6px; min-width: 0; }
+        .wrs-tile h4 { margin: 0; font-size: 13px; color: #eee; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .wrs-tile .wrs-meta { font-size: 12px; color: #aaa; margin: 3px 0 6px; }
+        .wrs-tile .wrs-canvas { position: relative; height: 110px; }
+
         /* Matrix Table Styles */
         .matrix-table {
             width: 100%;
@@ -761,6 +770,10 @@
                                 style="color: #00e676; text-decoration: underline; font-size: 13px; font-weight: bold; display: none;">
                                 찐찐상승
                             </a>
+                            <a href="#" id="wrs-graph-btn" onclick="openWrsGraphPopup(event)"
+                                style="color: #00e676; text-decoration: underline; font-size: 13px; font-weight: bold;">
+                                그래프
+                            </a>
                         </div>
                     </div>
 
@@ -885,6 +898,17 @@
                     VIX 30 이상 상승 후 하락 시 바닥 근접
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="wrs-graph-popup" class="modal">
+        <div class="modal-content" style="max-width: 1100px; padding: 25px 30px 30px; border-radius: 10px;">
+            <span class="close-btn" onclick="closeWrsGraphPopup()">&times;</span>
+            <h2 style="margin-top:0; color:#00e676; border-bottom:2px solid #00e676; padding-bottom:10px;">
+                📈 Final WRS 상위 20개 업종 — 최근 3개월
+            </h2>
+            <p id="wrs-graph-note" style="color:#aaa; font-size:13px; margin-top:0;"></p>
+            <div id="wrs-graph-grid" class="wrs-graph-grid"></div>
         </div>
     </div>
 
@@ -1890,6 +1914,9 @@
             if (event.target == marketModal) {
                 marketModal.style.display = "none";
             }
+            if (event.target == document.getElementById('wrs-graph-popup')) {
+                closeWrsGraphPopup();
+            }
             if (event.target == marketChartModal) {
                 marketChartModal.style.display = "none";
             }
@@ -2364,6 +2391,86 @@ indPopup.style.display = 'none';
 
         function closeMarketChartPopup() {
             document.getElementById('market-chart-popup').style.display = 'none';
+        }
+
+        // Sector/Industry WRS → 그래프: 오늘 Final WRS 상위 20개 업종(FRANK 1~20)의 최근 3개월 Final WRS.
+        // 히스토리 원본은 하루 2MB 라 받지 않고, wrs_trend.py 가 매일 만드는 static/wrs_trend.json(약 60KB)만 읽는다.
+        // 값은 calculateWRS() 와 같은 식이라 마지막 점 = 표의 Final WRS.
+        let wrsTrendDrawn = false;
+        async function openWrsGraphPopup(ev) {
+            if (ev) ev.preventDefault();
+            document.getElementById('wrs-graph-popup').style.display = 'block';
+            if (wrsTrendDrawn) return;
+            const grid = document.getElementById('wrs-graph-grid');
+            try {
+                const res = await fetch('./static/wrs_trend.json?t=' + new Date().getTime());
+                if (!res.ok) throw new Error('wrs_trend.json ' + res.status);
+                drawWrsGraphs(await res.json());
+                wrsTrendDrawn = true;
+            } catch (e) {
+                grid.innerHTML = '<p style="color:#ff8a80;">그래프 자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</p>';
+                console.log("WRS graph load failed:", e);
+            }
+        }
+
+        function drawWrsGraphs(trend) {
+            const dates = trend.dates, last = dates.length - 1;
+            const rankAt = (i) => Object.entries(trend.groups).filter(([, v]) => v[i] !== null)
+                .sort((a, b) => b[1][i] - a[1][i]).map(([k]) => k);
+            const top = rankAt(last).slice(0, 20);
+            const firstIdx = trend.groups[top[0]].findIndex(v => v !== null);
+            const pastRank = rankAt(firstIdx);
+
+            // 모든 칸이 같은 세로 눈금(0.25 단위) — 업종끼리 높이를 그대로 비교할 수 있게.
+            const all = top.flatMap(k => trend.groups[k].filter(v => v !== null));
+            const yMin = Math.floor(Math.min(...all) / 0.25) * 0.25, yMax = Math.ceil(Math.max(...all) / 0.25) * 0.25;
+
+            document.getElementById('wrs-graph-note').innerHTML =
+                `${dates[0]} ~ ${dates[last]} 평일 ${dates.length}일 · 순서는 ${dates[last]} FRANK 순위 · 모든 칸이 같은 세로 눈금입니다.<br>` +
+                `칸 숫자: 현재 Final WRS · 3개월 동안 바뀐 폭 · 3개월 전 순위` +
+                (trend.dropped && trend.dropped.length ? `<br>수집 이상(하루만 업종 전체가 튐)으로 뺀 날: ${trend.dropped.slice().sort().join(', ')}` : '');
+
+            const grid = document.getElementById('wrs-graph-grid');
+            grid.innerHTML = '';
+            top.forEach((key, i) => {
+                const [sector, industry] = key.split('|');
+                const vals = trend.groups[key];
+                const start = vals.find(v => v !== null), now = vals[last];
+                const chg = now - start;
+                const was = pastRank.indexOf(key);
+                const tile = document.createElement('div');
+                tile.className = 'wrs-tile';
+                tile.innerHTML =
+                    `<h4 title="${industry} (${sector})">${i + 1}. ${industry}</h4>` +
+                    `<div class="wrs-meta">${sector}<br><b style="color:#eee;">${now.toFixed(4)}</b> ` +
+                    `<span style="color:${chg >= 0 ? '#00e676' : '#ff5252'};">${chg >= 0 ? '▲' : '▼'}${Math.abs(chg).toFixed(4)}</span>` +
+                    ` · 3개월 전 ${was >= 0 ? (was + 1) + '위' : '-'}</div>` +
+                    `<div class="wrs-canvas"><canvas></canvas></div>`;
+                grid.appendChild(tile);
+                new Chart(tile.querySelector('canvas'), {
+                    type: 'line',
+                    data: {
+                        labels: dates.map(d => d.substring(5)),
+                        datasets: [{ data: vals, borderColor: '#00e676', borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, tension: 0.2, spanGaps: true }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, animation: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { callbacks: { title: (it) => dates[it[0].dataIndex], label: (it) => 'Final WRS ' + it.parsed.y.toFixed(4) } }
+                        },
+                        scales: {
+                            x: { ticks: { color: '#888', maxTicksLimit: 4, maxRotation: 0, font: { size: 10 } }, grid: { display: false } },
+                            y: { min: yMin, max: yMax, ticks: { color: '#888', stepSize: 0.25, font: { size: 10 }, callback: (v) => v.toFixed(2) }, grid: { color: 'rgba(255,255,255,0.06)' } }
+                        }
+                    }
+                });
+            });
+        }
+
+        function closeWrsGraphPopup() {
+            document.getElementById('wrs-graph-popup').style.display = 'none';
         }
 
         // 선택한 날짜의 52주 신고가/신저가/전체 종목수 패널.
