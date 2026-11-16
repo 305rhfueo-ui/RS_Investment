@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-15 01:37:16 UTC",
+  "last_updated": "2026-11-16 01:40:25 UTC",
   "total_count": 1109,
   "market_condition": "BAD",
   "wrs_data": [
@@ -55,11 +55,11 @@
       "Sector": "Financial Services",
       "Industry": "Banks - Regional",
       "Count": 57,
-      "WRS_6mo": 0.1474,
+      "WRS_6mo": 0.148,
       "WRS_6mo_MD": 0.1405,
-      "Win_Rate": 0.9474,
-      "Final_WRS": 0.277,
-      "WRS_Rank_Pct": 47.37,
+      "Win_Rate": 0.9649,
+      "Final_WRS": 0.2804,
+      "WRS_Rank_Pct": 46.62,
       "WRS_MD_Rank_Pct": 42.11,
       "Final_WRS_Rank_Pct": 9.02
     },
@@ -85,7 +85,7 @@
       "Final_WRS": 0.0949,
       "WRS_Rank_Pct": 68.42,
       "WRS_MD_Rank_Pct": 61.65,
-      "Final_WRS_Rank_Pct": 50.38
+      "Final_WRS_Rank_Pct": 49.62
     },
     {
       "Sector": "Consumer Cyclical",
@@ -132,7 +132,7 @@
       "Win_Rate": 0.5,
       "Final_WRS": 0.0561,
       "WRS_Rank_Pct": 77.44,
-      "WRS_MD_Rank_Pct": 76.69,
+      "WRS_MD_Rank_Pct": 75.94,
       "Final_WRS_Rank_Pct": 67.67
     },
     {
@@ -211,13 +211,13 @@
       "Sector": "Industrials",
       "Industry": "Aerospace & Defense",
       "Count": 32,
-      "WRS_6mo": 0.0265,
-      "WRS_6mo_MD": 0.0143,
-      "Win_Rate": 0.5,
-      "Final_WRS": 0.0979,
-      "WRS_Rank_Pct": 73.68,
-      "WRS_MD_Rank_Pct": 75.94,
-      "Final_WRS_Rank_Pct": 48.87
+      "WRS_6mo": 0.0247,
+      "WRS_6mo_MD": 0.0,
+      "Win_Rate": 0.4688,
+      "Final_WRS": 0.0871,
+      "WRS_Rank_Pct": 74.44,
+      "WRS_MD_Rank_Pct": 76.69,
+      "Final_WRS_Rank_Pct": 54.14
     },
     {
       "Sector": "Technology",
@@ -275,7 +275,7 @@
       "WRS_6mo_MD": 0.0467,
       "Win_Rate": 0.5455,
       "Final_WRS": 0.1185,
-      "WRS_Rank_Pct": 72.93,
+      "WRS_Rank_Pct": 73.68,
       "WRS_MD_Rank_Pct": 70.68,
       "Final_WRS_Rank_Pct": 43.61
     },
@@ -395,7 +395,7 @@
       "WRS_6mo_MD": 0.1477,
       "Win_Rate": 1.0,
       "Final_WRS": 0.0197,
-      "WRS_Rank_Pct": 46.62,
+      "WRS_Rank_Pct": 47.37,
       "WRS_MD_Rank_Pct": 40.6,
       "Final_WRS_Rank_Pct": 80.45
     },
@@ -457,7 +457,7 @@
       "Final_WRS": 0.1375,
       "WRS_Rank_Pct": 38.35,
       "WRS_MD_Rank_Pct": 48.87,
-      "Final_WRS_Rank_Pct": 36.84
+      "Final_WRS_Rank_Pct": 37.59
     },
     {
       "Sector": "Technology",
@@ -527,7 +527,7 @@
       "WRS_6mo_MD": 0.0556,
       "Win_Rate": 0.5833,
       "Final_WRS": 0.1001,
-      "WRS_Rank_Pct": 71.43,
+      "WRS_Rank_Pct": 72.18,
       "WRS_MD_Rank_Pct": 66.17,
       "Final_WRS_Rank_Pct": 47.37
     },
@@ -607,13 +607,13 @@
       "Sector": "Communication Services",
       "Industry": "Entertainment",
       "Count": 11,
-      "WRS_6mo": 0.024,
-      "WRS_6mo_MD": 0.1386,
-      "Win_Rate": 0.7273,
-      "Final_WRS": 0.1356,
-      "WRS_Rank_Pct": 74.44,
+      "WRS_6mo": 0.0377,
+      "WRS_6mo_MD": 0.1388,
+      "Win_Rate": 0.8182,
+      "Final_WRS": 0.1508,
+      "WRS_Rank_Pct": 71.43,
       "WRS_MD_Rank_Pct": 44.36,
-      "Final_WRS_Rank_Pct": 37.59
+      "Final_WRS_Rank_Pct": 33.08
     },
     {
       "Sector": "Consumer Cyclical",
@@ -673,7 +673,7 @@
       "Final_WRS": 0.1413,
       "WRS_Rank_Pct": 10.53,
       "WRS_MD_Rank_Pct": 11.28,
-      "Final_WRS_Rank_Pct": 35.34
+      "Final_WRS_Rank_Pct": 36.09
     },
     {
       "Sector": "Consumer Cyclical",
@@ -733,7 +733,7 @@
       "Final_WRS": 0.1473,
       "WRS_Rank_Pct": 40.6,
       "WRS_MD_Rank_Pct": 33.08,
-      "Final_WRS_Rank_Pct": 33.83
+      "Final_WRS_Rank_Pct": 34.59
     },
     {
       "Sector": "Industrials",
@@ -769,7 +769,7 @@
       "Final_WRS": 0.0887,
       "WRS_Rank_Pct": 50.38,
       "WRS_MD_Rank_Pct": 47.37,
-      "Final_WRS_Rank_Pct": 53.38
+      "Final_WRS_Rank_Pct": 52.63
     },
     {
       "Sector": "Financial Services",
@@ -804,7 +804,7 @@
       "Win_Rate": 0.4286,
       "Final_WRS": 0.0665,
       "WRS_Rank_Pct": 57.89,
-      "WRS_MD_Rank_Pct": 77.44,
+      "WRS_MD_Rank_Pct": 76.69,
       "Final_WRS_Rank_Pct": 63.16
     },
     {
@@ -829,7 +829,7 @@
       "Final_WRS": 0.0886,
       "WRS_Rank_Pct": 45.11,
       "WRS_MD_Rank_Pct": 69.92,
-      "Final_WRS_Rank_Pct": 54.14
+      "Final_WRS_Rank_Pct": 53.38
     },
     {
       "Sector": "Real Estate",
@@ -853,7 +853,7 @@
       "Final_WRS": 0.1487,
       "WRS_Rank_Pct": 48.87,
       "WRS_MD_Rank_Pct": 51.13,
-      "Final_WRS_Rank_Pct": 33.08
+      "Final_WRS_Rank_Pct": 33.83
     },
     {
       "Sector": "Consumer Cyclical",
@@ -935,7 +935,7 @@
       "WRS_6mo_MD": 0.0203,
       "Win_Rate": 0.75,
       "Final_WRS": 0.0591,
-      "WRS_Rank_Pct": 72.18,
+      "WRS_Rank_Pct": 72.93,
       "WRS_MD_Rank_Pct": 75.19,
       "Final_WRS_Rank_Pct": 66.17
     },
@@ -1117,7 +1117,7 @@
       "Final_WRS": 0.145,
       "WRS_Rank_Pct": 9.77,
       "WRS_MD_Rank_Pct": 46.62,
-      "Final_WRS_Rank_Pct": 34.59
+      "Final_WRS_Rank_Pct": 35.34
     },
     {
       "Sector": "Consumer Defensive",
@@ -1225,7 +1225,7 @@
       "Final_WRS": 0.1409,
       "WRS_Rank_Pct": 55.64,
       "WRS_MD_Rank_Pct": 45.86,
-      "Final_WRS_Rank_Pct": 36.09
+      "Final_WRS_Rank_Pct": 36.84
     },
     {
       "Sector": "Communication Services",
@@ -1273,7 +1273,7 @@
       "Final_WRS": 0.0948,
       "WRS_Rank_Pct": 81.2,
       "WRS_MD_Rank_Pct": 62.41,
-      "Final_WRS_Rank_Pct": 51.13
+      "Final_WRS_Rank_Pct": 50.38
     },
     {
       "Sector": "Consumer Cyclical",
@@ -1285,7 +1285,7 @@
       "Final_WRS": 0.0976,
       "WRS_Rank_Pct": 49.62,
       "WRS_MD_Rank_Pct": 73.68,
-      "Final_WRS_Rank_Pct": 49.62
+      "Final_WRS_Rank_Pct": 48.87
     },
     {
       "Sector": "Energy",
@@ -1333,7 +1333,7 @@
       "Final_WRS": 0.0914,
       "WRS_Rank_Pct": 15.04,
       "WRS_MD_Rank_Pct": 16.54,
-      "Final_WRS_Rank_Pct": 51.88
+      "Final_WRS_Rank_Pct": 51.13
     },
     {
       "Sector": "Basic Materials",
@@ -1405,7 +1405,7 @@
       "Final_WRS": 0.0891,
       "WRS_Rank_Pct": 12.03,
       "WRS_MD_Rank_Pct": 65.41,
-      "Final_WRS_Rank_Pct": 52.63
+      "Final_WRS_Rank_Pct": 51.88
     },
     {
       "Sector": "Energy",
@@ -1572,7 +1572,7 @@
       "Win_Rate": 0.0,
       "Final_WRS": 0.0,
       "WRS_Rank_Pct": 78.95,
-      "WRS_MD_Rank_Pct": 77.44,
+      "WRS_MD_Rank_Pct": 76.69,
       "Final_WRS_Rank_Pct": 87.22
     },
     {
@@ -1709,9 +1709,9 @@
       "Ret_5D_Pct": -7.06,
       "Dollar_Vol_M": 156.3,
       "api_called": false,
-      "RS_Rank_Pct": 66.1,
+      "RS_Rank_Pct": 66.19,
       "RS_3mo_Rank_Pct": 66.91,
-      "RS_1mo_Rank_Pct": 63.03
+      "RS_1mo_Rank_Pct": 63.12
     },
     {
       "Ticker": "SEB",
@@ -1823,7 +1823,7 @@
       "api_called": false,
       "RS_Rank_Pct": 50.59,
       "RS_3mo_Rank_Pct": 19.84,
-      "RS_1mo_Rank_Pct": 41.93
+      "RS_1mo_Rank_Pct": 42.02
     },
     {
       "Ticker": "FCNCA",
@@ -1879,7 +1879,7 @@
       "api_called": false,
       "RS_Rank_Pct": 30.12,
       "RS_3mo_Rank_Pct": 23.81,
-      "RS_1mo_Rank_Pct": 22.99
+      "RS_1mo_Rank_Pct": 23.08
     },
     {
       "Ticker": "WTM",
@@ -1935,7 +1935,7 @@
       "api_called": false,
       "RS_Rank_Pct": 48.06,
       "RS_3mo_Rank_Pct": 29.31,
-      "RS_1mo_Rank_Pct": 42.38
+      "RS_1mo_Rank_Pct": 42.47
     },
     {
       "Ticker": "MELI",
@@ -2053,7 +2053,7 @@
       "Ticker": "ASML",
       "Price": 1495.1600341796875,
       "Market Cap": "576.26B",
-      "RS_6mo": -0.014463225797425372,
+      "RS_6mo": -0.01446329467997326,
       "RS_3mo": -0.10198272112799929,
       "RS_1mo": -0.04582103900917188,
       "50DIV": -9.87,
@@ -2493,9 +2493,9 @@
       "Ret_5D_Pct": 1.57,
       "Dollar_Vol_M": 4.5,
       "api_called": true,
-      "RS_Rank_Pct": 61.41,
+      "RS_Rank_Pct": 61.5,
       "RS_3mo_Rank_Pct": 69.79,
-      "RS_1mo_Rank_Pct": 61.77
+      "RS_1mo_Rank_Pct": 61.86
     },
     {
       "Ticker": "LLY",
@@ -2549,7 +2549,7 @@
       "Ret_5D_Pct": 6.74,
       "Dollar_Vol_M": 3004.8,
       "api_called": false,
-      "RS_Rank_Pct": 11.18,
+      "RS_Rank_Pct": 11.09,
       "RS_3mo_Rank_Pct": 10.19,
       "RS_1mo_Rank_Pct": 10.82
     },
@@ -2607,7 +2607,7 @@
       "api_called": false,
       "RS_Rank_Pct": 38.32,
       "RS_3mo_Rank_Pct": 23.99,
-      "RS_1mo_Rank_Pct": 46.71
+      "RS_1mo_Rank_Pct": 46.8
     },
     {
       "Ticker": "TDG",
@@ -2661,7 +2661,7 @@
       "Ret_5D_Pct": 1.69,
       "Dollar_Vol_M": 636.6,
       "api_called": false,
-      "RS_Rank_Pct": 62.04,
+      "RS_Rank_Pct": 62.13,
       "RS_3mo_Rank_Pct": 37.78,
       "RS_1mo_Rank_Pct": 33.27
     },
@@ -2725,7 +2725,7 @@
       "Ticker": "BLK",
       "Price": 1222.9100341796875,
       "Market Cap": "188.85B",
-      "RS_6mo": 0.21431723461075092,
+      "RS_6mo": 0.21431710321614425,
       "RS_3mo": 0.12106798529890576,
       "RS_1mo": 0.12018125019705941,
       "50DIV": 9.85,
@@ -2831,7 +2831,7 @@
       "api_called": true,
       "RS_Rank_Pct": 75.83,
       "RS_3mo_Rank_Pct": 70.69,
-      "RS_1mo_Rank_Pct": 67.09
+      "RS_1mo_Rank_Pct": 67.18
     },
     {
       "Ticker": "URI",
@@ -2887,7 +2887,7 @@
       "api_called": false,
       "RS_Rank_Pct": 29.49,
       "RS_3mo_Rank_Pct": 38.41,
-      "RS_1mo_Rank_Pct": 23.08
+      "RS_1mo_Rank_Pct": 23.17
     },
     {
       "Ticker": "MU",
@@ -2997,8 +2997,8 @@
       "Ret_5D_Pct": 4.06,
       "Dollar_Vol_M": 469.9,
       "api_called": false,
-      "RS_Rank_Pct": 64.29,
-      "RS_3mo_Rank_Pct": 55.28,
+      "RS_Rank_Pct": 64.38,
+      "RS_3mo_Rank_Pct": 55.37,
       "RS_1mo_Rank_Pct": 33.0
     },
     {
@@ -3110,14 +3110,14 @@
       "Dollar_Vol_M": 469.6,
       "api_called": false,
       "RS_Rank_Pct": 41.12,
-      "RS_3mo_Rank_Pct": 58.97,
-      "RS_1mo_Rank_Pct": 61.14
+      "RS_3mo_Rank_Pct": 59.06,
+      "RS_1mo_Rank_Pct": 61.23
     },
     {
       "Ticker": "COST",
       "Price": 1106.2099609375,
       "Market Cap": "490.19B",
-      "RS_6mo": 0.17337132950130874,
+      "RS_6mo": 0.17337126196472064,
       "RS_3mo": 0.22941660477063042,
       "RS_1mo": 0.16218077457087626,
       "50DIV": 14.51,
@@ -3279,13 +3279,13 @@
       "api_called": false,
       "RS_Rank_Pct": 73.76,
       "RS_3mo_Rank_Pct": 69.7,
-      "RS_1mo_Rank_Pct": 43.55
+      "RS_1mo_Rank_Pct": 43.64
     },
     {
       "Ticker": "NEU",
       "Price": 709.1900024414062,
       "Market Cap": "6.52B",
-      "RS_6mo": 0.003975183537272622,
+      "RS_6mo": 0.003975259093028191,
       "RS_3mo": -0.19018707954580621,
       "RS_1mo": -0.14829302882582399,
       "50DIV": -16.65,
@@ -3333,7 +3333,7 @@
       "Ret_5D_Pct": 2.14,
       "Dollar_Vol_M": 86.4,
       "api_called": false,
-      "RS_Rank_Pct": 71.33,
+      "RS_Rank_Pct": 71.42,
       "RS_3mo_Rank_Pct": 91.25,
       "RS_1mo_Rank_Pct": 95.4
     },
@@ -3613,9 +3613,9 @@
       "Ret_5D_Pct": -0.7,
       "Dollar_Vol_M": 1.3,
       "api_called": true,
-      "RS_Rank_Pct": 66.82,
+      "RS_Rank_Pct": 66.91,
       "RS_3mo_Rank_Pct": 61.14,
-      "RS_1mo_Rank_Pct": 69.25
+      "RS_1mo_Rank_Pct": 69.34
     },
     {
       "Ticker": "REGN",
@@ -3677,7 +3677,7 @@
       "Ticker": "META",
       "Price": 641.6900024414062,
       "Market Cap": "1640.69B",
-      "RS_6mo": 0.11673638210058399,
+      "RS_6mo": 0.11673648691230973,
       "RS_3mo": 0.21921473450413176,
       "RS_1mo": -0.05321901583016733,
       "50DIV": -5.59,
@@ -3895,7 +3895,7 @@
       "api_called": false,
       "RS_Rank_Pct": 4.42,
       "RS_3mo_Rank_Pct": 16.5,
-      "RS_1mo_Rank_Pct": 53.74
+      "RS_1mo_Rank_Pct": 53.83
     },
     {
       "Ticker": "UI",
@@ -4063,7 +4063,7 @@
       "api_called": false,
       "RS_Rank_Pct": 79.08,
       "RS_3mo_Rank_Pct": 80.34,
-      "RS_1mo_Rank_Pct": 46.53
+      "RS_1mo_Rank_Pct": 46.62
     },
     {
       "Ticker": "DDS",
@@ -4173,7 +4173,7 @@
       "Ret_5D_Pct": 2.97,
       "Dollar_Vol_M": 22.9,
       "api_called": false,
-      "RS_Rank_Pct": 10.91,
+      "RS_Rank_Pct": 10.82,
       "RS_3mo_Rank_Pct": 25.97,
       "RS_1mo_Rank_Pct": 22.54
     },
@@ -4231,7 +4231,7 @@
       "api_called": false,
       "RS_Rank_Pct": 17.76,
       "RS_3mo_Rank_Pct": 22.81,
-      "RS_1mo_Rank_Pct": 40.04
+      "RS_1mo_Rank_Pct": 40.13
     },
     {
       "Ticker": "TDY",
@@ -4286,8 +4286,8 @@
       "Dollar_Vol_M": 240.4,
       "api_called": false,
       "RS_Rank_Pct": 55.82,
-      "RS_3mo_Rank_Pct": 43.46,
-      "RS_1mo_Rank_Pct": 43.37
+      "RS_3mo_Rank_Pct": 43.55,
+      "RS_1mo_Rank_Pct": 43.46
     },
     {
       "Ticker": "SITM",
@@ -4454,8 +4454,8 @@
       "Dollar_Vol_M": 90.6,
       "api_called": false,
       "RS_Rank_Pct": 17.4,
-      "RS_3mo_Rank_Pct": 49.86,
-      "RS_1mo_Rank_Pct": 41.66
+      "RS_3mo_Rank_Pct": 49.95,
+      "RS_1mo_Rank_Pct": 41.75
     },
     {
       "Ticker": "AMD",
@@ -4511,7 +4511,7 @@
       "api_called": false,
       "RS_Rank_Pct": 47.7,
       "RS_3mo_Rank_Pct": 12.44,
-      "RS_1mo_Rank_Pct": 55.91
+      "RS_1mo_Rank_Pct": 56.0
     },
     {
       "Ticker": "MA",
@@ -4565,7 +4565,7 @@
       "Ret_5D_Pct": 1.3,
       "Dollar_Vol_M": 1280.3,
       "api_called": false,
-      "RS_Rank_Pct": 11.99,
+      "RS_Rank_Pct": 11.9,
       "RS_3mo_Rank_Pct": 11.09,
       "RS_1mo_Rank_Pct": 32.19
     },
@@ -4903,7 +4903,7 @@
       "api_called": false,
       "RS_Rank_Pct": 19.66,
       "RS_3mo_Rank_Pct": 22.36,
-      "RS_1mo_Rank_Pct": 62.31
+      "RS_1mo_Rank_Pct": 62.4
     },
     {
       "Ticker": "CVCO",
@@ -5015,7 +5015,7 @@
       "api_called": false,
       "RS_Rank_Pct": 55.37,
       "RS_3mo_Rank_Pct": 60.5,
-      "RS_1mo_Rank_Pct": 60.87
+      "RS_1mo_Rank_Pct": 60.96
     },
     {
       "Ticker": "SPOT",
@@ -5406,7 +5406,7 @@
       "Dollar_Vol_M": 407.1,
       "api_called": false,
       "RS_Rank_Pct": 22.09,
-      "RS_3mo_Rank_Pct": 48.6,
+      "RS_3mo_Rank_Pct": 48.69,
       "RS_1mo_Rank_Pct": 28.58
     },
     {
@@ -5463,7 +5463,7 @@
       "api_called": false,
       "RS_Rank_Pct": 81.61,
       "RS_3mo_Rank_Pct": 11.99,
-      "RS_1mo_Rank_Pct": 59.15
+      "RS_1mo_Rank_Pct": 59.24
     },
     {
       "Ticker": "LMT",
@@ -5518,7 +5518,7 @@
       "Dollar_Vol_M": 544.6,
       "api_called": false,
       "RS_Rank_Pct": 35.53,
-      "RS_3mo_Rank_Pct": 32.82,
+      "RS_3mo_Rank_Pct": 32.73,
       "RS_1mo_Rank_Pct": 27.68
     },
     {
@@ -5630,8 +5630,8 @@
       "Dollar_Vol_M": 84.0,
       "api_called": false,
       "RS_Rank_Pct": 83.23,
-      "RS_3mo_Rank_Pct": 58.07,
-      "RS_1mo_Rank_Pct": 67.18
+      "RS_3mo_Rank_Pct": 58.16,
+      "RS_1mo_Rank_Pct": 67.27
     },
     {
       "Ticker": "AMP",
@@ -5687,7 +5687,7 @@
       "api_called": false,
       "RS_Rank_Pct": 33.18,
       "RS_3mo_Rank_Pct": 61.23,
-      "RS_1mo_Rank_Pct": 43.28
+      "RS_1mo_Rank_Pct": 43.37
     },
     {
       "Ticker": "CHE",
@@ -5909,8 +5909,8 @@
       "Ret_5D_Pct": 4.84,
       "Dollar_Vol_M": 283.8,
       "api_called": false,
-      "RS_Rank_Pct": 61.14,
-      "RS_3mo_Rank_Pct": 53.29,
+      "RS_Rank_Pct": 61.23,
+      "RS_3mo_Rank_Pct": 53.38,
       "RS_1mo_Rank_Pct": 37.06
     },
     {
@@ -6022,8 +6022,8 @@
       "Dollar_Vol_M": 252.6,
       "api_called": false,
       "RS_Rank_Pct": 75.56,
-      "RS_3mo_Rank_Pct": 53.83,
-      "RS_1mo_Rank_Pct": 50.23
+      "RS_3mo_Rank_Pct": 53.92,
+      "RS_1mo_Rank_Pct": 50.32
     },
     {
       "Ticker": "TT",
@@ -6302,8 +6302,8 @@
       "Dollar_Vol_M": 277.1,
       "api_called": false,
       "RS_Rank_Pct": 36.07,
-      "RS_3mo_Rank_Pct": 42.29,
-      "RS_1mo_Rank_Pct": 40.49
+      "RS_3mo_Rank_Pct": 42.38,
+      "RS_1mo_Rank_Pct": 40.58
     },
     {
       "Ticker": "MPC",
@@ -6413,9 +6413,9 @@
       "Ret_5D_Pct": 6.2,
       "Dollar_Vol_M": 4271.2,
       "api_called": false,
-      "RS_Rank_Pct": 65.55,
-      "RS_3mo_Rank_Pct": 58.43,
-      "RS_1mo_Rank_Pct": 69.97
+      "RS_Rank_Pct": 65.64,
+      "RS_3mo_Rank_Pct": 58.52,
+      "RS_1mo_Rank_Pct": 70.06
     },
     {
       "Ticker": "HCA",
@@ -6581,7 +6581,7 @@
       "Ret_5D_Pct": 3.24,
       "Dollar_Vol_M": 351.7,
       "api_called": false,
-      "RS_Rank_Pct": 15.87,
+      "RS_Rank_Pct": 15.78,
       "RS_3mo_Rank_Pct": 14.7,
       "RS_1mo_Rank_Pct": 11.18
     },
@@ -6637,7 +6637,7 @@
       "Ret_5D_Pct": 0.58,
       "Dollar_Vol_M": 240.2,
       "api_called": false,
-      "RS_Rank_Pct": 11.27,
+      "RS_Rank_Pct": 11.18,
       "RS_3mo_Rank_Pct": 12.62,
       "RS_1mo_Rank_Pct": 38.86
     },
@@ -6813,7 +6813,7 @@
       "Ticker": "HUM",
       "Price": 450.0,
       "Market Cap": "54.05B",
-      "RS_6mo": 0.5652984911583969,
+      "RS_6mo": 0.565298643398986,
       "RS_3mo": 0.22711486960454041,
       "RS_1mo": 0.13361834368155462,
       "50DIV": 10.29,
@@ -6863,7 +6863,7 @@
       "api_called": false,
       "RS_Rank_Pct": 5.86,
       "RS_3mo_Rank_Pct": 7.48,
-      "RS_1mo_Rank_Pct": 23.62
+      "RS_1mo_Rank_Pct": 23.72
     },
     {
       "Ticker": "ETN",
@@ -6975,7 +6975,7 @@
       "api_called": false,
       "RS_Rank_Pct": 84.4,
       "RS_3mo_Rank_Pct": 64.56,
-      "RS_1mo_Rank_Pct": 52.57
+      "RS_1mo_Rank_Pct": 52.66
     },
     {
       "Ticker": "ISRG",
@@ -7031,7 +7031,7 @@
       "api_called": false,
       "RS_Rank_Pct": 57.62,
       "RS_3mo_Rank_Pct": 7.39,
-      "RS_1mo_Rank_Pct": 43.64
+      "RS_1mo_Rank_Pct": 43.73
     },
     {
       "Ticker": "AXON",
@@ -7255,7 +7255,7 @@
       "api_called": false,
       "RS_Rank_Pct": 38.23,
       "RS_3mo_Rank_Pct": 22.09,
-      "RS_1mo_Rank_Pct": 58.52
+      "RS_1mo_Rank_Pct": 58.61
     },
     {
       "Ticker": "SPGI",
@@ -7365,9 +7365,9 @@
       "Ret_5D_Pct": 9.46,
       "Dollar_Vol_M": 1239.5,
       "api_called": false,
-      "RS_Rank_Pct": 68.44,
+      "RS_Rank_Pct": 68.53,
       "RS_3mo_Rank_Pct": 25.34,
-      "RS_1mo_Rank_Pct": 56.99
+      "RS_1mo_Rank_Pct": 57.08
     },
     {
       "Ticker": "TER",
@@ -7479,7 +7479,7 @@
       "api_called": false,
       "RS_Rank_Pct": 34.45,
       "RS_3mo_Rank_Pct": 14.97,
-      "RS_1mo_Rank_Pct": 43.91
+      "RS_1mo_Rank_Pct": 44.0
     },
     {
       "Ticker": "MSGS",
@@ -7533,8 +7533,8 @@
       "Ret_5D_Pct": 1.04,
       "Dollar_Vol_M": 84.0,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 33.18,
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 33.09,
       "RS_1mo_Rank_Pct": 38.59
     },
     {
@@ -7590,7 +7590,7 @@
       "Dollar_Vol_M": 539.5,
       "api_called": false,
       "RS_Rank_Pct": 3.97,
-      "RS_3mo_Rank_Pct": 52.48,
+      "RS_3mo_Rank_Pct": 52.57,
       "RS_1mo_Rank_Pct": 95.22
     },
     {
@@ -7645,7 +7645,7 @@
       "Ret_5D_Pct": 1.55,
       "Dollar_Vol_M": 143.4,
       "api_called": false,
-      "RS_Rank_Pct": 13.71,
+      "RS_Rank_Pct": 13.62,
       "RS_3mo_Rank_Pct": 15.24,
       "RS_1mo_Rank_Pct": 9.74
     },
@@ -7709,7 +7709,7 @@
       "Ticker": "PLPC",
       "Price": 285.8800048828125,
       "Market Cap": "1.40B",
-      "RS_6mo": -0.1736899932476056,
+      "RS_6mo": -0.17368993170200409,
       "RS_3mo": -0.2785317912091482,
       "RS_1mo": -0.14779651201529811,
       "50DIV": -22.26,
@@ -7765,7 +7765,7 @@
       "Ticker": "AGX",
       "Price": 306.4800109863281,
       "Market Cap": "4.30B",
-      "RS_6mo": -0.47470842278654335,
+      "RS_6mo": -0.47470846461281135,
       "RS_3mo": -0.3628456252924809,
       "RS_1mo": -0.06915444838009756,
       "50DIV": -15.22,
@@ -7870,8 +7870,8 @@
       "Dollar_Vol_M": 164.7,
       "api_called": false,
       "RS_Rank_Pct": 21.1,
-      "RS_3mo_Rank_Pct": 58.79,
-      "RS_1mo_Rank_Pct": 46.35
+      "RS_3mo_Rank_Pct": 58.88,
+      "RS_1mo_Rank_Pct": 46.44
     },
     {
       "Ticker": "AMG",
@@ -7927,7 +7927,7 @@
       "api_called": false,
       "RS_Rank_Pct": 17.85,
       "RS_3mo_Rank_Pct": 15.78,
-      "RS_1mo_Rank_Pct": 49.23
+      "RS_1mo_Rank_Pct": 49.32
     },
     {
       "Ticker": "ZBRA",
@@ -8039,7 +8039,7 @@
       "api_called": false,
       "RS_Rank_Pct": 43.64,
       "RS_3mo_Rank_Pct": 89.45,
-      "RS_1mo_Rank_Pct": 62.58
+      "RS_1mo_Rank_Pct": 62.67
     },
     {
       "Ticker": "CRS",
@@ -8149,7 +8149,7 @@
       "Ret_5D_Pct": 0.92,
       "Dollar_Vol_M": 1976.0,
       "api_called": false,
-      "RS_Rank_Pct": 15.24,
+      "RS_Rank_Pct": 15.15,
       "RS_3mo_Rank_Pct": 9.38,
       "RS_1mo_Rank_Pct": 36.97
     },
@@ -8318,7 +8318,7 @@
       "Dollar_Vol_M": 125.1,
       "api_called": false,
       "RS_Rank_Pct": 51.22,
-      "RS_3mo_Rank_Pct": 48.87,
+      "RS_3mo_Rank_Pct": 48.96,
       "RS_1mo_Rank_Pct": 75.83
     },
     {
@@ -8375,7 +8375,7 @@
       "api_called": false,
       "RS_Rank_Pct": 43.19,
       "RS_3mo_Rank_Pct": 28.94,
-      "RS_1mo_Rank_Pct": 53.47
+      "RS_1mo_Rank_Pct": 53.56
     },
     {
       "Ticker": "TLN",
@@ -8429,7 +8429,7 @@
       "Ret_5D_Pct": 11.04,
       "Dollar_Vol_M": 381.2,
       "api_called": false,
-      "RS_Rank_Pct": 66.46,
+      "RS_Rank_Pct": 66.55,
       "RS_3mo_Rank_Pct": 7.3,
       "RS_1mo_Rank_Pct": 36.79
     },
@@ -8487,7 +8487,7 @@
       "api_called": false,
       "RS_Rank_Pct": 57.44,
       "RS_3mo_Rank_Pct": 35.53,
-      "RS_1mo_Rank_Pct": 58.88
+      "RS_1mo_Rank_Pct": 58.97
     },
     {
       "Ticker": "SNOW",
@@ -8549,7 +8549,7 @@
       "Ticker": "TRV",
       "Price": 403.2300109863281,
       "Market Cap": "82.64B",
-      "RS_6mo": 0.3998374171363573,
+      "RS_6mo": 0.3998375515821806,
       "RS_3mo": 0.1527324791071361,
       "RS_1mo": 0.07728261500498608,
       "50DIV": 5.87,
@@ -8597,9 +8597,9 @@
       "Ret_5D_Pct": 2.03,
       "Dollar_Vol_M": 553.8,
       "api_called": false,
-      "RS_Rank_Pct": 12.71,
+      "RS_Rank_Pct": 12.62,
       "RS_3mo_Rank_Pct": 17.94,
-      "RS_1mo_Rank_Pct": 45.72
+      "RS_1mo_Rank_Pct": 45.81
     },
     {
       "Ticker": "DAVE",
@@ -8767,7 +8767,7 @@
       "api_called": false,
       "RS_Rank_Pct": 59.69,
       "RS_3mo_Rank_Pct": 73.49,
-      "RS_1mo_Rank_Pct": 67.45
+      "RS_1mo_Rank_Pct": 67.54
     },
     {
       "Ticker": "BIO",
@@ -8822,8 +8822,8 @@
       "Dollar_Vol_M": 93.9,
       "api_called": false,
       "RS_Rank_Pct": 22.18,
-      "RS_3mo_Rank_Pct": 55.37,
-      "RS_1mo_Rank_Pct": 45.36
+      "RS_3mo_Rank_Pct": 55.46,
+      "RS_1mo_Rank_Pct": 45.45
     },
     {
       "Ticker": "WST",
@@ -8877,7 +8877,7 @@
       "Ret_5D_Pct": 4.22,
       "Dollar_Vol_M": 199.5,
       "api_called": false,
-      "RS_Rank_Pct": 13.98,
+      "RS_Rank_Pct": 13.89,
       "RS_3mo_Rank_Pct": 8.39,
       "RS_1mo_Rank_Pct": 25.52
     },
@@ -8935,7 +8935,7 @@
       "api_called": false,
       "RS_Rank_Pct": 35.17,
       "RS_3mo_Rank_Pct": 7.21,
-      "RS_1mo_Rank_Pct": 23.99
+      "RS_1mo_Rank_Pct": 24.08
     },
     {
       "Ticker": "WCC",
@@ -9157,7 +9157,7 @@
       "Ret_5D_Pct": 12.36,
       "Dollar_Vol_M": 13.0,
       "api_called": false,
-      "RS_Rank_Pct": 15.15,
+      "RS_Rank_Pct": 15.06,
       "RS_3mo_Rank_Pct": 67.72,
       "RS_1mo_Rank_Pct": 93.42
     },
@@ -9213,7 +9213,7 @@
       "Ret_5D_Pct": 4.93,
       "Dollar_Vol_M": 70.6,
       "api_called": false,
-      "RS_Rank_Pct": 62.31,
+      "RS_Rank_Pct": 62.4,
       "RS_3mo_Rank_Pct": 75.2,
       "RS_1mo_Rank_Pct": 80.7
     },
@@ -9277,7 +9277,7 @@
       "Ticker": "AVGO",
       "Price": 347.010009765625,
       "Market Cap": "1656.50B",
-      "RS_6mo": -0.10791324896808477,
+      "RS_6mo": -0.10791318909930911,
       "RS_3mo": -0.002353988975594745,
       "RS_1mo": 0.09768234943066506,
       "50DIV": 0.51,
@@ -9439,7 +9439,7 @@
       "api_called": false,
       "RS_Rank_Pct": 8.84,
       "RS_3mo_Rank_Pct": 21.01,
-      "RS_1mo_Rank_Pct": 47.97
+      "RS_1mo_Rank_Pct": 48.06
     },
     {
       "Ticker": "SNA",
@@ -9493,15 +9493,15 @@
       "Ret_5D_Pct": 0.38,
       "Dollar_Vol_M": 171.7,
       "api_called": false,
-      "RS_Rank_Pct": 61.32,
+      "RS_Rank_Pct": 61.41,
       "RS_3mo_Rank_Pct": 64.38,
-      "RS_1mo_Rank_Pct": 58.25
+      "RS_1mo_Rank_Pct": 58.34
     },
     {
       "Ticker": "LII",
       "Price": 352.0199890136719,
       "Market Cap": "12.04B",
-      "RS_6mo": -0.22819972139356137,
+      "RS_6mo": -0.22819967833031451,
       "RS_3mo": -0.08711188649312711,
       "RS_1mo": 0.026176773688928234,
       "50DIV": -2.21,
@@ -9551,7 +9551,7 @@
       "api_called": false,
       "RS_Rank_Pct": 90.62,
       "RS_3mo_Rank_Pct": 78.99,
-      "RS_1mo_Rank_Pct": 64.2
+      "RS_1mo_Rank_Pct": 64.29
     },
     {
       "Ticker": "ONC",
@@ -9663,7 +9663,7 @@
       "api_called": false,
       "RS_Rank_Pct": 94.77,
       "RS_3mo_Rank_Pct": 84.85,
-      "RS_1mo_Rank_Pct": 62.67
+      "RS_1mo_Rank_Pct": 62.76
     },
     {
       "Ticker": "CDNS",
@@ -9719,7 +9719,7 @@
       "api_called": false,
       "RS_Rank_Pct": 82.33,
       "RS_3mo_Rank_Pct": 38.05,
-      "RS_1mo_Rank_Pct": 55.28
+      "RS_1mo_Rank_Pct": 55.37
     },
     {
       "Ticker": "WTS",
@@ -9774,8 +9774,8 @@
       "Dollar_Vol_M": 125.8,
       "api_called": false,
       "RS_Rank_Pct": 31.02,
-      "RS_3mo_Rank_Pct": 54.55,
-      "RS_1mo_Rank_Pct": 55.64
+      "RS_3mo_Rank_Pct": 54.64,
+      "RS_1mo_Rank_Pct": 55.73
     },
     {
       "Ticker": "GOOGL",
@@ -9999,7 +9999,7 @@
       "api_called": false,
       "RS_Rank_Pct": 30.75,
       "RS_3mo_Rank_Pct": 20.2,
-      "RS_1mo_Rank_Pct": 42.11
+      "RS_1mo_Rank_Pct": 42.2
     },
     {
       "Ticker": "KNSL",
@@ -10111,7 +10111,7 @@
       "api_called": false,
       "RS_Rank_Pct": 89.63,
       "RS_3mo_Rank_Pct": 61.41,
-      "RS_1mo_Rank_Pct": 51.31
+      "RS_1mo_Rank_Pct": 51.4
     },
     {
       "Ticker": "AAPL",
@@ -10167,7 +10167,7 @@
       "api_called": false,
       "RS_Rank_Pct": 31.56,
       "RS_3mo_Rank_Pct": 11.9,
-      "RS_1mo_Rank_Pct": 44.72
+      "RS_1mo_Rank_Pct": 44.82
     },
     {
       "Ticker": "WWD",
@@ -10222,8 +10222,8 @@
       "Dollar_Vol_M": 127.9,
       "api_called": false,
       "RS_Rank_Pct": 76.19,
-      "RS_3mo_Rank_Pct": 57.71,
-      "RS_1mo_Rank_Pct": 58.07
+      "RS_3mo_Rank_Pct": 57.8,
+      "RS_1mo_Rank_Pct": 58.16
     },
     {
       "Ticker": "AIT",
@@ -10277,7 +10277,7 @@
       "Ret_5D_Pct": 5.19,
       "Dollar_Vol_M": 39.8,
       "api_called": false,
-      "RS_Rank_Pct": 67.45,
+      "RS_Rank_Pct": 67.54,
       "RS_3mo_Rank_Pct": 77.82,
       "RS_1mo_Rank_Pct": 84.31
     },
@@ -10334,8 +10334,8 @@
       "Dollar_Vol_M": 1453.6,
       "api_called": false,
       "RS_Rank_Pct": 34.36,
-      "RS_3mo_Rank_Pct": 51.22,
-      "RS_1mo_Rank_Pct": 52.12
+      "RS_3mo_Rank_Pct": 51.31,
+      "RS_1mo_Rank_Pct": 52.21
     },
     {
       "Ticker": "KRYS",
@@ -10391,7 +10391,7 @@
       "api_called": false,
       "RS_Rank_Pct": 59.15,
       "RS_3mo_Rank_Pct": 72.86,
-      "RS_1mo_Rank_Pct": 70.6
+      "RS_1mo_Rank_Pct": 70.69
     },
     {
       "Ticker": "RNR",
@@ -10447,13 +10447,13 @@
       "api_called": false,
       "RS_Rank_Pct": 26.33,
       "RS_3mo_Rank_Pct": 20.29,
-      "RS_1mo_Rank_Pct": 56.63
+      "RS_1mo_Rank_Pct": 56.72
     },
     {
       "Ticker": "IDCC",
       "Price": 288.6199951171875,
       "Market Cap": "7.43B",
-      "RS_6mo": 0.16818840923827022,
+      "RS_6mo": 0.16818828102243688,
       "RS_3mo": -0.11133848656915617,
       "RS_1mo": -0.05394657359056208,
       "50DIV": -10.82,
@@ -10565,7 +10565,7 @@
       "Ticker": "LPLA",
       "Price": 292.4599914550781,
       "Market Cap": "22.77B",
-      "RS_6mo": 0.10441737807927415,
+      "RS_6mo": 0.10441749038067238,
       "RS_3mo": -0.1304014631351672,
       "RS_1mo": -0.045750284866383106,
       "50DIV": -7.91,
@@ -10733,7 +10733,7 @@
       "Ticker": "NDSN",
       "Price": 324.739990234375,
       "Market Cap": "18.09B",
-      "RS_6mo": 0.20183675809701682,
+      "RS_6mo": 0.20183663707176763,
       "RS_3mo": 0.015820328876776032,
       "RS_1mo": 0.04967789631665434,
       "50DIV": 0.54,
@@ -10782,8 +10782,8 @@
       "Dollar_Vol_M": 63.9,
       "api_called": false,
       "RS_Rank_Pct": 35.08,
-      "RS_3mo_Rank_Pct": 55.46,
-      "RS_1mo_Rank_Pct": 56.54
+      "RS_3mo_Rank_Pct": 55.55,
+      "RS_1mo_Rank_Pct": 56.63
     },
     {
       "Ticker": "HLT",
@@ -10893,7 +10893,7 @@
       "Ret_5D_Pct": 7.84,
       "Dollar_Vol_M": 500.2,
       "api_called": false,
-      "RS_Rank_Pct": 12.89,
+      "RS_Rank_Pct": 12.8,
       "RS_3mo_Rank_Pct": 12.17,
       "RS_1mo_Rank_Pct": 38.32
     },
@@ -11005,9 +11005,9 @@
       "Ret_5D_Pct": 0.53,
       "Dollar_Vol_M": 76.2,
       "api_called": false,
-      "RS_Rank_Pct": 65.1,
-      "RS_3mo_Rank_Pct": 50.95,
-      "RS_1mo_Rank_Pct": 59.42
+      "RS_Rank_Pct": 65.19,
+      "RS_3mo_Rank_Pct": 51.04,
+      "RS_1mo_Rank_Pct": 59.51
     },
     {
       "Ticker": "SHW",
@@ -11062,8 +11062,8 @@
       "Dollar_Vol_M": 701.6,
       "api_called": false,
       "RS_Rank_Pct": 35.98,
-      "RS_3mo_Rank_Pct": 44.27,
-      "RS_1mo_Rank_Pct": 41.3
+      "RS_3mo_Rank_Pct": 44.36,
+      "RS_1mo_Rank_Pct": 41.39
     },
     {
       "Ticker": "LRCX",
@@ -11125,7 +11125,7 @@
       "Ticker": "NSC",
       "Price": 327.8800048828125,
       "Market Cap": "73.65B",
-      "RS_6mo": 0.09921228558101167,
+      "RS_6mo": 0.09921218641391755,
       "RS_3mo": -0.007505933489944293,
       "RS_1mo": 0.04920419314886192,
       "50DIV": 1.53,
@@ -11175,7 +11175,7 @@
       "api_called": false,
       "RS_Rank_Pct": 54.37,
       "RS_3mo_Rank_Pct": 62.4,
-      "RS_1mo_Rank_Pct": 56.72
+      "RS_1mo_Rank_Pct": 56.81
     },
     {
       "Ticker": "CLH",
@@ -11293,7 +11293,7 @@
       "Ticker": "LH",
       "Price": 370.4800109863281,
       "Market Cap": "30.08B",
-      "RS_6mo": 0.507496039743003,
+      "RS_6mo": 0.5074958688180802,
       "RS_3mo": 0.15823891799916157,
       "RS_1mo": 0.2073532396997483,
       "50DIV": 12.39,
@@ -11399,7 +11399,7 @@
       "api_called": false,
       "RS_Rank_Pct": 95.58,
       "RS_3mo_Rank_Pct": 80.61,
-      "RS_1mo_Rank_Pct": 66.82
+      "RS_1mo_Rank_Pct": 66.91
     },
     {
       "Ticker": "NPO",
@@ -11455,7 +11455,7 @@
       "api_called": false,
       "RS_Rank_Pct": 80.88,
       "RS_3mo_Rank_Pct": 77.91,
-      "RS_1mo_Rank_Pct": 67.36
+      "RS_1mo_Rank_Pct": 67.45
     },
     {
       "Ticker": "WSO.B",
@@ -11511,7 +11511,7 @@
       "api_called": false,
       "RS_Rank_Pct": 86.56,
       "RS_3mo_Rank_Pct": 40.4,
-      "RS_1mo_Rank_Pct": 24.26
+      "RS_1mo_Rank_Pct": 24.35
     },
     {
       "Ticker": "DPZ",
@@ -11622,14 +11622,14 @@
       "Dollar_Vol_M": 1119.9,
       "api_called": false,
       "RS_Rank_Pct": 48.6,
-      "RS_3mo_Rank_Pct": 57.62,
+      "RS_3mo_Rank_Pct": 57.71,
       "RS_1mo_Rank_Pct": 37.42
     },
     {
       "Ticker": "AXP",
       "Price": 320.6000061035156,
       "Market Cap": "214.98B",
-      "RS_6mo": 0.10482811795857222,
+      "RS_6mo": 0.10482822048407948,
       "RS_3mo": 0.013800269737642014,
       "RS_1mo": 0.06449265403836796,
       "50DIV": 1.77,
@@ -11678,8 +11678,8 @@
       "Dollar_Vol_M": 549.8,
       "api_called": false,
       "RS_Rank_Pct": 52.93,
-      "RS_3mo_Rank_Pct": 56.0,
-      "RS_1mo_Rank_Pct": 51.13
+      "RS_3mo_Rank_Pct": 56.09,
+      "RS_1mo_Rank_Pct": 51.22
     },
     {
       "Ticker": "JBL",
@@ -11741,7 +11741,7 @@
       "Ticker": "CBOE",
       "Price": 375.4200134277344,
       "Market Cap": "39.17B",
-      "RS_6mo": 0.131216950375691,
+      "RS_6mo": 0.13121704243922494,
       "RS_3mo": 0.32267164401194504,
       "RS_1mo": 0.23402379360799674,
       "50DIV": 23.07,
@@ -11847,13 +11847,13 @@
       "api_called": false,
       "RS_Rank_Pct": 56.27,
       "RS_3mo_Rank_Pct": 13.8,
-      "RS_1mo_Rank_Pct": 45.63
+      "RS_1mo_Rank_Pct": 45.72
     },
     {
       "Ticker": "INTU",
       "Price": 341.70001220703125,
       "Market Cap": "91.31B",
-      "RS_6mo": 0.19996050514114241,
+      "RS_6mo": 0.19996039050290212,
       "RS_3mo": -0.008669290512844097,
       "RS_1mo": 0.0930382355662224,
       "50DIV": 7.78,
@@ -11957,9 +11957,9 @@
       "Ret_5D_Pct": 0.85,
       "Dollar_Vol_M": 40.4,
       "api_called": false,
-      "RS_Rank_Pct": 14.88,
+      "RS_Rank_Pct": 14.79,
       "RS_3mo_Rank_Pct": 26.51,
-      "RS_1mo_Rank_Pct": 41.84
+      "RS_1mo_Rank_Pct": 41.93
     },
     {
       "Ticker": "CRL",
@@ -12126,8 +12126,8 @@
       "Dollar_Vol_M": 60.6,
       "api_called": false,
       "RS_Rank_Pct": 40.04,
-      "RS_3mo_Rank_Pct": 56.99,
-      "RS_1mo_Rank_Pct": 24.08
+      "RS_3mo_Rank_Pct": 57.08,
+      "RS_1mo_Rank_Pct": 24.17
     },
     {
       "Ticker": "HEI",
@@ -12182,7 +12182,7 @@
       "Dollar_Vol_M": 68.2,
       "api_called": false,
       "RS_Rank_Pct": 42.02,
-      "RS_3mo_Rank_Pct": 56.27,
+      "RS_3mo_Rank_Pct": 56.36,
       "RS_1mo_Rank_Pct": 22.18
     },
     {
@@ -12239,7 +12239,7 @@
       "api_called": false,
       "RS_Rank_Pct": 73.67,
       "RS_3mo_Rank_Pct": 39.31,
-      "RS_1mo_Rank_Pct": 47.88
+      "RS_1mo_Rank_Pct": 47.97
     },
     {
       "Ticker": "IESC",
@@ -12357,7 +12357,7 @@
       "Ticker": "WTW",
       "Price": 335.3399963378906,
       "Market Cap": "30.92B",
-      "RS_6mo": 0.38428374207649313,
+      "RS_6mo": 0.384283821033205,
       "RS_3mo": 0.028914915721834456,
       "RS_1mo": 0.10505661535384155,
       "50DIV": 7.29,
@@ -12405,8 +12405,8 @@
       "Ret_5D_Pct": 1.97,
       "Dollar_Vol_M": 134.2,
       "api_called": false,
-      "RS_Rank_Pct": 14.25,
-      "RS_3mo_Rank_Pct": 51.85,
+      "RS_Rank_Pct": 14.16,
+      "RS_3mo_Rank_Pct": 51.94,
       "RS_1mo_Rank_Pct": 35.8
     },
     {
@@ -12463,7 +12463,7 @@
       "api_called": false,
       "RS_Rank_Pct": 0.99,
       "RS_3mo_Rank_Pct": 5.32,
-      "RS_1mo_Rank_Pct": 67.9
+      "RS_1mo_Rank_Pct": 67.99
     },
     {
       "Ticker": "ONTO",
@@ -12686,7 +12686,7 @@
       "Dollar_Vol_M": 345.9,
       "api_called": false,
       "RS_Rank_Pct": 58.43,
-      "RS_3mo_Rank_Pct": 48.06,
+      "RS_3mo_Rank_Pct": 48.15,
       "RS_1mo_Rank_Pct": 20.02
     },
     {
@@ -12742,7 +12742,7 @@
       "Dollar_Vol_M": 1559.7,
       "api_called": false,
       "RS_Rank_Pct": 34.17,
-      "RS_3mo_Rank_Pct": 32.55,
+      "RS_3mo_Rank_Pct": 32.46,
       "RS_1mo_Rank_Pct": 14.79
     },
     {
@@ -12799,7 +12799,7 @@
       "api_called": false,
       "RS_Rank_Pct": 50.32,
       "RS_3mo_Rank_Pct": 88.64,
-      "RS_1mo_Rank_Pct": 56.81
+      "RS_1mo_Rank_Pct": 56.9
     },
     {
       "Ticker": "PSA",
@@ -12910,7 +12910,7 @@
       "Dollar_Vol_M": 398.1,
       "api_called": false,
       "RS_Rank_Pct": 39.31,
-      "RS_3mo_Rank_Pct": 58.61,
+      "RS_3mo_Rank_Pct": 58.7,
       "RS_1mo_Rank_Pct": 90.35
     },
     {
@@ -12965,9 +12965,9 @@
       "Ret_5D_Pct": 0.52,
       "Dollar_Vol_M": 19.8,
       "api_called": false,
-      "RS_Rank_Pct": 12.8,
-      "RS_3mo_Rank_Pct": 47.52,
-      "RS_1mo_Rank_Pct": 41.48
+      "RS_Rank_Pct": 12.71,
+      "RS_3mo_Rank_Pct": 47.61,
+      "RS_1mo_Rank_Pct": 41.57
     },
     {
       "Ticker": "AEIS",
@@ -13078,8 +13078,8 @@
       "Dollar_Vol_M": 4.4,
       "api_called": false,
       "RS_Rank_Pct": 49.41,
-      "RS_3mo_Rank_Pct": 45.0,
-      "RS_1mo_Rank_Pct": 49.05
+      "RS_3mo_Rank_Pct": 45.09,
+      "RS_1mo_Rank_Pct": 49.14
     },
     {
       "Ticker": "CSW",
@@ -13135,7 +13135,7 @@
       "api_called": false,
       "RS_Rank_Pct": 58.07,
       "RS_3mo_Rank_Pct": 77.37,
-      "RS_1mo_Rank_Pct": 64.47
+      "RS_1mo_Rank_Pct": 64.56
     },
     {
       "Ticker": "FDS",
@@ -13246,8 +13246,8 @@
       "Dollar_Vol_M": 216.2,
       "api_called": false,
       "RS_Rank_Pct": 40.13,
-      "RS_3mo_Rank_Pct": 51.58,
-      "RS_1mo_Rank_Pct": 54.82
+      "RS_3mo_Rank_Pct": 51.67,
+      "RS_1mo_Rank_Pct": 54.91
     },
     {
       "Ticker": "WAB",
@@ -13302,8 +13302,8 @@
       "Dollar_Vol_M": 241.3,
       "api_called": false,
       "RS_Rank_Pct": 33.99,
-      "RS_3mo_Rank_Pct": 42.2,
-      "RS_1mo_Rank_Pct": 44.36
+      "RS_3mo_Rank_Pct": 42.29,
+      "RS_1mo_Rank_Pct": 44.45
     },
     {
       "Ticker": "SXI",
@@ -13413,7 +13413,7 @@
       "Ret_5D_Pct": 9.46,
       "Dollar_Vol_M": 1587.7,
       "api_called": false,
-      "RS_Rank_Pct": 70.06,
+      "RS_Rank_Pct": 70.15,
       "RS_3mo_Rank_Pct": 11.63,
       "RS_1mo_Rank_Pct": 20.2
     },
@@ -13421,7 +13421,7 @@
       "Ticker": "CI",
       "Price": 297.0,
       "Market Cap": "78.26B",
-      "RS_6mo": 0.13662143769097174,
+      "RS_6mo": 0.13662132013399497,
       "RS_3mo": 0.13099611182756815,
       "RS_1mo": 0.02460638043308364,
       "50DIV": 3.3,
@@ -13471,7 +13471,7 @@
       "api_called": false,
       "RS_Rank_Pct": 46.17,
       "RS_3mo_Rank_Pct": 22.54,
-      "RS_1mo_Rank_Pct": 64.56
+      "RS_1mo_Rank_Pct": 64.65
     },
     {
       "Ticker": "RCL",
@@ -13813,7 +13813,7 @@
       "Ticker": "WSO",
       "Price": 308.4599914550781,
       "Market Cap": "12.75B",
-      "RS_6mo": -0.10970795973938247,
+      "RS_6mo": -0.10970802679760863,
       "RS_3mo": 0.03454422265222283,
       "RS_1mo": 0.08455009576276858,
       "50DIV": 1.48,
@@ -13862,8 +13862,8 @@
       "Dollar_Vol_M": 144.9,
       "api_called": false,
       "RS_Rank_Pct": 83.77,
-      "RS_3mo_Rank_Pct": 50.59,
-      "RS_1mo_Rank_Pct": 43.01
+      "RS_3mo_Rank_Pct": 50.68,
+      "RS_1mo_Rank_Pct": 43.1
     },
     {
       "Ticker": "UNP",
@@ -13918,8 +13918,8 @@
       "Dollar_Vol_M": 775.3,
       "api_called": false,
       "RS_Rank_Pct": 36.43,
-      "RS_3mo_Rank_Pct": 47.79,
-      "RS_1mo_Rank_Pct": 41.21
+      "RS_3mo_Rank_Pct": 47.88,
+      "RS_1mo_Rank_Pct": 41.3
     },
     {
       "Ticker": "LNG",
@@ -13973,7 +13973,7 @@
       "Ret_5D_Pct": 11.33,
       "Dollar_Vol_M": 361.9,
       "api_called": false,
-      "RS_Rank_Pct": 13.53,
+      "RS_Rank_Pct": 13.44,
       "RS_3mo_Rank_Pct": 18.3,
       "RS_1mo_Rank_Pct": 32.82
     },
@@ -14086,7 +14086,7 @@
       "Dollar_Vol_M": 254.5,
       "api_called": false,
       "RS_Rank_Pct": 7.66,
-      "RS_3mo_Rank_Pct": 56.18,
+      "RS_3mo_Rank_Pct": 56.27,
       "RS_1mo_Rank_Pct": 96.48
     },
     {
@@ -14141,7 +14141,7 @@
       "Ret_5D_Pct": -4.98,
       "Dollar_Vol_M": 1006.9,
       "api_called": false,
-      "RS_Rank_Pct": 61.59,
+      "RS_Rank_Pct": 61.68,
       "RS_3mo_Rank_Pct": 63.03,
       "RS_1mo_Rank_Pct": 39.86
     },
@@ -14261,7 +14261,7 @@
       "Ticker": "ABBV",
       "Price": 295.0299987792969,
       "Market Cap": "521.50B",
-      "RS_6mo": 0.46975828450429963,
+      "RS_6mo": 0.46975818273531056,
       "RS_3mo": 0.17638316924947045,
       "RS_1mo": 0.07580822035336503,
       "50DIV": 7.44,
@@ -14311,7 +14311,7 @@
       "api_called": false,
       "RS_Rank_Pct": 9.38,
       "RS_3mo_Rank_Pct": 13.26,
-      "RS_1mo_Rank_Pct": 46.89
+      "RS_1mo_Rank_Pct": 46.98
     },
     {
       "Ticker": "PRI",
@@ -14366,8 +14366,8 @@
       "Dollar_Vol_M": 45.9,
       "api_called": false,
       "RS_Rank_Pct": 48.87,
-      "RS_3mo_Rank_Pct": 51.31,
-      "RS_1mo_Rank_Pct": 44.82
+      "RS_3mo_Rank_Pct": 51.4,
+      "RS_1mo_Rank_Pct": 44.91
     },
     {
       "Ticker": "MRVL",
@@ -14477,9 +14477,9 @@
       "Ret_5D_Pct": 4.48,
       "Dollar_Vol_M": 1471.6,
       "api_called": false,
-      "RS_Rank_Pct": 11.72,
+      "RS_Rank_Pct": 11.63,
       "RS_3mo_Rank_Pct": 6.85,
-      "RS_1mo_Rank_Pct": 60.41
+      "RS_1mo_Rank_Pct": 60.5
     },
     {
       "Ticker": "EXPE",
@@ -14590,14 +14590,14 @@
       "Dollar_Vol_M": 206.9,
       "api_called": false,
       "RS_Rank_Pct": 46.71,
-      "RS_3mo_Rank_Pct": 57.89,
+      "RS_3mo_Rank_Pct": 57.98,
       "RS_1mo_Rank_Pct": 9.29
     },
     {
       "Ticker": "SNX",
       "Price": 237.5800018310547,
       "Market Cap": "18.95B",
-      "RS_6mo": 0.06074726011098303,
+      "RS_6mo": 0.06074732353537883,
       "RS_3mo": -0.008147769738682656,
       "RS_1mo": 0.004975480342912224,
       "50DIV": -7.01,
@@ -14645,9 +14645,9 @@
       "Ret_5D_Pct": 8.62,
       "Dollar_Vol_M": 102.9,
       "api_called": false,
-      "RS_Rank_Pct": 61.86,
+      "RS_Rank_Pct": 61.95,
       "RS_3mo_Rank_Pct": 62.49,
-      "RS_1mo_Rank_Pct": 70.96
+      "RS_1mo_Rank_Pct": 71.06
     },
     {
       "Ticker": "EVR",
@@ -14758,8 +14758,8 @@
       "Dollar_Vol_M": 98.5,
       "api_called": false,
       "RS_Rank_Pct": 60.14,
-      "RS_3mo_Rank_Pct": 59.15,
-      "RS_1mo_Rank_Pct": 53.92
+      "RS_3mo_Rank_Pct": 59.24,
+      "RS_1mo_Rank_Pct": 54.01
     },
     {
       "Ticker": "ADP",
@@ -14926,8 +14926,8 @@
       "Dollar_Vol_M": 131.5,
       "api_called": false,
       "RS_Rank_Pct": 27.14,
-      "RS_3mo_Rank_Pct": 56.63,
-      "RS_1mo_Rank_Pct": 61.32
+      "RS_3mo_Rank_Pct": 56.72,
+      "RS_1mo_Rank_Pct": 61.41
     },
     {
       "Ticker": "AIZ",
@@ -15149,8 +15149,8 @@
       "Ret_5D_Pct": 6.06,
       "Dollar_Vol_M": 106.5,
       "api_called": false,
-      "RS_Rank_Pct": 66.91,
-      "RS_3mo_Rank_Pct": 41.48,
+      "RS_Rank_Pct": 67.0,
+      "RS_3mo_Rank_Pct": 41.57,
       "RS_1mo_Rank_Pct": 14.97
     },
     {
@@ -15207,7 +15207,7 @@
       "api_called": false,
       "RS_Rank_Pct": 92.97,
       "RS_3mo_Rank_Pct": 91.43,
-      "RS_1mo_Rank_Pct": 58.16
+      "RS_1mo_Rank_Pct": 58.25
     },
     {
       "Ticker": "ITW",
@@ -15374,7 +15374,7 @@
       "Dollar_Vol_M": 106.6,
       "api_called": false,
       "RS_Rank_Pct": 3.25,
-      "RS_3mo_Rank_Pct": 33.0,
+      "RS_3mo_Rank_Pct": 32.91,
       "RS_1mo_Rank_Pct": 32.37
     },
     {
@@ -15549,7 +15549,7 @@
       "Ticker": "LECO",
       "Price": 282.8599853515625,
       "Market Cap": "15.32B",
-      "RS_6mo": 0.13948236463161134,
+      "RS_6mo": 0.13948224053684172,
       "RS_3mo": 0.06725117598783299,
       "RS_1mo": 0.12134492223668096,
       "50DIV": 5.54,
@@ -15605,7 +15605,7 @@
       "Ticker": "UNF",
       "Price": 235.38999938964844,
       "Market Cap": "4.26B",
-      "RS_6mo": -0.037519695072725276,
+      "RS_6mo": -0.0375195911123625,
       "RS_3mo": -0.13949612512574933,
       "RS_1mo": -0.06145034689241148,
       "50DIV": -8.97,
@@ -15767,7 +15767,7 @@
       "api_called": false,
       "RS_Rank_Pct": 2.98,
       "RS_3mo_Rank_Pct": 36.52,
-      "RS_1mo_Rank_Pct": 61.59
+      "RS_1mo_Rank_Pct": 61.68
     },
     {
       "Ticker": "PRAX",
@@ -15821,7 +15821,7 @@
       "Ret_5D_Pct": 18.19,
       "Dollar_Vol_M": 115.1,
       "api_called": false,
-      "RS_Rank_Pct": 71.6,
+      "RS_Rank_Pct": 71.69,
       "RS_3mo_Rank_Pct": 73.76,
       "RS_1mo_Rank_Pct": 0.72
     },
@@ -15933,15 +15933,15 @@
       "Ret_5D_Pct": 5.06,
       "Dollar_Vol_M": 98.4,
       "api_called": false,
-      "RS_Rank_Pct": 15.69,
+      "RS_Rank_Pct": 15.6,
       "RS_3mo_Rank_Pct": 13.07,
-      "RS_1mo_Rank_Pct": 48.24
+      "RS_1mo_Rank_Pct": 48.33
     },
     {
       "Ticker": "NUE",
       "Price": 251.72999572753906,
       "Market Cap": "56.63B",
-      "RS_6mo": 0.11968392618419296,
+      "RS_6mo": 0.11968399335424257,
       "RS_3mo": 0.09193324822599348,
       "RS_1mo": 0.024346199461943482,
       "50DIV": -1.28,
@@ -15990,8 +15990,8 @@
       "Dollar_Vol_M": 217.7,
       "api_called": false,
       "RS_Rank_Pct": 50.14,
-      "RS_3mo_Rank_Pct": 32.91,
-      "RS_1mo_Rank_Pct": 64.65
+      "RS_3mo_Rank_Pct": 32.82,
+      "RS_1mo_Rank_Pct": 64.74
     },
     {
       "Ticker": "AME",
@@ -16046,8 +16046,8 @@
       "Dollar_Vol_M": 310.5,
       "api_called": false,
       "RS_Rank_Pct": 48.42,
-      "RS_3mo_Rank_Pct": 43.82,
-      "RS_1mo_Rank_Pct": 66.37
+      "RS_3mo_Rank_Pct": 43.91,
+      "RS_1mo_Rank_Pct": 66.46
     },
     {
       "Ticker": "FNV",
@@ -16102,8 +16102,8 @@
       "Dollar_Vol_M": 135.1,
       "api_called": false,
       "RS_Rank_Pct": 44.27,
-      "RS_3mo_Rank_Pct": 59.33,
-      "RS_1mo_Rank_Pct": 54.37
+      "RS_3mo_Rank_Pct": 59.42,
+      "RS_1mo_Rank_Pct": 54.46
     },
     {
       "Ticker": "VMC",
@@ -16221,7 +16221,7 @@
       "Ticker": "VRT",
       "Price": 202.07000732421875,
       "Market Cap": "77.81B",
-      "RS_6mo": -0.30886453284940996,
+      "RS_6mo": -0.30886447401968825,
       "RS_3mo": -0.19355382310605035,
       "RS_1mo": 0.02106509826959613,
       "50DIV": -12.64,
@@ -16271,7 +16271,7 @@
       "api_called": false,
       "RS_Rank_Pct": 94.32,
       "RS_3mo_Rank_Pct": 91.7,
-      "RS_1mo_Rank_Pct": 65.19
+      "RS_1mo_Rank_Pct": 65.28
     },
     {
       "Ticker": "ADBE",
@@ -16327,7 +16327,7 @@
       "api_called": false,
       "RS_Rank_Pct": 59.06,
       "RS_3mo_Rank_Pct": 74.48,
-      "RS_1mo_Rank_Pct": 61.95
+      "RS_1mo_Rank_Pct": 62.04
     },
     {
       "Ticker": "WSM",
@@ -16383,7 +16383,7 @@
       "api_called": false,
       "RS_Rank_Pct": 17.04,
       "RS_3mo_Rank_Pct": 24.08,
-      "RS_1mo_Rank_Pct": 53.38
+      "RS_1mo_Rank_Pct": 53.47
     },
     {
       "Ticker": "ALX",
@@ -16550,7 +16550,7 @@
       "Dollar_Vol_M": 160.6,
       "api_called": false,
       "RS_Rank_Pct": 75.02,
-      "RS_3mo_Rank_Pct": 32.64,
+      "RS_3mo_Rank_Pct": 32.55,
       "RS_1mo_Rank_Pct": 73.49
     },
     {
@@ -16661,7 +16661,7 @@
       "Ret_5D_Pct": 7.2,
       "Dollar_Vol_M": 303.9,
       "api_called": false,
-      "RS_Rank_Pct": 14.79,
+      "RS_Rank_Pct": 14.7,
       "RS_3mo_Rank_Pct": 64.2,
       "RS_1mo_Rank_Pct": 86.38
     },
@@ -16669,7 +16669,7 @@
       "Ticker": "LHX",
       "Price": 272.3500061035156,
       "Market Cap": "50.71B",
-      "RS_6mo": -0.056470613173572534,
+      "RS_6mo": -0.05647052708427905,
       "RS_3mo": 0.0545522598627435,
       "RS_1mo": 0.13807039552432263,
       "50DIV": 8.42,
@@ -16718,14 +16718,14 @@
       "Dollar_Vol_M": 264.6,
       "api_called": false,
       "RS_Rank_Pct": 79.53,
-      "RS_3mo_Rank_Pct": 44.82,
-      "RS_1mo_Rank_Pct": 22.81
+      "RS_3mo_Rank_Pct": 44.91,
+      "RS_1mo_Rank_Pct": 22.9
     },
     {
       "Ticker": "RGLD",
       "Price": 256.8900146484375,
       "Market Cap": "21.72B",
-      "RS_6mo": 0.20899750345113566,
+      "RS_6mo": 0.20899758091482323,
       "RS_3mo": 0.06270058701149825,
       "RS_1mo": 0.12128167836737466,
       "50DIV": 4.89,
@@ -16774,7 +16774,7 @@
       "Dollar_Vol_M": 92.1,
       "api_called": false,
       "RS_Rank_Pct": 33.72,
-      "RS_3mo_Rank_Pct": 41.84,
+      "RS_3mo_Rank_Pct": 41.93,
       "RS_1mo_Rank_Pct": 27.95
     },
     {
@@ -16885,8 +16885,8 @@
       "Ret_5D_Pct": -1.65,
       "Dollar_Vol_M": 1270.2,
       "api_called": false,
-      "RS_Rank_Pct": 63.39,
-      "RS_3mo_Rank_Pct": 42.65,
+      "RS_Rank_Pct": 63.48,
+      "RS_3mo_Rank_Pct": 42.74,
       "RS_1mo_Rank_Pct": 16.05
     },
     {
@@ -16942,8 +16942,8 @@
       "Dollar_Vol_M": 124.0,
       "api_called": false,
       "RS_Rank_Pct": 35.44,
-      "RS_3mo_Rank_Pct": 42.02,
-      "RS_1mo_Rank_Pct": 56.18
+      "RS_3mo_Rank_Pct": 42.11,
+      "RS_1mo_Rank_Pct": 56.27
     },
     {
       "Ticker": "ZS",
@@ -17005,7 +17005,7 @@
       "Ticker": "AJG",
       "Price": 282.94000244140625,
       "Market Cap": "72.55B",
-      "RS_6mo": 0.46257577336472927,
+      "RS_6mo": 0.46257566833108804,
       "RS_3mo": 0.13544218775178185,
       "RS_1mo": 0.15222960502852062,
       "50DIV": 12.44,
@@ -17167,7 +17167,7 @@
       "api_called": false,
       "RS_Rank_Pct": 1.35,
       "RS_3mo_Rank_Pct": 20.02,
-      "RS_1mo_Rank_Pct": 62.94
+      "RS_1mo_Rank_Pct": 63.03
     },
     {
       "Ticker": "OKTA",
@@ -17223,7 +17223,7 @@
       "api_called": false,
       "RS_Rank_Pct": 0.81,
       "RS_3mo_Rank_Pct": 1.08,
-      "RS_1mo_Rank_Pct": 65.83
+      "RS_1mo_Rank_Pct": 65.92
     },
     {
       "Ticker": "GPI",
@@ -17278,7 +17278,7 @@
       "Dollar_Vol_M": 25.9,
       "api_called": false,
       "RS_Rank_Pct": 86.47,
-      "RS_3mo_Rank_Pct": 51.49,
+      "RS_3mo_Rank_Pct": 51.58,
       "RS_1mo_Rank_Pct": 30.21
     },
     {
@@ -17334,14 +17334,14 @@
       "Dollar_Vol_M": 12.3,
       "api_called": false,
       "RS_Rank_Pct": 78.45,
-      "RS_3mo_Rank_Pct": 34.63,
+      "RS_3mo_Rank_Pct": 34.54,
       "RS_1mo_Rank_Pct": 14.25
     },
     {
       "Ticker": "DGX",
       "Price": 259.6000061035156,
       "Market Cap": "28.56B",
-      "RS_6mo": 0.4234167493182926,
+      "RS_6mo": 0.42341664117554484,
       "RS_3mo": 0.12250276248063811,
       "RS_1mo": 0.1468194705258371,
       "50DIV": 7.75,
@@ -17389,7 +17389,7 @@
       "Ret_5D_Pct": 1.55,
       "Dollar_Vol_M": 168.6,
       "api_called": false,
-      "RS_Rank_Pct": 11.36,
+      "RS_Rank_Pct": 11.27,
       "RS_3mo_Rank_Pct": 24.71,
       "RS_1mo_Rank_Pct": 19.84
     },
@@ -17397,7 +17397,7 @@
       "Ticker": "PKG",
       "Price": 251.02000427246094,
       "Market Cap": "22.36B",
-      "RS_6mo": 0.23108443765827408,
+      "RS_6mo": 0.2310845200295536,
       "RS_3mo": 0.05502491550636976,
       "RS_1mo": 0.10578267938985862,
       "50DIV": 4.74,
@@ -17446,7 +17446,7 @@
       "Dollar_Vol_M": 95.3,
       "api_called": false,
       "RS_Rank_Pct": 30.39,
-      "RS_3mo_Rank_Pct": 44.36,
+      "RS_3mo_Rank_Pct": 44.45,
       "RS_1mo_Rank_Pct": 35.35
     },
     {
@@ -17503,7 +17503,7 @@
       "api_called": false,
       "RS_Rank_Pct": 31.47,
       "RS_3mo_Rank_Pct": 32.28,
-      "RS_1mo_Rank_Pct": 57.62
+      "RS_1mo_Rank_Pct": 57.71
     },
     {
       "Ticker": "ALL",
@@ -17671,7 +17671,7 @@
       "api_called": false,
       "RS_Rank_Pct": 79.71,
       "RS_3mo_Rank_Pct": 81.88,
-      "RS_1mo_Rank_Pct": 51.85
+      "RS_1mo_Rank_Pct": 51.94
     },
     {
       "Ticker": "ASND",
@@ -18061,7 +18061,7 @@
       "Ret_5D_Pct": 1.57,
       "Dollar_Vol_M": 659.3,
       "api_called": false,
-      "RS_Rank_Pct": 60.78,
+      "RS_Rank_Pct": 60.87,
       "RS_3mo_Rank_Pct": 29.22,
       "RS_1mo_Rank_Pct": 31.38
     },
@@ -18173,9 +18173,9 @@
       "Ret_5D_Pct": 2.03,
       "Dollar_Vol_M": 260.7,
       "api_called": false,
-      "RS_Rank_Pct": 14.7,
+      "RS_Rank_Pct": 14.61,
       "RS_3mo_Rank_Pct": 7.84,
-      "RS_1mo_Rank_Pct": 24.35
+      "RS_1mo_Rank_Pct": 24.44
     },
     {
       "Ticker": "MATX",
@@ -18230,7 +18230,7 @@
       "Dollar_Vol_M": 53.9,
       "api_called": false,
       "RS_Rank_Pct": 34.99,
-      "RS_3mo_Rank_Pct": 57.53,
+      "RS_3mo_Rank_Pct": 57.62,
       "RS_1mo_Rank_Pct": 86.56
     },
     {
@@ -18287,7 +18287,7 @@
       "api_called": false,
       "RS_Rank_Pct": 36.16,
       "RS_3mo_Rank_Pct": 37.33,
-      "RS_1mo_Rank_Pct": 42.02
+      "RS_1mo_Rank_Pct": 42.11
     },
     {
       "Ticker": "HWM",
@@ -18343,7 +18343,7 @@
       "api_called": false,
       "RS_Rank_Pct": 82.42,
       "RS_3mo_Rank_Pct": 88.19,
-      "RS_1mo_Rank_Pct": 59.51
+      "RS_1mo_Rank_Pct": 59.6
     },
     {
       "Ticker": "MRNA",
@@ -18399,7 +18399,7 @@
       "api_called": false,
       "RS_Rank_Pct": 0.09,
       "RS_3mo_Rank_Pct": 0.18,
-      "RS_1mo_Rank_Pct": 50.59
+      "RS_1mo_Rank_Pct": 50.68
     },
     {
       "Ticker": "NFEGP",
@@ -18453,8 +18453,8 @@
       "Ret_5D_Pct": 4.17,
       "Dollar_Vol_M": 2.6,
       "api_called": true,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 59.6,
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 59.69,
       "RS_1mo_Rank_Pct": 86.93
     },
     {
@@ -18511,7 +18511,7 @@
       "api_called": false,
       "RS_Rank_Pct": 91.61,
       "RS_3mo_Rank_Pct": 68.98,
-      "RS_1mo_Rank_Pct": 62.49
+      "RS_1mo_Rank_Pct": 62.58
     },
     {
       "Ticker": "HEI.A",
@@ -18566,7 +18566,7 @@
       "Dollar_Vol_M": 55.5,
       "api_called": false,
       "RS_Rank_Pct": 40.76,
-      "RS_3mo_Rank_Pct": 52.66,
+      "RS_3mo_Rank_Pct": 52.75,
       "RS_1mo_Rank_Pct": 24.98
     },
     {
@@ -18621,9 +18621,9 @@
       "Ret_5D_Pct": 0.26,
       "Dollar_Vol_M": 414.8,
       "api_called": false,
-      "RS_Rank_Pct": 62.58,
-      "RS_3mo_Rank_Pct": 44.09,
-      "RS_1mo_Rank_Pct": 65.37
+      "RS_Rank_Pct": 62.67,
+      "RS_3mo_Rank_Pct": 44.18,
+      "RS_1mo_Rank_Pct": 65.46
     },
     {
       "Ticker": "ERIE",
@@ -18734,8 +18734,8 @@
       "Dollar_Vol_M": 206.3,
       "api_called": false,
       "RS_Rank_Pct": 58.97,
-      "RS_3mo_Rank_Pct": 43.64,
-      "RS_1mo_Rank_Pct": 59.06
+      "RS_3mo_Rank_Pct": 43.73,
+      "RS_1mo_Rank_Pct": 59.15
     },
     {
       "Ticker": "NBIS",
@@ -18901,9 +18901,9 @@
       "Ret_5D_Pct": 1.2,
       "Dollar_Vol_M": 782.8,
       "api_called": false,
-      "RS_Rank_Pct": 11.54,
+      "RS_Rank_Pct": 11.45,
       "RS_3mo_Rank_Pct": 23.9,
-      "RS_1mo_Rank_Pct": 52.84
+      "RS_1mo_Rank_Pct": 52.93
     },
     {
       "Ticker": "THG",
@@ -19014,7 +19014,7 @@
       "Dollar_Vol_M": 195.1,
       "api_called": false,
       "RS_Rank_Pct": 46.08,
-      "RS_3mo_Rank_Pct": 56.45,
+      "RS_3mo_Rank_Pct": 56.54,
       "RS_1mo_Rank_Pct": 33.18
     },
     {
@@ -19070,7 +19070,7 @@
       "Dollar_Vol_M": 120.0,
       "api_called": false,
       "RS_Rank_Pct": 57.17,
-      "RS_3mo_Rank_Pct": 55.91,
+      "RS_3mo_Rank_Pct": 56.0,
       "RS_1mo_Rank_Pct": 10.91
     },
     {
@@ -19127,7 +19127,7 @@
       "api_called": false,
       "RS_Rank_Pct": 52.3,
       "RS_3mo_Rank_Pct": 23.44,
-      "RS_1mo_Rank_Pct": 52.75
+      "RS_1mo_Rank_Pct": 52.84
     },
     {
       "Ticker": "MTB",
@@ -19183,7 +19183,7 @@
       "api_called": false,
       "RS_Rank_Pct": 52.21,
       "RS_3mo_Rank_Pct": 65.92,
-      "RS_1mo_Rank_Pct": 49.68
+      "RS_1mo_Rank_Pct": 49.77
     },
     {
       "Ticker": "SANM",
@@ -19245,7 +19245,7 @@
       "Ticker": "PGR",
       "Price": 235.77999877929688,
       "Market Cap": "136.60B",
-      "RS_6mo": 0.25424138206036784,
+      "RS_6mo": 0.25424147327959057,
       "RS_3mo": 0.11325453047552088,
       "RS_1mo": 0.12127261725012327,
       "50DIV": 7.2,
@@ -19351,7 +19351,7 @@
       "api_called": false,
       "RS_Rank_Pct": 22.72,
       "RS_3mo_Rank_Pct": 10.64,
-      "RS_1mo_Rank_Pct": 23.35
+      "RS_1mo_Rank_Pct": 23.44
     },
     {
       "Ticker": "ANET",
@@ -19573,9 +19573,9 @@
       "Ret_5D_Pct": 0.62,
       "Dollar_Vol_M": 482.9,
       "api_called": false,
-      "RS_Rank_Pct": 12.26,
+      "RS_Rank_Pct": 12.17,
       "RS_3mo_Rank_Pct": 23.62,
-      "RS_1mo_Rank_Pct": 40.67
+      "RS_1mo_Rank_Pct": 40.76
     },
     {
       "Ticker": "FIVE",
@@ -19630,7 +19630,7 @@
       "Dollar_Vol_M": 123.3,
       "api_called": false,
       "RS_Rank_Pct": 38.59,
-      "RS_3mo_Rank_Pct": 34.45,
+      "RS_3mo_Rank_Pct": 34.36,
       "RS_1mo_Rank_Pct": 18.94
     },
     {
@@ -19911,13 +19911,13 @@
       "api_called": false,
       "RS_Rank_Pct": 26.69,
       "RS_3mo_Rank_Pct": 27.95,
-      "RS_1mo_Rank_Pct": 65.64
+      "RS_1mo_Rank_Pct": 65.73
     },
     {
       "Ticker": "BTSGU",
       "Price": 233.50999450683594,
       "Market Cap": "N/A",
-      "RS_6mo": 0.279657578352023,
+      "RS_6mo": 0.2796576744438113,
       "RS_3mo": 0.23627529888329207,
       "RS_1mo": 0.22207796543813166,
       "50DIV": 15.2,
@@ -20079,7 +20079,7 @@
       "api_called": false,
       "RS_Rank_Pct": 7.3,
       "RS_3mo_Rank_Pct": 0.9,
-      "RS_1mo_Rank_Pct": 23.9
+      "RS_1mo_Rank_Pct": 23.99
     },
     {
       "Ticker": "PLTR",
@@ -20134,7 +20134,7 @@
       "Dollar_Vol_M": 2548.3,
       "api_called": false,
       "RS_Rank_Pct": 22.54,
-      "RS_3mo_Rank_Pct": 57.17,
+      "RS_3mo_Rank_Pct": 57.26,
       "RS_1mo_Rank_Pct": 83.95
     },
     {
@@ -20421,7 +20421,7 @@
       "Ticker": "CR",
       "Price": 209.74000549316406,
       "Market Cap": "12.13B",
-      "RS_6mo": 0.22405870263006106,
+      "RS_6mo": 0.22405860523328255,
       "RS_3mo": 0.059607446002200255,
       "RS_1mo": 0.061134870161252526,
       "50DIV": 3.46,
@@ -20470,8 +20470,8 @@
       "Dollar_Vol_M": 58.5,
       "api_called": false,
       "RS_Rank_Pct": 31.83,
-      "RS_3mo_Rank_Pct": 42.74,
-      "RS_1mo_Rank_Pct": 52.21
+      "RS_3mo_Rank_Pct": 42.83,
+      "RS_1mo_Rank_Pct": 52.3
     },
     {
       "Ticker": "MORN",
@@ -20693,7 +20693,7 @@
       "Ret_5D_Pct": 1.98,
       "Dollar_Vol_M": 329.4,
       "api_called": false,
-      "RS_Rank_Pct": 13.07,
+      "RS_Rank_Pct": 12.98,
       "RS_3mo_Rank_Pct": 17.13,
       "RS_1mo_Rank_Pct": 36.43
     },
@@ -20918,7 +20918,7 @@
       "Dollar_Vol_M": 150.6,
       "api_called": false,
       "RS_Rank_Pct": 49.68,
-      "RS_3mo_Rank_Pct": 42.83,
+      "RS_3mo_Rank_Pct": 42.92,
       "RS_1mo_Rank_Pct": 34.63
     },
     {
@@ -20974,8 +20974,8 @@
       "Dollar_Vol_M": 635.0,
       "api_called": false,
       "RS_Rank_Pct": 38.77,
-      "RS_3mo_Rank_Pct": 33.27,
-      "RS_1mo_Rank_Pct": 68.71
+      "RS_3mo_Rank_Pct": 33.18,
+      "RS_1mo_Rank_Pct": 68.8
     },
     {
       "Ticker": "SPG",
@@ -21087,13 +21087,13 @@
       "api_called": false,
       "RS_Rank_Pct": 50.86,
       "RS_3mo_Rank_Pct": 69.88,
-      "RS_1mo_Rank_Pct": 69.88
+      "RS_1mo_Rank_Pct": 69.97
     },
     {
       "Ticker": "DRI",
       "Price": 228.74000549316406,
       "Market Cap": "25.88B",
-      "RS_6mo": 0.20750662465087993,
+      "RS_6mo": 0.20750671142067584,
       "RS_3mo": 0.10071937416014436,
       "RS_1mo": 0.09940690428280775,
       "50DIV": 8.11,
@@ -21199,7 +21199,7 @@
       "api_called": false,
       "RS_Rank_Pct": 27.86,
       "RS_3mo_Rank_Pct": 29.49,
-      "RS_1mo_Rank_Pct": 55.73
+      "RS_1mo_Rank_Pct": 55.82
     },
     {
       "Ticker": "DASH",
@@ -21311,7 +21311,7 @@
       "api_called": false,
       "RS_Rank_Pct": 24.71,
       "RS_3mo_Rank_Pct": 12.08,
-      "RS_1mo_Rank_Pct": 51.49
+      "RS_1mo_Rank_Pct": 51.58
     },
     {
       "Ticker": "PAG",
@@ -21366,8 +21366,8 @@
       "Dollar_Vol_M": 96.0,
       "api_called": false,
       "RS_Rank_Pct": 16.95,
-      "RS_3mo_Rank_Pct": 51.94,
-      "RS_1mo_Rank_Pct": 57.8
+      "RS_3mo_Rank_Pct": 52.03,
+      "RS_1mo_Rank_Pct": 57.89
     },
     {
       "Ticker": "EGP",
@@ -21421,9 +21421,9 @@
       "Ret_5D_Pct": 1.97,
       "Dollar_Vol_M": 72.1,
       "api_called": false,
-      "RS_Rank_Pct": 66.01,
-      "RS_3mo_Rank_Pct": 51.04,
-      "RS_1mo_Rank_Pct": 57.08
+      "RS_Rank_Pct": 66.1,
+      "RS_3mo_Rank_Pct": 51.13,
+      "RS_1mo_Rank_Pct": 57.17
     },
     {
       "Ticker": "KLAC",
@@ -21591,7 +21591,7 @@
       "api_called": false,
       "RS_Rank_Pct": 79.98,
       "RS_3mo_Rank_Pct": 76.19,
-      "RS_1mo_Rank_Pct": 62.76
+      "RS_1mo_Rank_Pct": 62.85
     },
     {
       "Ticker": "FTNT",
@@ -21645,7 +21645,7 @@
       "Ret_5D_Pct": 7.05,
       "Dollar_Vol_M": 414.9,
       "api_called": false,
-      "RS_Rank_Pct": 69.16,
+      "RS_Rank_Pct": 69.25,
       "RS_3mo_Rank_Pct": 82.78,
       "RS_1mo_Rank_Pct": 97.84
     },
@@ -21701,9 +21701,9 @@
       "Ret_5D_Pct": 0.48,
       "Dollar_Vol_M": 162.1,
       "api_called": false,
-      "RS_Rank_Pct": 11.63,
+      "RS_Rank_Pct": 11.54,
       "RS_3mo_Rank_Pct": 2.61,
-      "RS_1mo_Rank_Pct": 53.29
+      "RS_1mo_Rank_Pct": 53.38
     },
     {
       "Ticker": "EAT",
@@ -21759,7 +21759,7 @@
       "api_called": false,
       "RS_Rank_Pct": 7.84,
       "RS_3mo_Rank_Pct": 81.79,
-      "RS_1mo_Rank_Pct": 67.99
+      "RS_1mo_Rank_Pct": 68.08
     },
     {
       "Ticker": "EXPD",
@@ -21814,8 +21814,8 @@
       "Dollar_Vol_M": 183.3,
       "api_called": false,
       "RS_Rank_Pct": 24.53,
-      "RS_3mo_Rank_Pct": 34.08,
-      "RS_1mo_Rank_Pct": 60.96
+      "RS_3mo_Rank_Pct": 33.99,
+      "RS_1mo_Rank_Pct": 61.05
     },
     {
       "Ticker": "FANG",
@@ -21869,7 +21869,7 @@
       "Ret_5D_Pct": 4.01,
       "Dollar_Vol_M": 309.1,
       "api_called": false,
-      "RS_Rank_Pct": 67.36,
+      "RS_Rank_Pct": 67.45,
       "RS_3mo_Rank_Pct": 77.01,
       "RS_1mo_Rank_Pct": 81.88
     },
@@ -21982,8 +21982,8 @@
       "Dollar_Vol_M": 125.1,
       "api_called": false,
       "RS_Rank_Pct": 44.91,
-      "RS_3mo_Rank_Pct": 50.5,
-      "RS_1mo_Rank_Pct": 49.14
+      "RS_3mo_Rank_Pct": 50.59,
+      "RS_1mo_Rank_Pct": 49.23
     },
     {
       "Ticker": "ATI",
@@ -22039,7 +22039,7 @@
       "api_called": false,
       "RS_Rank_Pct": 43.91,
       "RS_3mo_Rank_Pct": 78.18,
-      "RS_1mo_Rank_Pct": 63.66
+      "RS_1mo_Rank_Pct": 63.75
     },
     {
       "Ticker": "HCI",
@@ -22095,7 +22095,7 @@
       "api_called": false,
       "RS_Rank_Pct": 24.62,
       "RS_3mo_Rank_Pct": 31.65,
-      "RS_1mo_Rank_Pct": 70.78
+      "RS_1mo_Rank_Pct": 70.87
     },
     {
       "Ticker": "IT",
@@ -22150,7 +22150,7 @@
       "Dollar_Vol_M": 195.6,
       "api_called": false,
       "RS_Rank_Pct": 25.07,
-      "RS_3mo_Rank_Pct": 50.41,
+      "RS_3mo_Rank_Pct": 50.5,
       "RS_1mo_Rank_Pct": 78.0
     },
     {
@@ -22261,7 +22261,7 @@
       "Ret_5D_Pct": 5.08,
       "Dollar_Vol_M": 848.0,
       "api_called": false,
-      "RS_Rank_Pct": 68.17,
+      "RS_Rank_Pct": 68.26,
       "RS_3mo_Rank_Pct": 68.26,
       "RS_1mo_Rank_Pct": 35.98
     },
@@ -22319,7 +22319,7 @@
       "api_called": false,
       "RS_Rank_Pct": 39.95,
       "RS_3mo_Rank_Pct": 87.56,
-      "RS_1mo_Rank_Pct": 69.7
+      "RS_1mo_Rank_Pct": 69.79
     },
     {
       "Ticker": "PI",
@@ -22375,13 +22375,13 @@
       "api_called": false,
       "RS_Rank_Pct": 49.5,
       "RS_3mo_Rank_Pct": 31.29,
-      "RS_1mo_Rank_Pct": 71.24
+      "RS_1mo_Rank_Pct": 71.33
     },
     {
       "Ticker": "AEM",
       "Price": 178.4499969482422,
       "Market Cap": "90.21B",
-      "RS_6mo": 0.059899897984126475,
+      "RS_6mo": 0.05989998228046731,
       "RS_3mo": -0.11388022845207445,
       "RS_1mo": -0.016321818595122294,
       "50DIV": -4.86,
@@ -22429,7 +22429,7 @@
       "Ret_5D_Pct": -6.85,
       "Dollar_Vol_M": 215.0,
       "api_called": false,
-      "RS_Rank_Pct": 61.95,
+      "RS_Rank_Pct": 62.04,
       "RS_3mo_Rank_Pct": 82.96,
       "RS_1mo_Rank_Pct": 76.74
     },
@@ -22485,7 +22485,7 @@
       "Ret_5D_Pct": 2.99,
       "Dollar_Vol_M": 212.2,
       "api_called": false,
-      "RS_Rank_Pct": 64.92,
+      "RS_Rank_Pct": 65.01,
       "RS_3mo_Rank_Pct": 31.83,
       "RS_1mo_Rank_Pct": 31.2
     },
@@ -22654,14 +22654,14 @@
       "Dollar_Vol_M": 340.1,
       "api_called": false,
       "RS_Rank_Pct": 4.06,
-      "RS_3mo_Rank_Pct": 49.23,
-      "RS_1mo_Rank_Pct": 48.87
+      "RS_3mo_Rank_Pct": 49.32,
+      "RS_1mo_Rank_Pct": 48.96
     },
     {
       "Ticker": "LOW",
       "Price": 227.72999572753906,
       "Market Cap": "127.69B",
-      "RS_6mo": 0.1542814447957305,
+      "RS_6mo": 0.15428152400546297,
       "RS_3mo": 0.09710892201468263,
       "RS_1mo": 0.20321326170120158,
       "50DIV": 14.38,
@@ -22767,13 +22767,13 @@
       "api_called": false,
       "RS_Rank_Pct": 39.5,
       "RS_3mo_Rank_Pct": 65.64,
-      "RS_1mo_Rank_Pct": 50.77
+      "RS_1mo_Rank_Pct": 50.86
     },
     {
       "Ticker": "IBP",
       "Price": 229.0,
       "Market Cap": "6.09B",
-      "RS_6mo": 0.1257256612854063,
+      "RS_6mo": 0.1257257359725903,
       "RS_3mo": -0.019324903146239157,
       "RS_1mo": 0.2748456760826302,
       "50DIV": 13.07,
@@ -22879,7 +22879,7 @@
       "api_called": false,
       "RS_Rank_Pct": 38.14,
       "RS_3mo_Rank_Pct": 18.76,
-      "RS_1mo_Rank_Pct": 23.53
+      "RS_1mo_Rank_Pct": 23.62
     },
     {
       "Ticker": "SN",
@@ -23046,8 +23046,8 @@
       "Dollar_Vol_M": 141.6,
       "api_called": false,
       "RS_Rank_Pct": 75.92,
-      "RS_3mo_Rank_Pct": 53.74,
-      "RS_1mo_Rank_Pct": 47.52
+      "RS_3mo_Rank_Pct": 53.83,
+      "RS_1mo_Rank_Pct": 47.61
     },
     {
       "Ticker": "SBAC",
@@ -23101,9 +23101,9 @@
       "Ret_5D_Pct": 0.62,
       "Dollar_Vol_M": 120.3,
       "api_called": false,
-      "RS_Rank_Pct": 68.71,
+      "RS_Rank_Pct": 68.8,
       "RS_3mo_Rank_Pct": 31.2,
-      "RS_1mo_Rank_Pct": 52.39
+      "RS_1mo_Rank_Pct": 52.48
     },
     {
       "Ticker": "AMT",
@@ -23159,7 +23159,7 @@
       "api_called": false,
       "RS_Rank_Pct": 48.96,
       "RS_3mo_Rank_Pct": 19.39,
-      "RS_1mo_Rank_Pct": 46.17
+      "RS_1mo_Rank_Pct": 46.26
     },
     {
       "Ticker": "ODFL",
@@ -23439,7 +23439,7 @@
       "api_called": false,
       "RS_Rank_Pct": 58.79,
       "RS_3mo_Rank_Pct": 67.63,
-      "RS_1mo_Rank_Pct": 66.28
+      "RS_1mo_Rank_Pct": 66.37
     },
     {
       "Ticker": "ENS",
@@ -23606,14 +23606,14 @@
       "Dollar_Vol_M": 117.1,
       "api_called": false,
       "RS_Rank_Pct": 78.36,
-      "RS_3mo_Rank_Pct": 48.96,
+      "RS_3mo_Rank_Pct": 49.05,
       "RS_1mo_Rank_Pct": 78.99
     },
     {
       "Ticker": "DLR",
       "Price": 179.99000549316406,
       "Market Cap": "68.09B",
-      "RS_6mo": 0.008982616011585107,
+      "RS_6mo": 0.008982540788465845,
       "RS_3mo": -0.024632451735982983,
       "RS_1mo": 0.06498342070204677,
       "50DIV": 0.24,
@@ -23661,9 +23661,9 @@
       "Ret_5D_Pct": 3.32,
       "Dollar_Vol_M": 318.9,
       "api_called": false,
-      "RS_Rank_Pct": 70.42,
+      "RS_Rank_Pct": 70.51,
       "RS_3mo_Rank_Pct": 66.28,
-      "RS_1mo_Rank_Pct": 51.04
+      "RS_1mo_Rank_Pct": 51.13
     },
     {
       "Ticker": "SENEA",
@@ -23719,7 +23719,7 @@
       "api_called": false,
       "RS_Rank_Pct": 23.99,
       "RS_3mo_Rank_Pct": 70.42,
-      "RS_1mo_Rank_Pct": 45.18
+      "RS_1mo_Rank_Pct": 45.27
     },
     {
       "Ticker": "ENVA",
@@ -23830,7 +23830,7 @@
       "Dollar_Vol_M": 152.9,
       "api_called": false,
       "RS_Rank_Pct": 51.58,
-      "RS_3mo_Rank_Pct": 47.43,
+      "RS_3mo_Rank_Pct": 47.52,
       "RS_1mo_Rank_Pct": 17.76
     },
     {
@@ -23887,7 +23887,7 @@
       "api_called": false,
       "RS_Rank_Pct": 93.87,
       "RS_3mo_Rank_Pct": 88.73,
-      "RS_1mo_Rank_Pct": 61.68
+      "RS_1mo_Rank_Pct": 61.77
     },
     {
       "Ticker": "VRSK",
@@ -23943,7 +23943,7 @@
       "api_called": false,
       "RS_Rank_Pct": 24.98,
       "RS_3mo_Rank_Pct": 17.85,
-      "RS_1mo_Rank_Pct": 24.53
+      "RS_1mo_Rank_Pct": 24.62
     },
     {
       "Ticker": "UHS",
@@ -23999,7 +23999,7 @@
       "api_called": false,
       "RS_Rank_Pct": 21.64,
       "RS_3mo_Rank_Pct": 14.88,
-      "RS_1mo_Rank_Pct": 40.22
+      "RS_1mo_Rank_Pct": 40.31
     },
     {
       "Ticker": "CRAI",
@@ -24111,7 +24111,7 @@
       "api_called": false,
       "RS_Rank_Pct": 53.02,
       "RS_3mo_Rank_Pct": 77.46,
-      "RS_1mo_Rank_Pct": 63.39
+      "RS_1mo_Rank_Pct": 63.48
     },
     {
       "Ticker": "MRSH",
@@ -24165,7 +24165,7 @@
       "Ret_5D_Pct": 1.45,
       "Dollar_Vol_M": 379.0,
       "api_called": false,
-      "RS_Rank_Pct": 16.23,
+      "RS_Rank_Pct": 16.14,
       "RS_3mo_Rank_Pct": 20.38,
       "RS_1mo_Rank_Pct": 20.29
     },
@@ -24229,7 +24229,7 @@
       "Ticker": "QCOM",
       "Price": 172.47000122070312,
       "Market Cap": "184.54B",
-      "RS_6mo": -0.23349521326243983,
+      "RS_6mo": -0.23349516997322384,
       "RS_3mo": 0.12147923422430049,
       "RS_1mo": 0.0442302825784093,
       "50DIV": -3.5,
@@ -24279,7 +24279,7 @@
       "api_called": false,
       "RS_Rank_Pct": 91.07,
       "RS_3mo_Rank_Pct": 25.16,
-      "RS_1mo_Rank_Pct": 58.79
+      "RS_1mo_Rank_Pct": 58.88
     },
     {
       "Ticker": "WRLD",
@@ -24391,7 +24391,7 @@
       "api_called": false,
       "RS_Rank_Pct": 41.21,
       "RS_3mo_Rank_Pct": 61.32,
-      "RS_1mo_Rank_Pct": 41.03
+      "RS_1mo_Rank_Pct": 41.12
     },
     {
       "Ticker": "RGEN",
@@ -24559,7 +24559,7 @@
       "api_called": false,
       "RS_Rank_Pct": 23.17,
       "RS_3mo_Rank_Pct": 70.24,
-      "RS_1mo_Rank_Pct": 60.23
+      "RS_1mo_Rank_Pct": 60.32
     },
     {
       "Ticker": "ENSG",
@@ -24614,7 +24614,7 @@
       "Dollar_Vol_M": 48.0,
       "api_called": false,
       "RS_Rank_Pct": 43.28,
-      "RS_3mo_Rank_Pct": 33.09,
+      "RS_3mo_Rank_Pct": 33.0,
       "RS_1mo_Rank_Pct": 33.81
     },
     {
@@ -24726,7 +24726,7 @@
       "Dollar_Vol_M": 641.5,
       "api_called": false,
       "RS_Rank_Pct": 9.47,
-      "RS_3mo_Rank_Pct": 47.88,
+      "RS_3mo_Rank_Pct": 47.97,
       "RS_1mo_Rank_Pct": 89.54
     },
     {
@@ -24839,7 +24839,7 @@
       "api_called": false,
       "RS_Rank_Pct": 5.5,
       "RS_3mo_Rank_Pct": 17.04,
-      "RS_1mo_Rank_Pct": 57.26
+      "RS_1mo_Rank_Pct": 57.35
     },
     {
       "Ticker": "SAM",
@@ -24950,8 +24950,8 @@
       "Dollar_Vol_M": 629.8,
       "api_called": false,
       "RS_Rank_Pct": 45.81,
-      "RS_3mo_Rank_Pct": 53.47,
-      "RS_1mo_Rank_Pct": 41.12
+      "RS_3mo_Rank_Pct": 53.56,
+      "RS_1mo_Rank_Pct": 41.21
     },
     {
       "Ticker": "FTAI",
@@ -25181,7 +25181,7 @@
       "Ticker": "DAC",
       "Price": 150.1199951171875,
       "Market Cap": "2.73B",
-      "RS_6mo": 0.24184434400252336,
+      "RS_6mo": 0.24184441414923907,
       "RS_3mo": 0.05820924408129119,
       "RS_1mo": -0.008756033462088635,
       "50DIV": -4.43,
@@ -25230,7 +25230,7 @@
       "Dollar_Vol_M": 18.4,
       "api_called": false,
       "RS_Rank_Pct": 29.13,
-      "RS_3mo_Rank_Pct": 43.37,
+      "RS_3mo_Rank_Pct": 43.46,
       "RS_1mo_Rank_Pct": 75.02
     },
     {
@@ -25285,9 +25285,9 @@
       "Ret_5D_Pct": 3.49,
       "Dollar_Vol_M": 2146.0,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 88.1,
-      "RS_1mo_Rank_Pct": 70.24
+      "RS_1mo_Rank_Pct": 70.33
     },
     {
       "Ticker": "XOM",
@@ -25397,9 +25397,9 @@
       "Ret_5D_Pct": 1.42,
       "Dollar_Vol_M": 17.6,
       "api_called": false,
-      "RS_Rank_Pct": 62.85,
-      "RS_3mo_Rank_Pct": 55.73,
-      "RS_1mo_Rank_Pct": 68.35
+      "RS_Rank_Pct": 62.94,
+      "RS_3mo_Rank_Pct": 55.82,
+      "RS_1mo_Rank_Pct": 68.44
     },
     {
       "Ticker": "AXSM",
@@ -25510,7 +25510,7 @@
       "Dollar_Vol_M": 141.0,
       "api_called": false,
       "RS_Rank_Pct": 48.24,
-      "RS_3mo_Rank_Pct": 53.2,
+      "RS_3mo_Rank_Pct": 53.29,
       "RS_1mo_Rank_Pct": 29.31
     },
     {
@@ -25566,8 +25566,8 @@
       "Dollar_Vol_M": 24.9,
       "api_called": false,
       "RS_Rank_Pct": 45.63,
-      "RS_3mo_Rank_Pct": 57.8,
-      "RS_1mo_Rank_Pct": 54.19
+      "RS_3mo_Rank_Pct": 57.89,
+      "RS_1mo_Rank_Pct": 54.28
     },
     {
       "Ticker": "AVY",
@@ -25902,8 +25902,8 @@
       "Dollar_Vol_M": 27.4,
       "api_called": false,
       "RS_Rank_Pct": 3.07,
-      "RS_3mo_Rank_Pct": 34.27,
-      "RS_1mo_Rank_Pct": 68.53
+      "RS_3mo_Rank_Pct": 34.17,
+      "RS_1mo_Rank_Pct": 68.62
     },
     {
       "Ticker": "ABNB",
@@ -25958,14 +25958,14 @@
       "Dollar_Vol_M": 928.8,
       "api_called": false,
       "RS_Rank_Pct": 8.66,
-      "RS_3mo_Rank_Pct": 45.18,
+      "RS_3mo_Rank_Pct": 45.27,
       "RS_1mo_Rank_Pct": 29.76
     },
     {
       "Ticker": "ENTG",
       "Price": 147.41000366210938,
       "Market Cap": "22.52B",
-      "RS_6mo": 0.10579929656681492,
+      "RS_6mo": 0.10579940826623986,
       "RS_3mo": 0.06256549757486764,
       "RS_1mo": 0.10533782469295382,
       "50DIV": -0.07,
@@ -26014,7 +26014,7 @@
       "Dollar_Vol_M": 381.0,
       "api_called": false,
       "RS_Rank_Pct": 52.75,
-      "RS_3mo_Rank_Pct": 41.93,
+      "RS_3mo_Rank_Pct": 42.02,
       "RS_1mo_Rank_Pct": 35.53
     },
     {
@@ -26181,7 +26181,7 @@
       "Ret_5D_Pct": 1.08,
       "Dollar_Vol_M": 139.7,
       "api_called": false,
-      "RS_Rank_Pct": 13.44,
+      "RS_Rank_Pct": 13.35,
       "RS_3mo_Rank_Pct": 23.17,
       "RS_1mo_Rank_Pct": 21.64
     },
@@ -26189,7 +26189,7 @@
       "Ticker": "RRX",
       "Price": 176.41000366210938,
       "Market Cap": "11.75B",
-      "RS_6mo": -0.08911043158629159,
+      "RS_6mo": -0.08911036998903932,
       "RS_3mo": 0.10873000543490341,
       "RS_1mo": 0.1875837590907146,
       "50DIV": 10.1,
@@ -26407,7 +26407,7 @@
       "api_called": false,
       "RS_Rank_Pct": 18.49,
       "RS_3mo_Rank_Pct": 39.77,
-      "RS_1mo_Rank_Pct": 56.27
+      "RS_1mo_Rank_Pct": 56.36
     },
     {
       "Ticker": "CBRS",
@@ -26742,7 +26742,7 @@
       "Dollar_Vol_M": 14.6,
       "api_called": false,
       "RS_Rank_Pct": 25.16,
-      "RS_3mo_Rank_Pct": 43.1,
+      "RS_3mo_Rank_Pct": 43.19,
       "RS_1mo_Rank_Pct": 35.89
     },
     {
@@ -26799,7 +26799,7 @@
       "api_called": false,
       "RS_Rank_Pct": 75.29,
       "RS_3mo_Rank_Pct": 67.99,
-      "RS_1mo_Rank_Pct": 51.58
+      "RS_1mo_Rank_Pct": 51.67
     },
     {
       "Ticker": "GPOR",
@@ -26853,9 +26853,9 @@
       "Ret_5D_Pct": 9.75,
       "Dollar_Vol_M": 22.6,
       "api_called": false,
-      "RS_Rank_Pct": 68.26,
+      "RS_Rank_Pct": 68.35,
       "RS_3mo_Rank_Pct": 64.02,
-      "RS_1mo_Rank_Pct": 61.86
+      "RS_1mo_Rank_Pct": 61.95
     },
     {
       "Ticker": "BMO",
@@ -26910,8 +26910,8 @@
       "Dollar_Vol_M": 49.0,
       "api_called": false,
       "RS_Rank_Pct": 43.82,
-      "RS_3mo_Rank_Pct": 45.54,
-      "RS_1mo_Rank_Pct": 42.29
+      "RS_3mo_Rank_Pct": 45.63,
+      "RS_1mo_Rank_Pct": 42.38
     },
     {
       "Ticker": "SPCX",
@@ -26965,7 +26965,7 @@
       "Ret_5D_Pct": 3.6,
       "Dollar_Vol_M": 10755.3,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 35.89,
       "RS_1mo_Rank_Pct": 74.12
     },
@@ -27022,7 +27022,7 @@
       "Dollar_Vol_M": 59.9,
       "api_called": false,
       "RS_Rank_Pct": 51.49,
-      "RS_3mo_Rank_Pct": 33.63,
+      "RS_3mo_Rank_Pct": 33.54,
       "RS_1mo_Rank_Pct": 18.58
     },
     {
@@ -27078,8 +27078,8 @@
       "Dollar_Vol_M": 41.5,
       "api_called": false,
       "RS_Rank_Pct": 41.48,
-      "RS_3mo_Rank_Pct": 51.4,
-      "RS_1mo_Rank_Pct": 40.76
+      "RS_3mo_Rank_Pct": 51.49,
+      "RS_1mo_Rank_Pct": 40.85
     },
     {
       "Ticker": "EMR",
@@ -27135,7 +27135,7 @@
       "api_called": false,
       "RS_Rank_Pct": 27.95,
       "RS_3mo_Rank_Pct": 24.89,
-      "RS_1mo_Rank_Pct": 46.62
+      "RS_1mo_Rank_Pct": 46.71
     },
     {
       "Ticker": "ATO",
@@ -27189,7 +27189,7 @@
       "Ret_5D_Pct": 1.78,
       "Dollar_Vol_M": 132.0,
       "api_called": false,
-      "RS_Rank_Pct": 60.96,
+      "RS_Rank_Pct": 61.05,
       "RS_3mo_Rank_Pct": 35.35,
       "RS_1mo_Rank_Pct": 38.77
     },
@@ -27197,7 +27197,7 @@
       "Ticker": "TXRH",
       "Price": 185.97999572753906,
       "Market Cap": "12.21B",
-      "RS_6mo": 0.09608221455368338,
+      "RS_6mo": 0.09608230143941249,
       "RS_3mo": -0.029377530118959577,
       "RS_1mo": 0.14653290743394137,
       "50DIV": 8.01,
@@ -27302,7 +27302,7 @@
       "Dollar_Vol_M": 426.8,
       "api_called": false,
       "RS_Rank_Pct": 84.76,
-      "RS_3mo_Rank_Pct": 59.24,
+      "RS_3mo_Rank_Pct": 59.33,
       "RS_1mo_Rank_Pct": 88.55
     },
     {
@@ -27469,9 +27469,9 @@
       "Ret_5D_Pct": -0.68,
       "Dollar_Vol_M": 728.3,
       "api_called": false,
-      "RS_Rank_Pct": 64.47,
+      "RS_Rank_Pct": 64.56,
       "RS_3mo_Rank_Pct": 91.88,
-      "RS_1mo_Rank_Pct": 65.92
+      "RS_1mo_Rank_Pct": 66.01
     },
     {
       "Ticker": "ICUI",
@@ -27525,8 +27525,8 @@
       "Ret_5D_Pct": 4.16,
       "Dollar_Vol_M": 35.0,
       "api_called": false,
-      "RS_Rank_Pct": 13.26,
-      "RS_3mo_Rank_Pct": 52.57,
+      "RS_Rank_Pct": 13.17,
+      "RS_3mo_Rank_Pct": 52.66,
       "RS_1mo_Rank_Pct": 21.37
     },
     {
@@ -27861,7 +27861,7 @@
       "Ret_5D_Pct": -1.06,
       "Dollar_Vol_M": 341.2,
       "api_called": false,
-      "RS_Rank_Pct": 64.02,
+      "RS_Rank_Pct": 64.11,
       "RS_3mo_Rank_Pct": 15.42,
       "RS_1mo_Rank_Pct": 16.77
     },
@@ -27918,7 +27918,7 @@
       "Dollar_Vol_M": 129.6,
       "api_called": false,
       "RS_Rank_Pct": 38.5,
-      "RS_3mo_Rank_Pct": 52.93,
+      "RS_3mo_Rank_Pct": 53.02,
       "RS_1mo_Rank_Pct": 29.67
     },
     {
@@ -27973,15 +27973,15 @@
       "Ret_5D_Pct": 8.17,
       "Dollar_Vol_M": 470.9,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 48.42,
-      "RS_1mo_Rank_Pct": 64.11
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 48.51,
+      "RS_1mo_Rank_Pct": 64.2
     },
     {
       "Ticker": "JCI",
       "Price": 139.3300018310547,
       "Market Cap": "84.40B",
-      "RS_6mo": 0.0661984782693758,
+      "RS_6mo": 0.06619836893086038,
       "RS_3mo": 0.01863595694948115,
       "RS_1mo": -6.941735885621775e-05,
       "50DIV": -5.41,
@@ -28029,8 +28029,8 @@
       "Ret_5D_Pct": 3.18,
       "Dollar_Vol_M": 703.2,
       "api_called": false,
-      "RS_Rank_Pct": 60.87,
-      "RS_3mo_Rank_Pct": 54.64,
+      "RS_Rank_Pct": 60.96,
+      "RS_3mo_Rank_Pct": 54.73,
       "RS_1mo_Rank_Pct": 72.05
     },
     {
@@ -28143,7 +28143,7 @@
       "api_called": false,
       "RS_Rank_Pct": 8.75,
       "RS_3mo_Rank_Pct": 10.91,
-      "RS_1mo_Rank_Pct": 51.94
+      "RS_1mo_Rank_Pct": 52.03
     },
     {
       "Ticker": "GLW",
@@ -28255,7 +28255,7 @@
       "api_called": false,
       "RS_Rank_Pct": 49.86,
       "RS_3mo_Rank_Pct": 62.67,
-      "RS_1mo_Rank_Pct": 59.78
+      "RS_1mo_Rank_Pct": 59.87
     },
     {
       "Ticker": "ICE",
@@ -28317,7 +28317,7 @@
       "Ticker": "KWR",
       "Price": 155.42999267578125,
       "Market Cap": "2.67B",
-      "RS_6mo": 0.1380237569999384,
+      "RS_6mo": 0.1380238696102467,
       "RS_3mo": -0.01120122495529681,
       "RS_1mo": 0.03239079804719131,
       "50DIV": -0.61,
@@ -28367,7 +28367,7 @@
       "api_called": false,
       "RS_Rank_Pct": 45.9,
       "RS_3mo_Rank_Pct": 63.3,
-      "RS_1mo_Rank_Pct": 62.22
+      "RS_1mo_Rank_Pct": 62.31
     },
     {
       "Ticker": "BLTE",
@@ -28422,7 +28422,7 @@
       "Dollar_Vol_M": 35.7,
       "api_called": false,
       "RS_Rank_Pct": 31.65,
-      "RS_3mo_Rank_Pct": 43.73,
+      "RS_3mo_Rank_Pct": 43.82,
       "RS_1mo_Rank_Pct": 10.73
     },
     {
@@ -28478,7 +28478,7 @@
       "Dollar_Vol_M": 322.0,
       "api_called": false,
       "RS_Rank_Pct": 23.9,
-      "RS_3mo_Rank_Pct": 52.75,
+      "RS_3mo_Rank_Pct": 52.84,
       "RS_1mo_Rank_Pct": 89.09
     },
     {
@@ -28534,7 +28534,7 @@
       "Dollar_Vol_M": 2000.6,
       "api_called": false,
       "RS_Rank_Pct": 91.16,
-      "RS_3mo_Rank_Pct": 49.95,
+      "RS_3mo_Rank_Pct": 50.05,
       "RS_1mo_Rank_Pct": 94.86
     },
     {
@@ -28591,7 +28591,7 @@
       "api_called": false,
       "RS_Rank_Pct": 3.79,
       "RS_3mo_Rank_Pct": 3.43,
-      "RS_1mo_Rank_Pct": 55.0
+      "RS_1mo_Rank_Pct": 55.09
     },
     {
       "Ticker": "PCTY",
@@ -28653,7 +28653,7 @@
       "Ticker": "TGT",
       "Price": 161.4499969482422,
       "Market Cap": "73.35B",
-      "RS_6mo": 0.37319145244721064,
+      "RS_6mo": 0.37319153307065495,
       "RS_3mo": 0.07006944939975636,
       "RS_1mo": 0.09611784120560901,
       "50DIV": 3.91,
@@ -28701,7 +28701,7 @@
       "Ret_5D_Pct": 2.64,
       "Dollar_Vol_M": 378.5,
       "api_called": false,
-      "RS_Rank_Pct": 15.51,
+      "RS_Rank_Pct": 15.42,
       "RS_3mo_Rank_Pct": 38.95,
       "RS_1mo_Rank_Pct": 38.68
     },
@@ -28709,11 +28709,11 @@
       "Ticker": "ROKU",
       "Price": 160.52000427246094,
       "Market Cap": "23.93B",
-      "RS_6mo": 0.0,
-      "RS_3mo": 0.0,
-      "RS_1mo": 0.0,
-      "50DIV": null,
-      "200DIV": null,
+      "RS_6mo": 0.35995868897538214,
+      "RS_3mo": 0.08446102414477201,
+      "RS_1mo": 0.09231849445572082,
+      "50DIV": 3.34,
+      "200DIV": 24.33,
       "Sector": "Communication Services",
       "Industry": "Entertainment",
       "CY_Trend": null,
@@ -28721,45 +28721,45 @@
       "Up_Count": null,
       "Down_Count": null,
       "Up_Down_Ratio": null,
-      "Order": "NO",
+      "Order": "YES",
       "CY_Current": null,
       "CY_30Ago": null,
       "NY_Current": null,
       "NY_30Ago": null,
       "Target_Status": "NO",
-      "Jungjanggi Jeongbaeyeol": "NO",
-      "10DIV": null,
-      "BBWTHD": null,
-      "BBWTHD_LOW": null,
+      "Jungjanggi Jeongbaeyeol": "YES",
+      "10DIV": 1.58,
+      "BBWTHD": 0.07,
+      "BBWTHD_LOW": 0.02,
       "SALE_CY": null,
       "SALE_NY": null,
       "EPS_CY": null,
       "EPS_NY": null,
       "BB_Center_Breakout_5D": "NO",
-      "High_52W_Pct": 98.92,
+      "High_52W_Pct": 98.14,
       "New_High_52W": "N",
-      "Low_52W_Pct": 101.07,
+      "Low_52W_Pct": 204.41,
       "New_Low_52W": "N",
-      "ADR_20D": null,
-      "Max_Rise_1M_Pct": 2.17,
-      "Max_Rise_3M_Pct": 2.17,
-      "Max_Rise_6M_Pct": 2.17,
-      "Ret_1M_Pct": null,
-      "Ret_3M_Pct": null,
-      "Ret_6M_Pct": null,
+      "ADR_20D": 1.75,
+      "Max_Rise_1M_Pct": 6.21,
+      "Max_Rise_3M_Pct": 9.02,
+      "Max_Rise_6M_Pct": 42.23,
+      "Ret_1M_Pct": 5.02,
+      "Ret_3M_Pct": 4.18,
+      "Ret_6M_Pct": 29.3,
       "BRK_60D": "NO",
       "VOL_X": NaN,
       "CLS_POS": 0.0,
-      "Above_50_SMA": "X",
-      "Above_150_SMA": "X",
+      "Above_50_SMA": "O",
+      "Above_150_SMA": "O",
       "Vol_Surge_Wk": NaN,
-      "Ret_1D_Pct": 0.0,
-      "Ret_5D_Pct": null,
-      "Dollar_Vol_M": 0.0,
+      "Ret_1D_Pct": 0.09,
+      "Ret_5D_Pct": 3.48,
+      "Dollar_Vol_M": 1849.1,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 59.6,
-      "RS_1mo_Rank_Pct": 71.69
+      "RS_Rank_Pct": 16.77,
+      "RS_3mo_Rank_Pct": 34.72,
+      "RS_1mo_Rank_Pct": 40.04
     },
     {
       "Ticker": "WCN",
@@ -29045,7 +29045,7 @@
       "Ticker": "PG",
       "Price": 169.8000030517578,
       "Market Cap": "393.56B",
-      "RS_6mo": 0.27153945777034705,
+      "RS_6mo": 0.2715395881529743,
       "RS_3mo": 0.23818869902397766,
       "RS_1mo": 0.1147716104794591,
       "50DIV": 10.55,
@@ -29157,7 +29157,7 @@
       "Ticker": "ALLE",
       "Price": 191.97999572753906,
       "Market Cap": "16.33B",
-      "RS_6mo": 0.5369264351596776,
+      "RS_6mo": 0.5369262634276317,
       "RS_3mo": 0.2339947099852261,
       "RS_1mo": 0.26853442817337336,
       "50DIV": 16.51,
@@ -29262,8 +29262,8 @@
       "Dollar_Vol_M": 63.3,
       "api_called": false,
       "RS_Rank_Pct": 32.73,
-      "RS_3mo_Rank_Pct": 57.08,
-      "RS_1mo_Rank_Pct": 51.67
+      "RS_3mo_Rank_Pct": 57.17,
+      "RS_1mo_Rank_Pct": 51.76
     },
     {
       "Ticker": "DUOL",
@@ -29373,7 +29373,7 @@
       "Ret_5D_Pct": 2.56,
       "Dollar_Vol_M": 134.2,
       "api_called": false,
-      "RS_Rank_Pct": 15.6,
+      "RS_Rank_Pct": 15.51,
       "RS_3mo_Rank_Pct": 24.35,
       "RS_1mo_Rank_Pct": 9.11
     },
@@ -29381,7 +29381,7 @@
       "Ticker": "TMUS",
       "Price": 169.9499969482422,
       "Market Cap": "180.02B",
-      "RS_6mo": -0.03372957023020359,
+      "RS_6mo": -0.03372964283630665,
       "RS_3mo": -0.014112555089307054,
       "RS_1mo": 0.11033463640909098,
       "50DIV": 3.89,
@@ -29542,8 +29542,8 @@
       "Dollar_Vol_M": 513.0,
       "api_called": false,
       "RS_Rank_Pct": 28.67,
-      "RS_3mo_Rank_Pct": 33.36,
-      "RS_1mo_Rank_Pct": 58.97
+      "RS_3mo_Rank_Pct": 33.27,
+      "RS_1mo_Rank_Pct": 59.06
     },
     {
       "Ticker": "ROG",
@@ -29598,7 +29598,7 @@
       "Dollar_Vol_M": 17.4,
       "api_called": false,
       "RS_Rank_Pct": 80.25,
-      "RS_3mo_Rank_Pct": 50.05,
+      "RS_3mo_Rank_Pct": 50.14,
       "RS_1mo_Rank_Pct": 76.56
     },
     {
@@ -29653,9 +29653,9 @@
       "Ret_5D_Pct": 1.46,
       "Dollar_Vol_M": 130.5,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 38.14,
-      "RS_1mo_Rank_Pct": 52.48
+      "RS_1mo_Rank_Pct": 52.57
     },
     {
       "Ticker": "LAMR",
@@ -29767,7 +29767,7 @@
       "api_called": false,
       "RS_Rank_Pct": 21.55,
       "RS_3mo_Rank_Pct": 37.6,
-      "RS_1mo_Rank_Pct": 55.55
+      "RS_1mo_Rank_Pct": 55.64
     },
     {
       "Ticker": "EFX",
@@ -29822,7 +29822,7 @@
       "Dollar_Vol_M": 148.4,
       "api_called": false,
       "RS_Rank_Pct": 31.38,
-      "RS_3mo_Rank_Pct": 53.38,
+      "RS_3mo_Rank_Pct": 53.47,
       "RS_1mo_Rank_Pct": 8.21
     },
     {
@@ -29878,8 +29878,8 @@
       "Dollar_Vol_M": 961.4,
       "api_called": false,
       "RS_Rank_Pct": 20.38,
-      "RS_3mo_Rank_Pct": 48.15,
-      "RS_1mo_Rank_Pct": 54.73
+      "RS_3mo_Rank_Pct": 48.24,
+      "RS_1mo_Rank_Pct": 54.82
     },
     {
       "Ticker": "BFC",
@@ -29934,14 +29934,14 @@
       "Dollar_Vol_M": 10.8,
       "api_called": false,
       "RS_Rank_Pct": 47.16,
-      "RS_3mo_Rank_Pct": 51.67,
-      "RS_1mo_Rank_Pct": 54.28
+      "RS_3mo_Rank_Pct": 51.76,
+      "RS_1mo_Rank_Pct": 54.37
     },
     {
       "Ticker": "YUM",
       "Price": 161.3300018310547,
       "Market Cap": "43.28B",
-      "RS_6mo": 0.12496932733156516,
+      "RS_6mo": 0.12496943319493445,
       "RS_3mo": 0.1070863366274835,
       "RS_1mo": 0.11402755581181565,
       "50DIV": 9.29,
@@ -30213,9 +30213,9 @@
       "Ret_5D_Pct": -0.83,
       "Dollar_Vol_M": 99.5,
       "api_called": false,
-      "RS_Rank_Pct": 15.06,
+      "RS_Rank_Pct": 14.97,
       "RS_3mo_Rank_Pct": 79.17,
-      "RS_1mo_Rank_Pct": 52.93
+      "RS_1mo_Rank_Pct": 53.02
     },
     {
       "Ticker": "WTFC",
@@ -30382,7 +30382,7 @@
       "Dollar_Vol_M": 455.7,
       "api_called": false,
       "RS_Rank_Pct": 43.1,
-      "RS_3mo_Rank_Pct": 53.65,
+      "RS_3mo_Rank_Pct": 53.74,
       "RS_1mo_Rank_Pct": 29.94
     },
     {
@@ -30439,7 +30439,7 @@
       "api_called": false,
       "RS_Rank_Pct": 0.72,
       "RS_3mo_Rank_Pct": 0.54,
-      "RS_1mo_Rank_Pct": 68.08
+      "RS_1mo_Rank_Pct": 68.17
     },
     {
       "Ticker": "LEU",
@@ -30607,7 +30607,7 @@
       "api_called": false,
       "RS_Rank_Pct": 87.65,
       "RS_3mo_Rank_Pct": 64.92,
-      "RS_1mo_Rank_Pct": 70.69
+      "RS_1mo_Rank_Pct": 70.78
     },
     {
       "Ticker": "CDW",
@@ -30669,7 +30669,7 @@
       "Ticker": "GLDI",
       "Price": 132.41000366210938,
       "Market Cap": "N/A",
-      "RS_6mo": -0.027077561449305274,
+      "RS_6mo": -0.027077656023997226,
       "RS_3mo": -0.04733103724004771,
       "RS_1mo": -0.007090956358283926,
       "50DIV": -4.75,
@@ -30774,8 +30774,8 @@
       "Dollar_Vol_M": 95.2,
       "api_called": false,
       "RS_Rank_Pct": 42.83,
-      "RS_3mo_Rank_Pct": 46.17,
-      "RS_1mo_Rank_Pct": 68.62
+      "RS_3mo_Rank_Pct": 46.26,
+      "RS_1mo_Rank_Pct": 68.71
     },
     {
       "Ticker": "ORCL",
@@ -30831,7 +30831,7 @@
       "api_called": false,
       "RS_Rank_Pct": 92.43,
       "RS_3mo_Rank_Pct": 76.01,
-      "RS_1mo_Rank_Pct": 65.46
+      "RS_1mo_Rank_Pct": 65.55
     },
     {
       "Ticker": "NOVT",
@@ -30949,7 +30949,7 @@
       "Ticker": "AGM.A",
       "Price": 126.48999786376953,
       "Market Cap": "1.37B",
-      "RS_6mo": 0.010642130867147284,
+      "RS_6mo": 0.010642238284020673,
       "RS_3mo": -0.13810082419332104,
       "RS_1mo": -0.059941322403457425,
       "50DIV": -11.65,
@@ -30997,7 +30997,7 @@
       "Ret_5D_Pct": 1.17,
       "Dollar_Vol_M": 0.0,
       "api_called": false,
-      "RS_Rank_Pct": 70.15,
+      "RS_Rank_Pct": 70.24,
       "RS_3mo_Rank_Pct": 86.29,
       "RS_1mo_Rank_Pct": 85.12
     },
@@ -31111,7 +31111,7 @@
       "api_called": false,
       "RS_Rank_Pct": 2.52,
       "RS_3mo_Rank_Pct": 0.36,
-      "RS_1mo_Rank_Pct": 64.29
+      "RS_1mo_Rank_Pct": 64.38
     },
     {
       "Ticker": "CHCO",
@@ -31166,8 +31166,8 @@
       "Dollar_Vol_M": 11.0,
       "api_called": false,
       "RS_Rank_Pct": 32.1,
-      "RS_3mo_Rank_Pct": 48.78,
-      "RS_1mo_Rank_Pct": 57.44
+      "RS_3mo_Rank_Pct": 48.87,
+      "RS_1mo_Rank_Pct": 57.53
     },
     {
       "Ticker": "FORM",
@@ -31333,7 +31333,7 @@
       "Ret_5D_Pct": -13.32,
       "Dollar_Vol_M": 36.6,
       "api_called": false,
-      "RS_Rank_Pct": 16.5,
+      "RS_Rank_Pct": 16.41,
       "RS_3mo_Rank_Pct": 27.68,
       "RS_1mo_Rank_Pct": 2.16
     },
@@ -31390,7 +31390,7 @@
       "Dollar_Vol_M": 1209.6,
       "api_called": false,
       "RS_Rank_Pct": 81.7,
-      "RS_3mo_Rank_Pct": 59.42,
+      "RS_3mo_Rank_Pct": 59.51,
       "RS_1mo_Rank_Pct": 81.42
     },
     {
@@ -31447,7 +31447,7 @@
       "api_called": false,
       "RS_Rank_Pct": 58.52,
       "RS_3mo_Rank_Pct": 78.27,
-      "RS_1mo_Rank_Pct": 64.92
+      "RS_1mo_Rank_Pct": 65.01
     },
     {
       "Ticker": "PJT",
@@ -31501,7 +31501,7 @@
       "Ret_5D_Pct": 1.54,
       "Dollar_Vol_M": 33.7,
       "api_called": false,
-      "RS_Rank_Pct": 62.4,
+      "RS_Rank_Pct": 62.49,
       "RS_3mo_Rank_Pct": 76.1,
       "RS_1mo_Rank_Pct": 21.46
     },
@@ -31615,7 +31615,7 @@
       "api_called": false,
       "RS_Rank_Pct": 93.06,
       "RS_3mo_Rank_Pct": 94.32,
-      "RS_1mo_Rank_Pct": 70.33
+      "RS_1mo_Rank_Pct": 70.42
     },
     {
       "Ticker": "AZZ",
@@ -31669,9 +31669,9 @@
       "Ret_5D_Pct": 6.28,
       "Dollar_Vol_M": 22.3,
       "api_called": false,
-      "RS_Rank_Pct": 69.79,
-      "RS_3mo_Rank_Pct": 58.7,
-      "RS_1mo_Rank_Pct": 47.34
+      "RS_Rank_Pct": 69.88,
+      "RS_3mo_Rank_Pct": 58.79,
+      "RS_1mo_Rank_Pct": 47.43
     },
     {
       "Ticker": "DKS",
@@ -31727,7 +31727,7 @@
       "api_called": false,
       "RS_Rank_Pct": 92.61,
       "RS_3mo_Rank_Pct": 83.14,
-      "RS_1mo_Rank_Pct": 45.0
+      "RS_1mo_Rank_Pct": 45.09
     },
     {
       "Ticker": "KEX",
@@ -31837,7 +31837,7 @@
       "Ret_5D_Pct": 3.63,
       "Dollar_Vol_M": 64.6,
       "api_called": false,
-      "RS_Rank_Pct": 13.35,
+      "RS_Rank_Pct": 13.26,
       "RS_3mo_Rank_Pct": 1.62,
       "RS_1mo_Rank_Pct": 0.45
     },
@@ -31949,7 +31949,7 @@
       "Ret_5D_Pct": 4.07,
       "Dollar_Vol_M": 242.5,
       "api_called": false,
-      "RS_Rank_Pct": 62.49,
+      "RS_Rank_Pct": 62.58,
       "RS_3mo_Rank_Pct": 35.8,
       "RS_1mo_Rank_Pct": 27.32
     },
@@ -31957,7 +31957,7 @@
       "Ticker": "DHI",
       "Price": 145.5500030517578,
       "Market Cap": "39.51B",
-      "RS_6mo": 0.07305304332174178,
+      "RS_6mo": 0.07305314942872317,
       "RS_3mo": 0.0339435838212107,
       "RS_1mo": 0.08988338780846275,
       "50DIV": 3.04,
@@ -32006,8 +32006,8 @@
       "Dollar_Vol_M": 394.5,
       "api_called": false,
       "RS_Rank_Pct": 59.6,
-      "RS_3mo_Rank_Pct": 50.86,
-      "RS_1mo_Rank_Pct": 40.4
+      "RS_3mo_Rank_Pct": 50.95,
+      "RS_1mo_Rank_Pct": 40.49
     },
     {
       "Ticker": "DOCN",
@@ -32119,7 +32119,7 @@
       "api_called": false,
       "RS_Rank_Pct": 93.78,
       "RS_3mo_Rank_Pct": 83.68,
-      "RS_1mo_Rank_Pct": 70.87
+      "RS_1mo_Rank_Pct": 70.96
     },
     {
       "Ticker": "SAIC",
@@ -32181,7 +32181,7 @@
       "Ticker": "EXR",
       "Price": 158.5,
       "Market Cap": "33.08B",
-      "RS_6mo": 0.1928306325852928,
+      "RS_6mo": 0.19283051056507694,
       "RS_3mo": 0.13164753874757879,
       "RS_1mo": 0.17744408240203163,
       "50DIV": 12.02,
@@ -32343,7 +32343,7 @@
       "api_called": false,
       "RS_Rank_Pct": 22.9,
       "RS_3mo_Rank_Pct": 31.38,
-      "RS_1mo_Rank_Pct": 68.26
+      "RS_1mo_Rank_Pct": 68.35
     },
     {
       "Ticker": "TOL",
@@ -32398,7 +32398,7 @@
       "Dollar_Vol_M": 107.2,
       "api_called": false,
       "RS_Rank_Pct": 45.0,
-      "RS_3mo_Rank_Pct": 41.57,
+      "RS_3mo_Rank_Pct": 41.66,
       "RS_1mo_Rank_Pct": 19.66
     },
     {
@@ -32511,7 +32511,7 @@
       "api_called": false,
       "RS_Rank_Pct": 79.26,
       "RS_3mo_Rank_Pct": 93.6,
-      "RS_1mo_Rank_Pct": 53.2
+      "RS_1mo_Rank_Pct": 53.29
     },
     {
       "Ticker": "MANE",
@@ -32623,7 +32623,7 @@
       "api_called": false,
       "RS_Rank_Pct": 55.55,
       "RS_3mo_Rank_Pct": 77.55,
-      "RS_1mo_Rank_Pct": 59.33
+      "RS_1mo_Rank_Pct": 59.42
     },
     {
       "Ticker": "PLMR",
@@ -32791,13 +32791,13 @@
       "api_called": false,
       "RS_Rank_Pct": 60.32,
       "RS_3mo_Rank_Pct": 69.43,
-      "RS_1mo_Rank_Pct": 51.4
+      "RS_1mo_Rank_Pct": 51.49
     },
     {
       "Ticker": "HLI",
       "Price": 142.83999633789062,
       "Market Cap": "9.92B",
-      "RS_6mo": 0.023950782249485388,
+      "RS_6mo": 0.0239508800730535,
       "RS_3mo": 0.1639679167573026,
       "RS_1mo": 0.14472441342835562,
       "50DIV": 6.44,
@@ -32845,7 +32845,7 @@
       "Ret_5D_Pct": -2.07,
       "Dollar_Vol_M": 57.3,
       "api_called": false,
-      "RS_Rank_Pct": 67.72,
+      "RS_Rank_Pct": 67.81,
       "RS_3mo_Rank_Pct": 15.51,
       "RS_1mo_Rank_Pct": 20.65
     },
@@ -32909,7 +32909,7 @@
       "Ticker": "HWKN",
       "Price": 148.67999267578125,
       "Market Cap": "3.09B",
-      "RS_6mo": 0.01985308075236142,
+      "RS_6mo": 0.019853173930376077,
       "RS_3mo": 0.28960643300837735,
       "RS_1mo": 0.17287217779813072,
       "50DIV": 10.31,
@@ -32957,7 +32957,7 @@
       "Ret_5D_Pct": -1.38,
       "Dollar_Vol_M": 9.9,
       "api_called": false,
-      "RS_Rank_Pct": 68.62,
+      "RS_Rank_Pct": 68.71,
       "RS_3mo_Rank_Pct": 3.34,
       "RS_1mo_Rank_Pct": 14.07
     },
@@ -32965,7 +32965,7 @@
       "Ticker": "FSV",
       "Price": 154.4199981689453,
       "Market Cap": "6.47B",
-      "RS_6mo": 0.22599594620272312,
+      "RS_6mo": 0.2259960789346706,
       "RS_3mo": 0.12168796591362083,
       "RS_1mo": 0.18034158791030686,
       "50DIV": 11.87,
@@ -33069,7 +33069,7 @@
       "Ret_5D_Pct": 5.51,
       "Dollar_Vol_M": 54.0,
       "api_called": false,
-      "RS_Rank_Pct": 13.17,
+      "RS_Rank_Pct": 13.07,
       "RS_3mo_Rank_Pct": 23.53,
       "RS_1mo_Rank_Pct": 34.9
     },
@@ -33125,9 +33125,9 @@
       "Ret_5D_Pct": 4.17,
       "Dollar_Vol_M": 945.7,
       "api_called": false,
-      "RS_Rank_Pct": 63.3,
-      "RS_3mo_Rank_Pct": 58.25,
-      "RS_1mo_Rank_Pct": 58.43
+      "RS_Rank_Pct": 63.39,
+      "RS_3mo_Rank_Pct": 58.34,
+      "RS_1mo_Rank_Pct": 58.52
     },
     {
       "Ticker": "MSM",
@@ -33182,7 +33182,7 @@
       "Dollar_Vol_M": 56.9,
       "api_called": false,
       "RS_Rank_Pct": 41.3,
-      "RS_3mo_Rank_Pct": 43.91,
+      "RS_3mo_Rank_Pct": 44.0,
       "RS_1mo_Rank_Pct": 81.33
     },
     {
@@ -33239,7 +33239,7 @@
       "api_called": false,
       "RS_Rank_Pct": 78.63,
       "RS_3mo_Rank_Pct": 69.16,
-      "RS_1mo_Rank_Pct": 50.95
+      "RS_1mo_Rank_Pct": 51.04
     },
     {
       "Ticker": "CVSA",
@@ -33293,7 +33293,7 @@
       "Ret_5D_Pct": 7.12,
       "Dollar_Vol_M": 46.5,
       "api_called": false,
-      "RS_Rank_Pct": 68.8,
+      "RS_Rank_Pct": 68.89,
       "RS_3mo_Rank_Pct": 68.89,
       "RS_1mo_Rank_Pct": 78.9
     },
@@ -33350,7 +33350,7 @@
       "Dollar_Vol_M": 26.5,
       "api_called": false,
       "RS_Rank_Pct": 49.23,
-      "RS_3mo_Rank_Pct": 46.44,
+      "RS_3mo_Rank_Pct": 46.53,
       "RS_1mo_Rank_Pct": 39.22
     },
     {
@@ -33406,8 +33406,8 @@
       "Dollar_Vol_M": 154.4,
       "api_called": false,
       "RS_Rank_Pct": 55.91,
-      "RS_3mo_Rank_Pct": 46.35,
-      "RS_1mo_Rank_Pct": 52.66
+      "RS_3mo_Rank_Pct": 46.44,
+      "RS_1mo_Rank_Pct": 52.75
     },
     {
       "Ticker": "AWK",
@@ -33573,9 +33573,9 @@
       "Ret_5D_Pct": -3.53,
       "Dollar_Vol_M": 23.0,
       "api_called": false,
-      "RS_Rank_Pct": 67.27,
+      "RS_Rank_Pct": 67.36,
       "RS_3mo_Rank_Pct": 82.33,
-      "RS_1mo_Rank_Pct": 51.76
+      "RS_1mo_Rank_Pct": 51.85
     },
     {
       "Ticker": "CPK",
@@ -33685,7 +33685,7 @@
       "Ret_5D_Pct": 8.39,
       "Dollar_Vol_M": 12.1,
       "api_called": false,
-      "RS_Rank_Pct": 14.43,
+      "RS_Rank_Pct": 14.34,
       "RS_3mo_Rank_Pct": 9.11,
       "RS_1mo_Rank_Pct": 13.53
     },
@@ -33741,9 +33741,9 @@
       "Ret_5D_Pct": 0.29,
       "Dollar_Vol_M": 267.4,
       "api_called": false,
-      "RS_Rank_Pct": 15.33,
+      "RS_Rank_Pct": 15.24,
       "RS_3mo_Rank_Pct": 15.96,
-      "RS_1mo_Rank_Pct": 60.05
+      "RS_1mo_Rank_Pct": 60.14
     },
     {
       "Ticker": "GPC",
@@ -33797,7 +33797,7 @@
       "Ret_5D_Pct": 0.44,
       "Dollar_Vol_M": 90.3,
       "api_called": false,
-      "RS_Rank_Pct": 16.77,
+      "RS_Rank_Pct": 16.68,
       "RS_3mo_Rank_Pct": 65.73,
       "RS_1mo_Rank_Pct": 80.79
     },
@@ -33853,8 +33853,8 @@
       "Ret_5D_Pct": 3.44,
       "Dollar_Vol_M": 148.8,
       "api_called": false,
-      "RS_Rank_Pct": 64.2,
-      "RS_3mo_Rank_Pct": 41.66,
+      "RS_Rank_Pct": 64.29,
+      "RS_3mo_Rank_Pct": 41.75,
       "RS_1mo_Rank_Pct": 29.04
     },
     {
@@ -33910,8 +33910,8 @@
       "Dollar_Vol_M": 122.1,
       "api_called": false,
       "RS_Rank_Pct": 9.02,
-      "RS_3mo_Rank_Pct": 44.72,
-      "RS_1mo_Rank_Pct": 59.6
+      "RS_3mo_Rank_Pct": 44.82,
+      "RS_1mo_Rank_Pct": 59.69
     },
     {
       "Ticker": "Q",
@@ -33967,7 +33967,7 @@
       "api_called": false,
       "RS_Rank_Pct": 89.9,
       "RS_3mo_Rank_Pct": 75.83,
-      "RS_1mo_Rank_Pct": 50.14
+      "RS_1mo_Rank_Pct": 50.23
     },
     {
       "Ticker": "LSCC",
@@ -34078,8 +34078,8 @@
       "Dollar_Vol_M": 11.6,
       "api_called": false,
       "RS_Rank_Pct": 59.87,
-      "RS_3mo_Rank_Pct": 51.13,
-      "RS_1mo_Rank_Pct": 53.56
+      "RS_3mo_Rank_Pct": 51.22,
+      "RS_1mo_Rank_Pct": 53.65
     },
     {
       "Ticker": "PEP",
@@ -34191,7 +34191,7 @@
       "api_called": false,
       "RS_Rank_Pct": 76.47,
       "RS_3mo_Rank_Pct": 76.65,
-      "RS_1mo_Rank_Pct": 65.1
+      "RS_1mo_Rank_Pct": 65.19
     },
     {
       "Ticker": "EWBC",
@@ -34246,8 +34246,8 @@
       "Dollar_Vol_M": 96.8,
       "api_called": false,
       "RS_Rank_Pct": 46.53,
-      "RS_3mo_Rank_Pct": 43.01,
-      "RS_1mo_Rank_Pct": 43.46
+      "RS_3mo_Rank_Pct": 43.1,
+      "RS_1mo_Rank_Pct": 43.55
     },
     {
       "Ticker": "BOKF",
@@ -34301,9 +34301,9 @@
       "Ret_5D_Pct": 0.62,
       "Dollar_Vol_M": 32.2,
       "api_called": false,
-      "RS_Rank_Pct": 63.21,
+      "RS_Rank_Pct": 63.3,
       "RS_3mo_Rank_Pct": 66.64,
-      "RS_1mo_Rank_Pct": 42.56
+      "RS_1mo_Rank_Pct": 42.65
     },
     {
       "Ticker": "NNI",
@@ -34357,9 +34357,9 @@
       "Ret_5D_Pct": -2.74,
       "Dollar_Vol_M": 14.1,
       "api_called": false,
-      "RS_Rank_Pct": 63.93,
-      "RS_3mo_Rank_Pct": 46.89,
-      "RS_1mo_Rank_Pct": 60.6
+      "RS_Rank_Pct": 64.02,
+      "RS_3mo_Rank_Pct": 46.98,
+      "RS_1mo_Rank_Pct": 60.69
     },
     {
       "Ticker": "OSK",
@@ -34471,7 +34471,7 @@
       "api_called": false,
       "RS_Rank_Pct": 3.61,
       "RS_3mo_Rank_Pct": 14.43,
-      "RS_1mo_Rank_Pct": 65.55
+      "RS_1mo_Rank_Pct": 65.64
     },
     {
       "Ticker": "TFX",
@@ -34581,7 +34581,7 @@
       "Ret_5D_Pct": 2.85,
       "Dollar_Vol_M": 1.5,
       "api_called": false,
-      "RS_Rank_Pct": 67.99,
+      "RS_Rank_Pct": 68.08,
       "RS_3mo_Rank_Pct": 73.04,
       "RS_1mo_Rank_Pct": 86.02
     },
@@ -34639,7 +34639,7 @@
       "api_called": false,
       "RS_Rank_Pct": 60.69,
       "RS_3mo_Rank_Pct": 40.58,
-      "RS_1mo_Rank_Pct": 68.89
+      "RS_1mo_Rank_Pct": 68.98
     },
     {
       "Ticker": "DTM",
@@ -34695,13 +34695,13 @@
       "api_called": false,
       "RS_Rank_Pct": 84.85,
       "RS_3mo_Rank_Pct": 67.45,
-      "RS_1mo_Rank_Pct": 69.61
+      "RS_1mo_Rank_Pct": 69.7
     },
     {
       "Ticker": "HRI",
       "Price": 165.38999938964844,
       "Market Cap": "5.53B",
-      "RS_6mo": 0.297886618297877,
+      "RS_6mo": 0.29788675807700243,
       "RS_3mo": 0.07083990505157077,
       "RS_1mo": 0.40258936098836706,
       "50DIV": 16.63,
@@ -34757,7 +34757,7 @@
       "Ticker": "EHC",
       "Price": 140.99000549316406,
       "Market Cap": "13.83B",
-      "RS_6mo": 0.41578272117252435,
+      "RS_6mo": 0.4157828196147712,
       "RS_3mo": 0.210757602351545,
       "RS_1mo": 0.1447428201633402,
       "50DIV": 11.37,
@@ -34805,7 +34805,7 @@
       "Ret_5D_Pct": 2.51,
       "Dollar_Vol_M": 70.9,
       "api_called": false,
-      "RS_Rank_Pct": 11.81,
+      "RS_Rank_Pct": 11.72,
       "RS_3mo_Rank_Pct": 9.2,
       "RS_1mo_Rank_Pct": 20.56
     },
@@ -34863,7 +34863,7 @@
       "api_called": false,
       "RS_Rank_Pct": 39.86,
       "RS_3mo_Rank_Pct": 36.07,
-      "RS_1mo_Rank_Pct": 63.21
+      "RS_1mo_Rank_Pct": 63.3
     },
     {
       "Ticker": "IMO",
@@ -34919,7 +34919,7 @@
       "api_called": false,
       "RS_Rank_Pct": 59.42,
       "RS_3mo_Rank_Pct": 63.75,
-      "RS_1mo_Rank_Pct": 71.33
+      "RS_1mo_Rank_Pct": 71.42
     },
     {
       "Ticker": "AEP",
@@ -34975,7 +34975,7 @@
       "api_called": false,
       "RS_Rank_Pct": 60.41,
       "RS_3mo_Rank_Pct": 36.43,
-      "RS_1mo_Rank_Pct": 50.86
+      "RS_1mo_Rank_Pct": 50.95
     },
     {
       "Ticker": "STZ",
@@ -35199,13 +35199,13 @@
       "api_called": false,
       "RS_Rank_Pct": 55.73,
       "RS_3mo_Rank_Pct": 67.81,
-      "RS_1mo_Rank_Pct": 41.57
+      "RS_1mo_Rank_Pct": 41.66
     },
     {
       "Ticker": "DINO",
       "Price": 102.18000030517578,
       "Market Cap": "17.30B",
-      "RS_6mo": 0.575057529592855,
+      "RS_6mo": 0.5750573597856379,
       "RS_3mo": 0.15040887748394982,
       "RS_1mo": -0.13808285365374587,
       "50DIV": -8.73,
@@ -35422,7 +35422,7 @@
       "Dollar_Vol_M": 27.3,
       "api_called": false,
       "RS_Rank_Pct": 42.47,
-      "RS_3mo_Rank_Pct": 46.26,
+      "RS_3mo_Rank_Pct": 46.35,
       "RS_1mo_Rank_Pct": 33.63
     },
     {
@@ -35701,7 +35701,7 @@
       "Ret_5D_Pct": 2.51,
       "Dollar_Vol_M": 129.9,
       "api_called": false,
-      "RS_Rank_Pct": 13.8,
+      "RS_Rank_Pct": 13.71,
       "RS_3mo_Rank_Pct": 22.63,
       "RS_1mo_Rank_Pct": 39.95
     },
@@ -35815,13 +35815,13 @@
       "api_called": false,
       "RS_Rank_Pct": 85.57,
       "RS_3mo_Rank_Pct": 5.23,
-      "RS_1mo_Rank_Pct": 56.36
+      "RS_1mo_Rank_Pct": 56.45
     },
     {
       "Ticker": "FMX",
       "Price": 131.91000366210938,
       "Market Cap": "44.94B",
-      "RS_6mo": 0.18034931008038513,
+      "RS_6mo": 0.18034938177228865,
       "RS_3mo": 0.1704255132056091,
       "RS_1mo": 0.08523526134578338,
       "50DIV": 8.1,
@@ -35871,7 +35871,7 @@
       "api_called": false,
       "RS_Rank_Pct": 39.4,
       "RS_3mo_Rank_Pct": 14.25,
-      "RS_1mo_Rank_Pct": 42.92
+      "RS_1mo_Rank_Pct": 43.01
     },
     {
       "Ticker": "HAE",
@@ -35927,7 +35927,7 @@
       "api_called": false,
       "RS_Rank_Pct": 1.53,
       "RS_3mo_Rank_Pct": 12.8,
-      "RS_1mo_Rank_Pct": 43.82
+      "RS_1mo_Rank_Pct": 43.91
     },
     {
       "Ticker": "APO",
@@ -35981,7 +35981,7 @@
       "Ret_5D_Pct": 5.76,
       "Dollar_Vol_M": 378.3,
       "api_called": false,
-      "RS_Rank_Pct": 68.35,
+      "RS_Rank_Pct": 68.44,
       "RS_3mo_Rank_Pct": 62.31,
       "RS_1mo_Rank_Pct": 17.31
     },
@@ -36263,7 +36263,7 @@
       "api_called": false,
       "RS_Rank_Pct": 78.0,
       "RS_3mo_Rank_Pct": 40.22,
-      "RS_1mo_Rank_Pct": 50.41
+      "RS_1mo_Rank_Pct": 50.5
     },
     {
       "Ticker": "MHK",
@@ -36325,7 +36325,7 @@
       "Ticker": "LEA",
       "Price": 108.70999908447266,
       "Market Cap": "5.24B",
-      "RS_6mo": -0.1663119868028574,
+      "RS_6mo": -0.16631206930788311,
       "RS_3mo": -0.0852723040901514,
       "RS_1mo": -0.052020250361852136,
       "50DIV": -9.13,
@@ -36486,8 +36486,8 @@
       "Dollar_Vol_M": 152.0,
       "api_called": false,
       "RS_Rank_Pct": 41.66,
-      "RS_3mo_Rank_Pct": 48.33,
-      "RS_1mo_Rank_Pct": 42.2
+      "RS_3mo_Rank_Pct": 48.42,
+      "RS_1mo_Rank_Pct": 42.29
     },
     {
       "Ticker": "NICE",
@@ -36598,7 +36598,7 @@
       "Dollar_Vol_M": 239.8,
       "api_called": false,
       "RS_Rank_Pct": 43.01,
-      "RS_3mo_Rank_Pct": 56.54,
+      "RS_3mo_Rank_Pct": 56.63,
       "RS_1mo_Rank_Pct": 5.77
     },
     {
@@ -36653,7 +36653,7 @@
       "Ret_5D_Pct": -1.2,
       "Dollar_Vol_M": 59.9,
       "api_called": false,
-      "RS_Rank_Pct": 71.78,
+      "RS_Rank_Pct": 71.87,
       "RS_3mo_Rank_Pct": 84.94,
       "RS_1mo_Rank_Pct": 11.54
     },
@@ -36711,7 +36711,7 @@
       "api_called": false,
       "RS_Rank_Pct": 74.48,
       "RS_3mo_Rank_Pct": 72.95,
-      "RS_1mo_Rank_Pct": 55.46
+      "RS_1mo_Rank_Pct": 55.55
     },
     {
       "Ticker": "DUK",
@@ -36821,7 +36821,7 @@
       "Ret_5D_Pct": -0.29,
       "Dollar_Vol_M": 296.3,
       "api_called": false,
-      "RS_Rank_Pct": 69.61,
+      "RS_Rank_Pct": 69.7,
       "RS_3mo_Rank_Pct": 40.67,
       "RS_1mo_Rank_Pct": 21.01
     },
@@ -36879,7 +36879,7 @@
       "api_called": false,
       "RS_Rank_Pct": 81.15,
       "RS_3mo_Rank_Pct": 78.36,
-      "RS_1mo_Rank_Pct": 69.07
+      "RS_1mo_Rank_Pct": 69.16
     },
     {
       "Ticker": "SII",
@@ -36935,7 +36935,7 @@
       "api_called": false,
       "RS_Rank_Pct": 82.78,
       "RS_3mo_Rank_Pct": 82.69,
-      "RS_1mo_Rank_Pct": 63.12
+      "RS_1mo_Rank_Pct": 63.21
     },
     {
       "Ticker": "FDXF",
@@ -36989,15 +36989,15 @@
       "Ret_5D_Pct": 8.39,
       "Dollar_Vol_M": 97.1,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 52.84,
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 52.93,
       "RS_1mo_Rank_Pct": 6.85
     },
     {
       "Ticker": "TD",
       "Price": 123.76000213623047,
       "Market Cap": "202.10B",
-      "RS_6mo": 0.18151137134897755,
+      "RS_6mo": 0.1815114479216249,
       "RS_3mo": 0.10916016587938708,
       "RS_1mo": 0.07013097461483694,
       "50DIV": 2.33,
@@ -37047,7 +37047,7 @@
       "api_called": false,
       "RS_Rank_Pct": 38.95,
       "RS_3mo_Rank_Pct": 28.67,
-      "RS_1mo_Rank_Pct": 49.41
+      "RS_1mo_Rank_Pct": 49.5
     },
     {
       "Ticker": "CROX",
@@ -37215,7 +37215,7 @@
       "api_called": false,
       "RS_Rank_Pct": 77.73,
       "RS_3mo_Rank_Pct": 66.37,
-      "RS_1mo_Rank_Pct": 55.18
+      "RS_1mo_Rank_Pct": 55.28
     },
     {
       "Ticker": "MCRI",
@@ -37269,9 +37269,9 @@
       "Ret_5D_Pct": 1.73,
       "Dollar_Vol_M": 8.3,
       "api_called": false,
-      "RS_Rank_Pct": 70.33,
+      "RS_Rank_Pct": 70.42,
       "RS_3mo_Rank_Pct": 76.83,
-      "RS_1mo_Rank_Pct": 67.27
+      "RS_1mo_Rank_Pct": 67.36
     },
     {
       "Ticker": "ADUS",
@@ -37325,8 +37325,8 @@
       "Ret_5D_Pct": -1.05,
       "Dollar_Vol_M": 12.9,
       "api_called": false,
-      "RS_Rank_Pct": 13.89,
-      "RS_3mo_Rank_Pct": 41.75,
+      "RS_Rank_Pct": 13.8,
+      "RS_3mo_Rank_Pct": 41.84,
       "RS_1mo_Rank_Pct": 36.52
     },
     {
@@ -37382,7 +37382,7 @@
       "Dollar_Vol_M": 19.7,
       "api_called": false,
       "RS_Rank_Pct": 10.01,
-      "RS_3mo_Rank_Pct": 53.56,
+      "RS_3mo_Rank_Pct": 53.65,
       "RS_1mo_Rank_Pct": 77.37
     },
     {
@@ -37493,9 +37493,9 @@
       "Ret_5D_Pct": -4.43,
       "Dollar_Vol_M": 110.7,
       "api_called": false,
-      "RS_Rank_Pct": 65.01,
+      "RS_Rank_Pct": 65.1,
       "RS_3mo_Rank_Pct": 89.63,
-      "RS_1mo_Rank_Pct": 45.81
+      "RS_1mo_Rank_Pct": 45.9
     },
     {
       "Ticker": "TFII",
@@ -37605,9 +37605,9 @@
       "Ret_5D_Pct": -1.48,
       "Dollar_Vol_M": 76.6,
       "api_called": false,
-      "RS_Rank_Pct": 66.28,
-      "RS_3mo_Rank_Pct": 53.92,
-      "RS_1mo_Rank_Pct": 58.34
+      "RS_Rank_Pct": 66.37,
+      "RS_3mo_Rank_Pct": 54.01,
+      "RS_1mo_Rank_Pct": 58.43
     },
     {
       "Ticker": "OPY",
@@ -37661,7 +37661,7 @@
       "Ret_5D_Pct": -1.4,
       "Dollar_Vol_M": 7.2,
       "api_called": false,
-      "RS_Rank_Pct": 69.07,
+      "RS_Rank_Pct": 69.16,
       "RS_3mo_Rank_Pct": 88.82,
       "RS_1mo_Rank_Pct": 86.47
     },
@@ -37885,9 +37885,9 @@
       "Ret_5D_Pct": 1.83,
       "Dollar_Vol_M": 31.7,
       "api_called": false,
-      "RS_Rank_Pct": 62.22,
+      "RS_Rank_Pct": 62.31,
       "RS_3mo_Rank_Pct": 63.12,
-      "RS_1mo_Rank_Pct": 49.5
+      "RS_1mo_Rank_Pct": 49.59
     },
     {
       "Ticker": "EPAM",
@@ -38109,8 +38109,8 @@
       "Ret_5D_Pct": 3.32,
       "Dollar_Vol_M": 33.7,
       "api_called": false,
-      "RS_Rank_Pct": 71.87,
-      "RS_3mo_Rank_Pct": 44.0,
+      "RS_Rank_Pct": 71.96,
+      "RS_3mo_Rank_Pct": 44.09,
       "RS_1mo_Rank_Pct": 13.71
     },
     {
@@ -38222,7 +38222,7 @@
       "Dollar_Vol_M": 103.2,
       "api_called": false,
       "RS_Rank_Pct": 4.15,
-      "RS_3mo_Rank_Pct": 32.73,
+      "RS_3mo_Rank_Pct": 32.64,
       "RS_1mo_Rank_Pct": 4.42
     },
     {
@@ -38285,7 +38285,7 @@
       "Ticker": "EBAY",
       "Price": 120.91999816894531,
       "Market Cap": "53.08B",
-      "RS_6mo": 0.12176240978473774,
+      "RS_6mo": 0.12176247997806453,
       "RS_3mo": 0.202091396139642,
       "RS_1mo": 0.0474595063275094,
       "50DIV": 5.9,
@@ -38335,7 +38335,7 @@
       "api_called": false,
       "RS_Rank_Pct": 49.95,
       "RS_3mo_Rank_Pct": 10.46,
-      "RS_1mo_Rank_Pct": 57.53
+      "RS_1mo_Rank_Pct": 57.62
     },
     {
       "Ticker": "PHM",
@@ -38390,7 +38390,7 @@
       "Dollar_Vol_M": 167.6,
       "api_called": false,
       "RS_Rank_Pct": 44.09,
-      "RS_3mo_Rank_Pct": 48.51,
+      "RS_3mo_Rank_Pct": 48.6,
       "RS_1mo_Rank_Pct": 16.23
     },
     {
@@ -38445,9 +38445,9 @@
       "Ret_5D_Pct": 0.87,
       "Dollar_Vol_M": 17.4,
       "api_called": false,
-      "RS_Rank_Pct": 65.64,
+      "RS_Rank_Pct": 65.73,
       "RS_3mo_Rank_Pct": 68.53,
-      "RS_1mo_Rank_Pct": 59.87
+      "RS_1mo_Rank_Pct": 59.96
     },
     {
       "Ticker": "CF",
@@ -38502,8 +38502,8 @@
       "Dollar_Vol_M": 135.7,
       "api_called": false,
       "RS_Rank_Pct": 49.59,
-      "RS_3mo_Rank_Pct": 49.5,
-      "RS_1mo_Rank_Pct": 45.9
+      "RS_3mo_Rank_Pct": 49.59,
+      "RS_1mo_Rank_Pct": 45.99
     },
     {
       "Ticker": "BABA",
@@ -38677,7 +38677,7 @@
       "Ticker": "TW",
       "Price": 132.74000549316406,
       "Market Cap": "27.75B",
-      "RS_6mo": 0.3683232311019269,
+      "RS_6mo": 0.3683231337702574,
       "RS_3mo": 0.29537694993508534,
       "RS_1mo": 0.2117571324951412,
       "50DIV": 17.84,
@@ -38725,7 +38725,7 @@
       "Ret_5D_Pct": 3.92,
       "Dollar_Vol_M": 170.2,
       "api_called": false,
-      "RS_Rank_Pct": 15.96,
+      "RS_Rank_Pct": 15.87,
       "RS_3mo_Rank_Pct": 3.07,
       "RS_1mo_Rank_Pct": 8.03
     },
@@ -38950,7 +38950,7 @@
       "Dollar_Vol_M": 65.7,
       "api_called": false,
       "RS_Rank_Pct": 39.68,
-      "RS_3mo_Rank_Pct": 52.3,
+      "RS_3mo_Rank_Pct": 52.39,
       "RS_1mo_Rank_Pct": 13.8
     },
     {
@@ -39007,7 +39007,7 @@
       "api_called": false,
       "RS_Rank_Pct": 35.26,
       "RS_3mo_Rank_Pct": 25.79,
-      "RS_1mo_Rank_Pct": 54.1
+      "RS_1mo_Rank_Pct": 54.19
     },
     {
       "Ticker": "ALV",
@@ -39061,9 +39061,9 @@
       "Ret_5D_Pct": -2.47,
       "Dollar_Vol_M": 83.7,
       "api_called": false,
-      "RS_Rank_Pct": 68.53,
-      "RS_3mo_Rank_Pct": 48.69,
-      "RS_1mo_Rank_Pct": 44.54
+      "RS_Rank_Pct": 68.62,
+      "RS_3mo_Rank_Pct": 48.78,
+      "RS_1mo_Rank_Pct": 44.63
     },
     {
       "Ticker": "AAOI",
@@ -39175,13 +39175,13 @@
       "api_called": false,
       "RS_Rank_Pct": 0.36,
       "RS_3mo_Rank_Pct": 5.77,
-      "RS_1mo_Rank_Pct": 44.18
+      "RS_1mo_Rank_Pct": 44.27
     },
     {
       "Ticker": "CM",
       "Price": 115.80000305175781,
       "Market Cap": "105.14B",
-      "RS_6mo": 0.08060713812412332,
+      "RS_6mo": 0.08060707043558409,
       "RS_3mo": 0.05033017752742119,
       "RS_1mo": 0.07165494835926414,
       "50DIV": 1.9,
@@ -39230,8 +39230,8 @@
       "Dollar_Vol_M": 46.3,
       "api_called": false,
       "RS_Rank_Pct": 58.34,
-      "RS_3mo_Rank_Pct": 46.08,
-      "RS_1mo_Rank_Pct": 48.96
+      "RS_3mo_Rank_Pct": 46.17,
+      "RS_1mo_Rank_Pct": 49.05
     },
     {
       "Ticker": "BDC",
@@ -39285,9 +39285,9 @@
       "Ret_5D_Pct": 4.14,
       "Dollar_Vol_M": 24.7,
       "api_called": false,
-      "RS_Rank_Pct": 71.69,
+      "RS_Rank_Pct": 71.78,
       "RS_3mo_Rank_Pct": 85.75,
-      "RS_1mo_Rank_Pct": 62.04
+      "RS_1mo_Rank_Pct": 62.13
     },
     {
       "Ticker": "GDXU",
@@ -39455,7 +39455,7 @@
       "api_called": false,
       "RS_Rank_Pct": 57.53,
       "RS_3mo_Rank_Pct": 68.08,
-      "RS_1mo_Rank_Pct": 40.31
+      "RS_1mo_Rank_Pct": 40.4
     },
     {
       "Ticker": "CAKE",
@@ -39629,7 +39629,7 @@
       "Ticker": "GEF.B",
       "Price": 100.6500015258789,
       "Market Cap": "3.81B",
-      "RS_6mo": 0.3463120102701428,
+      "RS_6mo": 0.34631188621215825,
       "RS_3mo": -0.03431973598157796,
       "RS_1mo": -0.048154229349154976,
       "50DIV": -7.11,
@@ -39733,9 +39733,9 @@
       "Ret_5D_Pct": 4.94,
       "Dollar_Vol_M": 251.9,
       "api_called": false,
-      "RS_Rank_Pct": 67.63,
+      "RS_Rank_Pct": 67.72,
       "RS_3mo_Rank_Pct": 84.67,
-      "RS_1mo_Rank_Pct": 70.15
+      "RS_1mo_Rank_Pct": 70.24
     },
     {
       "Ticker": "NRG",
@@ -39902,7 +39902,7 @@
       "Dollar_Vol_M": 605.0,
       "api_called": false,
       "RS_Rank_Pct": 54.46,
-      "RS_3mo_Rank_Pct": 54.1,
+      "RS_3mo_Rank_Pct": 54.19,
       "RS_1mo_Rank_Pct": 12.89
     },
     {
@@ -39959,7 +39959,7 @@
       "api_called": false,
       "RS_Rank_Pct": 42.11,
       "RS_3mo_Rank_Pct": 36.79,
-      "RS_1mo_Rank_Pct": 42.65
+      "RS_1mo_Rank_Pct": 42.74
     },
     {
       "Ticker": "JBTM",
@@ -40071,7 +40071,7 @@
       "api_called": false,
       "RS_Rank_Pct": 96.03,
       "RS_3mo_Rank_Pct": 90.89,
-      "RS_1mo_Rank_Pct": 67.63
+      "RS_1mo_Rank_Pct": 67.72
     },
     {
       "Ticker": "CRUS",
@@ -40238,8 +40238,8 @@
       "Dollar_Vol_M": 64.0,
       "api_called": false,
       "RS_Rank_Pct": 55.28,
-      "RS_3mo_Rank_Pct": 44.91,
-      "RS_1mo_Rank_Pct": 54.64
+      "RS_3mo_Rank_Pct": 45.0,
+      "RS_1mo_Rank_Pct": 54.73
     },
     {
       "Ticker": "SPHR",
@@ -40293,7 +40293,7 @@
       "Ret_5D_Pct": 4.62,
       "Dollar_Vol_M": 71.2,
       "api_called": false,
-      "RS_Rank_Pct": 71.51,
+      "RS_Rank_Pct": 71.6,
       "RS_3mo_Rank_Pct": 88.46,
       "RS_1mo_Rank_Pct": 4.87
     },
@@ -40351,7 +40351,7 @@
       "api_called": false,
       "RS_Rank_Pct": 46.44,
       "RS_3mo_Rank_Pct": 30.57,
-      "RS_1mo_Rank_Pct": 24.44
+      "RS_1mo_Rank_Pct": 24.53
     },
     {
       "Ticker": "FRT",
@@ -40405,8 +40405,8 @@
       "Ret_5D_Pct": 0.3,
       "Dollar_Vol_M": 90.0,
       "api_called": false,
-      "RS_Rank_Pct": 67.54,
-      "RS_3mo_Rank_Pct": 55.18,
+      "RS_Rank_Pct": 67.63,
+      "RS_3mo_Rank_Pct": 55.28,
       "RS_1mo_Rank_Pct": 36.16
     },
     {
@@ -40462,7 +40462,7 @@
       "Dollar_Vol_M": 57.6,
       "api_called": false,
       "RS_Rank_Pct": 28.04,
-      "RS_3mo_Rank_Pct": 53.11,
+      "RS_3mo_Rank_Pct": 53.2,
       "RS_1mo_Rank_Pct": 79.98
     },
     {
@@ -40687,7 +40687,7 @@
       "api_called": false,
       "RS_Rank_Pct": 81.88,
       "RS_3mo_Rank_Pct": 89.09,
-      "RS_1mo_Rank_Pct": 69.52
+      "RS_1mo_Rank_Pct": 69.61
     },
     {
       "Ticker": "W",
@@ -40743,7 +40743,7 @@
       "api_called": false,
       "RS_Rank_Pct": 4.51,
       "RS_3mo_Rank_Pct": 23.35,
-      "RS_1mo_Rank_Pct": 42.74
+      "RS_1mo_Rank_Pct": 42.83
     },
     {
       "Ticker": "CHH",
@@ -40799,7 +40799,7 @@
       "api_called": false,
       "RS_Rank_Pct": 50.77,
       "RS_3mo_Rank_Pct": 22.0,
-      "RS_1mo_Rank_Pct": 22.9
+      "RS_1mo_Rank_Pct": 22.99
     },
     {
       "Ticker": "VAC",
@@ -40909,9 +40909,9 @@
       "Ret_5D_Pct": -2.8,
       "Dollar_Vol_M": 99.5,
       "api_called": false,
-      "RS_Rank_Pct": 10.82,
+      "RS_Rank_Pct": 10.73,
       "RS_3mo_Rank_Pct": 0.63,
-      "RS_1mo_Rank_Pct": 70.51
+      "RS_1mo_Rank_Pct": 70.6
     },
     {
       "Ticker": "TROW",
@@ -40966,7 +40966,7 @@
       "Dollar_Vol_M": 158.4,
       "api_called": false,
       "RS_Rank_Pct": 45.18,
-      "RS_3mo_Rank_Pct": 52.39,
+      "RS_3mo_Rank_Pct": 52.48,
       "RS_1mo_Rank_Pct": 28.22
     },
     {
@@ -41134,8 +41134,8 @@
       "Dollar_Vol_M": 57.6,
       "api_called": false,
       "RS_Rank_Pct": 26.06,
-      "RS_3mo_Rank_Pct": 44.45,
-      "RS_1mo_Rank_Pct": 42.83
+      "RS_3mo_Rank_Pct": 44.54,
+      "RS_1mo_Rank_Pct": 42.92
     },
     {
       "Ticker": "GDDY",
@@ -41303,13 +41303,13 @@
       "api_called": false,
       "RS_Rank_Pct": 21.28,
       "RS_3mo_Rank_Pct": 61.95,
-      "RS_1mo_Rank_Pct": 40.94
+      "RS_1mo_Rank_Pct": 41.03
     },
     {
       "Ticker": "PPG",
       "Price": 122.55999755859375,
       "Market Cap": "27.07B",
-      "RS_6mo": 0.1995138565016463,
+      "RS_6mo": 0.19951377666113876,
       "RS_3mo": 0.13914310479582082,
       "RS_1mo": 0.19017892880730178,
       "50DIV": 11.0,
@@ -41365,7 +41365,7 @@
       "Ticker": "SAFT",
       "Price": 104.47000122070312,
       "Market Cap": "1.53B",
-      "RS_6mo": 0.5448687626949014,
+      "RS_6mo": 0.5448686031928439,
       "RS_3mo": 0.06067464006222316,
       "RS_1mo": 0.04636816617603032,
       "50DIV": 0.58,
@@ -41414,8 +41414,8 @@
       "Dollar_Vol_M": 4.7,
       "api_called": false,
       "RS_Rank_Pct": 6.22,
-      "RS_3mo_Rank_Pct": 42.56,
-      "RS_1mo_Rank_Pct": 57.98
+      "RS_3mo_Rank_Pct": 42.65,
+      "RS_1mo_Rank_Pct": 58.07
     },
     {
       "Ticker": "WEC",
@@ -41471,7 +41471,7 @@
       "api_called": false,
       "RS_Rank_Pct": 48.33,
       "RS_3mo_Rank_Pct": 21.73,
-      "RS_1mo_Rank_Pct": 23.81
+      "RS_1mo_Rank_Pct": 23.9
     },
     {
       "Ticker": "BCO",
@@ -41581,7 +41581,7 @@
       "Ret_5D_Pct": 17.21,
       "Dollar_Vol_M": 411.0,
       "api_called": false,
-      "RS_Rank_Pct": 67.18,
+      "RS_Rank_Pct": 67.27,
       "RS_3mo_Rank_Pct": 65.55,
       "RS_1mo_Rank_Pct": 2.43
     },
@@ -41637,7 +41637,7 @@
       "Ret_5D_Pct": 1.36,
       "Dollar_Vol_M": 53.4,
       "api_called": false,
-      "RS_Rank_Pct": 64.56,
+      "RS_Rank_Pct": 64.65,
       "RS_3mo_Rank_Pct": 25.61,
       "RS_1mo_Rank_Pct": 27.77
     },
@@ -41695,7 +41695,7 @@
       "api_called": true,
       "RS_Rank_Pct": 51.85,
       "RS_3mo_Rank_Pct": 31.92,
-      "RS_1mo_Rank_Pct": 69.34
+      "RS_1mo_Rank_Pct": 69.43
     },
     {
       "Ticker": "TRI",
@@ -41749,9 +41749,9 @@
       "Ret_5D_Pct": -2.9,
       "Dollar_Vol_M": 150.9,
       "api_called": false,
-      "RS_Rank_Pct": 14.34,
+      "RS_Rank_Pct": 14.25,
       "RS_3mo_Rank_Pct": 37.51,
-      "RS_1mo_Rank_Pct": 58.7
+      "RS_1mo_Rank_Pct": 58.79
     },
     {
       "Ticker": "HNGE",
@@ -41862,14 +41862,14 @@
       "Dollar_Vol_M": 253.8,
       "api_called": false,
       "RS_Rank_Pct": 60.05,
-      "RS_3mo_Rank_Pct": 34.72,
+      "RS_3mo_Rank_Pct": 34.63,
       "RS_1mo_Rank_Pct": 35.08
     },
     {
       "Ticker": "MCY",
       "Price": 86.44999694824219,
       "Market Cap": "4.79B",
-      "RS_6mo": -0.07639859806923957,
+      "RS_6mo": -0.07639866282463081,
       "RS_3mo": -0.12241795005241764,
       "RS_1mo": -0.11690815376860456,
       "50DIV": -12.87,
@@ -42086,8 +42086,8 @@
       "Dollar_Vol_M": 7.7,
       "api_called": false,
       "RS_Rank_Pct": 40.31,
-      "RS_3mo_Rank_Pct": 45.27,
-      "RS_1mo_Rank_Pct": 61.23
+      "RS_3mo_Rank_Pct": 45.36,
+      "RS_1mo_Rank_Pct": 61.32
     },
     {
       "Ticker": "FROG",
@@ -42309,9 +42309,9 @@
       "Ret_5D_Pct": null,
       "Dollar_Vol_M": 0.0,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 59.6,
-      "RS_1mo_Rank_Pct": 71.69
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 59.69,
+      "RS_1mo_Rank_Pct": 71.78
     },
     {
       "Ticker": "CFFI",
@@ -42367,7 +42367,7 @@
       "api_called": false,
       "RS_Rank_Pct": 7.21,
       "RS_3mo_Rank_Pct": 5.59,
-      "RS_1mo_Rank_Pct": 44.45
+      "RS_1mo_Rank_Pct": 44.54
     },
     {
       "Ticker": "NWPX",
@@ -42479,7 +42479,7 @@
       "api_called": false,
       "RS_Rank_Pct": 97.48,
       "RS_3mo_Rank_Pct": 95.76,
-      "RS_1mo_Rank_Pct": 65.01
+      "RS_1mo_Rank_Pct": 65.1
     },
     {
       "Ticker": "INSM",
@@ -42534,7 +42534,7 @@
       "Dollar_Vol_M": 187.0,
       "api_called": false,
       "RS_Rank_Pct": 39.77,
-      "RS_3mo_Rank_Pct": 56.72,
+      "RS_3mo_Rank_Pct": 56.81,
       "RS_1mo_Rank_Pct": 2.34
     },
     {
@@ -42590,8 +42590,8 @@
       "Dollar_Vol_M": 31.5,
       "api_called": false,
       "RS_Rank_Pct": 37.87,
-      "RS_3mo_Rank_Pct": 59.51,
-      "RS_1mo_Rank_Pct": 71.06
+      "RS_3mo_Rank_Pct": 59.6,
+      "RS_1mo_Rank_Pct": 71.15
     },
     {
       "Ticker": "AIR",
@@ -42645,7 +42645,7 @@
       "Ret_5D_Pct": -0.72,
       "Dollar_Vol_M": 36.2,
       "api_called": false,
-      "RS_Rank_Pct": 67.09,
+      "RS_Rank_Pct": 67.18,
       "RS_3mo_Rank_Pct": 86.38,
       "RS_1mo_Rank_Pct": 22.45
     },
@@ -42703,7 +42703,7 @@
       "api_called": false,
       "RS_Rank_Pct": 33.81,
       "RS_3mo_Rank_Pct": 35.08,
-      "RS_1mo_Rank_Pct": 47.07
+      "RS_1mo_Rank_Pct": 47.16
     },
     {
       "Ticker": "SSB",
@@ -42758,14 +42758,14 @@
       "Dollar_Vol_M": 58.6,
       "api_called": false,
       "RS_Rank_Pct": 40.58,
-      "RS_3mo_Rank_Pct": 49.41,
-      "RS_1mo_Rank_Pct": 48.33
+      "RS_3mo_Rank_Pct": 49.5,
+      "RS_1mo_Rank_Pct": 48.42
     },
     {
       "Ticker": "SHEL",
       "Price": 99.08000183105469,
       "Market Cap": "280.16B",
-      "RS_6mo": 0.25184560736808015,
+      "RS_6mo": 0.25184549926882094,
       "RS_3mo": 0.10909905309145264,
       "RS_1mo": -0.021506721223465794,
       "50DIV": 0.15,
@@ -42870,8 +42870,8 @@
       "Dollar_Vol_M": 77.0,
       "api_called": false,
       "RS_Rank_Pct": 57.89,
-      "RS_3mo_Rank_Pct": 44.18,
-      "RS_1mo_Rank_Pct": 52.3
+      "RS_3mo_Rank_Pct": 44.27,
+      "RS_1mo_Rank_Pct": 52.39
     },
     {
       "Ticker": "KOD",
@@ -42981,7 +42981,7 @@
       "Ret_5D_Pct": -4.07,
       "Dollar_Vol_M": 17.1,
       "api_called": false,
-      "RS_Rank_Pct": 12.17,
+      "RS_Rank_Pct": 12.08,
       "RS_3mo_Rank_Pct": 16.68,
       "RS_1mo_Rank_Pct": 29.22
     },
@@ -42989,9 +42989,9 @@
       "Ticker": "STRC",
       "Price": 99.91000366210938,
       "Market Cap": "N/A",
-      "RS_6mo": 0.13110174521609497,
-      "RS_3mo": 0.11845609056579547,
-      "RS_1mo": 0.06968799476731613,
+      "RS_6mo": 0.13110191814679184,
+      "RS_3mo": 0.11845600218918895,
+      "RS_1mo": 0.06968791413920498,
       "50DIV": 1.78,
       "200DIV": 8.3,
       "Sector": "Technology",
@@ -43039,7 +43039,7 @@
       "api_called": true,
       "RS_Rank_Pct": 47.25,
       "RS_3mo_Rank_Pct": 25.88,
-      "RS_1mo_Rank_Pct": 49.59
+      "RS_1mo_Rank_Pct": 49.68
     },
     {
       "Ticker": "ABT",
@@ -43095,15 +43095,15 @@
       "api_called": false,
       "RS_Rank_Pct": 18.85,
       "RS_3mo_Rank_Pct": 60.32,
-      "RS_1mo_Rank_Pct": 45.99
+      "RS_1mo_Rank_Pct": 46.08
     },
     {
       "Ticker": "BMNP",
       "Price": 96.98999786376953,
       "Market Cap": "N/A",
       "RS_6mo": 0.0,
-      "RS_3mo": 0.12167687442066331,
-      "RS_1mo": 0.052954916450264,
+      "RS_3mo": 0.12167696600389823,
+      "RS_1mo": 0.052954996822796196,
       "50DIV": -0.38,
       "200DIV": null,
       "Sector": "N/A",
@@ -43149,9 +43149,9 @@
       "Ret_5D_Pct": 0.08,
       "Dollar_Vol_M": 1.6,
       "api_called": true,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 25.07,
-      "RS_1mo_Rank_Pct": 55.37
+      "RS_1mo_Rank_Pct": 55.46
     },
     {
       "Ticker": "AVT",
@@ -43205,8 +43205,8 @@
       "Ret_5D_Pct": 5.92,
       "Dollar_Vol_M": 86.5,
       "api_called": false,
-      "RS_Rank_Pct": 69.25,
-      "RS_3mo_Rank_Pct": 56.36,
+      "RS_Rank_Pct": 69.34,
+      "RS_3mo_Rank_Pct": 56.45,
       "RS_1mo_Rank_Pct": 78.72
     },
     {
@@ -43261,17 +43261,17 @@
       "Ret_5D_Pct": 5.76,
       "Dollar_Vol_M": 25.4,
       "api_called": false,
-      "RS_Rank_Pct": 62.76,
-      "RS_3mo_Rank_Pct": 50.23,
+      "RS_Rank_Pct": 62.85,
+      "RS_3mo_Rank_Pct": 50.32,
       "RS_1mo_Rank_Pct": 36.07
     },
     {
       "Ticker": "SATA",
       "Price": 97.7300033569336,
       "Market Cap": "N/A",
-      "RS_6mo": 0.11045696669384865,
-      "RS_3mo": 0.051646285758789746,
-      "RS_1mo": 0.061683320312561546,
+      "RS_6mo": 0.11045713668872092,
+      "RS_3mo": 0.05164596786017656,
+      "RS_1mo": 0.0616835637548848,
       "50DIV": 0.3,
       "200DIV": 5.45,
       "Sector": "Financial Services",
@@ -43318,8 +43318,8 @@
       "Dollar_Vol_M": 26.0,
       "api_called": true,
       "RS_Rank_Pct": 51.94,
-      "RS_3mo_Rank_Pct": 45.63,
-      "RS_1mo_Rank_Pct": 52.03
+      "RS_3mo_Rank_Pct": 45.72,
+      "RS_1mo_Rank_Pct": 52.12
     },
     {
       "Ticker": "PNW",
@@ -43375,7 +43375,7 @@
       "api_called": false,
       "RS_Rank_Pct": 47.88,
       "RS_3mo_Rank_Pct": 22.99,
-      "RS_1mo_Rank_Pct": 42.47
+      "RS_1mo_Rank_Pct": 42.56
     },
     {
       "Ticker": "BJ",
@@ -43429,7 +43429,7 @@
       "Ret_5D_Pct": 0.86,
       "Dollar_Vol_M": 172.8,
       "api_called": false,
-      "RS_Rank_Pct": 16.14,
+      "RS_Rank_Pct": 16.05,
       "RS_3mo_Rank_Pct": 5.05,
       "RS_1mo_Rank_Pct": 31.65
     },
@@ -43487,7 +43487,7 @@
       "api_called": false,
       "RS_Rank_Pct": 20.65,
       "RS_3mo_Rank_Pct": 18.85,
-      "RS_1mo_Rank_Pct": 50.5
+      "RS_1mo_Rank_Pct": 50.59
     },
     {
       "Ticker": "LOGI",
@@ -43541,9 +43541,9 @@
       "Ret_5D_Pct": 6.32,
       "Dollar_Vol_M": 106.4,
       "api_called": false,
-      "RS_Rank_Pct": 71.96,
+      "RS_Rank_Pct": 72.05,
       "RS_3mo_Rank_Pct": 21.91,
-      "RS_1mo_Rank_Pct": 64.83
+      "RS_1mo_Rank_Pct": 64.92
     },
     {
       "Ticker": "ESTC",
@@ -43599,7 +43599,7 @@
       "api_called": false,
       "RS_Rank_Pct": 3.34,
       "RS_3mo_Rank_Pct": 39.5,
-      "RS_1mo_Rank_Pct": 71.42
+      "RS_1mo_Rank_Pct": 71.51
     },
     {
       "Ticker": "LLYVK",
@@ -43654,7 +43654,7 @@
       "Dollar_Vol_M": 19.7,
       "api_called": false,
       "RS_Rank_Pct": 44.63,
-      "RS_3mo_Rank_Pct": 46.8,
+      "RS_3mo_Rank_Pct": 46.89,
       "RS_1mo_Rank_Pct": 27.41
     },
     {
@@ -43821,7 +43821,7 @@
       "Ret_5D_Pct": 1.54,
       "Dollar_Vol_M": 260.6,
       "api_called": false,
-      "RS_Rank_Pct": 16.05,
+      "RS_Rank_Pct": 15.96,
       "RS_3mo_Rank_Pct": 9.47,
       "RS_1mo_Rank_Pct": 32.91
     },
@@ -43877,7 +43877,7 @@
       "Ret_5D_Pct": 11.04,
       "Dollar_Vol_M": 333.1,
       "api_called": false,
-      "RS_Rank_Pct": 61.23,
+      "RS_Rank_Pct": 61.32,
       "RS_3mo_Rank_Pct": 65.01,
       "RS_1mo_Rank_Pct": 36.88
     },
@@ -43935,7 +43935,7 @@
       "api_called": false,
       "RS_Rank_Pct": 56.81,
       "RS_3mo_Rank_Pct": 63.48,
-      "RS_1mo_Rank_Pct": 41.39
+      "RS_1mo_Rank_Pct": 41.48
     },
     {
       "Ticker": "FELE",
@@ -43989,9 +43989,9 @@
       "Ret_5D_Pct": 4.3,
       "Dollar_Vol_M": 22.1,
       "api_called": false,
-      "RS_Rank_Pct": 64.65,
+      "RS_Rank_Pct": 64.74,
       "RS_3mo_Rank_Pct": 60.87,
-      "RS_1mo_Rank_Pct": 64.38
+      "RS_1mo_Rank_Pct": 64.47
     },
     {
       "Ticker": "KMB",
@@ -44046,8 +44046,8 @@
       "Dollar_Vol_M": 521.0,
       "api_called": false,
       "RS_Rank_Pct": 34.72,
-      "RS_3mo_Rank_Pct": 42.38,
-      "RS_1mo_Rank_Pct": 45.09
+      "RS_3mo_Rank_Pct": 42.47,
+      "RS_1mo_Rank_Pct": 45.18
     },
     {
       "Ticker": "CPT",
@@ -44101,9 +44101,9 @@
       "Ret_5D_Pct": -0.29,
       "Dollar_Vol_M": 63.1,
       "api_called": false,
-      "RS_Rank_Pct": 71.24,
+      "RS_Rank_Pct": 71.33,
       "RS_3mo_Rank_Pct": 67.09,
-      "RS_1mo_Rank_Pct": 57.35
+      "RS_1mo_Rank_Pct": 57.44
     },
     {
       "Ticker": "USFD",
@@ -44157,8 +44157,8 @@
       "Ret_5D_Pct": 1.67,
       "Dollar_Vol_M": 178.8,
       "api_called": false,
-      "RS_Rank_Pct": 12.62,
-      "RS_3mo_Rank_Pct": 47.7,
+      "RS_Rank_Pct": 12.53,
+      "RS_3mo_Rank_Pct": 47.79,
       "RS_1mo_Rank_Pct": 35.26
     },
     {
@@ -44271,7 +44271,7 @@
       "api_called": false,
       "RS_Rank_Pct": 74.03,
       "RS_3mo_Rank_Pct": 91.07,
-      "RS_1mo_Rank_Pct": 66.19
+      "RS_1mo_Rank_Pct": 66.28
     },
     {
       "Ticker": "VLTO",
@@ -44383,7 +44383,7 @@
       "api_called": false,
       "RS_Rank_Pct": 40.67,
       "RS_3mo_Rank_Pct": 18.49,
-      "RS_1mo_Rank_Pct": 23.72
+      "RS_1mo_Rank_Pct": 23.81
     },
     {
       "Ticker": "SCHW",
@@ -44439,7 +44439,7 @@
       "api_called": false,
       "RS_Rank_Pct": 51.67,
       "RS_3mo_Rank_Pct": 81.97,
-      "RS_1mo_Rank_Pct": 53.83
+      "RS_1mo_Rank_Pct": 53.92
     },
     {
       "Ticker": "SKYW",
@@ -44493,7 +44493,7 @@
       "Ret_5D_Pct": 3.73,
       "Dollar_Vol_M": 25.1,
       "api_called": false,
-      "RS_Rank_Pct": 69.34,
+      "RS_Rank_Pct": 69.43,
       "RS_3mo_Rank_Pct": 87.11,
       "RS_1mo_Rank_Pct": 84.76
     },
@@ -44663,7 +44663,7 @@
       "api_called": false,
       "RS_Rank_Pct": 29.94,
       "RS_3mo_Rank_Pct": 34.9,
-      "RS_1mo_Rank_Pct": 45.27
+      "RS_1mo_Rank_Pct": 45.36
     },
     {
       "Ticker": "IOSP",
@@ -44717,7 +44717,7 @@
       "Ret_5D_Pct": 2.79,
       "Dollar_Vol_M": 16.3,
       "api_called": false,
-      "RS_Rank_Pct": 64.74,
+      "RS_Rank_Pct": 64.83,
       "RS_3mo_Rank_Pct": 79.8,
       "RS_1mo_Rank_Pct": 93.96
     },
@@ -44830,7 +44830,7 @@
       "Dollar_Vol_M": 7.6,
       "api_called": false,
       "RS_Rank_Pct": 45.72,
-      "RS_3mo_Rank_Pct": 45.9,
+      "RS_3mo_Rank_Pct": 45.99,
       "RS_1mo_Rank_Pct": 26.24
     },
     {
@@ -44943,7 +44943,7 @@
       "api_called": false,
       "RS_Rank_Pct": 74.21,
       "RS_3mo_Rank_Pct": 75.65,
-      "RS_1mo_Rank_Pct": 71.15
+      "RS_1mo_Rank_Pct": 71.24
     },
     {
       "Ticker": "INBX",
@@ -45054,7 +45054,7 @@
       "Dollar_Vol_M": 29.8,
       "api_called": false,
       "RS_Rank_Pct": 85.21,
-      "RS_3mo_Rank_Pct": 58.34,
+      "RS_3mo_Rank_Pct": 58.43,
       "RS_1mo_Rank_Pct": 38.95
     },
     {
@@ -45165,9 +45165,9 @@
       "Ret_5D_Pct": 0.13,
       "Dollar_Vol_M": 123.6,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 1.89,
-      "RS_1mo_Rank_Pct": 56.9
+      "RS_1mo_Rank_Pct": 56.99
     },
     {
       "Ticker": "ECHO",
@@ -45229,7 +45229,7 @@
       "Ticker": "CIB",
       "Price": 89.51000213623047,
       "Market Cap": "21.14B",
-      "RS_6mo": 0.3770656705552742,
+      "RS_6mo": 0.3770655242701324,
       "RS_3mo": -0.020595641905044912,
       "RS_1mo": -0.04365449415921212,
       "50DIV": -5.77,
@@ -45277,7 +45277,7 @@
       "Ret_5D_Pct": -3.1,
       "Dollar_Vol_M": 43.2,
       "api_called": false,
-      "RS_Rank_Pct": 14.97,
+      "RS_Rank_Pct": 14.88,
       "RS_3mo_Rank_Pct": 65.46,
       "RS_1mo_Rank_Pct": 81.51
     },
@@ -45614,7 +45614,7 @@
       "Dollar_Vol_M": 189.2,
       "api_called": false,
       "RS_Rank_Pct": 27.59,
-      "RS_3mo_Rank_Pct": 33.54,
+      "RS_3mo_Rank_Pct": 33.45,
       "RS_1mo_Rank_Pct": 5.59
     },
     {
@@ -45670,7 +45670,7 @@
       "Dollar_Vol_M": 105.7,
       "api_called": false,
       "RS_Rank_Pct": 53.65,
-      "RS_3mo_Rank_Pct": 49.14,
+      "RS_3mo_Rank_Pct": 49.23,
       "RS_1mo_Rank_Pct": 31.29
     },
     {
@@ -45781,7 +45781,7 @@
       "Ret_5D_Pct": -8.56,
       "Dollar_Vol_M": 13.2,
       "api_called": false,
-      "RS_Rank_Pct": 70.51,
+      "RS_Rank_Pct": 70.6,
       "RS_3mo_Rank_Pct": 75.02,
       "RS_1mo_Rank_Pct": 82.87
     },
@@ -45838,8 +45838,8 @@
       "Dollar_Vol_M": 27.6,
       "api_called": false,
       "RS_Rank_Pct": 19.75,
-      "RS_3mo_Rank_Pct": 33.72,
-      "RS_1mo_Rank_Pct": 48.6
+      "RS_3mo_Rank_Pct": 33.63,
+      "RS_1mo_Rank_Pct": 48.69
     },
     {
       "Ticker": "NDAQ",
@@ -45901,7 +45901,7 @@
       "Ticker": "HAS",
       "Price": 120.55000305175781,
       "Market Cap": "16.86B",
-      "RS_6mo": 0.45863366879766304,
+      "RS_6mo": 0.45863354623207664,
       "RS_3mo": 0.33114258771390864,
       "RS_1mo": 0.26277448296102845,
       "50DIV": 18.66,
@@ -46007,13 +46007,13 @@
       "api_called": false,
       "RS_Rank_Pct": 38.41,
       "RS_3mo_Rank_Pct": 17.22,
-      "RS_1mo_Rank_Pct": 50.32
+      "RS_1mo_Rank_Pct": 50.41
     },
     {
       "Ticker": "ECO",
       "Price": 88.81999969482422,
       "Market Cap": "3.47B",
-      "RS_6mo": 0.9469553773462037,
+      "RS_6mo": 0.9469555291355813,
       "RS_3mo": 0.4283119935508279,
       "RS_1mo": 0.03232814439977786,
       "50DIV": 2.88,
@@ -46063,14 +46063,14 @@
       "api_called": false,
       "RS_Rank_Pct": 1.17,
       "RS_3mo_Rank_Pct": 0.99,
-      "RS_1mo_Rank_Pct": 62.4
+      "RS_1mo_Rank_Pct": 62.49
     },
     {
       "Ticker": "HCC",
       "Price": 83.3499984741211,
       "Market Cap": "4.40B",
       "RS_6mo": -0.0140180234424159,
-      "RS_3mo": -0.13047955623515972,
+      "RS_3mo": -0.13047949365391825,
       "RS_1mo": -0.007629864324892897,
       "50DIV": -4.51,
       "200DIV": -4.41,
@@ -46174,8 +46174,8 @@
       "Dollar_Vol_M": 12.7,
       "api_called": false,
       "RS_Rank_Pct": 25.61,
-      "RS_3mo_Rank_Pct": 34.36,
-      "RS_1mo_Rank_Pct": 54.91
+      "RS_3mo_Rank_Pct": 34.27,
+      "RS_1mo_Rank_Pct": 55.0
     },
     {
       "Ticker": "KSPI",
@@ -46231,7 +46231,7 @@
       "api_called": false,
       "RS_Rank_Pct": 58.7,
       "RS_3mo_Rank_Pct": 75.92,
-      "RS_1mo_Rank_Pct": 70.42
+      "RS_1mo_Rank_Pct": 70.51
     },
     {
       "Ticker": "HSBC",
@@ -46285,7 +46285,7 @@
       "Ret_5D_Pct": 2.94,
       "Dollar_Vol_M": 70.1,
       "api_called": false,
-      "RS_Rank_Pct": 66.55,
+      "RS_Rank_Pct": 66.64,
       "RS_3mo_Rank_Pct": 77.19,
       "RS_1mo_Rank_Pct": 73.85
     },
@@ -46293,7 +46293,7 @@
       "Ticker": "CNXN",
       "Price": 82.91000366210938,
       "Market Cap": "2.09B",
-      "RS_6mo": 0.3191827738238554,
+      "RS_6mo": 0.31918262954125415,
       "RS_3mo": 0.10991629432133511,
       "RS_1mo": -0.027301979753598507,
       "50DIV": -4.99,
@@ -46398,7 +46398,7 @@
       "Dollar_Vol_M": 58.5,
       "api_called": false,
       "RS_Rank_Pct": 28.4,
-      "RS_3mo_Rank_Pct": 50.32,
+      "RS_3mo_Rank_Pct": 50.41,
       "RS_1mo_Rank_Pct": 15.15
     },
     {
@@ -46509,7 +46509,7 @@
       "Ret_5D_Pct": 4.03,
       "Dollar_Vol_M": 106.1,
       "api_called": false,
-      "RS_Rank_Pct": 67.81,
+      "RS_Rank_Pct": 67.9,
       "RS_3mo_Rank_Pct": 68.62,
       "RS_1mo_Rank_Pct": 89.18
     },
@@ -46678,8 +46678,8 @@
       "Dollar_Vol_M": 5.9,
       "api_called": false,
       "RS_Rank_Pct": 33.36,
-      "RS_3mo_Rank_Pct": 55.64,
-      "RS_1mo_Rank_Pct": 63.48
+      "RS_3mo_Rank_Pct": 55.73,
+      "RS_1mo_Rank_Pct": 63.57
     },
     {
       "Ticker": "RYTM",
@@ -46853,11 +46853,11 @@
       "Ticker": "TCBI",
       "Price": 99.94999694824219,
       "Market Cap": "4.39B",
-      "RS_6mo": 0.0,
-      "RS_3mo": 0.0,
-      "RS_1mo": 0.0,
-      "50DIV": null,
-      "200DIV": null,
+      "RS_6mo": 0.06688562458466711,
+      "RS_3mo": 0.0642487700039254,
+      "RS_1mo": 0.1386826996338535,
+      "50DIV": 3.54,
+      "200DIV": 1.34,
       "Sector": "Financial Services",
       "Industry": "Banks - Regional",
       "CY_Trend": 4.93,
@@ -46872,38 +46872,38 @@
       "NY_30Ago": 8.2327,
       "Target_Status": "NO",
       "Jungjanggi Jeongbaeyeol": "NO",
-      "10DIV": null,
-      "BBWTHD": null,
-      "BBWTHD_LOW": null,
+      "10DIV": -1.82,
+      "BBWTHD": 0.16,
+      "BBWTHD_LOW": 0.04,
       "SALE_CY": 8.5,
       "SALE_NY": 5.66,
       "EPS_CY": 14.89,
       "EPS_NY": 6.88,
       "BB_Center_Breakout_5D": "NO",
-      "High_52W_Pct": 96.11,
+      "High_52W_Pct": 92.14,
       "New_High_52W": "N",
-      "Low_52W_Pct": 101.41,
+      "Low_52W_Pct": 122.16,
       "New_Low_52W": "N",
-      "ADR_20D": null,
-      "Max_Rise_1M_Pct": 5.52,
-      "Max_Rise_3M_Pct": 5.52,
-      "Max_Rise_6M_Pct": 5.52,
-      "Ret_1M_Pct": null,
-      "Ret_3M_Pct": null,
-      "Ret_6M_Pct": null,
+      "ADR_20D": 3.44,
+      "Max_Rise_1M_Pct": 20.36,
+      "Max_Rise_3M_Pct": 22.93,
+      "Max_Rise_6M_Pct": 22.93,
+      "Ret_1M_Pct": 9.65,
+      "Ret_3M_Pct": 2.16,
+      "Ret_6M_Pct": -0.01,
       "BRK_60D": "NO",
-      "VOL_X": 0.61,
-      "CLS_POS": 56.57,
-      "Above_50_SMA": "X",
-      "Above_150_SMA": "X",
-      "Vol_Surge_Wk": 0.55,
+      "VOL_X": 0.36,
+      "CLS_POS": 84.92,
+      "Above_50_SMA": "O",
+      "Above_150_SMA": "O",
+      "Vol_Surge_Wk": 0.51,
       "Ret_1D_Pct": 0.06,
-      "Ret_5D_Pct": null,
-      "Dollar_Vol_M": 3.2,
+      "Ret_5D_Pct": -1.07,
+      "Dollar_Vol_M": 17.9,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 59.6,
-      "RS_1mo_Rank_Pct": 71.69
+      "RS_Rank_Pct": 60.78,
+      "RS_3mo_Rank_Pct": 41.39,
+      "RS_1mo_Rank_Pct": 22.63
     },
     {
       "Ticker": "OMAB",
@@ -47014,8 +47014,8 @@
       "Dollar_Vol_M": 253.0,
       "api_called": false,
       "RS_Rank_Pct": 57.8,
-      "RS_3mo_Rank_Pct": 59.06,
-      "RS_1mo_Rank_Pct": 67.54
+      "RS_3mo_Rank_Pct": 59.15,
+      "RS_1mo_Rank_Pct": 67.63
     },
     {
       "Ticker": "ZBH",
@@ -47070,7 +47070,7 @@
       "Dollar_Vol_M": 260.0,
       "api_called": false,
       "RS_Rank_Pct": 22.81,
-      "RS_3mo_Rank_Pct": 33.81,
+      "RS_3mo_Rank_Pct": 33.72,
       "RS_1mo_Rank_Pct": 25.07
     },
     {
@@ -47183,7 +47183,7 @@
       "api_called": false,
       "RS_Rank_Pct": 92.7,
       "RS_3mo_Rank_Pct": 83.77,
-      "RS_1mo_Rank_Pct": 54.55
+      "RS_1mo_Rank_Pct": 54.64
     },
     {
       "Ticker": "SWK",
@@ -47293,7 +47293,7 @@
       "Ret_5D_Pct": 1.04,
       "Dollar_Vol_M": 540.8,
       "api_called": false,
-      "RS_Rank_Pct": 11.9,
+      "RS_Rank_Pct": 11.81,
       "RS_3mo_Rank_Pct": 15.06,
       "RS_1mo_Rank_Pct": 25.34
     },
@@ -47349,7 +47349,7 @@
       "Ret_5D_Pct": 8.7,
       "Dollar_Vol_M": 59.3,
       "api_called": false,
-      "RS_Rank_Pct": 64.83,
+      "RS_Rank_Pct": 64.92,
       "RS_3mo_Rank_Pct": 69.61,
       "RS_1mo_Rank_Pct": 73.22
     },
@@ -47407,7 +47407,7 @@
       "api_called": false,
       "RS_Rank_Pct": 29.4,
       "RS_3mo_Rank_Pct": 24.44,
-      "RS_1mo_Rank_Pct": 55.82
+      "RS_1mo_Rank_Pct": 55.91
     },
     {
       "Ticker": "AX",
@@ -47463,7 +47463,7 @@
       "api_called": false,
       "RS_Rank_Pct": 52.84,
       "RS_3mo_Rank_Pct": 62.22,
-      "RS_1mo_Rank_Pct": 46.26
+      "RS_1mo_Rank_Pct": 46.35
     },
     {
       "Ticker": "CL",
@@ -47573,7 +47573,7 @@
       "Ret_5D_Pct": 5.33,
       "Dollar_Vol_M": 187.1,
       "api_called": false,
-      "RS_Rank_Pct": 69.43,
+      "RS_Rank_Pct": 69.52,
       "RS_3mo_Rank_Pct": 67.54,
       "RS_1mo_Rank_Pct": 73.4
     },
@@ -47631,7 +47631,7 @@
       "api_called": false,
       "RS_Rank_Pct": 91.7,
       "RS_3mo_Rank_Pct": 93.78,
-      "RS_1mo_Rank_Pct": 61.41
+      "RS_1mo_Rank_Pct": 61.5
     },
     {
       "Ticker": "CCJ",
@@ -47693,7 +47693,7 @@
       "Ticker": "KO",
       "Price": 99.25,
       "Market Cap": "426.96B",
-      "RS_6mo": 0.3159110481063212,
+      "RS_6mo": 0.31591092820666333,
       "RS_3mo": 0.14589365385264808,
       "RS_1mo": 0.09911408217099975,
       "50DIV": 9.36,
@@ -47797,15 +47797,15 @@
       "Ret_5D_Pct": 7.87,
       "Dollar_Vol_M": 280.4,
       "api_called": false,
-      "RS_Rank_Pct": 63.12,
+      "RS_Rank_Pct": 63.21,
       "RS_3mo_Rank_Pct": 71.51,
-      "RS_1mo_Rank_Pct": 62.85
+      "RS_1mo_Rank_Pct": 62.94
     },
     {
       "Ticker": "ICFI",
       "Price": 81.26000213623047,
       "Market Cap": "1.46B",
-      "RS_6mo": 0.2629672450858175,
+      "RS_6mo": 0.2629671107947965,
       "RS_3mo": -0.04359786596349935,
       "RS_1mo": -0.049217753833060526,
       "50DIV": -7.23,
@@ -47861,7 +47861,7 @@
       "Ticker": "OTTR",
       "Price": 75.94999694824219,
       "Market Cap": "3.19B",
-      "RS_6mo": -0.06077570683467498,
+      "RS_6mo": -0.06077563041377654,
       "RS_3mo": -0.12576770227559675,
       "RS_1mo": -0.10867137668912505,
       "50DIV": -12.42,
@@ -47917,7 +47917,7 @@
       "Ticker": "IRMD",
       "Price": 85.3499984741211,
       "Market Cap": "1.09B",
-      "RS_6mo": -0.010381957672428138,
+      "RS_6mo": -0.010381881583009081,
       "RS_3mo": 0.029636712660266226,
       "RS_1mo": 0.011332558510926679,
       "50DIV": 0.3,
@@ -47966,8 +47966,8 @@
       "Dollar_Vol_M": 9.8,
       "api_called": false,
       "RS_Rank_Pct": 74.84,
-      "RS_3mo_Rank_Pct": 51.76,
-      "RS_1mo_Rank_Pct": 68.98
+      "RS_3mo_Rank_Pct": 51.85,
+      "RS_1mo_Rank_Pct": 69.07
     },
     {
       "Ticker": "SOLV",
@@ -48022,8 +48022,8 @@
       "Dollar_Vol_M": 81.8,
       "api_called": false,
       "RS_Rank_Pct": 29.76,
-      "RS_3mo_Rank_Pct": 46.98,
-      "RS_1mo_Rank_Pct": 44.63
+      "RS_3mo_Rank_Pct": 47.07,
+      "RS_1mo_Rank_Pct": 44.72
     },
     {
       "Ticker": "APH",
@@ -48079,7 +48079,7 @@
       "api_called": false,
       "RS_Rank_Pct": 36.88,
       "RS_3mo_Rank_Pct": 41.03,
-      "RS_1mo_Rank_Pct": 63.84
+      "RS_1mo_Rank_Pct": 63.93
     },
     {
       "Ticker": "MMSI",
@@ -48133,9 +48133,9 @@
       "Ret_5D_Pct": -0.69,
       "Dollar_Vol_M": 36.5,
       "api_called": false,
-      "RS_Rank_Pct": 12.08,
-      "RS_3mo_Rank_Pct": 58.88,
-      "RS_1mo_Rank_Pct": 68.17
+      "RS_Rank_Pct": 11.99,
+      "RS_3mo_Rank_Pct": 58.97,
+      "RS_1mo_Rank_Pct": 68.26
     },
     {
       "Ticker": "SITE",
@@ -48189,7 +48189,7 @@
       "Ret_5D_Pct": -0.12,
       "Dollar_Vol_M": 77.1,
       "api_called": false,
-      "RS_Rank_Pct": 63.03,
+      "RS_Rank_Pct": 63.12,
       "RS_3mo_Rank_Pct": 8.48,
       "RS_1mo_Rank_Pct": 6.67
     },
@@ -48303,7 +48303,7 @@
       "api_called": false,
       "RS_Rank_Pct": 54.64,
       "RS_3mo_Rank_Pct": 65.28,
-      "RS_1mo_Rank_Pct": 63.93
+      "RS_1mo_Rank_Pct": 64.02
     },
     {
       "Ticker": "ROAD",
@@ -48359,7 +48359,7 @@
       "api_called": false,
       "RS_Rank_Pct": 90.89,
       "RS_3mo_Rank_Pct": 95.4,
-      "RS_1mo_Rank_Pct": 66.01
+      "RS_1mo_Rank_Pct": 66.1
     },
     {
       "Ticker": "BHP",
@@ -48413,7 +48413,7 @@
       "Ret_5D_Pct": -0.5,
       "Dollar_Vol_M": 142.9,
       "api_called": false,
-      "RS_Rank_Pct": 71.06,
+      "RS_Rank_Pct": 71.15,
       "RS_3mo_Rank_Pct": 79.53,
       "RS_1mo_Rank_Pct": 73.13
     },
@@ -48637,9 +48637,9 @@
       "Ret_5D_Pct": -5.06,
       "Dollar_Vol_M": 8.9,
       "api_called": false,
-      "RS_Rank_Pct": 71.15,
+      "RS_Rank_Pct": 71.24,
       "RS_3mo_Rank_Pct": 82.87,
-      "RS_1mo_Rank_Pct": 60.5
+      "RS_1mo_Rank_Pct": 60.6
     },
     {
       "Ticker": "ORLY",
@@ -48695,7 +48695,7 @@
       "api_called": false,
       "RS_Rank_Pct": 55.64,
       "RS_3mo_Rank_Pct": 36.88,
-      "RS_1mo_Rank_Pct": 47.79
+      "RS_1mo_Rank_Pct": 47.88
     },
     {
       "Ticker": "LB",
@@ -48749,7 +48749,7 @@
       "Ret_5D_Pct": 12.37,
       "Dollar_Vol_M": 36.3,
       "api_called": false,
-      "RS_Rank_Pct": 62.13,
+      "RS_Rank_Pct": 62.22,
       "RS_3mo_Rank_Pct": 83.32,
       "RS_1mo_Rank_Pct": 85.3
     },
@@ -48805,7 +48805,7 @@
       "Ret_5D_Pct": 2.53,
       "Dollar_Vol_M": 9.5,
       "api_called": false,
-      "RS_Rank_Pct": 11.0,
+      "RS_Rank_Pct": 10.91,
       "RS_3mo_Rank_Pct": 12.53,
       "RS_1mo_Rank_Pct": 1.53
     },
@@ -48863,7 +48863,7 @@
       "api_called": false,
       "RS_Rank_Pct": 60.23,
       "RS_3mo_Rank_Pct": 40.76,
-      "RS_1mo_Rank_Pct": 49.95
+      "RS_1mo_Rank_Pct": 50.05
     },
     {
       "Ticker": "AAON",
@@ -48918,8 +48918,8 @@
       "Dollar_Vol_M": 117.4,
       "api_called": false,
       "RS_Rank_Pct": 96.39,
-      "RS_3mo_Rank_Pct": 49.77,
-      "RS_1mo_Rank_Pct": 24.62
+      "RS_3mo_Rank_Pct": 49.86,
+      "RS_1mo_Rank_Pct": 24.71
     },
     {
       "Ticker": "CVS",
@@ -48973,9 +48973,9 @@
       "Ret_5D_Pct": 6.56,
       "Dollar_Vol_M": 716.6,
       "api_called": false,
-      "RS_Rank_Pct": 61.05,
-      "RS_3mo_Rank_Pct": 58.52,
-      "RS_1mo_Rank_Pct": 67.0
+      "RS_Rank_Pct": 61.14,
+      "RS_3mo_Rank_Pct": 58.61,
+      "RS_1mo_Rank_Pct": 67.09
     },
     {
       "Ticker": "NXT",
@@ -49086,8 +49086,8 @@
       "Dollar_Vol_M": 79.0,
       "api_called": false,
       "RS_Rank_Pct": 56.63,
-      "RS_3mo_Rank_Pct": 45.09,
-      "RS_1mo_Rank_Pct": 61.5
+      "RS_3mo_Rank_Pct": 45.18,
+      "RS_1mo_Rank_Pct": 61.59
     },
     {
       "Ticker": "MIRM",
@@ -49141,8 +49141,8 @@
       "Ret_5D_Pct": 0.29,
       "Dollar_Vol_M": 31.1,
       "api_called": false,
-      "RS_Rank_Pct": 68.98,
-      "RS_3mo_Rank_Pct": 56.9,
+      "RS_Rank_Pct": 69.07,
+      "RS_3mo_Rank_Pct": 56.99,
       "RS_1mo_Rank_Pct": 7.57
     },
     {
@@ -49197,9 +49197,9 @@
       "Ret_5D_Pct": 1.88,
       "Dollar_Vol_M": 3.7,
       "api_called": false,
-      "RS_Rank_Pct": 69.97,
+      "RS_Rank_Pct": 70.06,
       "RS_3mo_Rank_Pct": 90.44,
-      "RS_1mo_Rank_Pct": 71.6
+      "RS_1mo_Rank_Pct": 71.69
     },
     {
       "Ticker": "RBA",
@@ -49310,7 +49310,7 @@
       "Dollar_Vol_M": 77.6,
       "api_called": false,
       "RS_Rank_Pct": 8.21,
-      "RS_3mo_Rank_Pct": 57.35,
+      "RS_3mo_Rank_Pct": 57.44,
       "RS_1mo_Rank_Pct": 1.35
     },
     {
@@ -49421,9 +49421,9 @@
       "Ret_5D_Pct": 2.47,
       "Dollar_Vol_M": 9.0,
       "api_called": false,
-      "RS_Rank_Pct": 66.37,
-      "RS_3mo_Rank_Pct": 49.32,
-      "RS_1mo_Rank_Pct": 66.73
+      "RS_Rank_Pct": 66.46,
+      "RS_3mo_Rank_Pct": 49.41,
+      "RS_1mo_Rank_Pct": 66.82
     },
     {
       "Ticker": "LRN",
@@ -49534,7 +49534,7 @@
       "Dollar_Vol_M": 24.5,
       "api_called": false,
       "RS_Rank_Pct": 34.63,
-      "RS_3mo_Rank_Pct": 54.73,
+      "RS_3mo_Rank_Pct": 54.82,
       "RS_1mo_Rank_Pct": 9.56
     },
     {
@@ -49647,7 +49647,7 @@
       "api_called": false,
       "RS_Rank_Pct": 59.24,
       "RS_3mo_Rank_Pct": 85.84,
-      "RS_1mo_Rank_Pct": 59.96
+      "RS_1mo_Rank_Pct": 60.05
     },
     {
       "Ticker": "BRC",
@@ -49701,9 +49701,9 @@
       "Ret_5D_Pct": 5.07,
       "Dollar_Vol_M": 35.8,
       "api_called": false,
-      "RS_Rank_Pct": 69.7,
+      "RS_Rank_Pct": 69.79,
       "RS_3mo_Rank_Pct": 70.96,
-      "RS_1mo_Rank_Pct": 56.09
+      "RS_1mo_Rank_Pct": 56.18
     },
     {
       "Ticker": "BIDU",
@@ -49759,7 +49759,7 @@
       "api_called": false,
       "RS_Rank_Pct": 94.41,
       "RS_3mo_Rank_Pct": 82.06,
-      "RS_1mo_Rank_Pct": 66.55
+      "RS_1mo_Rank_Pct": 66.64
     },
     {
       "Ticker": "OLLI",
@@ -49815,7 +49815,7 @@
       "api_called": false,
       "RS_Rank_Pct": 28.94,
       "RS_3mo_Rank_Pct": 2.71,
-      "RS_1mo_Rank_Pct": 53.11
+      "RS_1mo_Rank_Pct": 53.2
     },
     {
       "Ticker": "PBAM",
@@ -49870,8 +49870,8 @@
       "Dollar_Vol_M": 3.5,
       "api_called": false,
       "RS_Rank_Pct": 31.11,
-      "RS_3mo_Rank_Pct": 54.37,
-      "RS_1mo_Rank_Pct": 45.54
+      "RS_3mo_Rank_Pct": 54.46,
+      "RS_1mo_Rank_Pct": 45.63
     },
     {
       "Ticker": "EW",
@@ -49981,7 +49981,7 @@
       "Ret_5D_Pct": 4.7,
       "Dollar_Vol_M": 3.6,
       "api_called": false,
-      "RS_Rank_Pct": 12.53,
+      "RS_Rank_Pct": 12.44,
       "RS_3mo_Rank_Pct": 65.37,
       "RS_1mo_Rank_Pct": 86.11
     },
@@ -50039,7 +50039,7 @@
       "api_called": false,
       "RS_Rank_Pct": 49.77,
       "RS_3mo_Rank_Pct": 27.86,
-      "RS_1mo_Rank_Pct": 49.32
+      "RS_1mo_Rank_Pct": 49.41
     },
     {
       "Ticker": "WHLRL",
@@ -50093,9 +50093,9 @@
       "Ret_5D_Pct": null,
       "Dollar_Vol_M": 0.0,
       "api_called": true,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 59.6,
-      "RS_1mo_Rank_Pct": 71.69
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 59.69,
+      "RS_1mo_Rank_Pct": 71.78
     },
     {
       "Ticker": "HXL",
@@ -50317,9 +50317,9 @@
       "Ret_5D_Pct": 10.3,
       "Dollar_Vol_M": 9.4,
       "api_called": false,
-      "RS_Rank_Pct": 11.09,
-      "RS_3mo_Rank_Pct": 54.19,
-      "RS_1mo_Rank_Pct": 65.73
+      "RS_Rank_Pct": 11.0,
+      "RS_3mo_Rank_Pct": 54.28,
+      "RS_1mo_Rank_Pct": 65.83
     },
     {
       "Ticker": "SPSC",
@@ -50430,7 +50430,7 @@
       "Dollar_Vol_M": 184.9,
       "api_called": false,
       "RS_Rank_Pct": 44.45,
-      "RS_3mo_Rank_Pct": 54.28,
+      "RS_3mo_Rank_Pct": 54.37,
       "RS_1mo_Rank_Pct": 85.66
     },
     {
@@ -50487,7 +50487,7 @@
       "api_called": false,
       "RS_Rank_Pct": 20.02,
       "RS_3mo_Rank_Pct": 64.83,
-      "RS_1mo_Rank_Pct": 60.78
+      "RS_1mo_Rank_Pct": 60.87
     },
     {
       "Ticker": "CRCL",
@@ -50598,7 +50598,7 @@
       "Dollar_Vol_M": 134.8,
       "api_called": false,
       "RS_Rank_Pct": 47.61,
-      "RS_3mo_Rank_Pct": 49.59,
+      "RS_3mo_Rank_Pct": 49.68,
       "RS_1mo_Rank_Pct": 28.67
     },
     {
@@ -50765,7 +50765,7 @@
       "Ret_5D_Pct": 3.02,
       "Dollar_Vol_M": 1.4,
       "api_called": true,
-      "RS_Rank_Pct": 65.37,
+      "RS_Rank_Pct": 65.46,
       "RS_3mo_Rank_Pct": 61.86,
       "RS_1mo_Rank_Pct": 77.82
     },
@@ -50991,7 +50991,7 @@
       "api_called": false,
       "RS_Rank_Pct": 31.74,
       "RS_3mo_Rank_Pct": 68.44,
-      "RS_1mo_Rank_Pct": 69.43
+      "RS_1mo_Rank_Pct": 69.52
     },
     {
       "Ticker": "HSIC",
@@ -51046,8 +51046,8 @@
       "Dollar_Vol_M": 188.4,
       "api_called": false,
       "RS_Rank_Pct": 30.03,
-      "RS_3mo_Rank_Pct": 54.91,
-      "RS_1mo_Rank_Pct": 60.14
+      "RS_3mo_Rank_Pct": 55.0,
+      "RS_1mo_Rank_Pct": 60.23
     },
     {
       "Ticker": "SRCE",
@@ -51103,7 +51103,7 @@
       "api_called": false,
       "RS_Rank_Pct": 27.23,
       "RS_3mo_Rank_Pct": 38.77,
-      "RS_1mo_Rank_Pct": 48.42
+      "RS_1mo_Rank_Pct": 48.51
     },
     {
       "Ticker": "GSAT",
@@ -51159,7 +51159,7 @@
       "api_called": false,
       "RS_Rank_Pct": 54.28,
       "RS_3mo_Rank_Pct": 32.1,
-      "RS_1mo_Rank_Pct": 40.58
+      "RS_1mo_Rank_Pct": 40.67
     },
     {
       "Ticker": "CLX",
@@ -51214,7 +51214,7 @@
       "Dollar_Vol_M": 353.1,
       "api_called": false,
       "RS_Rank_Pct": 29.85,
-      "RS_3mo_Rank_Pct": 33.45,
+      "RS_3mo_Rank_Pct": 33.36,
       "RS_1mo_Rank_Pct": 1.71
     },
     {
@@ -51327,7 +51327,7 @@
       "api_called": false,
       "RS_Rank_Pct": 79.62,
       "RS_3mo_Rank_Pct": 63.57,
-      "RS_1mo_Rank_Pct": 63.75
+      "RS_1mo_Rank_Pct": 63.84
     },
     {
       "Ticker": "PRIM",
@@ -51439,7 +51439,7 @@
       "api_called": false,
       "RS_Rank_Pct": 37.06,
       "RS_3mo_Rank_Pct": 37.06,
-      "RS_1mo_Rank_Pct": 48.06
+      "RS_1mo_Rank_Pct": 48.15
     },
     {
       "Ticker": "TPC",
@@ -51493,7 +51493,7 @@
       "Ret_5D_Pct": 9.9,
       "Dollar_Vol_M": 33.1,
       "api_called": false,
-      "RS_Rank_Pct": 13.62,
+      "RS_Rank_Pct": 13.53,
       "RS_3mo_Rank_Pct": 21.46,
       "RS_1mo_Rank_Pct": 2.07
     },
@@ -51550,8 +51550,8 @@
       "Dollar_Vol_M": 215.0,
       "api_called": false,
       "RS_Rank_Pct": 87.02,
-      "RS_3mo_Rank_Pct": 54.46,
-      "RS_1mo_Rank_Pct": 54.46
+      "RS_3mo_Rank_Pct": 54.55,
+      "RS_1mo_Rank_Pct": 54.55
     },
     {
       "Ticker": "VSXY",
@@ -51661,7 +51661,7 @@
       "Ret_5D_Pct": 0.43,
       "Dollar_Vol_M": 19.5,
       "api_called": false,
-      "RS_Rank_Pct": 12.44,
+      "RS_Rank_Pct": 12.35,
       "RS_3mo_Rank_Pct": 4.87,
       "RS_1mo_Rank_Pct": 25.79
     },
@@ -51718,8 +51718,8 @@
       "Dollar_Vol_M": 290.5,
       "api_called": false,
       "RS_Rank_Pct": 44.18,
-      "RS_3mo_Rank_Pct": 47.61,
-      "RS_1mo_Rank_Pct": 50.68
+      "RS_3mo_Rank_Pct": 47.7,
+      "RS_1mo_Rank_Pct": 50.77
     },
     {
       "Ticker": "AGL",
@@ -51773,7 +51773,7 @@
       "Ret_5D_Pct": 2.0,
       "Dollar_Vol_M": 17.6,
       "api_called": false,
-      "RS_Rank_Pct": 11.45,
+      "RS_Rank_Pct": 11.36,
       "RS_3mo_Rank_Pct": 3.25,
       "RS_1mo_Rank_Pct": 0.63
     },
@@ -51998,7 +51998,7 @@
       "Dollar_Vol_M": 11.3,
       "api_called": false,
       "RS_Rank_Pct": 29.31,
-      "RS_3mo_Rank_Pct": 49.68,
+      "RS_3mo_Rank_Pct": 49.77,
       "RS_1mo_Rank_Pct": 34.81
     },
     {
@@ -52054,7 +52054,7 @@
       "Dollar_Vol_M": 259.1,
       "api_called": false,
       "RS_Rank_Pct": 19.57,
-      "RS_3mo_Rank_Pct": 47.97,
+      "RS_3mo_Rank_Pct": 48.06,
       "RS_1mo_Rank_Pct": 21.91
     },
     {
@@ -52111,7 +52111,7 @@
       "api_called": false,
       "RS_Rank_Pct": 33.63,
       "RS_3mo_Rank_Pct": 7.03,
-      "RS_1mo_Rank_Pct": 60.32
+      "RS_1mo_Rank_Pct": 60.41
     },
     {
       "Ticker": "DAL",
@@ -52222,7 +52222,7 @@
       "Dollar_Vol_M": 71.6,
       "api_called": false,
       "RS_Rank_Pct": 1.71,
-      "RS_3mo_Rank_Pct": 47.25,
+      "RS_3mo_Rank_Pct": 47.34,
       "RS_1mo_Rank_Pct": 0.27
     },
     {
@@ -52334,8 +52334,8 @@
       "Dollar_Vol_M": 198.0,
       "api_called": false,
       "RS_Rank_Pct": 56.9,
-      "RS_3mo_Rank_Pct": 57.26,
-      "RS_1mo_Rank_Pct": 45.45
+      "RS_3mo_Rank_Pct": 57.35,
+      "RS_1mo_Rank_Pct": 45.54
     },
     {
       "Ticker": "PARR",
@@ -52389,8 +52389,8 @@
       "Ret_5D_Pct": 7.41,
       "Dollar_Vol_M": 38.1,
       "api_called": false,
-      "RS_Rank_Pct": 16.59,
-      "RS_3mo_Rank_Pct": 45.72,
+      "RS_Rank_Pct": 16.5,
+      "RS_3mo_Rank_Pct": 45.81,
       "RS_1mo_Rank_Pct": 88.28
     },
     {
@@ -52502,7 +52502,7 @@
       "Dollar_Vol_M": 396.7,
       "api_called": false,
       "RS_Rank_Pct": 56.09,
-      "RS_3mo_Rank_Pct": 50.14,
+      "RS_3mo_Rank_Pct": 50.23,
       "RS_1mo_Rank_Pct": 28.85
     },
     {
@@ -52558,7 +52558,7 @@
       "Dollar_Vol_M": 330.0,
       "api_called": false,
       "RS_Rank_Pct": 75.11,
-      "RS_3mo_Rank_Pct": 47.07,
+      "RS_3mo_Rank_Pct": 47.16,
       "RS_1mo_Rank_Pct": 16.14
     },
     {
@@ -52615,7 +52615,7 @@
       "api_called": false,
       "RS_Rank_Pct": 3.7,
       "RS_3mo_Rank_Pct": 3.52,
-      "RS_1mo_Rank_Pct": 48.69
+      "RS_1mo_Rank_Pct": 48.78
     },
     {
       "Ticker": "BHE",
@@ -52727,7 +52727,7 @@
       "api_called": false,
       "RS_Rank_Pct": 84.04,
       "RS_3mo_Rank_Pct": 76.92,
-      "RS_1mo_Rank_Pct": 66.46
+      "RS_1mo_Rank_Pct": 66.55
     },
     {
       "Ticker": "PVH",
@@ -52781,7 +52781,7 @@
       "Ret_5D_Pct": 3.76,
       "Dollar_Vol_M": 57.9,
       "api_called": false,
-      "RS_Rank_Pct": 62.94,
+      "RS_Rank_Pct": 63.03,
       "RS_3mo_Rank_Pct": 4.15,
       "RS_1mo_Rank_Pct": 20.92
     },
@@ -52894,7 +52894,7 @@
       "Dollar_Vol_M": 11.1,
       "api_called": false,
       "RS_Rank_Pct": 25.52,
-      "RS_3mo_Rank_Pct": 45.45,
+      "RS_3mo_Rank_Pct": 45.54,
       "RS_1mo_Rank_Pct": 15.42
     },
     {
@@ -52949,9 +52949,9 @@
       "Ret_5D_Pct": -0.32,
       "Dollar_Vol_M": 18.2,
       "api_called": false,
-      "RS_Rank_Pct": 14.61,
+      "RS_Rank_Pct": 14.52,
       "RS_3mo_Rank_Pct": 16.95,
-      "RS_1mo_Rank_Pct": 66.1
+      "RS_1mo_Rank_Pct": 66.19
     },
     {
       "Ticker": "SSNC",
@@ -53006,7 +53006,7 @@
       "Dollar_Vol_M": 63.5,
       "api_called": false,
       "RS_Rank_Pct": 26.96,
-      "RS_3mo_Rank_Pct": 55.82,
+      "RS_3mo_Rank_Pct": 55.91,
       "RS_1mo_Rank_Pct": 75.74
     },
     {
@@ -53118,8 +53118,8 @@
       "Dollar_Vol_M": 29.4,
       "api_called": false,
       "RS_Rank_Pct": 36.52,
-      "RS_3mo_Rank_Pct": 49.05,
-      "RS_1mo_Rank_Pct": 51.22
+      "RS_3mo_Rank_Pct": 49.14,
+      "RS_1mo_Rank_Pct": 51.31
     },
     {
       "Ticker": "AFRM",
@@ -53173,7 +53173,7 @@
       "Ret_5D_Pct": -4.4,
       "Dollar_Vol_M": 319.0,
       "api_called": false,
-      "RS_Rank_Pct": 70.87,
+      "RS_Rank_Pct": 70.96,
       "RS_3mo_Rank_Pct": 79.44,
       "RS_1mo_Rank_Pct": 87.83
     },
@@ -53231,7 +53231,7 @@
       "api_called": false,
       "RS_Rank_Pct": 86.29,
       "RS_3mo_Rank_Pct": 61.68,
-      "RS_1mo_Rank_Pct": 69.16
+      "RS_1mo_Rank_Pct": 69.25
     },
     {
       "Ticker": "NBR",
@@ -53565,7 +53565,7 @@
       "Ret_5D_Pct": 4.19,
       "Dollar_Vol_M": 389.0,
       "api_called": false,
-      "RS_Rank_Pct": 70.78,
+      "RS_Rank_Pct": 70.87,
       "RS_3mo_Rank_Pct": 74.75,
       "RS_1mo_Rank_Pct": 87.65
     },
@@ -53790,8 +53790,8 @@
       "Dollar_Vol_M": 13.2,
       "api_called": false,
       "RS_Rank_Pct": 7.75,
-      "RS_3mo_Rank_Pct": 34.54,
-      "RS_1mo_Rank_Pct": 61.05
+      "RS_3mo_Rank_Pct": 34.45,
+      "RS_1mo_Rank_Pct": 61.14
     },
     {
       "Ticker": "CCI",
@@ -53959,7 +53959,7 @@
       "api_called": false,
       "RS_Rank_Pct": 83.86,
       "RS_3mo_Rank_Pct": 79.89,
-      "RS_1mo_Rank_Pct": 22.63
+      "RS_1mo_Rank_Pct": 22.72
     },
     {
       "Ticker": "TIGO",
@@ -54013,7 +54013,7 @@
       "Ret_5D_Pct": -4.7,
       "Dollar_Vol_M": 184.4,
       "api_called": false,
-      "RS_Rank_Pct": 65.73,
+      "RS_Rank_Pct": 65.83,
       "RS_3mo_Rank_Pct": 76.47,
       "RS_1mo_Rank_Pct": 72.23
     },
@@ -54071,13 +54071,13 @@
       "api_called": false,
       "RS_Rank_Pct": 1.8,
       "RS_3mo_Rank_Pct": 11.27,
-      "RS_1mo_Rank_Pct": 59.24
+      "RS_1mo_Rank_Pct": 59.33
     },
     {
       "Ticker": "GOLF",
       "Price": 82.94000244140625,
       "Market Cap": "4.74B",
-      "RS_6mo": -0.005956770944970047,
+      "RS_6mo": -0.005956849998230193,
       "RS_3mo": -0.025290932089281695,
       "RS_1mo": 0.075658873133292,
       "50DIV": 0.11,
@@ -54127,7 +54127,7 @@
       "api_called": false,
       "RS_Rank_Pct": 74.3,
       "RS_3mo_Rank_Pct": 66.46,
-      "RS_1mo_Rank_Pct": 46.98
+      "RS_1mo_Rank_Pct": 47.07
     },
     {
       "Ticker": "IOND",
@@ -54181,7 +54181,7 @@
       "Ret_5D_Pct": 0.66,
       "Dollar_Vol_M": 18.4,
       "api_called": false,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 79.08,
       "RS_1mo_Rank_Pct": 74.03
     },
@@ -54237,9 +54237,9 @@
       "Ret_5D_Pct": 1.3,
       "Dollar_Vol_M": 24.2,
       "api_called": false,
-      "RS_Rank_Pct": 65.83,
-      "RS_3mo_Rank_Pct": 57.44,
-      "RS_1mo_Rank_Pct": 44.0
+      "RS_Rank_Pct": 65.92,
+      "RS_3mo_Rank_Pct": 57.53,
+      "RS_1mo_Rank_Pct": 44.09
     },
     {
       "Ticker": "MNPR",
@@ -54295,13 +54295,13 @@
       "api_called": false,
       "RS_Rank_Pct": 32.64,
       "RS_3mo_Rank_Pct": 97.39,
-      "RS_1mo_Rank_Pct": 43.73
+      "RS_1mo_Rank_Pct": 43.82
     },
     {
       "Ticker": "IR",
       "Price": 85.05999755859375,
       "Market Cap": "32.66B",
-      "RS_6mo": 0.2419352748405075,
+      "RS_6mo": 0.24193515102139948,
       "RS_3mo": 0.11514649267538372,
       "RS_1mo": 0.13599309248164182,
       "50DIV": 9.64,
@@ -54351,7 +54351,7 @@
       "api_called": false,
       "RS_Rank_Pct": 29.04,
       "RS_3mo_Rank_Pct": 26.96,
-      "RS_1mo_Rank_Pct": 23.17
+      "RS_1mo_Rank_Pct": 23.26
     },
     {
       "Ticker": "NFG",
@@ -54405,9 +54405,9 @@
       "Ret_5D_Pct": 4.47,
       "Dollar_Vol_M": 47.7,
       "api_called": false,
-      "RS_Rank_Pct": 65.28,
+      "RS_Rank_Pct": 65.37,
       "RS_3mo_Rank_Pct": 69.52,
-      "RS_1mo_Rank_Pct": 71.51
+      "RS_1mo_Rank_Pct": 71.6
     },
     {
       "Ticker": "SR",
@@ -54629,7 +54629,7 @@
       "Ret_5D_Pct": 6.72,
       "Dollar_Vol_M": 122.0,
       "api_called": false,
-      "RS_Rank_Pct": 68.08,
+      "RS_Rank_Pct": 68.17,
       "RS_3mo_Rank_Pct": 75.29,
       "RS_1mo_Rank_Pct": 87.02
     },
@@ -54749,7 +54749,7 @@
       "Ticker": "CZFS",
       "Price": 85.1500015258789,
       "Market Cap": "0.41B",
-      "RS_6mo": 0.39796254282225935,
+      "RS_6mo": 0.3979624634620593,
       "RS_3mo": 0.10788496831714474,
       "RS_1mo": 0.10611463778146332,
       "50DIV": 3.87,
@@ -54797,7 +54797,7 @@
       "Ret_5D_Pct": 0.33,
       "Dollar_Vol_M": 1.1,
       "api_called": false,
-      "RS_Rank_Pct": 12.98,
+      "RS_Rank_Pct": 12.89,
       "RS_3mo_Rank_Pct": 29.04,
       "RS_1mo_Rank_Pct": 34.99
     },
@@ -54909,8 +54909,8 @@
       "Ret_5D_Pct": 3.56,
       "Dollar_Vol_M": 76.8,
       "api_called": false,
-      "RS_Rank_Pct": 16.41,
-      "RS_3mo_Rank_Pct": 46.71,
+      "RS_Rank_Pct": 16.32,
+      "RS_3mo_Rank_Pct": 46.8,
       "RS_1mo_Rank_Pct": 1.62
     },
     {
@@ -55023,7 +55023,7 @@
       "api_called": false,
       "RS_Rank_Pct": 96.93,
       "RS_3mo_Rank_Pct": 61.59,
-      "RS_1mo_Rank_Pct": 63.57
+      "RS_1mo_Rank_Pct": 63.66
     },
     {
       "Ticker": "NEE",
@@ -55077,8 +55077,8 @@
       "Ret_5D_Pct": -2.1,
       "Dollar_Vol_M": 1000.0,
       "api_called": false,
-      "RS_Rank_Pct": 63.84,
-      "RS_3mo_Rank_Pct": 45.81,
+      "RS_Rank_Pct": 63.93,
+      "RS_3mo_Rank_Pct": 45.9,
       "RS_1mo_Rank_Pct": 33.9
     },
     {
@@ -55191,7 +55191,7 @@
       "api_called": false,
       "RS_Rank_Pct": 55.09,
       "RS_3mo_Rank_Pct": 22.45,
-      "RS_1mo_Rank_Pct": 49.77
+      "RS_1mo_Rank_Pct": 49.86
     },
     {
       "Ticker": "CMS-B",
@@ -55245,9 +55245,9 @@
       "Ret_5D_Pct": -4.07,
       "Dollar_Vol_M": 0.2,
       "api_called": true,
-      "RS_Rank_Pct": 70.69,
-      "RS_3mo_Rank_Pct": 57.98,
-      "RS_1mo_Rank_Pct": 64.74
+      "RS_Rank_Pct": 70.78,
+      "RS_3mo_Rank_Pct": 58.07,
+      "RS_1mo_Rank_Pct": 64.83
     },
     {
       "Ticker": "XYZ",
@@ -55415,7 +55415,7 @@
       "api_called": false,
       "RS_Rank_Pct": 43.55,
       "RS_3mo_Rank_Pct": 19.75,
-      "RS_1mo_Rank_Pct": 50.05
+      "RS_1mo_Rank_Pct": 50.14
     },
     {
       "Ticker": "INDB",
@@ -55470,7 +55470,7 @@
       "Dollar_Vol_M": 16.9,
       "api_called": false,
       "RS_Rank_Pct": 45.36,
-      "RS_3mo_Rank_Pct": 42.11,
+      "RS_3mo_Rank_Pct": 42.2,
       "RS_1mo_Rank_Pct": 37.24
     },
     {
@@ -55533,7 +55533,7 @@
       "Ticker": "SCI",
       "Price": 74.9800033569336,
       "Market Cap": "10.19B",
-      "RS_6mo": 0.0540625944559368,
+      "RS_6mo": 0.054062693591218666,
       "RS_3mo": -0.05396998080914085,
       "RS_1mo": -0.03639156718336148,
       "50DIV": -4.32,
@@ -55581,7 +55581,7 @@
       "Ret_5D_Pct": 1.68,
       "Dollar_Vol_M": 74.9,
       "api_called": false,
-      "RS_Rank_Pct": 63.57,
+      "RS_Rank_Pct": 63.66,
       "RS_3mo_Rank_Pct": 73.4,
       "RS_1mo_Rank_Pct": 80.61
     },
@@ -55695,7 +55695,7 @@
       "api_called": false,
       "RS_Rank_Pct": 32.28,
       "RS_3mo_Rank_Pct": 35.98,
-      "RS_1mo_Rank_Pct": 43.1
+      "RS_1mo_Rank_Pct": 43.19
     },
     {
       "Ticker": "ETSY",
@@ -55751,7 +55751,7 @@
       "api_called": false,
       "RS_Rank_Pct": 10.1,
       "RS_3mo_Rank_Pct": 21.1,
-      "RS_1mo_Rank_Pct": 41.75
+      "RS_1mo_Rank_Pct": 41.84
     },
     {
       "Ticker": "LEN",
@@ -55805,8 +55805,8 @@
       "Ret_5D_Pct": -5.78,
       "Dollar_Vol_M": 206.9,
       "api_called": false,
-      "RS_Rank_Pct": 69.52,
-      "RS_3mo_Rank_Pct": 52.03,
+      "RS_Rank_Pct": 69.61,
+      "RS_3mo_Rank_Pct": 52.12,
       "RS_1mo_Rank_Pct": 25.7
     },
     {
@@ -55917,9 +55917,9 @@
       "Ret_5D_Pct": 1.37,
       "Dollar_Vol_M": 51.9,
       "api_called": false,
-      "RS_Rank_Pct": 63.66,
-      "RS_3mo_Rank_Pct": 33.9,
-      "RS_1mo_Rank_Pct": 44.91
+      "RS_Rank_Pct": 63.75,
+      "RS_3mo_Rank_Pct": 33.81,
+      "RS_1mo_Rank_Pct": 45.0
     },
     {
       "Ticker": "OMC",
@@ -55974,8 +55974,8 @@
       "Dollar_Vol_M": 129.5,
       "api_called": false,
       "RS_Rank_Pct": 25.97,
-      "RS_3mo_Rank_Pct": 41.39,
-      "RS_1mo_Rank_Pct": 23.44
+      "RS_3mo_Rank_Pct": 41.48,
+      "RS_1mo_Rank_Pct": 23.53
     },
     {
       "Ticker": "ALGT",
@@ -56087,7 +56087,7 @@
       "api_called": false,
       "RS_Rank_Pct": 81.79,
       "RS_3mo_Rank_Pct": 8.21,
-      "RS_1mo_Rank_Pct": 53.02
+      "RS_1mo_Rank_Pct": 53.11
     },
     {
       "Ticker": "LIVN",
@@ -56309,8 +56309,8 @@
       "Ret_5D_Pct": -2.49,
       "Dollar_Vol_M": 7.4,
       "api_called": true,
-      "RS_Rank_Pct": 69.88,
-      "RS_3mo_Rank_Pct": 54.82,
+      "RS_Rank_Pct": 69.97,
+      "RS_3mo_Rank_Pct": 54.91,
       "RS_1mo_Rank_Pct": 79.53
     },
     {
@@ -56373,7 +56373,7 @@
       "Ticker": "LEN.B",
       "Price": 81.54000091552734,
       "Market Cap": "19.40B",
-      "RS_6mo": 0.010477330256940712,
+      "RS_6mo": 0.010477413543757974,
       "RS_3mo": 0.021590486317341253,
       "RS_1mo": 0.10510302953053838,
       "50DIV": 1.75,
@@ -56421,8 +56421,8 @@
       "Ret_5D_Pct": -6.1,
       "Dollar_Vol_M": 3.8,
       "api_called": false,
-      "RS_Rank_Pct": 70.24,
-      "RS_3mo_Rank_Pct": 54.01,
+      "RS_Rank_Pct": 70.33,
+      "RS_3mo_Rank_Pct": 54.1,
       "RS_1mo_Rank_Pct": 35.71
     },
     {
@@ -56533,7 +56533,7 @@
       "Ret_5D_Pct": 5.67,
       "Dollar_Vol_M": 26.7,
       "api_called": false,
-      "RS_Rank_Pct": 62.67,
+      "RS_Rank_Pct": 62.76,
       "RS_3mo_Rank_Pct": 77.28,
       "RS_1mo_Rank_Pct": 83.05
     },
@@ -56702,7 +56702,7 @@
       "Dollar_Vol_M": 22.3,
       "api_called": false,
       "RS_Rank_Pct": 41.03,
-      "RS_3mo_Rank_Pct": 47.34,
+      "RS_3mo_Rank_Pct": 47.43,
       "RS_1mo_Rank_Pct": 39.59
     },
     {
@@ -56871,7 +56871,7 @@
       "api_called": false,
       "RS_Rank_Pct": 88.28,
       "RS_3mo_Rank_Pct": 85.66,
-      "RS_1mo_Rank_Pct": 66.64
+      "RS_1mo_Rank_Pct": 66.73
     },
     {
       "Ticker": "FEIM",
@@ -56926,8 +56926,8 @@
       "Dollar_Vol_M": 9.5,
       "api_called": false,
       "RS_Rank_Pct": 73.85,
-      "RS_3mo_Rank_Pct": 55.55,
-      "RS_1mo_Rank_Pct": 65.28
+      "RS_3mo_Rank_Pct": 55.64,
+      "RS_1mo_Rank_Pct": 65.37
     },
     {
       "Ticker": "SYBT",
@@ -56982,8 +56982,8 @@
       "Dollar_Vol_M": 7.5,
       "api_called": false,
       "RS_Rank_Pct": 42.2,
-      "RS_3mo_Rank_Pct": 56.81,
-      "RS_1mo_Rank_Pct": 48.15
+      "RS_3mo_Rank_Pct": 56.9,
+      "RS_1mo_Rank_Pct": 48.24
     },
     {
       "Ticker": "OLED",
@@ -57037,7 +57037,7 @@
       "Ret_5D_Pct": 1.11,
       "Dollar_Vol_M": 37.7,
       "api_called": false,
-      "RS_Rank_Pct": 66.19,
+      "RS_Rank_Pct": 66.28,
       "RS_3mo_Rank_Pct": 35.71,
       "RS_1mo_Rank_Pct": 11.27
     },
@@ -57095,7 +57095,7 @@
       "api_called": false,
       "RS_Rank_Pct": 81.06,
       "RS_3mo_Rank_Pct": 81.7,
-      "RS_1mo_Rank_Pct": 69.79
+      "RS_1mo_Rank_Pct": 69.88
     },
     {
       "Ticker": "SUNC",
@@ -57149,7 +57149,7 @@
       "Ret_5D_Pct": 8.3,
       "Dollar_Vol_M": 20.7,
       "api_called": false,
-      "RS_Rank_Pct": 63.48,
+      "RS_Rank_Pct": 63.57,
       "RS_3mo_Rank_Pct": 78.45,
       "RS_1mo_Rank_Pct": 79.8
     },
@@ -57207,7 +57207,7 @@
       "api_called": false,
       "RS_Rank_Pct": 82.15,
       "RS_3mo_Rank_Pct": 37.15,
-      "RS_1mo_Rank_Pct": 46.8
+      "RS_1mo_Rank_Pct": 46.89
     },
     {
       "Ticker": "ZTS",
@@ -57373,7 +57373,7 @@
       "Ret_5D_Pct": 3.44,
       "Dollar_Vol_M": 75.0,
       "api_called": false,
-      "RS_Rank_Pct": 16.32,
+      "RS_Rank_Pct": 16.23,
       "RS_3mo_Rank_Pct": 71.96,
       "RS_1mo_Rank_Pct": 84.4
     },
@@ -57430,8 +57430,8 @@
       "Dollar_Vol_M": 1.0,
       "api_called": false,
       "RS_Rank_Pct": 39.59,
-      "RS_3mo_Rank_Pct": 44.54,
-      "RS_1mo_Rank_Pct": 70.06
+      "RS_3mo_Rank_Pct": 44.63,
+      "RS_1mo_Rank_Pct": 70.15
     },
     {
       "Ticker": "DK",
@@ -57541,9 +57541,9 @@
       "Ret_5D_Pct": -0.4,
       "Dollar_Vol_M": 37.2,
       "api_called": false,
-      "RS_Rank_Pct": 68.89,
+      "RS_Rank_Pct": 68.98,
       "RS_3mo_Rank_Pct": 62.04,
-      "RS_1mo_Rank_Pct": 56.0
+      "RS_1mo_Rank_Pct": 56.09
     },
     {
       "Ticker": "CMPR",
@@ -57653,9 +57653,9 @@
       "Ret_5D_Pct": -0.54,
       "Dollar_Vol_M": 20.4,
       "api_called": false,
-      "RS_Rank_Pct": 64.11,
+      "RS_Rank_Pct": 64.2,
       "RS_3mo_Rank_Pct": 72.59,
-      "RS_1mo_Rank_Pct": 54.01
+      "RS_1mo_Rank_Pct": 54.1
     },
     {
       "Ticker": "CTBI",
@@ -57708,7 +57708,7 @@
       "Ret_1D_Pct": 0.13,
       "Ret_5D_Pct": 1.55,
       "Dollar_Vol_M": 4.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 48.51,
       "RS_3mo_Rank_Pct": 66.82,
       "RS_1mo_Rank_Pct": 78.18
@@ -57764,9 +57764,9 @@
       "Ret_1D_Pct": -0.78,
       "Ret_5D_Pct": 0.13,
       "Dollar_Vol_M": 124.3,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 77.01,
-      "RS_3mo_Rank_Pct": 50.77,
+      "RS_3mo_Rank_Pct": 50.86,
       "RS_1mo_Rank_Pct": 21.19
     },
     {
@@ -57820,7 +57820,7 @@
       "Ret_1D_Pct": -0.81,
       "Ret_5D_Pct": 2.64,
       "Dollar_Vol_M": 83.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 27.41,
       "RS_3mo_Rank_Pct": 5.68,
       "RS_1mo_Rank_Pct": 13.35
@@ -57877,9 +57877,9 @@
       "Ret_5D_Pct": 2.55,
       "Dollar_Vol_M": 76.5,
       "api_called": false,
-      "RS_Rank_Pct": 61.68,
+      "RS_Rank_Pct": 61.77,
       "RS_3mo_Rank_Pct": 30.3,
-      "RS_1mo_Rank_Pct": 40.13
+      "RS_1mo_Rank_Pct": 40.22
     },
     {
       "Ticker": "CUBI",
@@ -57991,7 +57991,7 @@
       "api_called": false,
       "RS_Rank_Pct": 74.66,
       "RS_3mo_Rank_Pct": 74.21,
-      "RS_1mo_Rank_Pct": 67.81
+      "RS_1mo_Rank_Pct": 67.9
     },
     {
       "Ticker": "BAH",
@@ -58044,7 +58044,7 @@
       "Ret_1D_Pct": -0.25,
       "Ret_5D_Pct": 1.71,
       "Dollar_Vol_M": 76.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 41.84,
       "RS_3mo_Rank_Pct": 12.71,
       "RS_1mo_Rank_Pct": 8.12
@@ -58103,7 +58103,7 @@
       "api_called": false,
       "RS_Rank_Pct": 79.35,
       "RS_3mo_Rank_Pct": 68.35,
-      "RS_1mo_Rank_Pct": 63.3
+      "RS_1mo_Rank_Pct": 63.39
     },
     {
       "Ticker": "XEL",
@@ -58158,7 +58158,7 @@
       "Dollar_Vol_M": 956.5,
       "api_called": false,
       "RS_Rank_Pct": 55.46,
-      "RS_3mo_Rank_Pct": 33.99,
+      "RS_3mo_Rank_Pct": 33.9,
       "RS_1mo_Rank_Pct": 32.73
     },
     {
@@ -58212,8 +58212,8 @@
       "Ret_1D_Pct": 0.31,
       "Ret_5D_Pct": 6.81,
       "Dollar_Vol_M": 33.6,
-      "api_called": true,
-      "RS_Rank_Pct": 15.78,
+      "api_called": false,
+      "RS_Rank_Pct": 15.69,
       "RS_3mo_Rank_Pct": 4.51,
       "RS_1mo_Rank_Pct": 5.23
     },
@@ -58268,7 +58268,7 @@
       "Ret_1D_Pct": -2.0,
       "Ret_5D_Pct": -0.3,
       "Dollar_Vol_M": 556.0,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 74.75,
       "RS_3mo_Rank_Pct": 84.13,
       "RS_1mo_Rank_Pct": 91.88
@@ -58324,8 +58324,8 @@
       "Ret_1D_Pct": -0.78,
       "Ret_5D_Pct": -4.06,
       "Dollar_Vol_M": 18.5,
-      "api_called": true,
-      "RS_Rank_Pct": 61.5,
+      "api_called": false,
+      "RS_Rank_Pct": 61.59,
       "RS_3mo_Rank_Pct": 85.3,
       "RS_1mo_Rank_Pct": 87.2
     },
@@ -58492,7 +58492,7 @@
       "Ret_1D_Pct": -3.73,
       "Ret_5D_Pct": 7.86,
       "Dollar_Vol_M": 517.3,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 18.12,
       "RS_3mo_Rank_Pct": 70.6,
       "RS_1mo_Rank_Pct": 88.37
@@ -58548,7 +58548,7 @@
       "Ret_1D_Pct": -0.51,
       "Ret_5D_Pct": -6.32,
       "Dollar_Vol_M": 32.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 10.19,
       "RS_3mo_Rank_Pct": 73.13,
       "RS_1mo_Rank_Pct": 83.32
@@ -58604,10 +58604,10 @@
       "Ret_1D_Pct": -2.61,
       "Ret_5D_Pct": 1.55,
       "Dollar_Vol_M": 92.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 40.49,
       "RS_3mo_Rank_Pct": 25.7,
-      "RS_1mo_Rank_Pct": 47.7
+      "RS_1mo_Rank_Pct": 47.79
     },
     {
       "Ticker": "TARS",
@@ -58660,8 +58660,8 @@
       "Ret_1D_Pct": 4.41,
       "Ret_5D_Pct": 17.03,
       "Dollar_Vol_M": 58.8,
-      "api_called": true,
-      "RS_Rank_Pct": 14.52,
+      "api_called": false,
+      "RS_Rank_Pct": 14.43,
       "RS_3mo_Rank_Pct": 15.15,
       "RS_1mo_Rank_Pct": 7.12
     },
@@ -58716,10 +58716,10 @@
       "Ret_1D_Pct": 0.67,
       "Ret_5D_Pct": 3.42,
       "Dollar_Vol_M": 207.2,
-      "api_called": true,
-      "RS_Rank_Pct": 72.05,
-      "RS_3mo_Rank_Pct": 59.6,
-      "RS_1mo_Rank_Pct": 57.71
+      "api_called": false,
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 59.69,
+      "RS_1mo_Rank_Pct": 57.8
     },
     {
       "Ticker": "WMK",
@@ -58828,16 +58828,16 @@
       "Ret_1D_Pct": 3.28,
       "Ret_5D_Pct": 4.45,
       "Dollar_Vol_M": 10.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 33.54,
       "RS_3mo_Rank_Pct": 24.8,
-      "RS_1mo_Rank_Pct": 48.78
+      "RS_1mo_Rank_Pct": 48.87
     },
     {
       "Ticker": "STRD",
       "Price": 66.6500015258789,
       "Market Cap": "0.78B",
-      "RS_6mo": 0.040239418149038315,
+      "RS_6mo": 0.04023930972555509,
       "RS_3mo": 0.01635870494366993,
       "RS_1mo": -0.01727431997652845,
       "50DIV": -6.82,
@@ -58884,9 +58884,9 @@
       "Ret_1D_Pct": -1.26,
       "Ret_5D_Pct": -5.23,
       "Dollar_Vol_M": 15.0,
-      "api_called": true,
-      "RS_Rank_Pct": 65.46,
-      "RS_3mo_Rank_Pct": 55.09,
+      "api_called": false,
+      "RS_Rank_Pct": 65.55,
+      "RS_3mo_Rank_Pct": 55.18,
       "RS_1mo_Rank_Pct": 76.92
     },
     {
@@ -58943,7 +58943,7 @@
       "api_called": false,
       "RS_Rank_Pct": 58.16,
       "RS_3mo_Rank_Pct": 63.21,
-      "RS_1mo_Rank_Pct": 64.02
+      "RS_1mo_Rank_Pct": 64.11
     },
     {
       "Ticker": "THFF",
@@ -58998,8 +58998,8 @@
       "Dollar_Vol_M": 8.4,
       "api_called": false,
       "RS_Rank_Pct": 36.97,
-      "RS_3mo_Rank_Pct": 52.21,
-      "RS_1mo_Rank_Pct": 43.19
+      "RS_3mo_Rank_Pct": 52.3,
+      "RS_1mo_Rank_Pct": 43.28
     },
     {
       "Ticker": "WMB",
@@ -59052,10 +59052,10 @@
       "Ret_1D_Pct": -0.5,
       "Ret_5D_Pct": 7.82,
       "Dollar_Vol_M": 299.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 75.65,
-      "RS_3mo_Rank_Pct": 56.09,
-      "RS_1mo_Rank_Pct": 68.8
+      "RS_3mo_Rank_Pct": 56.18,
+      "RS_1mo_Rank_Pct": 68.89
     },
     {
       "Ticker": "VPG",
@@ -59108,7 +59108,7 @@
       "Ret_1D_Pct": -3.84,
       "Ret_5D_Pct": 15.13,
       "Dollar_Vol_M": 10.2,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 99.64,
       "RS_3mo_Rank_Pct": 87.02,
       "RS_1mo_Rank_Pct": 92.61
@@ -59164,8 +59164,8 @@
       "Ret_1D_Pct": 1.57,
       "Ret_5D_Pct": 1.03,
       "Dollar_Vol_M": 106.7,
-      "api_called": true,
-      "RS_Rank_Pct": 14.16,
+      "api_called": false,
+      "RS_Rank_Pct": 14.07,
       "RS_3mo_Rank_Pct": 74.57,
       "RS_1mo_Rank_Pct": 21.1
     },
@@ -59276,10 +59276,10 @@
       "Ret_1D_Pct": 0.05,
       "Ret_5D_Pct": 0.14,
       "Dollar_Vol_M": 181.3,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 5.32,
-      "RS_3mo_Rank_Pct": 45.36,
-      "RS_1mo_Rank_Pct": 57.89
+      "RS_3mo_Rank_Pct": 45.45,
+      "RS_1mo_Rank_Pct": 57.98
     },
     {
       "Ticker": "HWC",
@@ -59332,8 +59332,8 @@
       "Ret_1D_Pct": 0.43,
       "Ret_5D_Pct": -8.67,
       "Dollar_Vol_M": 189.8,
-      "api_called": true,
-      "RS_Rank_Pct": 65.92,
+      "api_called": false,
+      "RS_Rank_Pct": 66.01,
       "RS_3mo_Rank_Pct": 79.35,
       "RS_1mo_Rank_Pct": 85.75
     },
@@ -59388,7 +59388,7 @@
       "Ret_1D_Pct": -0.05,
       "Ret_5D_Pct": -2.19,
       "Dollar_Vol_M": 1.7,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 79.89,
       "RS_3mo_Rank_Pct": 74.39,
       "RS_1mo_Rank_Pct": 86.83
@@ -59397,7 +59397,7 @@
       "Ticker": "FLS",
       "Price": 83.0999984741211,
       "Market Cap": "10.54B",
-      "RS_6mo": 0.20656145563141448,
+      "RS_6mo": 0.2065613364085678,
       "RS_3mo": 0.10977239546661875,
       "RS_1mo": 0.22052773741891404,
       "50DIV": 11.12,
@@ -59501,7 +59501,7 @@
       "Ret_5D_Pct": 4.5,
       "Dollar_Vol_M": 180.0,
       "api_called": false,
-      "RS_Rank_Pct": 66.64,
+      "RS_Rank_Pct": 66.73,
       "RS_3mo_Rank_Pct": 39.59,
       "RS_1mo_Rank_Pct": 36.25
     },
@@ -59556,7 +59556,7 @@
       "Ret_1D_Pct": 0.91,
       "Ret_5D_Pct": 1.72,
       "Dollar_Vol_M": 170.2,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 44.54,
       "RS_3mo_Rank_Pct": 36.25,
       "RS_1mo_Rank_Pct": 85.48
@@ -59613,9 +59613,9 @@
       "Ret_5D_Pct": 1.7,
       "Dollar_Vol_M": 107.8,
       "api_called": false,
-      "RS_Rank_Pct": 64.38,
-      "RS_3mo_Rank_Pct": 47.16,
-      "RS_1mo_Rank_Pct": 44.09
+      "RS_Rank_Pct": 64.47,
+      "RS_3mo_Rank_Pct": 47.25,
+      "RS_1mo_Rank_Pct": 44.18
     },
     {
       "Ticker": "VSAT",
@@ -59668,7 +59668,7 @@
       "Ret_1D_Pct": -4.94,
       "Ret_5D_Pct": 5.9,
       "Dollar_Vol_M": 86.6,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 83.05,
       "RS_3mo_Rank_Pct": 70.78,
       "RS_1mo_Rank_Pct": 10.64
@@ -59724,10 +59724,10 @@
       "Ret_1D_Pct": -1.34,
       "Ret_5D_Pct": 6.86,
       "Dollar_Vol_M": 22.1,
-      "api_called": true,
-      "RS_Rank_Pct": 15.42,
-      "RS_3mo_Rank_Pct": 42.47,
-      "RS_1mo_Rank_Pct": 58.61
+      "api_called": false,
+      "RS_Rank_Pct": 15.33,
+      "RS_3mo_Rank_Pct": 42.56,
+      "RS_1mo_Rank_Pct": 58.7
     },
     {
       "Ticker": "WRB",
@@ -59780,10 +59780,10 @@
       "Ret_1D_Pct": 0.38,
       "Ret_5D_Pct": 2.94,
       "Dollar_Vol_M": 120.7,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 30.57,
       "RS_3mo_Rank_Pct": 15.6,
-      "RS_1mo_Rank_Pct": 49.86
+      "RS_1mo_Rank_Pct": 49.95
     },
     {
       "Ticker": "CASH",
@@ -59839,7 +59839,7 @@
       "api_called": false,
       "RS_Rank_Pct": 77.55,
       "RS_3mo_Rank_Pct": 74.12,
-      "RS_1mo_Rank_Pct": 47.25
+      "RS_1mo_Rank_Pct": 47.34
     },
     {
       "Ticker": "SLGL",
@@ -59892,7 +59892,7 @@
       "Ret_1D_Pct": -2.01,
       "Ret_5D_Pct": -9.65,
       "Dollar_Vol_M": 1.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 89.36,
       "RS_3mo_Rank_Pct": 95.67,
       "RS_1mo_Rank_Pct": 91.16
@@ -59948,10 +59948,10 @@
       "Ret_1D_Pct": 0.92,
       "Ret_5D_Pct": 3.31,
       "Dollar_Vol_M": 391.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 37.6,
       "RS_3mo_Rank_Pct": 6.4,
-      "RS_1mo_Rank_Pct": 40.85
+      "RS_1mo_Rank_Pct": 40.94
     },
     {
       "Ticker": "KFY",
@@ -60004,10 +60004,10 @@
       "Ret_1D_Pct": -0.26,
       "Ret_5D_Pct": 0.23,
       "Dollar_Vol_M": 28.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 36.61,
       "RS_3mo_Rank_Pct": 73.85,
-      "RS_1mo_Rank_Pct": 46.08
+      "RS_1mo_Rank_Pct": 46.17
     },
     {
       "Ticker": "UBER",
@@ -60060,10 +60060,10 @@
       "Ret_1D_Pct": 0.82,
       "Ret_5D_Pct": 1.6,
       "Dollar_Vol_M": 789.6,
-      "api_called": true,
-      "RS_Rank_Pct": 61.77,
+      "api_called": false,
+      "RS_Rank_Pct": 61.86,
       "RS_3mo_Rank_Pct": 75.74,
-      "RS_1mo_Rank_Pct": 62.13
+      "RS_1mo_Rank_Pct": 62.22
     },
     {
       "Ticker": "VVX",
@@ -60118,7 +60118,7 @@
       "Dollar_Vol_M": 19.2,
       "api_called": false,
       "RS_Rank_Pct": 49.14,
-      "RS_3mo_Rank_Pct": 43.19,
+      "RS_3mo_Rank_Pct": 43.28,
       "RS_1mo_Rank_Pct": 11.72
     },
     {
@@ -60172,10 +60172,10 @@
       "Ret_1D_Pct": -2.04,
       "Ret_5D_Pct": -0.81,
       "Dollar_Vol_M": 39.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 19.39,
       "RS_3mo_Rank_Pct": 37.42,
-      "RS_1mo_Rank_Pct": 60.69
+      "RS_1mo_Rank_Pct": 60.78
     },
     {
       "Ticker": "ACMR",
@@ -60228,7 +60228,7 @@
       "Ret_1D_Pct": -3.87,
       "Ret_5D_Pct": 7.49,
       "Dollar_Vol_M": 42.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 97.29,
       "RS_3mo_Rank_Pct": 98.47,
       "RS_1mo_Rank_Pct": 84.04
@@ -60237,7 +60237,7 @@
       "Ticker": "ESEA",
       "Price": 66.94999694824219,
       "Market Cap": "0.47B",
-      "RS_6mo": 0.11560716991281961,
+      "RS_6mo": 0.11560710726157941,
       "RS_3mo": -0.05523404528596526,
       "RS_1mo": 0.05392639462124593,
       "50DIV": -4.14,
@@ -60284,20 +60284,20 @@
       "Ret_1D_Pct": -0.15,
       "Ret_5D_Pct": 5.6,
       "Dollar_Vol_M": 0.8,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 51.13,
       "RS_3mo_Rank_Pct": 73.58,
-      "RS_1mo_Rank_Pct": 55.09
+      "RS_1mo_Rank_Pct": 55.18
     },
     {
       "Ticker": "EMBJ",
       "Price": 78.7300033569336,
       "Market Cap": "14.01B",
-      "RS_6mo": 0.43441541317043153,
-      "RS_3mo": 0.09353330134394573,
-      "RS_1mo": 0.13047156753615807,
-      "50DIV": 5.5,
-      "200DIV": 16.66,
+      "RS_6mo": 0.0,
+      "RS_3mo": 0.0,
+      "RS_1mo": 0.0,
+      "50DIV": null,
+      "200DIV": null,
       "Sector": "Industrials",
       "Industry": "Aerospace & Defense",
       "CY_Trend": -13.51,
@@ -60305,45 +60305,45 @@
       "Up_Count": 3,
       "Down_Count": 2,
       "Up_Down_Ratio": 60.0,
-      "Order": "YES",
+      "Order": "NO",
       "CY_Current": 2.792,
       "CY_30Ago": 3.2282,
       "NY_Current": 4.09892,
       "NY_30Ago": 3.98692,
       "Target_Status": "NO",
-      "Jungjanggi Jeongbaeyeol": "YES",
-      "10DIV": 1.22,
-      "BBWTHD": 0.2,
-      "BBWTHD_LOW": 0.07,
+      "Jungjanggi Jeongbaeyeol": "NO",
+      "10DIV": null,
+      "BBWTHD": null,
+      "BBWTHD_LOW": null,
       "SALE_CY": 13.37,
       "SALE_NY": 12.22,
       "EPS_CY": 102.14,
       "EPS_NY": 46.81,
       "BB_Center_Breakout_5D": "NO",
-      "High_52W_Pct": 94.33,
-      "New_High_52W": "N",
-      "Low_52W_Pct": 147.82,
-      "New_Low_52W": "N",
-      "ADR_20D": 3.43,
-      "Max_Rise_1M_Pct": 25.96,
-      "Max_Rise_3M_Pct": 25.96,
-      "Max_Rise_6M_Pct": 56.7,
-      "Ret_1M_Pct": 8.83,
-      "Ret_3M_Pct": 5.09,
-      "Ret_6M_Pct": 36.74,
+      "High_52W_Pct": 99.56,
+      "New_High_52W": "Y",
+      "Low_52W_Pct": 101.03,
+      "New_Low_52W": "Y",
+      "ADR_20D": null,
+      "Max_Rise_1M_Pct": 1.48,
+      "Max_Rise_3M_Pct": 1.48,
+      "Max_Rise_6M_Pct": 1.48,
+      "Ret_1M_Pct": null,
+      "Ret_3M_Pct": null,
+      "Ret_6M_Pct": null,
       "BRK_60D": "NO",
-      "VOL_X": 0.96,
+      "VOL_X": 1.0,
       "CLS_POS": 69.57,
-      "Above_50_SMA": "O",
-      "Above_150_SMA": "O",
-      "Vol_Surge_Wk": 0.78,
-      "Ret_1D_Pct": -0.94,
-      "Ret_5D_Pct": 6.28,
+      "Above_50_SMA": "X",
+      "Above_150_SMA": "X",
+      "Vol_Surge_Wk": null,
+      "Ret_1D_Pct": null,
+      "Ret_5D_Pct": null,
       "Dollar_Vol_M": 123.0,
-      "api_called": true,
-      "RS_Rank_Pct": 10.73,
-      "RS_3mo_Rank_Pct": 32.46,
-      "RS_1mo_Rank_Pct": 24.71
+      "api_called": false,
+      "RS_Rank_Pct": 72.14,
+      "RS_3mo_Rank_Pct": 59.69,
+      "RS_1mo_Rank_Pct": 71.78
     },
     {
       "Ticker": "DOCU",
@@ -60396,7 +60396,7 @@
       "Ret_1D_Pct": 0.76,
       "Ret_5D_Pct": 4.06,
       "Dollar_Vol_M": 138.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 2.8,
       "RS_3mo_Rank_Pct": 1.98,
       "RS_1mo_Rank_Pct": 27.05
@@ -60455,7 +60455,7 @@
       "api_called": false,
       "RS_Rank_Pct": 57.08,
       "RS_3mo_Rank_Pct": 60.41,
-      "RS_1mo_Rank_Pct": 56.45
+      "RS_1mo_Rank_Pct": 56.54
     },
     {
       "Ticker": "TEM",
@@ -60508,7 +60508,7 @@
       "Ret_1D_Pct": -5.65,
       "Ret_5D_Pct": -5.85,
       "Dollar_Vol_M": 378.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 4.96,
       "RS_3mo_Rank_Pct": 26.6,
       "RS_1mo_Rank_Pct": 19.48
@@ -60564,9 +60564,9 @@
       "Ret_1D_Pct": 0.5,
       "Ret_5D_Pct": 0.55,
       "Dollar_Vol_M": 36.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 8.3,
-      "RS_3mo_Rank_Pct": 50.68,
+      "RS_3mo_Rank_Pct": 50.77,
       "RS_1mo_Rank_Pct": 18.12
     },
     {
@@ -60620,7 +60620,7 @@
       "Ret_1D_Pct": 0.38,
       "Ret_5D_Pct": 4.04,
       "Dollar_Vol_M": 8.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 21.91,
       "RS_3mo_Rank_Pct": 91.97,
       "RS_1mo_Rank_Pct": 91.34
@@ -60676,10 +60676,10 @@
       "Ret_1D_Pct": -5.08,
       "Ret_5D_Pct": 6.78,
       "Dollar_Vol_M": 9.2,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 88.37,
       "RS_3mo_Rank_Pct": 89.0,
-      "RS_1mo_Rank_Pct": 68.44
+      "RS_1mo_Rank_Pct": 68.53
     },
     {
       "Ticker": "ASH",
@@ -60732,8 +60732,8 @@
       "Ret_1D_Pct": 1.59,
       "Ret_5D_Pct": -0.2,
       "Dollar_Vol_M": 78.7,
-      "api_called": true,
-      "RS_Rank_Pct": 12.35,
+      "api_called": false,
+      "RS_Rank_Pct": 12.26,
       "RS_3mo_Rank_Pct": 30.84,
       "RS_1mo_Rank_Pct": 30.12
     },
@@ -60789,9 +60789,9 @@
       "Ret_5D_Pct": 5.65,
       "Dollar_Vol_M": 0.0,
       "api_called": true,
-      "RS_Rank_Pct": 70.6,
+      "RS_Rank_Pct": 70.69,
       "RS_3mo_Rank_Pct": 76.74,
-      "RS_1mo_Rank_Pct": 67.72
+      "RS_1mo_Rank_Pct": 67.81
     },
     {
       "Ticker": "SF",
@@ -60958,8 +60958,8 @@
       "Dollar_Vol_M": 10.2,
       "api_called": false,
       "RS_Rank_Pct": 50.95,
-      "RS_3mo_Rank_Pct": 52.12,
-      "RS_1mo_Rank_Pct": 24.17
+      "RS_3mo_Rank_Pct": 52.21,
+      "RS_1mo_Rank_Pct": 24.26
     },
     {
       "Ticker": "GIB",
@@ -61012,7 +61012,7 @@
       "Ret_1D_Pct": -0.02,
       "Ret_5D_Pct": -1.8,
       "Dollar_Vol_M": 37.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 23.44,
       "RS_3mo_Rank_Pct": 19.66,
       "RS_1mo_Rank_Pct": 25.16
@@ -61069,8 +61069,8 @@
       "Ret_5D_Pct": 1.74,
       "Dollar_Vol_M": 27.0,
       "api_called": false,
-      "RS_Rank_Pct": 63.75,
-      "RS_3mo_Rank_Pct": 46.53,
+      "RS_Rank_Pct": 63.84,
+      "RS_3mo_Rank_Pct": 46.62,
       "RS_1mo_Rank_Pct": 38.5
     },
     {
@@ -61125,7 +61125,7 @@
       "Ret_5D_Pct": -5.77,
       "Dollar_Vol_M": 34.7,
       "api_called": true,
-      "RS_Rank_Pct": 72.05,
+      "RS_Rank_Pct": 72.14,
       "RS_3mo_Rank_Pct": 91.61,
       "RS_1mo_Rank_Pct": 90.26
     },
@@ -61133,7 +61133,7 @@
       "Ticker": "ULS",
       "Price": 80.36000061035156,
       "Market Cap": "16.22B",
-      "RS_6mo": -0.1332881413083497,
+      "RS_6mo": -0.13328820202530944,
       "RS_3mo": 0.11251377249241727,
       "RS_1mo": 0.138305600535577,
       "50DIV": 12.08,
@@ -61180,10 +61180,10 @@
       "Ret_1D_Pct": -1.46,
       "Ret_5D_Pct": 2.17,
       "Dollar_Vol_M": 44.6,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 85.66,
       "RS_3mo_Rank_Pct": 27.59,
-      "RS_1mo_Rank_Pct": 22.72
+      "RS_1mo_Rank_Pct": 22.81
     },
     {
       "Ticker": "SMBC",
@@ -61236,10 +61236,10 @@
       "Ret_1D_Pct": 0.4,
       "Ret_5D_Pct": 1.08,
       "Dollar_Vol_M": 4.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 56.36,
-      "RS_3mo_Rank_Pct": 58.16,
-      "RS_1mo_Rank_Pct": 53.65
+      "RS_3mo_Rank_Pct": 58.25,
+      "RS_1mo_Rank_Pct": 53.74
     },
     {
       "Ticker": "EXPO",
@@ -61292,7 +61292,7 @@
       "Ret_1D_Pct": 1.26,
       "Ret_5D_Pct": 3.92,
       "Dollar_Vol_M": 23.8,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 5.05,
       "RS_3mo_Rank_Pct": 2.89,
       "RS_1mo_Rank_Pct": 4.69
@@ -61348,7 +61348,7 @@
       "Ret_1D_Pct": -0.4,
       "Ret_5D_Pct": 2.66,
       "Dollar_Vol_M": 14.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 77.37,
       "RS_3mo_Rank_Pct": 75.11,
       "RS_1mo_Rank_Pct": 87.47
@@ -61404,7 +61404,7 @@
       "Ret_1D_Pct": 2.06,
       "Ret_5D_Pct": 4.31,
       "Dollar_Vol_M": 130.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 73.94,
       "RS_3mo_Rank_Pct": 81.51,
       "RS_1mo_Rank_Pct": 74.48
@@ -61516,7 +61516,7 @@
       "Ret_1D_Pct": -0.21,
       "Ret_5D_Pct": -1.57,
       "Dollar_Vol_M": 51.6,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 85.03,
       "RS_3mo_Rank_Pct": 95.13,
       "RS_1mo_Rank_Pct": 98.38
@@ -61572,8 +61572,8 @@
       "Ret_1D_Pct": 0.32,
       "Ret_5D_Pct": 1.99,
       "Dollar_Vol_M": 2.4,
-      "api_called": true,
-      "RS_Rank_Pct": 14.07,
+      "api_called": false,
+      "RS_Rank_Pct": 13.98,
       "RS_3mo_Rank_Pct": 20.11,
       "RS_1mo_Rank_Pct": 30.66
     },
@@ -61631,7 +61631,7 @@
       "api_called": false,
       "RS_Rank_Pct": 58.25,
       "RS_3mo_Rank_Pct": 74.93,
-      "RS_1mo_Rank_Pct": 46.44
+      "RS_1mo_Rank_Pct": 46.53
     },
     {
       "Ticker": "BYD",
@@ -61685,7 +61685,7 @@
       "Ret_5D_Pct": 0.88,
       "Dollar_Vol_M": 43.5,
       "api_called": false,
-      "RS_Rank_Pct": 67.0,
+      "RS_Rank_Pct": 67.09,
       "RS_3mo_Rank_Pct": 60.23,
       "RS_1mo_Rank_Pct": 20.47
     },
@@ -61740,9 +61740,9 @@
       "Ret_1D_Pct": 0.93,
       "Ret_5D_Pct": -4.5,
       "Dollar_Vol_M": 35.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 7.03,
-      "RS_3mo_Rank_Pct": 48.24,
+      "RS_3mo_Rank_Pct": 48.33,
       "RS_1mo_Rank_Pct": 86.74
     },
     {
@@ -61796,10 +61796,10 @@
       "Ret_1D_Pct": 1.25,
       "Ret_5D_Pct": 2.81,
       "Dollar_Vol_M": 8.0,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 33.0,
-      "RS_3mo_Rank_Pct": 44.63,
-      "RS_1mo_Rank_Pct": 48.51
+      "RS_3mo_Rank_Pct": 44.72,
+      "RS_1mo_Rank_Pct": 48.6
     },
     {
       "Ticker": "MAS",
@@ -61852,7 +61852,7 @@
       "Ret_1D_Pct": 0.24,
       "Ret_5D_Pct": 2.99,
       "Dollar_Vol_M": 130.1,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 21.73,
       "RS_3mo_Rank_Pct": 9.65,
       "RS_1mo_Rank_Pct": 8.3
@@ -61908,7 +61908,7 @@
       "Ret_1D_Pct": -3.64,
       "Ret_5D_Pct": 12.69,
       "Dollar_Vol_M": 32.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 97.75,
       "RS_3mo_Rank_Pct": 97.84,
       "RS_1mo_Rank_Pct": 82.51
@@ -61964,7 +61964,7 @@
       "Ret_1D_Pct": -3.9,
       "Ret_5D_Pct": 7.61,
       "Dollar_Vol_M": 444.0,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 99.91,
       "RS_3mo_Rank_Pct": 99.01,
       "RS_1mo_Rank_Pct": 95.13
@@ -62020,7 +62020,7 @@
       "Ret_1D_Pct": -3.96,
       "Ret_5D_Pct": 15.94,
       "Dollar_Vol_M": 810.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 99.55,
       "RS_3mo_Rank_Pct": 83.05,
       "RS_1mo_Rank_Pct": 5.05
@@ -62076,7 +62076,7 @@
       "Ret_1D_Pct": -3.13,
       "Ret_5D_Pct": 13.25,
       "Dollar_Vol_M": 35.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 80.07,
       "RS_3mo_Rank_Pct": 88.37,
       "RS_1mo_Rank_Pct": 91.07
@@ -62085,7 +62085,7 @@
       "Ticker": "TECK",
       "Price": 60.189998626708984,
       "Market Cap": "29.55B",
-      "RS_6mo": -0.007449478691081396,
+      "RS_6mo": -0.007449370108575465,
       "RS_3mo": -0.04633367914964495,
       "RS_1mo": -0.02641609440241402,
       "50DIV": -7.03,
@@ -62132,7 +62132,7 @@
       "Ret_1D_Pct": -1.63,
       "Ret_5D_Pct": -0.45,
       "Dollar_Vol_M": 70.8,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 74.57,
       "RS_3mo_Rank_Pct": 71.69,
       "RS_1mo_Rank_Pct": 79.08
@@ -62245,9 +62245,9 @@
       "Ret_5D_Pct": 0.24,
       "Dollar_Vol_M": 12.8,
       "api_called": false,
-      "RS_Rank_Pct": 71.42,
+      "RS_Rank_Pct": 71.51,
       "RS_3mo_Rank_Pct": 63.66,
-      "RS_1mo_Rank_Pct": 57.17
+      "RS_1mo_Rank_Pct": 57.26
     },
     {
       "Ticker": "NTR",
@@ -62300,10 +62300,10 @@
       "Ret_1D_Pct": 0.03,
       "Ret_5D_Pct": -0.34,
       "Dollar_Vol_M": 60.2,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 53.56,
-      "RS_3mo_Rank_Pct": 53.02,
-      "RS_1mo_Rank_Pct": 59.69
+      "RS_3mo_Rank_Pct": 53.11,
+      "RS_1mo_Rank_Pct": 59.78
     },
     {
       "Ticker": "AMBA",
@@ -62356,10 +62356,10 @@
       "Ret_1D_Pct": -1.54,
       "Ret_5D_Pct": 2.68,
       "Dollar_Vol_M": 38.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 93.24,
       "RS_3mo_Rank_Pct": 84.76,
-      "RS_1mo_Rank_Pct": 66.91
+      "RS_1mo_Rank_Pct": 67.0
     },
     {
       "Ticker": "ENLT",
@@ -62468,7 +62468,7 @@
       "Ret_1D_Pct": 0.96,
       "Ret_5D_Pct": -16.03,
       "Dollar_Vol_M": 58.9,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 47.79,
       "RS_3mo_Rank_Pct": 97.93,
       "RS_1mo_Rank_Pct": 94.5
@@ -62477,7 +62477,7 @@
       "Ticker": "PFIS",
       "Price": 72.69000244140625,
       "Market Cap": "0.73B",
-      "RS_6mo": 0.3002858162561066,
+      "RS_6mo": 0.30028573643675527,
       "RS_3mo": 0.08721561141967274,
       "RS_1mo": 0.1064138379038897,
       "50DIV": 3.22,
@@ -62524,9 +62524,9 @@
       "Ret_1D_Pct": -0.22,
       "Ret_5D_Pct": 0.62,
       "Dollar_Vol_M": 2.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 22.27,
-      "RS_3mo_Rank_Pct": 34.17,
+      "RS_3mo_Rank_Pct": 34.08,
       "RS_1mo_Rank_Pct": 34.72
     },
     {
@@ -62636,9 +62636,9 @@
       "Ret_1D_Pct": 3.16,
       "Ret_5D_Pct": 4.3,
       "Dollar_Vol_M": 90.3,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 25.34,
-      "RS_3mo_Rank_Pct": 43.55,
+      "RS_3mo_Rank_Pct": 43.64,
       "RS_1mo_Rank_Pct": 31.92
     },
     {
@@ -62692,9 +62692,9 @@
       "Ret_1D_Pct": 5.03,
       "Ret_5D_Pct": 5.37,
       "Dollar_Vol_M": 5.0,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 37.33,
-      "RS_3mo_Rank_Pct": 45.99,
+      "RS_3mo_Rank_Pct": 46.08,
       "RS_1mo_Rank_Pct": 36.34
     },
     {
@@ -62748,7 +62748,7 @@
       "Ret_1D_Pct": 14.06,
       "Ret_5D_Pct": 15.27,
       "Dollar_Vol_M": 87.7,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 37.96,
       "RS_3mo_Rank_Pct": 9.92,
       "RS_1mo_Rank_Pct": 2.98
@@ -62757,7 +62757,7 @@
       "Ticker": "ESAB",
       "Price": 83.25,
       "Market Cap": "5.18B",
-      "RS_6mo": -0.049611604074625434,
+      "RS_6mo": -0.04961153255870031,
       "RS_3mo": 0.1039921774603951,
       "RS_1mo": 0.316048340143495,
       "50DIV": 17.36,
@@ -62804,7 +62804,7 @@
       "Ret_1D_Pct": 0.85,
       "Ret_5D_Pct": 0.51,
       "Dollar_Vol_M": 47.2,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 78.9,
       "RS_3mo_Rank_Pct": 30.03,
       "RS_1mo_Rank_Pct": 1.89
@@ -62863,13 +62863,13 @@
       "api_called": false,
       "RS_Rank_Pct": 77.19,
       "RS_3mo_Rank_Pct": 73.31,
-      "RS_1mo_Rank_Pct": 47.16
+      "RS_1mo_Rank_Pct": 47.25
     },
     {
       "Ticker": "BANR",
       "Price": 69.29000091552734,
       "Market Cap": "2.53B",
-      "RS_6mo": 0.14278609112940885,
+      "RS_6mo": 0.14278621855776544,
       "RS_3mo": 0.016634640344628516,
       "RS_1mo": 0.07506305141625624,
       "50DIV": 0.93,
@@ -62916,10 +62916,10 @@
       "Ret_1D_Pct": 0.22,
       "Ret_5D_Pct": -1.14,
       "Dollar_Vol_M": 12.4,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 45.09,
-      "RS_3mo_Rank_Pct": 55.0,
-      "RS_1mo_Rank_Pct": 47.43
+      "RS_3mo_Rank_Pct": 55.09,
+      "RS_1mo_Rank_Pct": 47.52
     },
     {
       "Ticker": "NYT",
@@ -62973,7 +62973,7 @@
       "Ret_5D_Pct": 6.51,
       "Dollar_Vol_M": 98.1,
       "api_called": false,
-      "RS_Rank_Pct": 65.19,
+      "RS_Rank_Pct": 65.28,
       "RS_3mo_Rank_Pct": 15.87,
       "RS_1mo_Rank_Pct": 30.3
     },
@@ -63028,7 +63028,7 @@
       "Ret_1D_Pct": 0.63,
       "Ret_5D_Pct": -2.75,
       "Dollar_Vol_M": 76.8,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 88.64,
       "RS_3mo_Rank_Pct": 89.72,
       "RS_1mo_Rank_Pct": 97.02
@@ -63084,9 +63084,9 @@
       "Ret_1D_Pct": 0.73,
       "Ret_5D_Pct": 1.78,
       "Dollar_Vol_M": 46.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 46.62,
-      "RS_3mo_Rank_Pct": 42.92,
+      "RS_3mo_Rank_Pct": 43.01,
       "RS_1mo_Rank_Pct": 28.13
     },
     {
@@ -63141,9 +63141,9 @@
       "Ret_5D_Pct": -0.72,
       "Dollar_Vol_M": 133.6,
       "api_called": false,
-      "RS_Rank_Pct": 70.96,
+      "RS_Rank_Pct": 71.06,
       "RS_3mo_Rank_Pct": 64.29,
-      "RS_1mo_Rank_Pct": 44.27
+      "RS_1mo_Rank_Pct": 44.36
     },
     {
       "Ticker": "OTIS",
@@ -63196,10 +63196,10 @@
       "Ret_1D_Pct": 1.04,
       "Ret_5D_Pct": -1.29,
       "Dollar_Vol_M": 199.8,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 44.72,
       "RS_3mo_Rank_Pct": 23.08,
-      "RS_1mo_Rank_Pct": 23.26
+      "RS_1mo_Rank_Pct": 23.35
     },
     {
       "Ticker": "TNC",
@@ -63308,7 +63308,7 @@
       "Ret_1D_Pct": 0.52,
       "Ret_5D_Pct": 1.05,
       "Dollar_Vol_M": 149.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 58.61,
       "RS_3mo_Rank_Pct": 29.13,
       "RS_1mo_Rank_Pct": 26.42
@@ -63364,7 +63364,7 @@
       "Ret_1D_Pct": -3.12,
       "Ret_5D_Pct": 24.11,
       "Dollar_Vol_M": 50.3,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 94.68,
       "RS_3mo_Rank_Pct": 93.51,
       "RS_1mo_Rank_Pct": 72.68
@@ -63420,8 +63420,8 @@
       "Ret_1D_Pct": 1.44,
       "Ret_5D_Pct": 0.78,
       "Dollar_Vol_M": 198.8,
-      "api_called": true,
-      "RS_Rank_Pct": 16.68,
+      "api_called": false,
+      "RS_Rank_Pct": 16.59,
       "RS_3mo_Rank_Pct": 15.33,
       "RS_1mo_Rank_Pct": 5.86
     },
@@ -63476,9 +63476,9 @@
       "Ret_1D_Pct": 0.82,
       "Ret_5D_Pct": 2.71,
       "Dollar_Vol_M": 209.5,
-      "api_called": true,
+      "api_called": false,
       "RS_Rank_Pct": 52.12,
-      "RS_3mo_Rank_Pct": 46.62,
+      "RS_3mo_Rank_Pct": 46.71,
       "RS_1mo_Rank_Pct": 30.48
     },
     {
@@ -63588,8 +63588,8 @@
       "Ret_1D_Pct": 0.45,
       "Ret_5D_Pct": 1.58,
       "Dollar_Vol_M": 4.7,
-      "api_called": true,
-      "RS_Rank_Pct": 67.9,
+      "api_called": false,
+      "RS_Rank_Pct": 67.99,
       "RS_3mo_Rank_Pct": 74.3,
       "RS_1mo_Rank_Pct": 75.92
     },
@@ -63701,17 +63701,17 @@
       "Ret_5D_Pct": 1.73,
       "Dollar_Vol_M": 224.2,
       "api_called": false,
-      "RS_Rank_Pct": 66.73,
-      "RS_3mo_Rank_Pct": 43.28,
-      "RS_1mo_Rank_Pct": 47.61
+      "RS_Rank_Pct": 66.82,
+      "RS_3mo_Rank_Pct": 43.37,
+      "RS_1mo_Rank_Pct": 47.7
     }
   ],
   "data_quality": {
     "total": 1109,
     "blank_rows": 0,
     "null_rate": 0.0,
-    "api_called_count": 93,
-    "duration_s": 932.5,
+    "api_called_count": 22,
+    "duration_s": 798.6,
     "threshold": 0.15
   },
   "degraded": false
